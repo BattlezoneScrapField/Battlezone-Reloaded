@@ -1,3 +1,6 @@
 [submodule "External/VTScrapPool"]
 	path = External/VTScrapPool
 	url = https://github.com/VTrider/VTScrapPool.git
+[submodule "External/ExtraUtilities"]
+	path = External/ExtraUtilities
+	url = https://github.com/VTrider/ExtraUtilities.git
