@@ -1,0 +1,5 @@
+/__pycache__
+/Workshop   # Build output directory
+workshop.vdf # Steamcmd workshop manifest, contains paths local to the user
+/.vscode
+.env

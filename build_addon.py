@@ -1,0 +1,55 @@
+"""
+Builds an instance of the mod in your addon folder
+"""
+
+import os
+import shutil
+import winreg
+
+ROOT: str = os.getcwd()
+WORKSHOP_FOLDER: str = os.path.join(ROOT, "Workshop")
+
+
+def get_addon_path() -> str:
+    try:
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\\WOW6432Node\\Valve\\Steam")
+        value, type = winreg.QueryValueEx(key, "InstallPath")
+        addon_path = os.path.join(value, "steamapps", "common", "Battlezone 98 Redux", "addon")
+
+        if not os.path.exists(addon_path):
+            raise RuntimeError("Couldn't find steam directory, do you have steam installed?")
+        
+    except Exception as e:
+        print(f"An error occured: {e}")
+
+    return addon_path
+
+
+def build_addon() -> None:
+    if not os.path.exists(WORKSHOP_FOLDER):
+        raise FileNotFoundError("Couldn't find workshop build folder, make sure to run squish first")
+
+    addon_path: str = get_addon_path()
+    reloaded_path = os.path.join(addon_path, "reloaded")
+    if os.path.exists(reloaded_path):
+        option: str = input("Warning: folder already exists, do you want to overwrite? [y/n]" )
+        if option.lower() != 'y':
+            print("Cancelling build")
+            return
+        else:
+            print("Building addon")
+
+    if os.path.exists(reloaded_path):
+        shutil.rmtree(reloaded_path)
+    
+    os.mkdir(reloaded_path)
+
+    for path, _, files in os.walk(WORKSHOP_FOLDER):
+        for file in files:
+            shutil.copyfile(os.path.join(path, file), os.path.join(reloaded_path, file))
+
+    print("Done")
+
+
+if __name__ == "__main__":
+    build_addon()
