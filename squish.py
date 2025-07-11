@@ -1,6 +1,6 @@
 """
 Squishes all the required files into a single folder
-to upload to the steam workshop
+to upload to the steam workshop or use in-game
 """
 
 import os
@@ -9,11 +9,13 @@ import shutil
 ROOT: str = os.getcwd()
 WORKSHOP_FOLDER: str = os.path.join(ROOT, "Workshop")
 
+# Add file extensions to this list that should not be included in build
 excluded_file_types: set[str] = set([
     ".exp", # Unnnecesary binaries from exu compilation
     ".lib"
 ])
 
+# Add specific files in this list that must be present for the build to succeed
 required_items: list[str] = [
     "exu.dll"
 ]
@@ -28,6 +30,9 @@ def add_item_recurse(*path_from_root: str) -> None:
 
     source_paths.append(final_path)
 
+
+# Add the target paths for the build, it will search their entire tree
+# so you only need to list the top level path
 
 add_item_recurse("Multiplayer")
 add_item_recurse("Scripts")
