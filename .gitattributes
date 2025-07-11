@@ -1,3 +1,4 @@
+*.lgt linguist-vendored=true
 * linguist-vendored=false
 * linguist-generated=false
 *.py linguist-language=Python
