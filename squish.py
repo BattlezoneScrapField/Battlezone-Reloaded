@@ -7,7 +7,7 @@ import os
 import shutil
 
 ROOT: str = os.getcwd()
-WORKSHOP_FOLDER: str = os.path.join(ROOT, "Workshop")
+BUILD_FOLDER: str = os.path.join(ROOT, "Build")
 
 # Add file extensions to this list that should not be included in build
 excluded_file_types: set[str] = set([
@@ -43,19 +43,19 @@ add_item_recurse("External", "RequireFix")
 
 
 def squish() -> None:
-    os.makedirs("Workshop", exist_ok = True)
+    os.makedirs("Build", exist_ok = True)
     for path in source_paths:
         for path, _, files in os.walk(path):
             for file in files:
                 _, extension = os.path.splitext(file)
                 if extension in excluded_file_types:
                     continue
-                shutil.copyfile(os.path.join(path, file), os.path.join(WORKSHOP_FOLDER, file))
+                shutil.copyfile(os.path.join(path, file), os.path.join(BUILD_FOLDER, file))
 
 
 def verify_files() -> list[str]:
     missing_files: list[str] = []
-    for _, _, files in os.walk(WORKSHOP_FOLDER):
+    for _, _, files in os.walk(BUILD_FOLDER):
         for required_file in required_items:
             if required_file not in files:
                 missing_files.append(required_file)
@@ -67,10 +67,12 @@ if __name__ == "__main__":
 
     missing_files: list[str] = verify_files()
     if len(missing_files) == 0:
-        print("Built workshop release")
+        print("Built release")
     else:
-        print("Failed to build workshop release, missing file(s):")
-        shutil.rmtree(WORKSHOP_FOLDER)
+        print("Failed to build release, missing file(s):")
+        shutil.rmtree(BUILD_FOLDER)
         for missing_file in missing_files:
             print(missing_file)
         print("\nDid you remember to compile the binaries?")
+    
+    os.system("pause")

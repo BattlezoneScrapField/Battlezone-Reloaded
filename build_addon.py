@@ -7,7 +7,7 @@ import shutil
 import winreg
 
 ROOT: str = os.getcwd()
-WORKSHOP_FOLDER: str = os.path.join(ROOT, "Workshop")
+BUILD_FOLDER: str = os.path.join(ROOT, "Build")
 
 
 def get_addon_path() -> str:
@@ -26,7 +26,7 @@ def get_addon_path() -> str:
 
 
 def build_addon() -> None:
-    if not os.path.exists(WORKSHOP_FOLDER):
+    if not os.path.exists(BUILD_FOLDER):
         raise FileNotFoundError("Couldn't find workshop build folder, make sure to run squish first")
 
     addon_path: str = get_addon_path()
@@ -44,11 +44,12 @@ def build_addon() -> None:
     
     os.mkdir(reloaded_path)
 
-    for path, _, files in os.walk(WORKSHOP_FOLDER):
+    for path, _, files in os.walk(BUILD_FOLDER):
         for file in files:
             shutil.copyfile(os.path.join(path, file), os.path.join(reloaded_path, file))
 
     print("Done")
+    os.system("pause")
 
 
 if __name__ == "__main__":

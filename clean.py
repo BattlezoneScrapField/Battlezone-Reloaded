@@ -6,12 +6,12 @@ import os
 import shutil
 
 ROOT: str = os.getcwd()
-WORKSHOP_FOLDER = os.path.join(ROOT, "Workshop")
+BUILD_FOLDER = os.path.join(ROOT, "Build")
 
 
 def clean():
-    shutil.rmtree(WORKSHOP_FOLDER)
-    print("Cleaned workshop build folder")
+    shutil.rmtree(BUILD_FOLDER)
+    print("Cleaned build folder")
     os.system("pause")
 
 

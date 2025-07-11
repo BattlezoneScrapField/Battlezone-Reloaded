@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 from enum import Enum
 import os
 import subprocess
-import sys
 
 
 class Visiblity(Enum):
@@ -21,22 +20,34 @@ class Visiblity(Enum):
 
 
 ROOT: str = os.getcwd()
-WORKSHOP_FOLDER: str = os.path.join(ROOT, "Workshop")
+BUILD_FOLDER: str = os.path.join(ROOT, "Build")
 MANIFEST_PATH: str = os.path.join(ROOT, "workshop.vdf")
 
 APPID: int = 301650
 WORKSHOP_ID: int = 3522264415
-CONTENT_FOLDER: str = WORKSHOP_FOLDER
+CONTENT_FOLDER: str = BUILD_FOLDER
 preview_file: str = ''
 visbility: Visiblity = Visiblity.PRIVATE
 TITLE: str = "Battlezone: Reloaded"
-description: str = "testing"
-changenote: str = "test"
+description: str = ''
+changenote: str = ''
+
+
+def get_workshop_txts() -> tuple[str, str]:
+    with open("workshop_description.txt", 'r') as des:
+        description = des.read()
+
+    with open("workshop_changenote.txt", 'r') as cn:
+        changenote = cn.read()
+
+    return (description, changenote)
 
 
 def generate_manifest() -> None:
     if os.path.exists(MANIFEST_PATH):
         os.remove(MANIFEST_PATH)
+
+    description, changenote = get_workshop_txts()
 
     with open("workshop.vdf", "w") as manifest:
         manifest.write('"workshopitem"\n')
