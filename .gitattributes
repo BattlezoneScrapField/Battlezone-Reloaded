@@ -1,2 +1,4 @@
 * linguist-vendored=false
 * linguist-generated=false
+*.py linguist-language=Python
+*.lua linguist-language=Lua
