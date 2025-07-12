@@ -3,3 +3,4 @@
 workshop.vdf
 /.vscode
 .env
+/.venv
