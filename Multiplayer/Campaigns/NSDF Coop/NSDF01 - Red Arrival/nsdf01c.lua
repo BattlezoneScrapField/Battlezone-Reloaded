@@ -5,7 +5,7 @@
 
 local RequireFix = require("RequireFix")
 
-RequireFix.Initialize("3469349432")
+RequireFix.Initialize("3522264415")
 
 local vsp = require("vsp")
 
@@ -149,7 +149,6 @@ function () -- exit
 	SetScrap(GetTeamNum(GetPlayerHandle()), 5)
 
 	vsp.shared_resource.make_scrap_shared()
-	exu.SetGlobalTurbo(true) -- Set this after the cutscene is done so it doesn't break it
 end
 )
 
@@ -169,18 +168,16 @@ function (state) end
 -- This listener is what will trigger the next mission state, but we also need to store the handle of
 -- the scavenger that's built, so in order for all players to receive this data we need to synchronize it
 -- manually. Once all players have acknowledged that they have the data, the mission can change state.
-mission:define_event_listener(mission_phase.wait_for_first_scavenger,
-							  "CreateObject",
-							  function (h)
-								if GetTeamNum(h) == 1 and IsOdf(h, "avscav") then
-									mission.var.first_scav = h
-									-- This is where we need to use manual synchronization, we will wait until all players fire off this event
-									-- and save the handle of the scav.
-									-- Remember that since we are calling a method, we need to manually pass in "self" (the mission variable)
-									-- as the first parameter to the callback. Only the host will call this function as well.
-									vsp.net.wait_for_all_clients(mission.change_state, mission, mission_phase.escort_first_scavenger)
-								end
-							  end
+mission:define_event_listener(mission_phase.wait_for_first_scavenger, "CreateObject", function (h)
+	if GetTeamNum(h) == 1 and IsOdf(h, "avscav") then
+		mission.var.first_scav = h
+		-- This is where we need to use manual synchronization, we will wait until all players fire off this event
+		-- and save the handle of the scav.
+		-- Remember that since we are calling a method, we need to manually pass in "self" (the mission variable)
+		-- as the first parameter to the callback. Only the host will call this function as well.
+		vsp.net.wait_for_all_clients(mission.change_state, mission, mission_phase.escort_first_scavenger)
+	end
+end
 )
 
 mission:define_state(mission_phase.escort_first_scavenger,
@@ -256,17 +253,15 @@ end,
 function (state) end
 )
 
-mission:define_event_listener(mission_phase.second_fighter_attack,
-							  "CreateObject",
-							  function (h)
-							  	if IsOdf(h, "svfigh") then
-							  		if GetDistance(mission.var.first_scav, mission.var.bgoal) < 200.0 then
-							  			Attack(h, mission.var.first_scav)
-							  		else
-							  			Goto(h, "patrol2", 0) -- attack scrap field
-							  		end
-							  	end
-							  end
+mission:define_event_listener(mission_phase.second_fighter_attack, "CreateObject", function (h)
+	if IsOdf(h, "svfigh") then
+		if GetDistance(mission.var.first_scav, mission.var.bgoal) < 200.0 then
+			Attack(h, mission.var.first_scav)
+		else
+			Goto(h, "patrol2", 0) -- attack scrap field
+		end
+	end
+end
 )
 
 -- This state may or not be triggered depending on if the scav takes damage
@@ -313,41 +308,35 @@ function (state)
 		mission:build_single_object("avscav", 1, GetPosition("spawn3"))
 
 		local scaled_fighter_count = vsp.net_player.get_player_count()
-		-- In the stock mission this waits for 10 seconds, but with turbo speed
-		-- the scav will run twice as fast (also note passing in mission instance due to calling a method)
-		vsp.util.defer_for(5, mission.build_multiple_objects, mission, "svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn4"))
+		vsp.util.defer_for(10, mission.build_multiple_objects, mission, "svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn4"))
 end,
 function (state) end
 )
 
-mission:define_event_listener(mission_phase.escort_second_scavenger,
-							 "CreateObject",
-							  function (h)
-							  	if IsOdf(h, "avscav") then
-									mission.var.second_scav = h
-									SetCritical(h, true)
-									Retreat(h, "retreat")
-									SetObjectiveOn(h)
-									AudioMessage("misn0228.wav")
+mission:define_event_listener(mission_phase.escort_second_scavenger, "CreateObject", function (h)
+	if IsOdf(h, "avscav") then
+		mission.var.second_scav = h
+		SetCritical(h, true)
+		Retreat(h, "retreat")
+		SetObjectiveOn(h)
+		AudioMessage("misn0228.wav")
 
-									-- track the scav and make sure it stays alive
-									mission:define_global_listener("Update", function (dt)
-										if not IsAlive(mission.var.second_scav) then
-											mission:change_state(mission_phase.mission_failed)
-										end
-									end)
-								end
-							  end
+		-- track the scav and make sure it stays alive
+		mission:define_global_listener("Update", function (dt)
+			if not IsAlive(mission.var.second_scav) then
+				mission:change_state(mission_phase.mission_failed)
+			end
+		end)
+	end
+end
 )
 
 -- This tells the built fighter(s) to attack the second scav
-mission:define_event_listener(mission_phase.escort_second_scavenger,
-							  "CreateObject",
-							   function (h)
-								if IsOdf(h, "svfigh") then
-									Attack(h, mission.var.second_scav)
-								end
-							   end
+mission:define_event_listener(mission_phase.escort_second_scavenger, "CreateObject", function (h)
+	if IsOdf(h, "svfigh") then
+		Attack(h, mission.var.second_scav)
+	end
+end
 )
 
 mission:define_state(mission_phase.mission_success,
