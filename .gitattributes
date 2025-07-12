@@ -1,3 +1,2 @@
+# Fixed bz map files being detected as "Logtalk"
 *.lgt linguist-vendored=true
-*.py linguist-vendored=false
-*.lua linguist-vendored=false
