@@ -1,3 +1,3 @@
 # Fixed bz map files being detected as "Logtalk"
 *.lgt linguist-vendored=true
-Reference\ Mission\ Scripts/** linguist-vendored=true
+References/** linguist-vendored=true
