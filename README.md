@@ -19,7 +19,7 @@ Included are a bunch of scripts to help in building the mod for both local addon
 Once you have those installed clone the repo:
 
 ```
-git clone --rescursive https://github.com/BattlezoneScrapField/Battlezone-Reloaded.git
+git clone --recursive https://github.com/BattlezoneScrapField/Battlezone-Reloaded.git
 ```
 
 ## Build steps
