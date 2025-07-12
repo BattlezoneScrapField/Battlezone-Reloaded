@@ -1,5 +1,3 @@
-*.lgt linguist-vendored=true
-* linguist-vendored=false
-* linguist-generated=false
-*.py linguist-language=Python
-*.lua linguist-language=Lua
+* linguist-vendored 
+*.py linguist-vendored=false
+*.lua linguist-vendored=false
