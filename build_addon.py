@@ -48,9 +48,13 @@ def build_addon() -> None:
         for file in files:
             shutil.copyfile(os.path.join(path, file), os.path.join(reloaded_path, file))
 
-    print("Done")
+    print(f"Built addon at {reloaded_path}")
     os.system("pause")
 
 
 if __name__ == "__main__":
-    build_addon()
+    try:
+        build_addon()
+    except Exception as e:
+        print("An error occurred: {e}")
+        os.system("pause")
