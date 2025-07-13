@@ -9,6 +9,9 @@
 =======================================
 --]]
 
+local RequireFix = require("RequireFix")
+RequireFix.Initialize("3522264415")
+
 local vsp = require("vsp")
 
 local reloaded = {}

@@ -3,10 +3,7 @@
 	By VTrider
 --]]
 
-local RequireFix = require("RequireFix")
-
-RequireFix.Initialize("3522264415")
-
+local reloaded = require("reloaded")
 local vsp = require("vsp")
 
 local exu = require("exu")
