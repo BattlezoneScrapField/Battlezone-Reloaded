@@ -50,13 +50,6 @@ def build_addon() -> None:
 
     addon_path: str = get_addon_path()
     reloaded_path = os.path.join(addon_path, "reloaded")
-    if os.path.exists(reloaded_path):
-        option: str = input("Warning: folder already exists, do you want to overwrite? [y/n]" )
-        if option.lower() != 'y':
-            print("Cancelling build")
-            return
-        else:
-            print("Building addon")
 
     if os.path.exists(reloaded_path):
         shutil.rmtree(reloaded_path)

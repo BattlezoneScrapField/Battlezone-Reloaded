@@ -34,7 +34,9 @@ def add_item_recurse(*path_from_root: str) -> None:
 # Add the target paths for the build, it will search their entire tree
 # so you only need to list the top level path
 
+add_item_recurse("Assets")
 add_item_recurse("Multiplayer")
+add_item_recurse("Presets")
 add_item_recurse("Scripts")
 
 add_item_recurse("External", "ExtraUtilities", "Release")
