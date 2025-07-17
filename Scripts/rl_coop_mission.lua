@@ -128,20 +128,6 @@ do
         end
     end
 
-    local apply_starting_recyclers = function (h) end
-
-    --- Sets whether or not players will start with a recycler (on by default).
-    --- @param state boolean
-    function coop_mission:set_starting_recyclers(state)
-        if state == false then
-            apply_starting_recyclers = function (h)
-                if GetClassLabel(h) == "recycler" then
-                    vsp.utility.defer(vsp.net.remove_sync_object, h)
-                end
-            end
-        end
-    end
-
     --- Forwards the arguments to BuildObject() and constructs a single synchronized object for the host only.
     --- Overrides the mission class method.
     --- @param ... any params forwarded to BuildObject
@@ -259,8 +245,6 @@ do
 
     function rl_coop_mission.CreateObject(h)
         if not mission.get_current_mission() then return end
-
-        apply_starting_recyclers(h)
     end
 end
 return rl_coop_mission

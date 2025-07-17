@@ -26,6 +26,7 @@ do
 
         reloaded.coop_mission.Start()
         reloaded.mission.Start()
+        reloaded.service_building.Start()
     end
 
     function reloaded.Update(dt)

@@ -4,18 +4,12 @@
 --]]
 
 local reloaded = require("reloaded")
-local vsp = require("vsp")
 
 local exu = require("exu")
-
+local vsp = require("vsp")
+exu.DisableStartingRecycler()
 -- Global rule preset config file
 local coop_config = require("rl_coop_campaign")
-
-exu.SetCustomKillMessage(1, "NSDF Expeditionary Force")
-exu.SetCustomKillMessage(15, "Unknown Hostiles")
-
--- field hq label: "abmbld_i76building"
-reloaded.service_building.make_repair_building(GetHandle("abhang1_i76building"))
 
 -- This helper makes a table with the same string as both a key and value,
 -- it will serve as a nice constant for defining mission states
@@ -32,8 +26,10 @@ local mission_phase = vsp.enum.make_string_enum(
 	"mission_failed"
 )
 
--- 4 player coop
-local my_team = reloaded.team.make_team("NSDF", 1, 2, 3, 4)
+-- 4 player coop: assigns teamnums from 1 to 4 (max) as part of a team and allies them
+local my_team = reloaded.team.make_team("NSDF Expeditionary Force", vsp.utility.sequence(coop_config.max_players))
+
+local enemy_team = reloaded.team.make_team("Unknown Hostiles", coop_config.enemy_team_num)
 
 -- this initializes the coop mission wrappuh, this object inherits all methods
 -- from the regular mission class, and also contains special methods that we'll
@@ -50,9 +46,6 @@ mission:set_initial_state(mission_phase.intro_cinematic_1)
 for i = 1, mission.team:get_player_count() do
 	mission:set_spawn_direction(i, vsp.math3d.east)
 end
-
-mission:set_life_count(1)
-mission:set_starting_recyclers(false) -- remove starting recycler that spawns from strat/mpi mode
 
 -- You define a mission state by giving it a name, an update function, an enter function, and an exit function.
 -- In this case the name is defined in a table to keep things organized, strings are always good if you need

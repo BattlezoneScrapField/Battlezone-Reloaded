@@ -8,6 +8,8 @@
 
 local vsp = require("vsp")
 
+local exu = require("exu")
+
 local rl_team = {}
 do
     --- @type team | nil
@@ -31,6 +33,10 @@ do
         -- Map assigned team numbers for players (1, 2, 3, 4... etc.)
         self.team_nums = vsp.set.make_set(...)
         self.player_count = self.team_nums:size()
+
+        for team_num in self.team_nums:iterator() do
+            exu.SetCustomKillMessage(team_num, self.name)
+        end
     end
 
     function team:get_player_count()
