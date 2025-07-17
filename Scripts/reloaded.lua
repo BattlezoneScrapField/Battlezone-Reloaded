@@ -47,19 +47,19 @@ do
     end
 
     function reloaded.CreatePlayer(id, name, team)
-
+        vsp.CreatePlayer(id, name, team)
     end
 
     function reloaded.DeletePlayer(id, name, team)
-
+        vsp.DeletePlayer(id, name, team)
     end
 
     function reloaded.Receive(from, type, ...)
-
+        vsp.Receive(from, type, ...)
     end
 
     function reloaded.AddScrap(team, amount)
-
+        vsp.AddScrap(team, amount)
     end
 end
 return reloaded

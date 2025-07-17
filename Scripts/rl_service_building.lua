@@ -56,7 +56,7 @@ do
     --- @param service_function fun(self: basic_service_building, service_target: userdata)
     function basic_service_building:basic_service_building(building, range, interval, amount, creation_attribute, service_function)
         self.handle = vsp.utility.required_param(building, "building", "userdata", "Reloaded")
-        self.odf = vsp.odf.open(self.handle)
+        self.odf = self.odf or vsp.odf.open(self.handle)
         self.range = vsp.utility.required_param(range, "range", "number", "Reloaded")
         self.interval = vsp.utility.required_param(interval, "interval", "number", "Reloaded")
         self.amount = vsp.utility.required_param(amount, "amount", "number", "Reloaded")
@@ -107,15 +107,19 @@ do
     repair_building.default_sound = "abhange2.wav"
 
     function repair_building:repair_building(building, range, interval, amount, sound, creation_attribute)
+        self.odf = vsp.odf.open(building)
+        range = range or self.odf:get_float("Reloaded", "repairRange", self.default_range)
+        interval = interval or self.odf:get_float("Reloaded", "repairInterval", self.defaut_interval)
+        amount = amount or self.odf:get_int("Reloaded", "repairAmount", self.default_amount)
+
         self:super(building, range, interval, amount, creation_attribute, function (self, object)
+            if not (IsCraft(object) or IsPerson(object)) then return end -- service criteria from DBZ
             if GetHealth(object) < 1.0 then
                 AddHealth(object, self.amount)
                 StartSound(self.sound, object)
             end
         end)
-        self.range = self.range or self.odf:get_float("Reloaded", "repairRange", self.default_range)
-        self.interval = self.interval or self.odf:get_float("Reloaded", "repairInterval", self.defaut_interval)
-        self.amount = self.amount or self.odf:get_int("Reloaded", "repairAmount", self.default_amount)
+
         self.sound = sound or self.odf:get_string("Reloaded", "repairSound", self.default_sound)
     end
 

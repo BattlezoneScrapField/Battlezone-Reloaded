@@ -387,45 +387,39 @@ end
 --- Stock event handlers
 
 function Start()
-    vsp.Start()
 	reloaded.Start()
 
 	do_misc_startup()
 end
 
 function Update(dt)
-    vsp.Update(dt)
 	reloaded.Update(dt)
 end
 
 function CreateObject(h)
-    vsp.CreateObject(h)
 	reloaded.CreateObject(h)
 
 	banish_fking_neutral_grizzly(h)
 end
 
 function DeleteObject(h)
-	
+
 end
 
 function CreatePlayer(id, name, team)
-    vsp.CreatePlayer(id, name, team)
 	reloaded.CreatePlayer(id, name, team)
 end
 
 function DeletePlayer(id, name, team)
-    vsp.DeletePlayer(id, name, team)
 	reloaded.DeletePlayer(id, name, team)
 end
 
 function Receive(from, type, ...)
-    vsp.Receive(from, type, ...)
 	reloaded.Receive(from, type, ...)
 end
 
 --- Extra Utilities event handlers
 
 function exu.AddScrap(team, amount)
-	vsp.AddScrap(team, amount)
+	reloaded.AddScrap(team, amount)
 end
