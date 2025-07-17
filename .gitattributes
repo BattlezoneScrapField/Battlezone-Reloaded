@@ -1,3 +1,6 @@
 # Fixed bz map files being detected as "Logtalk"
 *.lgt linguist-vendored=true
 References/** linguist-vendored=true
+
+# Some files like bzns require CRLF line endings and can silently break the game without them
+* text eol=crlf

@@ -30,8 +30,10 @@ do
     --- @class basic_service_building : object
     local basic_service_building = vsp.object.make_class("basic_service_building")
 
-    --- @type table<basic_service_building>
+    --- Object handle -> service building
+    --- @type table<userdata, basic_service_building>
     local all_service_buildings = {}
+    rl_service_building.all_service_buildings = all_service_buildings
 
     --- Table of searching methods that return true if the object is of the right characteristics,
     --- andd false otherwise to determine if something should be serviced
@@ -54,6 +56,7 @@ do
     --- @param service_function fun(self: basic_service_building, service_target: userdata)
     function basic_service_building:basic_service_building(building, range, interval, amount, creation_attribute, service_function)
         self.handle = vsp.utility.required_param(building, "building", "userdata", "Reloaded")
+        self.odf = vsp.odf.open(self.handle)
         self.range = vsp.utility.required_param(range, "range", "number", "Reloaded")
         self.interval = vsp.utility.required_param(interval, "interval", "number", "Reloaded")
         self.amount = vsp.utility.required_param(amount, "amount", "number", "Reloaded")
@@ -79,6 +82,8 @@ do
                 self.timer:pause()
             end
         end
+
+        all_service_buildings[self.handle] = self
     end
 
     function basic_service_building:is_enabled()
@@ -96,30 +101,34 @@ do
     --- @class repair_building : basic_service_building, object
     local repair_building = vsp.object.make_class("repair_building", basic_service_building)
 
-    --- @param building userdata handle
-    --- @param range? number range in meters to apply service
-    --- @param interval? number interval in seconds to apply service
-    --- @param amount? number amount of service to apply
-    --- @param creation_attribute? enum
-    function repair_building:repair_building(building, range, interval, amount, creation_attribute)
-        range = range or 50.0
-        interval = interval or 1.0
-        amount = amount or 50
+    repair_building.default_range = 50.0
+    repair_building.defaut_interval = 1.0
+    repair_building.default_amount = 50
+    repair_building.default_sound = "abhange2.wav"
+
+    function repair_building:repair_building(building, range, interval, amount, sound, creation_attribute)
         self:super(building, range, interval, amount, creation_attribute, function (self, object)
             if GetHealth(object) < 1.0 then
                 AddHealth(object, self.amount)
-                StartSound("abhange2.wav", object)
+                StartSound(self.sound, object)
             end
         end)
+        self.range = self.range or self.odf:get_float("Reloaded", "repairRange", self.default_range)
+        self.interval = self.interval or self.odf:get_float("Reloaded", "repairInterval", self.defaut_interval)
+        self.amount = self.amount or self.odf:get_int("Reloaded", "repairAmount", self.default_amount)
+        self.sound = sound or self.odf:get_string("Reloaded", "repairSound", self.default_sound)
     end
 
-    --- Creates a repair building, with the stats of a stock hangar if left nil
+    --- Creates a repair building, with the stats of a stock hangar if all parameters are left nil
     --- @param building userdata handle
     --- @param range? number range in meters to apply service
     --- @param interval? number interval in seconds to apply service
     --- @param amount? number amount of service to apply
-    function rl_service_building.make_repair_building(building, range, interval, amount, creation_attribute)
-        return repair_building:new(building, range, interval, amount, creation_attribute)
+    --- @param sound? string sound file to play when applying service
+    --- @param creation_attribute? enum creation attribute to spawn disabled
+    --- @return repair_building
+    function rl_service_building.make_repair_building(building, range, interval, amount, sound, creation_attribute)
+        return repair_building:new(building, range, interval, amount, sound, creation_attribute)
     end
 
     local function register_start_objects()

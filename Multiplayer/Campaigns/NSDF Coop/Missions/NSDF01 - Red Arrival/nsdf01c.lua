@@ -14,6 +14,9 @@ local coop_config = require("rl_coop_campaign")
 exu.SetCustomKillMessage(1, "NSDF Expeditionary Force")
 exu.SetCustomKillMessage(15, "Unknown Hostiles")
 
+-- field hq label: "abmbld_i76building"
+reloaded.service_building.make_repair_building(GetHandle("abhang1_i76building"))
+
 -- This helper makes a table with the same string as both a key and value,
 -- it will serve as a nice constant for defining mission states
 local mission_phase = vsp.enum.make_string_enum(

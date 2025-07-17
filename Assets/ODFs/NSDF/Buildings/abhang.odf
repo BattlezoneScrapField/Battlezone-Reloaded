@@ -13,8 +13,8 @@ radarSignature = 1.0
 [BuildingClass]
 soundAmbient = "abhange0.wav"
 
-// [RepairDepotClass]
-// repairRange = 0.0 // Disable the built-in repair functionality
+[RepairDepotClass]
+repairRange = 0.0 // Disable the built-in repair functionality
 
 [Reloaded]
 repairRange = 50.0
