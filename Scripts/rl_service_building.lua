@@ -1,7 +1,7 @@
 --[[
 =======================================
 *   Battlezone: Reloaded
-*   
+*
 *   Manages service buildings such as
 *   the stock supply/field HQ, and
 *   hangar, to provide AOE service
@@ -20,227 +20,239 @@ local vsp = require("vsp")
 
 local rl_service_building = {}
 do
-    --- @type enum
-    local creation_attributes = vsp.enum.make_enum(
-        "start_enabled",
-        "start_disabled"
-    )
-    --- @type enum
-    local service_attributes = vsp.enum.make_enum(
-        "service_all",
-        "service_team"
-    )
+	--- @type enum
+	local creation_attributes = vsp.enum.make_enum("start_enabled", "start_disabled")
+	--- @type enum
+	local service_attributes = vsp.enum.make_enum("service_all", "service_team")
 
-    --- @class basic_service_building : object
-    local basic_service_building = vsp.object.make_class("basic_service_building")
+	--- @class basic_service_building : object
+	local basic_service_building = vsp.object.make_class("basic_service_building")
 
-    --- Object handle -> service building
-    --- @type table<userdata, basic_service_building>
-    local all_service_buildings = {}
-    rl_service_building.all_service_buildings = all_service_buildings
+	--- Object handle -> service building
+	--- @type table<userdata, basic_service_building>
+	local all_service_buildings = {}
+	rl_service_building.all_service_buildings = all_service_buildings
 
-    --- Table of searching methods that return true if the object is of the right characteristics,
-    --- andd false otherwise to determine if something should be serviced
-    --- @type table<fun(obj: userdata): boolean>
-    local service_searchers = {
-        [service_attributes.service_all] = function (obj)
-            return true
-        end,
-        [service_attributes.service_team] = function (obj)
-            return GetTeamNum(obj) == GetTeamNum(GetPlayerHandle())
-        end
-    }
+	--- Table of searching methods that return true if the object is of the right characteristics,
+	--- andd false otherwise to determine if something should be serviced
+	--- @type table<fun(obj: userdata): boolean>
+	local service_searchers = {
+		[service_attributes.service_all] = function(obj)
+			return true
+		end,
+		[service_attributes.service_team] = function(obj)
+			return GetTeamNum(obj) == GetTeamNum(GetPlayerHandle())
+		end,
+	}
 
-    --- Service building base class constructor
-    --- @param building userdata handle
-    --- @param range number range in meters to apply service
-    --- @param interval number interval in seconds to apply service
-    --- @param amount number amount of service to apply
-    --- @param creation_attribute? enum
-    --- @param service_function fun(self: basic_service_building, service_target: userdata)
-    function basic_service_building:basic_service_building(building, range, interval, amount, creation_attribute, service_function)
-        assert(not all_service_buildings[self.handle], "Reloaded: This building has already been registered as a service building")
+	--- Service building base class constructor
+	--- @param building userdata handle
+	--- @param range number range in meters to apply service
+	--- @param interval number interval in seconds to apply service
+	--- @param amount number amount of service to apply
+	--- @param creation_attribute? enum
+	--- @param service_function fun(self: basic_service_building, service_target: userdata)
+	function basic_service_building:basic_service_building(
+		building,
+		range,
+		interval,
+		amount,
+		creation_attribute,
+		service_function
+	)
+		assert(
+			not all_service_buildings[self.handle],
+			"Reloaded: This building has already been registered as a service building"
+		)
 
-        self.handle = vsp.utility.required_param(building, "building", "userdata", "Reloaded")
-        self.odf = self.odf or vsp.odf.open(self.handle)
-        self.range = vsp.utility.required_param(range, "range", "number", "Reloaded")
-        self.interval = vsp.utility.required_param(interval, "interval", "number", "Reloaded")
-        self.amount = vsp.utility.required_param(amount, "amount", "number", "Reloaded")
-        vsp.utility.required_param(service_function, "service_function", "function", "Reloaded")
-        
-        self.service_mode = service_attributes.service_team
-        
-        local wrapped_service_function = function ()
-            for obj in ObjectsInRange(self.range, self.handle) do
-                if IsLocal(obj) then -- service is handled client side and applied to local units
-                    if service_searchers[self.service_mode](obj) then
-                        service_function(self, obj)
-                    end
-                end
-            end
-        end
-        
-        self.timer = vsp.time.make_timer(self.interval, true, wrapped_service_function)
-        
-        self.timer:start()
+		self.handle = vsp.utility.required_param(building, "building", "userdata", "Reloaded")
+		self.odf = self.odf or vsp.odf.open(self.handle)
+		self.range = vsp.utility.required_param(range, "range", "number", "Reloaded")
+		self.interval = vsp.utility.required_param(interval, "interval", "number", "Reloaded")
+		self.amount = vsp.utility.required_param(amount, "amount", "number", "Reloaded")
+		vsp.utility.required_param(service_function, "service_function", "function", "Reloaded")
 
-        if creation_attribute then
-            local attribute = assert(creation_attributes[creation_attribute], "VSP: Invalid creation attribute for class basic_service_building")
-            if attribute == creation_attributes.start_disabled then
-                self.timer:pause()
-            end
-        end
+		self.service_mode = service_attributes.service_team
 
-        all_service_buildings[self.handle] = self
-    end
+		local wrapped_service_function = function()
+			for obj in ObjectsInRange(self.range, self.handle) do
+				if IsLocal(obj) then -- service is handled client side and applied to local units
+					if service_searchers[self.service_mode](obj) then
+						service_function(self, obj)
+					end
+				end
+			end
+		end
 
-    function basic_service_building:is_enabled()
-        return self.timer:is_active()
-    end
+		self.timer = vsp.time.make_timer(self.interval, true, wrapped_service_function)
 
-    function basic_service_building:enable()
-        self.timer:resume()
-    end
+		self.timer:start()
 
-    function basic_service_building:disable()
-        self.timer:pause()
-    end
+		if creation_attribute then
+			local attribute = assert(
+				creation_attributes[creation_attribute],
+				"VSP: Invalid creation attribute for class basic_service_building"
+			)
+			if attribute == creation_attributes.start_disabled then
+				self.timer:pause()
+			end
+		end
 
-    --- @class repair_building : basic_service_building, object
-    local repair_building = vsp.object.make_class("repair_building", basic_service_building)
+		all_service_buildings[self.handle] = self
+	end
 
-    repair_building.default_range = 50.0
-    repair_building.defaut_interval = 1.0
-    repair_building.default_amount = 50
-    repair_building.default_sound = "abhange2.wav"
+	function basic_service_building:is_enabled()
+		return self.timer:is_active()
+	end
 
-    function repair_building:repair_building(building, range, interval, amount, sound, creation_attribute)
-        self.odf = vsp.odf.open(building)
+	function basic_service_building:enable()
+		self.timer:resume()
+	end
 
-        if self.odf:get_float("RepairDepotClass", "repairRange", math.huge) ~= 0.0 then
-            error("Reloaded: repair building odf malformed, stock repairRange must be 0.0")
-        end
+	function basic_service_building:disable()
+		self.timer:pause()
+	end
 
-        range = range or self.odf:get_float("Reloaded", "repairRange", self.default_range)
-        interval = interval or self.odf:get_float("Reloaded", "repairInterval", self.defaut_interval)
-        amount = amount or self.odf:get_int("Reloaded", "repairAmount", self.default_amount)
+	--- @class repair_building : basic_service_building, object
+	local repair_building = vsp.object.make_class("repair_building", basic_service_building)
 
-        self:super(building, range, interval, amount, creation_attribute, function (self, object)
-            if not (IsCraft(object) or IsPerson(object)) then return end -- service criteria from DBZ
-            if GetHealth(object) < 1.0 then
-                AddHealth(object, self.amount)
-                StartSound(self.sound, object)
-            end
-        end)
+	repair_building.default_range = 50.0
+	repair_building.defaut_interval = 1.0
+	repair_building.default_amount = 50
+	repair_building.default_sound = "abhange2.wav"
 
-        self.sound = sound or self.odf:get_string("Reloaded", "repairSound", self.default_sound)
-    end
+	function repair_building:repair_building(building, range, interval, amount, sound, creation_attribute)
+		self.odf = vsp.odf.open(building)
 
-    --- Creates a repair building, with the stats of a stock hangar if all parameters are left nil
-    --- @param building userdata handle
-    --- @param range? number range in meters to apply service
-    --- @param interval? number interval in seconds to apply service
-    --- @param amount? number amount of service to apply
-    --- @param sound? string sound file to play when applying service
-    --- @param creation_attribute? enum creation attribute to spawn disabled
-    --- @return repair_building
-    function rl_service_building.make_repair_building(building, range, interval, amount, sound, creation_attribute)
-        return repair_building:new(building, range, interval, amount, sound, creation_attribute)
-    end
+		if self.odf:get_float("RepairDepotClass", "repairRange", math.huge) ~= 0.0 then
+			error("Reloaded: repair building odf malformed, stock repairRange must be 0.0")
+		end
 
-    --- @class supply_building : basic_service_building, object
-    local supply_building = vsp.object.make_class("supply_building", basic_service_building)
+		range = range or self.odf:get_float("Reloaded", "repairRange", self.default_range)
+		interval = interval or self.odf:get_float("Reloaded", "repairInterval", self.defaut_interval)
+		amount = amount or self.odf:get_int("Reloaded", "repairAmount", self.default_amount)
 
-    supply_building.default_range = 50.0
-    supply_building.defaut_interval = 1.0
-    supply_building.default_amount = 50
-    supply_building.default_sound = "supply.wav"
+		self:super(building, range, interval, amount, creation_attribute, function(self, object)
+			if not (IsCraft(object) or IsPerson(object)) then
+				return
+			end -- service criteria from DBZ
+			if GetHealth(object) < 1.0 then
+				AddHealth(object, self.amount)
+				StartSound(self.sound, object)
+			end
+		end)
 
-    function supply_building:supply_building(building, range, interval, amount, sound, creation_attribute)
-        self.odf = vsp.odf.open(building)
+		self.sound = sound or self.odf:get_string("Reloaded", "repairSound", self.default_sound)
+	end
 
-        if self.odf:get_float("SupplyDepotClass", "supplyRange", math.huge) ~= 0.0 then
-            error("Reloaded: repair building odf malformed, stock supplyRange must be 0.0")
-        end
+	--- Creates a repair building, with the stats of a stock hangar if all parameters are left nil
+	--- @param building userdata handle
+	--- @param range? number range in meters to apply service
+	--- @param interval? number interval in seconds to apply service
+	--- @param amount? number amount of service to apply
+	--- @param sound? string sound file to play when applying service
+	--- @param creation_attribute? enum creation attribute to spawn disabled
+	--- @return repair_building
+	function rl_service_building.make_repair_building(building, range, interval, amount, sound, creation_attribute)
+		return repair_building:new(building, range, interval, amount, sound, creation_attribute)
+	end
 
-        range = range or self.odf:get_float("Reloaded", "supplyRange", self.default_range)
-        interval = interval or self.odf:get_float("Reloaded", "supplyInterval", self.defaut_interval)
-        amount = amount or self.odf:get_int("Reloaded", "supplyAmount", self.default_amount)
+	--- @class supply_building : basic_service_building, object
+	local supply_building = vsp.object.make_class("supply_building", basic_service_building)
 
-        self:super(building, range, interval, amount, creation_attribute, function (self, object)
-            if not (IsCraft(object) or IsPerson(object)) then return end -- service criteria from DBZ
-            if GetAmmo(object) < 1.0 then
-                AddAmmo(object, self.amount)
-                StartSound(self.sound, object)
-            end
-        end)
+	supply_building.default_range = 50.0
+	supply_building.defaut_interval = 1.0
+	supply_building.default_amount = 50
+	supply_building.default_sound = "supply.wav"
 
-        self.sound = sound or self.odf:get_string("Reloaded", "supplySound", self.default_sound)
-    end
+	function supply_building:supply_building(building, range, interval, amount, sound, creation_attribute)
+		self.odf = vsp.odf.open(building)
 
-    --- Creates a supply_unit_spawn building, with the stats of a stock supply/field HQ if all parameters are left nil
-    --- @param building userdata handle
-    --- @param range? number range in meters to apply service
-    --- @param interval? number interval in seconds to apply service
-    --- @param amount? number amount of service to apply
-    --- @param sound? string sound file to play when applying service
-    --- @param creation_attribute? enum creation attribute to spawn disabled
-    --- @return supply_building
-    function rl_service_building.make_supply_building(building, range, interval, amount, sound, creation_attribute)
-        return supply_building:new(building, range, interval, amount, sound, creation_attribute)
-    end
+		if self.odf:get_float("SupplyDepotClass", "supplyRange", math.huge) ~= 0.0 then
+			error("Reloaded: repair building odf malformed, stock supplyRange must be 0.0")
+		end
 
-    --- Whether or not to automatically use reloaded service buildings
-    --- @type boolean
-    local auto_detect_service_buildings = false
+		range = range or self.odf:get_float("Reloaded", "supplyRange", self.default_range)
+		interval = interval or self.odf:get_float("Reloaded", "supplyInterval", self.defaut_interval)
+		amount = amount or self.odf:get_int("Reloaded", "supplyAmount", self.default_amount)
 
-    --- Enables or disables automatic detection and usage of reloaded service buildings, false by default.
-    --- Anything with a "supplybuilding" or "repairbuilding" class label is a valid service auto service building.
-    --- @param state boolean
-    function rl_service_building.autodetect(state)
-        auto_detect_service_buildings = vsp.utility.required_param(state, "state", "boolean", "Reloaded")
-    end
+		self:super(building, range, interval, amount, creation_attribute, function(self, object)
+			if not (IsCraft(object) or IsPerson(object)) then
+				return
+			end -- service criteria from DBZ
+			if GetAmmo(object) < 1.0 then
+				AddAmmo(object, self.amount)
+				StartSound(self.sound, object)
+			end
+		end)
 
-    function rl_service_building.enable_all()
-        for _, service_building in ipairs(all_service_buildings) do
-            service_building:enable()
-        end
-    end
+		self.sound = sound or self.odf:get_string("Reloaded", "supplySound", self.default_sound)
+	end
 
-    function rl_service_building.disable_all()
-        for _, service_building in ipairs(all_service_buildings) do
-            service_building:disable()
-        end
-    end
+	--- Creates a supply_unit_spawn building, with the stats of a stock supply/field HQ if all parameters are left nil
+	--- @param building userdata handle
+	--- @param range? number range in meters to apply service
+	--- @param interval? number interval in seconds to apply service
+	--- @param amount? number amount of service to apply
+	--- @param sound? string sound file to play when applying service
+	--- @param creation_attribute? enum creation attribute to spawn disabled
+	--- @return supply_building
+	function rl_service_building.make_supply_building(building, range, interval, amount, sound, creation_attribute)
+		return supply_building:new(building, range, interval, amount, sound, creation_attribute)
+	end
 
-    function rl_service_building.get(handle)
-        vsp.utility.required_param(handle, "handle", "userdata", "Reloaded")
-        return assert(all_service_buildings[handle], "Reloaded: this handle is not a service building")
-    end
+	--- Whether or not to automatically use reloaded service buildings
+	--- @type boolean
+	local auto_detect_service_buildings = false
 
-    local function register_start_objects()
-        if not auto_detect_service_buildings then return end
-        local objs = vsp.object_service.get_start_objects():get()
+	--- Enables or disables automatic detection and usage of reloaded service buildings, false by default.
+	--- Anything with a "supplybuilding" or "repairbuilding" class label is a valid service auto service building.
+	--- @param state boolean
+	function rl_service_building.autodetect(state)
+		auto_detect_service_buildings = vsp.utility.required_param(state, "state", "boolean", "Reloaded")
+	end
 
-        for _, obj in ipairs(objs) do
-            if GetClassLabel(obj) == "repairdepot" then
-                repair_building:new(obj)
-            elseif GetClassLabel(obj) == "supplydepot" then
-                supply_building:new(obj)
-            end
-        end
-    end
+	function rl_service_building.enable_all()
+		for _, service_building in ipairs(all_service_buildings) do
+			service_building:enable()
+		end
+	end
 
-    function rl_service_building.Start()
-        register_start_objects()
-    end
+	function rl_service_building.disable_all()
+		for _, service_building in ipairs(all_service_buildings) do
+			service_building:disable()
+		end
+	end
 
-    function rl_service_building.Update(dt)
+	function rl_service_building.get(handle)
+		vsp.utility.required_param(handle, "handle", "userdata", "Reloaded")
+		return assert(all_service_buildings[handle], "Reloaded: this handle is not a service building")
+	end
 
-    end
+	local function register_start_objects()
+		if not auto_detect_service_buildings then
+			return
+		end
+		local objs = vsp.object_service.get_start_objects():get()
 
-    rl_service_building.creation_attributes = creation_attributes
-    rl_service_building.service_attributes = service_attributes
-    rl_service_building.basic_service_building = basic_service_building
+		for _, obj in ipairs(objs) do
+			if GetClassLabel(obj) == "repairdepot" then
+				repair_building:new(obj)
+			elseif GetClassLabel(obj) == "supplydepot" then
+				supply_building:new(obj)
+			end
+		end
+	end
+
+	function rl_service_building.Start()
+		register_start_objects()
+	end
+
+	function rl_service_building.Update(dt) end
+
+	rl_service_building.creation_attributes = creation_attributes
+	rl_service_building.service_attributes = service_attributes
+	rl_service_building.basic_service_building = basic_service_building
 end
 return rl_service_building
+
