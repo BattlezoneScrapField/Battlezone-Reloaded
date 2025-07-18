@@ -15,7 +15,7 @@ do
     --- @type team | nil
     local my_team = nil
 
-    function rl_team.get_me()
+    function rl_team.my_team_num()
         return GetTeamNum(GetPlayerHandle())
     end
 
@@ -37,6 +37,8 @@ do
         for team_num in self.team_nums:iterator() do
             exu.SetCustomKillMessage(team_num, self.name)
         end
+
+        self:do_ally()
     end
 
     function team:get_player_count()

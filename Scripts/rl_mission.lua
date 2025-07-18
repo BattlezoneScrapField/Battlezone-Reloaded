@@ -96,6 +96,13 @@ do
         self.initial_state = state_id
     end
 
+    local valid_events = vsp.set.make_set(
+        "Start",
+        "Update",
+        "CreateObject",
+        "DeleteObject"
+    )
+
     --- Defines a per-state event listener for any stock event handler. CreateObject(h) for example.
     --- The `state` parameter is the id of the state you wish to attach the listener to.
     --- `what` is the exact string name of the stock event handler.
@@ -106,13 +113,20 @@ do
     --- @param state any state id to attach listener
     --- @param what string name of the event handler
     --- @param func fun(...: any)
+    --- @return self
     function mission:define_event_listener(state, what, func)
+        vsp.utility.required_param(state, "state", "any", "Reloaded")
+        vsp.utility.required_param(what, "what", "string", "Reloaded")
+        vsp.utility.required_param(func, "func", "function", "Reloaded")
+        assert(valid_events:contains(what), string.format("Reloaded: requested event %s is invalid", what))
         assert(self.states[state], string.format("Reloaded: Requested state %s does not exist", state))
         assert(what ~= "Start", "Reloaded: Start event listeners are forbidden, just use Start()")
         assert(what ~= "Update", "Reloaded: Update event listeners are forbidden, use the state update function")
 
         self.states[state].event_listeners[what] = self.states[state].event_listeners[what] or {}
         table.insert(self.states[state].event_listeners[what], func)
+
+        return self
     end
 
     --- Defines a global event listener. Use this SPARINGLY because it can quickly devolve
@@ -120,10 +134,29 @@ do
     --- global listeners that's a sign to refactor the mission script.
     --- @param what string name of the event handler
     --- @param func fun(...: any)
+    --- @return integer listener_handle handle you can save in case you need to undefine it later
     function mission:define_global_listener(what, func)
+        vsp.utility.required_param(what, "what", "string", "Reloaded")
+        vsp.utility.required_param(func, "func", "function", "Reloaded")
+        assert(valid_events:contains(what), string.format("Reloaded: requested event %s is invalid", what))
         assert(what ~= "Start", "Reloaded: Start global listeners are forbidden, just use Start()")
+
         self.global_listeners[what] = self.global_listeners[what] or {}
         table.insert(self.global_listeners[what], func)
+
+        return #self.global_listeners[what]
+    end
+
+    --- Undefines a global listener for the given event with the given handle
+    --- @param what string event name
+    --- @param handle integer global listener handle
+    function mission:undefine_global_listener(what, handle)
+        vsp.utility.required_param(what, "what", "string", "Reloaded")
+        vsp.utility.required_param(handle, "handle", "number", "Reloaded")
+        assert(valid_events:contains(what), string.format("Reloaded: requested event %s is invalid", what))
+        assert(self.global_listeners[what][handle], "Reloaded: Global listener handle is invalid")
+
+        self.global_listeners[what][handle] = function () end
     end
 
     --- Builds a single object (this is just here so that it works in both SP and MP)
@@ -139,6 +172,7 @@ do
     --- @param position any
     --- @return table handles
     function mission:build_multiple_objects(odfname, teamnum, count, position)
+        position = vsp.utility.get_any_position(position)
         local return_handles = {}
         local max_radius = 10 * count
         for i = 1, count do

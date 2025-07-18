@@ -39,7 +39,7 @@ do
 
     --- Makes a coop mission instance with the given team
     --- @param team team
-    --- @return any
+    --- @return coop_mission
     function rl_coop_mission.make_coop(team)
         return coop_mission:new(team)
     end
@@ -108,7 +108,7 @@ do
         apply_my_spawn_direction = function ()
             local me = GetPlayerHandle()
             local pos = GetPosition(me)
-            SetTransform(me, BuildDirectionalMatrix(pos, self.spawn_directions[team.get_me()]))
+            SetTransform(me, BuildDirectionalMatrix(pos, self.spawn_directions[team.my_team_num()]))
         end
     end
 

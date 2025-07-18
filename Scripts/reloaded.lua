@@ -3,9 +3,6 @@
 *   Battlezone: Reloaded
 *   
 *   Standard script entry point
-*
-*	Required Event Handlers:
-*	- Update(dt)
 =======================================
 --]]
 
@@ -16,6 +13,7 @@ local vsp = require("vsp")
 
 local reloaded = {}
 do
+    reloaded.ai               = require("rl_ai")
     reloaded.coop_mission     = require("rl_coop_mission")
     reloaded.mission          = require("rl_mission")
     reloaded.service_building = require("rl_service_building")

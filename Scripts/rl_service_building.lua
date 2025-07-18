@@ -194,7 +194,8 @@ do
     --- @type boolean
     local auto_detect_service_buildings = false
 
-    --- Enables or disables automatic detection and usage of reloaded service buildings, false by default
+    --- Enables or disables automatic detection and usage of reloaded service buildings, false by default.
+    --- Anything with a "supplybuilding" or "repairbuilding" class label is a valid service auto service building.
     --- @param state boolean
     function rl_service_building.autodetect(state)
         auto_detect_service_buildings = vsp.utility.required_param(state, "state", "boolean", "Reloaded")

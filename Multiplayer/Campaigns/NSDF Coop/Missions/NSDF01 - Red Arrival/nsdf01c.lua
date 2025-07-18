@@ -1,13 +1,18 @@
 --[[
-	NSDF 01 Coop - Red Arrival
-	By VTrider
+=======================================
+*   Battlezone: Reloaded
+*   
+*   Coop Campaign
+*
+*	NSDF01 - Red Arrival
+=======================================
 --]]
 
 local reloaded = require("reloaded")
 
 local exu = require("exu")
 local vsp = require("vsp")
-exu.DisableStartingRecycler()
+
 -- Global rule preset config file
 local coop_config = require("rl_coop_campaign")
 
@@ -27,9 +32,9 @@ local mission_phase = vsp.enum.make_string_enum(
 )
 
 -- 4 player coop: assigns teamnums from 1 to 4 (max) as part of a team and allies them
-local my_team = reloaded.team.make_team("NSDF Expeditionary Force", vsp.utility.sequence(coop_config.max_players))
+local my_team = reloaded.team.make_team("4th Platoon", vsp.utility.sequence(coop_config.max_players))
 
-local enemy_team = reloaded.team.make_team("Unknown Hostiles", coop_config.enemy_team_num)
+local enemy_team = reloaded.team.make_team("Bogeys", coop_config.enemy_team_num)
 
 -- this initializes the coop mission wrappuh, this object inherits all methods
 -- from the regular mission class, and also contains special methods that we'll
@@ -204,7 +209,7 @@ function (state, dt)
 	end
 end,
 function (state)
-	local scaled_fighter_count = vsp.net_player.get_player_count()
+	local scaled_fighter_count = reloaded.ai.scaling.get_scaled(reloaded.ai.scaling.count, 1)
 	mission:build_multiple_objects("svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn1"))
 
 	AudioMessage("misn0233.wav")
@@ -238,7 +243,7 @@ function (state, dt)
 	end
 end,
 function (state)
-	local scaled_fighter_count = vsp.net_player.get_player_count()
+	local scaled_fighter_count = reloaded.ai.scaling.get_scaled(reloaded.ai.scaling.count, 1)
 	mission:build_multiple_objects("svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn2"))
 end,
 function (state) end
@@ -298,7 +303,7 @@ function (state)
 		-- an event listener for CreateObject (defined below)
 		mission:build_single_object("avscav", 1, GetPosition("spawn3"))
 
-		local scaled_fighter_count = vsp.net_player.get_player_count()
+		local scaled_fighter_count = reloaded.ai.scaling.get_scaled(reloaded.ai.scaling.count, 1)
 		vsp.utility.defer_for(10, mission.build_multiple_objects, mission, "svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn4"))
 end,
 function (state) end
@@ -370,19 +375,10 @@ local function banish_fking_neutral_grizzly(h)
 	end
 end
 
--- It's good to keep shit out of the stock event handlers so you can easily tell what they're doing.
--- In this case we only have a small setup function but if it's large we don't want to dig through
--- the Start() function.
-local function do_misc_startup()
-	exu.SetShotConvergence(true)
-end
-
 --- Stock event handlers
 
 function Start()
 	reloaded.Start()
-
-	do_misc_startup()
 end
 
 function Update(dt)
@@ -400,6 +396,7 @@ function DeleteObject(h)
 end
 
 function CreatePlayer(id, name, team)
+
 	reloaded.CreatePlayer(id, name, team)
 end
 
