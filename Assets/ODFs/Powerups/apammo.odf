@@ -1,0 +1,19 @@
+[GameObjectClass]
+baseName = "apammo"
+classLabel = "ammopack"
+scrapCost = 1
+scrapValue = 0
+maxHealth = 150
+maxAmmo = 0
+unitName = "Ammo"
+aiName = "PowerUpProcess"
+
+// Reloaded:
+buildTime = 1.5
+
+[PowerUpClass]
+soundPickup = "weapon.wav"
+soundReject = "mnu_buzz.wav"
+
+[AmmoPowerupClass]
+ammoUp = 500

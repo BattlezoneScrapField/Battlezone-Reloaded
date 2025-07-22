@@ -185,10 +185,10 @@ function Update()
 	then
 		AudioMessage("misn1416.wav");
 		M.beacon_time1 = 99999.0;
-		M.beacon1 = BuildObject("apcamr",1,"rescue1");
-		M.guy1 = BuildObject("aspilo",1,"help1");
-		M.guy2 = BuildObject("aspilo",1,"help2");
-		M.guy3 = BuildObject("aspilo",1,"help3");
+		M.beacon1 = exu.BuildAsyncObject("apcamr",1,"rescue1");
+		M.guy1 = exu.BuildAsyncObject("aspilo",1,"help1");
+		M.guy2 = exu.BuildAsyncObject("aspilo",1,"help2");
+		M.guy3 = exu.BuildAsyncObject("aspilo",1,"help3");
 		SetIndependence(M.guy1, 0);
 		SetIndependence(M.guy2, 0);
 		SetIndependence(M.guy3, 0);
@@ -280,10 +280,10 @@ function Update()
 	if (GetTime()>M.beacon_time2)
 	then
 		M.beacon_time2 = 99999.0;
-		M.beacon2 = BuildObject("apcamr",1,"rescue2");
-		M.guy1 = BuildObject("aspilo",1,"help4");
-		M.guy2 = BuildObject("aspilo",1,"help5");
-		M.guy3 = BuildObject("aspilo",1,"help6");
+		M.beacon2 = exu.BuildAsyncObject("apcamr",1,"rescue2");
+		M.guy1 = exu.BuildAsyncObject("aspilo",1,"help4");
+		M.guy2 = exu.BuildAsyncObject("aspilo",1,"help5");
+		M.guy3 = exu.BuildAsyncObject("aspilo",1,"help6");
 		SetIndependence(M.guy1, 0);
 		SetIndependence(M.guy2, 0);
 		SetIndependence(M.guy3, 0);
@@ -339,10 +339,10 @@ function Update()
 	if (GetTime()>M.beacon_time3)
 	then
 		M.beacon_time3 = 99999.0;
-		M.beacon3 = BuildObject("apcamr",1,"rescue3");
-		M.guy1 = BuildObject("aspilo",1,"help7");
-		M.guy2 = BuildObject("aspilo",1,"help8");
-		M.guy3 = BuildObject("aspilo",1,"help9");
+		M.beacon3 = exu.BuildAsyncObject("apcamr",1,"rescue3");
+		M.guy1 = exu.BuildAsyncObject("aspilo",1,"help7");
+		M.guy2 = exu.BuildAsyncObject("aspilo",1,"help8");
+		M.guy3 = exu.BuildAsyncObject("aspilo",1,"help9");
 		SetIndependence(M.guy1, 0);
 		SetIndependence(M.guy2, 0);
 		SetIndependence(M.guy3, 0);
@@ -420,17 +420,17 @@ function Update()
 		M.wave_count = M.wave_count + 1;
 		local x = math.random(0, 2); --rand()%3;
 		if (x == 0) then
-			BuildObject("hvsav",3,"alien1");
-			BuildObject("hvsav",3,"alien2");
-			BuildObject("hvsav",3,"alien5");
+			exu.BuildAsyncObject("hvsav",3,"alien1");
+			exu.BuildAsyncObject("hvsav",3,"alien2");
+			exu.BuildAsyncObject("hvsav",3,"alien5");
 		elseif (x == 1) then
-			BuildObject("hvsav",3,"alien3");
-			BuildObject("hvsav",3,"alien4");
-			BuildObject("hvsav",3,"alien1");
+			exu.BuildAsyncObject("hvsav",3,"alien3");
+			exu.BuildAsyncObject("hvsav",3,"alien4");
+			exu.BuildAsyncObject("hvsav",3,"alien1");
 		elseif (x == 2) then
-			BuildObject("hvsav",3,"alien5");
-			BuildObject("hvsav",3,"alien6");
-			BuildObject("hvsav",3,"alien3");
+			exu.BuildAsyncObject("hvsav",3,"alien5");
+			exu.BuildAsyncObject("hvsav",3,"alien6");
+			exu.BuildAsyncObject("hvsav",3,"alien3");
 		end
 		M.alien_time = GetTime()+180.0;  -- was 70.0, now we explore
 	end

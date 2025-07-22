@@ -456,13 +456,13 @@ then
 			then
 				local MAT_3D M = GetTransform(M.wingtank2);
 				RemoveObject(M.wingtank2);
-				M.new_tank1 = BuildObject("avtank", 1, M);
+				M.new_tank1 = exu.BuildAsyncObject("avtank", 1, M);
 			end
 			if (IsAlive(M.wingtank3))
 			then
 				local MAT_3D M = GetTransform(M.wingtank3);
 				RemoveObject(M.wingtank3);
-				M.new_tank2 = BuildObject("avtank", 1, M);
+				M.new_tank2 = exu.BuildAsyncObject("avtank", 1, M);
 			end
 			ClearObjectives();																
 			AddObjective("misn0700.otf", "GREEN");											
@@ -470,7 +470,7 @@ then
 			M.recon_message_time = GetTime() + 240.0;
 			M.runner_check = GetTime() + 6.0; 
 			M.patrol2_move_time = GetTime () + 60.0;
-			M.nav1 = BuildObject ("apcamr", 1, "cam1_spawn"); --outpost cam
+			M.nav1 = exu.BuildAsyncObject ("apcamr", 1, "cam1_spawn"); --outpost cam
 			SetObjectiveName(M.nav1, "CCA Outpost");
 			M.tower_check = GetTime() + 10.0;
 			M.rendezvous = true;														
@@ -589,8 +589,8 @@ then
 	    if ((GetDistance(M.user, M.jump_geyz) > 400.0) and (M.units == 0))
 		then
 			AudioMessage("misn0702.wav"); -- Rookie trasmits a broken message saying player should look at camera
-			M.jump_cam = BuildObject ("apcamr", 1, "jump_cam_spawn");
-			M.rookie = BuildObject ("avfigh", 1, M.jump_geyz);
+			M.jump_cam = exu.BuildAsyncObject ("apcamr", 1, "jump_cam_spawn");
+			M.rookie = exu.BuildAsyncObject ("avfigh", 1, M.jump_geyz);
 			Follow (M.rookie, M.jump_geyz);
 			M.rookie_move_time = GetTime() + 10.0;
 --			M.recon_message2_time = GetTime() + 480.0;
@@ -709,21 +709,21 @@ then
 
 		if ((M.start_evac) and (M.unit_spawn_time < GetTime()) and ( not M.unit_spawn) and ( not M.alarm_special))-- spawns cca soldiers and tells them to go to their tanks
 		then
-			M.pilot1 = BuildObject("sspilo",2,"hut2_spawn");
-			M.pilot2 = BuildObject("sspilo",2,"hut2_spawn");
-			M.pilot3 = BuildObject("sspilo",2,"hut2_spawn");
-			M.pilot4 = BuildObject("sspilo",2,"hut1_spawn");
-			M.pilot5 = BuildObject("sspilo",2,"hut1_spawn");
+			M.pilot1 = exu.BuildAsyncObject("sspilo",2,"hut2_spawn");
+			M.pilot2 = exu.BuildAsyncObject("sspilo",2,"hut2_spawn");
+			M.pilot3 = exu.BuildAsyncObject("sspilo",2,"hut2_spawn");
+			M.pilot4 = exu.BuildAsyncObject("sspilo",2,"hut1_spawn");
+			M.pilot5 = exu.BuildAsyncObject("sspilo",2,"hut1_spawn");
 			if (M.parkturret1 ~= M.user) then
 				local MAT_3D M = GetTransform(M.parkturret1);
 				RemoveObject(M.parkturret1);
-				M.spawn_turret1 = BuildObject("svturr", 2, M);
+				M.spawn_turret1 = exu.BuildAsyncObject("svturr", 2, M);
 				Defend(M.spawn_turret1);
 			end
 			if (M.parkturret2 ~= M.user) then
 				local MAT_3D M = GetTransform(M.parkturret2);
 				RemoveObject(M.parkturret2);
-				M.spawn_turret2 = BuildObject("svturr", 2, M);
+				M.spawn_turret2 = exu.BuildAsyncObject("svturr", 2, M);
 				Defend(M.spawn_turret2);
 			end
 			-- these lines tell the soviet pilots to get to their ships
@@ -747,11 +747,11 @@ then
 		-- this is what happens when the player is in the base and sets off the alarm while out of a vehcile
 		if ((M.start_evac) and (M.alarm_special) and (M.unit_spawn_time < GetTime()) and ( not M.unit_spawn))-- spawns cca soldiers and tells them to go to their tanks
 		then
-			M.pilot1 = BuildObject("sspilo",2,"hut2_spawn");
-			M.pilot2 = BuildObject("sspilo",2,"hut2_spawn");
-			M.pilot3 = BuildObject("sssold",2,"hut2_spawn");
-			M.pilot4 = BuildObject("sspilo",2,"hut1_spawn");
-			M.pilot5 = BuildObject("sssold",2,"hut1_spawn");
+			M.pilot1 = exu.BuildAsyncObject("sspilo",2,"hut2_spawn");
+			M.pilot2 = exu.BuildAsyncObject("sspilo",2,"hut2_spawn");
+			M.pilot3 = exu.BuildAsyncObject("sssold",2,"hut2_spawn");
+			M.pilot4 = exu.BuildAsyncObject("sspilo",2,"hut1_spawn");
+			M.pilot5 = exu.BuildAsyncObject("sssold",2,"hut1_spawn");
 			Attack(M.pilot3, M.user);
 			Attack(M.pilot5, M.user);
 			-- these lines tell the soviet pilots to get to their ships
@@ -1249,8 +1249,8 @@ end
 			if ((M.retreat_success) and ( not IsAlive(M.svpatrol1_1)) 
 				 and  ( not IsAlive(M.svpatrol1_2)) and ( not IsAlive(M.svpatrol1_3)) and (IsAlive(M.ccarecycle)))
 			then																			
-				M.svpatrol1_1 = BuildObject("svtank", 2, M.ccarecycle);
-				M.svpatrol1_2 = BuildObject("svtank", 2, M.ccarecycle);
+				M.svpatrol1_1 = exu.BuildAsyncObject("svtank", 2, M.ccarecycle);
+				M.svpatrol1_2 = exu.BuildAsyncObject("svtank", 2, M.ccarecycle);
 --				M.svpatrol1_3 = BuildObject("svtank", 2, M.ccarecycle);
 				Patrol(M.svpatrol1_1, "patrol_path1");
 				Patrol(M.svpatrol1_2, "patrol_path1");
@@ -1272,8 +1272,8 @@ end
 			if ((M.retreat_success) and ( not IsAlive(M.svpatrol3_1)) 
 				 and  ( not IsAlive(M.svpatrol3_2)) and ( not IsAlive(M.svpatrol3_3)) and (IsAlive(M.ccarecycle)))
 			then																					
-				M.svpatrol3_1 = BuildObject("svtank", 2, M.ccarecycle);
-				M.svpatrol3_2 = BuildObject("svtank", 2, M.ccarecycle);
+				M.svpatrol3_1 = exu.BuildAsyncObject("svtank", 2, M.ccarecycle);
+				M.svpatrol3_2 = exu.BuildAsyncObject("svtank", 2, M.ccarecycle);
 --				M.svpatrol3_3 = BuildObject("svtank", 2, M.ccarecycle);
 				Patrol(M.svpatrol3_1, "patrol_path1");
 				Patrol(M.svpatrol3_2, "patrol_path1");
@@ -1296,8 +1296,8 @@ if ( not M.first_objective)
 then																							
 	if (( not IsAlive(M.svpatrol1_1)) and ( not IsAlive(M.svpatrol1_2)) and (IsAlive(M.ccarecycle)) and ( not M.detected))   
 	then																				
-		M.svpatrol1_1 = BuildObject("svfigh", 2, M.ccarecycle);							
-		M.svpatrol1_2 = BuildObject("svfigh", 2, M.ccarecycle);						
+		M.svpatrol1_1 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);							
+		M.svpatrol1_2 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);						
 		Patrol(M.svpatrol1_1, "patrol_path1");									
 		Patrol(M.svpatrol1_2, "patrol_path1");									
 		M.p1_retreat = false;	
@@ -1320,8 +1320,8 @@ then
 --]]																					
 	if (( not IsAlive(M.svpatrol3_1)) and ( not IsAlive(M.svpatrol3_2)) and (IsAlive(M.ccarecycle)) and ( not M.detected))
 	then																					
-		M.svpatrol3_1 = BuildObject("svfigh", 2, M.ccarecycle);								
-		M.svpatrol3_2 = BuildObject("svfigh", 2, M.ccarecycle);								
+		M.svpatrol3_1 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);								
+		M.svpatrol3_2 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);								
 		Patrol(M.svpatrol3_1, "patrol_path1");											
 		Patrol(M.svpatrol3_2, "patrol_path1");
 		M.p3_retreat = false;	
@@ -1332,8 +1332,8 @@ then
 																						
 	if (( not IsAlive(M.svpatrol4_1)) and ( not IsAlive(M.svpatrol4_2)) and (IsAlive(M.ccarecycle)))	
 	then																				
-		M.svpatrol4_1 = BuildObject("svfigh", 2, M.ccarecycle);								
-		M.svpatrol4_2 = BuildObject("svfigh", 2, M.ccarecycle);								
+		M.svpatrol4_1 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);								
+		M.svpatrol4_2 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);								
 		Patrol(M.svpatrol4_1, "patrol_path2");											
 		Patrol(M.svpatrol4_2, "patrol_path2");											
 	end
@@ -1473,12 +1473,12 @@ end
 --]]
 	if ((M.first_objective) and ( not M.next_mission) and (M.next_mission_time < GetTime()))
 	then
-		M.nsdfrecycle = BuildObject("avrec7", 1, "recycle_spawn");
-		M.nsdfmuf = BuildObject("avmu7", 1, "muf_spawn");
+		M.nsdfrecycle = exu.BuildAsyncObject("avrec7", 1, "recycle_spawn");
+		M.nsdfmuf = exu.BuildAsyncObject("avmu7", 1, "muf_spawn");
 		Goto(M.nsdfrecycle, "recycle_path", 0);
 		Goto(M.nsdfmuf, "muf_path", 0);
-		M.nav6 = BuildObject ("apcamr", 1, "recycle_cam_spawn");	
-		M.nav7 = BuildObject ("apcamr", 1, "recy_cam_spawn"); 
+		M.nav6 = exu.BuildAsyncObject ("apcamr", 1, "recycle_cam_spawn");	
+		M.nav7 = exu.BuildAsyncObject ("apcamr", 1, "recy_cam_spawn"); 
 		SetObjectiveName(M.nav6, "Utah Rendezvous");
 		SetObjectiveName(M.nav7, "CCA BASE");
 		AddScrap(1, 30);
@@ -1488,7 +1488,7 @@ end
 		SetAIP("misn07.aip");
 --		SetObjectiveOn(recycler);
 --		SetObjectiveName(recycler, "Utah");
-		M.ccabaseguntower1 = BuildObject("sbtowe", 2, "base_tower1_spawn");
+		M.ccabaseguntower1 = exu.BuildAsyncObject("sbtowe", 2, "base_tower1_spawn");
 --		M.ccabaseguntower2 = BuildObject("sbtowe", 2, "base_tower2_spawn");
 		ClearObjectives();
 		AddObjective("misn0701.otf", "GREEN");

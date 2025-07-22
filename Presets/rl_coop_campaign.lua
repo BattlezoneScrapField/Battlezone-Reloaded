@@ -32,6 +32,7 @@ do
     cfg.enemy_team_num = 15
     cfg.shot_convergence = true       -- Enable hovercraft shot convergence (like BZ2)
     cfg.extended_smart_reticle = true -- Extend the range of the smart reticle (like BZ2)
+    cfg.smart_reticle_range = 500.0   -- The new range of the reticle of extended range is enabled
     cfg.enemy_count_scaling = true    -- Set built in AI scaling methods to scale linearly with player count if used
 
     -- Apply runnable options
@@ -54,7 +55,7 @@ do
     end
 
     if cfg.extended_smart_reticle then
-        exu.SetReticleRange(500.0)
+        exu.SetReticleRange(cfg.smart_reticle_range)
     end
 
     if cfg.enemy_count_scaling then

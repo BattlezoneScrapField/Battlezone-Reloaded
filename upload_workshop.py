@@ -28,7 +28,7 @@ WORKSHOP_ID: int = 3522264415
 CONTENT_FOLDER: str = BUILD_FOLDER
 preview_file: str = ''
 visbility: Visiblity = Visiblity.PRIVATE
-TITLE: str = "Battlezone: Reloaded"
+TITLE: str = "Battlezone: Reloaded (Beta)"
 description: str = ''
 changenote: str = ''
 

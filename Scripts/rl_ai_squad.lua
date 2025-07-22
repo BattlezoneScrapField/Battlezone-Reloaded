@@ -16,17 +16,37 @@ do
     --- @class ai_squad : object
     local ai_squad = vsp.object.make_class("ai_squad")
 
-    function ai_squad:ai_squad(leader, ...)
-        self.leader = vsp.utility.required_param(leader, "leader", "userdata", "Reloaded")
-        self.members = vsp.set.make_set(self.leader, ...)
+    function ai_squad:ai_squad(leader_or_table, ...)
+        if type(leader_or_table) == "table" then
+            self.leader = vsp.utility.required_param(leader_or_table[1], "leader", "userdata", "Reloaded")
+            self.members = vsp.set.make_set(self.leader, unpack(leader_or_table, 2, #leader_or_table))
+        else
+            self.leader = vsp.utility.required_param(leader_or_table, "leader", "userdata", "Reloaded")
+            self.members = vsp.set.make_set(self.leader, ...)
+        end
     end
 
     --- Creates a squad from the given units
-    --- @param leader userdata squad leader unit
+    --- @param leader_or_table userdata | table<userdata> squad leader unit, or a table of all units with the leader first
     --- @param ...? userdata remaining members
     --- @return ai_squad
-    function rl_ai_squad.make_squad(leader, ...)
-        return ai_squad:new(leader, ...)
+    function rl_ai_squad.make_squad(leader_or_table, ...)
+        return ai_squad:new(leader_or_table, ...)
+    end
+
+    -- Formation code
+    --[[ 
+        if unit ~= self.leader then
+            SetCommand(unit, AiCommand.FORMATION, 1, self.leader)
+        end
+    --]]
+
+    function ai_squad:goto(where)
+        self:for_each(Goto, where, 1)
+    end
+
+    function ai_squad:stop()
+        self:for_each(Stop, 0)
     end
 
     function ai_squad:attack(target)

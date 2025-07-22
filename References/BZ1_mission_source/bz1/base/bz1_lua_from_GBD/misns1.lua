@@ -227,15 +227,15 @@ function Update()
 		M.et4 = GetHandle("avtank8_wingman");
 		M.ambase = GetHandle("ambase");
 		-- temporary 
-		M.walker1 = BuildObject ("svwalk", 1, "spawnwalker1"); 
+		M.walker1 = exu.BuildAsyncObject ("svwalk", 1, "spawnwalker1"); 
 		--M.walker2 = BuildObject ("svwalk", 1, "spawnwalker2"); 
 		--M.walker3 = BuildObject ("svwalk", 1, "walkstart3"); 
-		M.walkcam1 = BuildObject ("apcamr", 1, "walkcam1");
+		M.walkcam1 = exu.BuildAsyncObject ("apcamr", 1, "walkcam1");
 		--M.walkcam2 = BuildObject ("apcamr", 1, "walkcam2");
 		--M.walkcam3 = BuildObject ("apcamr", 1, "walkcam3");
-		M.hidcam1 = BuildObject ("apcamr", 1, "hidcamupper");
-		M.hidcam2 = BuildObject ("apcamr", 1, "hidcammiddle");
-		M.hidcam3 = BuildObject ("apcamr", 1, "hidcamlower");
+		M.hidcam1 = exu.BuildAsyncObject ("apcamr", 1, "hidcamupper");
+		M.hidcam2 = exu.BuildAsyncObject ("apcamr", 1, "hidcammiddle");
+		M.hidcam3 = exu.BuildAsyncObject ("apcamr", 1, "hidcamlower");
 		M.basecam = GetHandle("apcamr0_camerapod");
 		SetObjectiveName(M.walkcam1, "Walker Cut Off");
 		--SetObjectiveName(M.walkcam2, "Middle Pass Exit");
@@ -253,11 +253,11 @@ function Update()
 		--RemoveObject (M.et2);
 		RemoveObject (M.et3);
 		RemoveObject (M.et4);
-		BuildObject("svtank", 1, "tank1");
-		BuildObject("svtank", 1, "tank2");
-		BuildObject("svfigh", 1, "figh1");
-		BuildObject("svturr", 1, "turr1");
-		BuildObject("svturr", 1, "turr2");
+		exu.BuildAsyncObject("svtank", 1, "tank1");
+		exu.BuildAsyncObject("svtank", 1, "tank2");
+		exu.BuildAsyncObject("svfigh", 1, "figh1");
+		exu.BuildAsyncObject("svturr", 1, "turr1");
+		exu.BuildAsyncObject("svturr", 1, "turr2");
 		M.startconvoy = GetTime () + 180.0;
 		M.missionstart = true;
 		SetScrap (1, 20);
@@ -682,8 +682,8 @@ function Update()
 		)
 	then
 		SetAIP ("misn14.aip");
-		M.scav1 = BuildObject ("avscav", 2, M.muf);
-		M.scav2 = BuildObject ("avscav", 2, M.muf);
+		M.scav1 = exu.BuildAsyncObject ("avscav", 2, M.muf);
+		M.scav2 = exu.BuildAsyncObject ("avscav", 2, M.muf);
 		SetObjectiveOn(M.silo);
 		SetObjectiveOn(M.muf);
 		--M.coloradosafe = true;
@@ -707,7 +707,7 @@ function Update()
 		(M.aw1at < GetTime()) and (M.aw1amade == false) and (IsAlive(M.muf))
 		)
 	then
-		BuildObject ("avtank", 2, M.muf);
+		exu.BuildAsyncObject ("avtank", 2, M.muf);
 		M.aw1amade = true;
 	end
 	if
@@ -715,7 +715,7 @@ function Update()
 		(M.aw1bt < GetTime()) and (M.aw1bmade == false) and (IsAlive(M.muf))
 		)
 	then
-		BuildObject ("avfigh", 2, M.muf);
+		exu.BuildAsyncObject ("avfigh", 2, M.muf);
 		M.aw1bmade = true;
 	end
 	if
@@ -723,7 +723,7 @@ function Update()
 		(M.aw1ct < GetTime()) and (M.aw1cmade == false) and (IsAlive(M.muf))
 		)
 	then
-		BuildObject ("avfigh", 2, M.muf);
+		exu.BuildAsyncObject ("avfigh", 2, M.muf);
 		M.aw1cmade = true;
 	end
 	if
@@ -731,7 +731,7 @@ function Update()
 		(M.aw2at < GetTime()) and (M.aw2amade == false) and (IsAlive(M.muf))
 		)
 	then
-		BuildObject ("avtank", 2, M.muf);
+		exu.BuildAsyncObject ("avtank", 2, M.muf);
 		M.aw2amade = true;
 	end
 	if
@@ -739,7 +739,7 @@ function Update()
 		(M.aw2bt < GetTime()) and (M.aw2bmade == false) and (IsAlive(M.muf))
 		)
 	then
-		BuildObject ("avfigh", 2, M.muf);
+		exu.BuildAsyncObject ("avfigh", 2, M.muf);
 		M.aw2bmade = true;
 	end
 	if
@@ -747,7 +747,7 @@ function Update()
 		(M.aw2ct < GetTime()) and (M.aw2cmade == false) and (IsAlive(M.muf))
 		)
 	then
-		BuildObject ("avtank", 2, M.muf);
+		exu.BuildAsyncObject ("avtank", 2, M.muf);
 		M.aw2cmade = true;
 	end
 	if
@@ -756,7 +756,7 @@ function Update()
 		(IsAlive(M.muf)) and (IsAlive(M.silo))
 		)
 	then
-		BuildObject ("avtank", 2, M.muf);
+		exu.BuildAsyncObject ("avtank", 2, M.muf);
 		M.aw3amade = true;
 	end
 	if
@@ -765,7 +765,7 @@ function Update()
 		(IsAlive(M.muf)) and (IsAlive(M.silo))
 		)
 	then
-		BuildObject ("avtank", 2, M.muf);
+		exu.BuildAsyncObject ("avtank", 2, M.muf);
 		M.aw3bmade = true;
 	end
 	if
@@ -774,7 +774,7 @@ function Update()
 		(IsAlive(M.muf)) and (IsAlive(M.silo))
 		)
 	then
-		BuildObject ("avfigh", 2, M.muf);
+		exu.BuildAsyncObject ("avfigh", 2, M.muf);
 		M.aw3cmade = true;
 	end
 	if
@@ -782,7 +782,7 @@ function Update()
 		(M.du1at < GetTime()) and (M.du1amade == false)
 		)
 	then
-		BuildObject ("avturr", 2, M.muf);
+		exu.BuildAsyncObject ("avturr", 2, M.muf);
 		M.du1amade = true;
 	end
 	if
@@ -790,7 +790,7 @@ function Update()
 		(M.du1bt < GetTime()) and (M.du1bmade == false)
 		)
 	then
-		BuildObject ("avturr", 2, M.muf);
+		exu.BuildAsyncObject ("avturr", 2, M.muf);
 		M.du1bmade = true;
 	end
 	--[[if
@@ -1007,9 +1007,9 @@ function Update()
 	then
 		M.wave1 = 99999999999.0;
 		M.cavalry = true;
-		M.cav1 = BuildObject ("avfigh", 2, "cavspawn");
-		M.cav2 = BuildObject ("avtank", 2, "cavspawn");
-		M.cav3 = BuildObject ("avfigh", 2, "cavspawn");
+		M.cav1 = exu.BuildAsyncObject ("avfigh", 2, "cavspawn");
+		M.cav2 = exu.BuildAsyncObject ("avtank", 2, "cavspawn");
+		M.cav3 = exu.BuildAsyncObject ("avfigh", 2, "cavspawn");
 		--M.cav4 = BuildObject ("avtank", 2, "cavspawn");
 		--M.cav5 = BuildObject ("avtank", 2, "cavspawn");
 		AudioMessage ("misns122.wav");

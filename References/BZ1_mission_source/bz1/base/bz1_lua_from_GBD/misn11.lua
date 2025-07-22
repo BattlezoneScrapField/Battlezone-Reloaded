@@ -177,7 +177,7 @@ function Update()
 		Defend(M.turr1,0);
 		Defend(M.turr3,0);
 		AudioMessage("misn1105.wav");
-		BuildObject("svfigh",2,"strike1");
+		exu.BuildAsyncObject("svfigh",2,"strike1");
 		--ObjectList &list = *GameObject::objectList;
 		--for (ObjectList::iterator i = list.begin(); i ~= list.end(); i++) 
 		--then
@@ -221,7 +221,7 @@ function Update()
 		--[[
 			 Now send another enemy
 		--]]
-		BuildObject("svfigh",2,"strike2");		
+		exu.BuildAsyncObject("svfigh",2,"strike2");		
 		--ObjectList &list = *GameObject::objectList;
 		--for (ObjectList::iterator i = list.begin(); i ~= list.end(); i++) 
 		--then
@@ -248,8 +248,8 @@ function Update()
 			(GetDistance(M.launch,M.tug1)<450.0))
 		)
 	then
-		M.tank1 = BuildObject("svtank",2,"launch_attack");
-		M.tank2 = BuildObject("svtank",2,"launch_attack");
+		M.tank1 = exu.BuildAsyncObject("svtank",2,"launch_attack");
+		M.tank2 = exu.BuildAsyncObject("svtank",2,"launch_attack");
 		AddHealth(M.launch, -0.90);
 		AudioMessage("misn1108.wav");
 		Attack(M.tank1,M.launch,1);
@@ -304,8 +304,8 @@ function Update()
 	end
 	if (( not M.last_wave) and (M.last_wave_time<GetTime()))
 	then
-		BuildObject("svfigh",2,"strike2");
-		BuildObject("svfigh",2,"strike2");
+		exu.BuildAsyncObject("svfigh",2,"strike2");
+		exu.BuildAsyncObject("svfigh",2,"strike2");
 		--ObjectList &list = *GameObject::objectList;
 		--for (ObjectList::iterator i = list.begin(); i ~= list.end(); i++) 
 		--then
@@ -320,9 +320,9 @@ function Update()
 		end
 		-- we put this one in later
 		-- cuz we want it to wait
-		local last_guy = BuildObject("svfigh",2,M.launch2);
+		local last_guy = exu.BuildAsyncObject("svfigh",2,M.launch2);
 		Attack(last_guy,M.player);
-		BuildObject("apcamr",1,"last_camera");
+		exu.BuildAsyncObject("apcamr",1,"last_camera");
 		M.last_wave = true;
 		M.last_wave_time = 99999.0;
 	end

@@ -432,19 +432,19 @@ function Update()
 	--	switch (M.patrol1start)
 		if M.patrol1start == 0 then
 	--	case 0:
-			M.pu1p1 = BuildObject ("svfigh",2, "pat1sp1");
+			M.pu1p1 = exu.BuildAsyncObject ("svfigh",2, "pat1sp1");
 		elseif M.patrol1start == 1 then
 	--		break;
 	--	case 1:
-			M.pu1p1 = BuildObject ("svfigh",2, "pat1sp2");
+			M.pu1p1 = exu.BuildAsyncObject ("svfigh",2, "pat1sp2");
 		elseif M.patrol1start == 2 then	
 	--		break;
 	--	case 2:
-			M.pu1p1 = BuildObject ("svtank",2, "pat1sp3");
+			M.pu1p1 = exu.BuildAsyncObject ("svtank",2, "pat1sp3");
 		elseif M.patrol1start == 3 then
 	--		break;
 	--	case 3:
-			M.pu1p1 = BuildObject ("svfigh",2, "pat1sp4");
+			M.pu1p1 = exu.BuildAsyncObject ("svfigh",2, "pat1sp4");
 		end
 		M.patrol1set = true;
 	end
@@ -455,19 +455,19 @@ function Update()
 	--	switch (M.patrol2start)
 		if M.patrol2start == 0 then
 	--	case 0:
-			M.pu1p2 = BuildObject ("svfigh",2, "pat2sp1");
+			M.pu1p2 = exu.BuildAsyncObject ("svfigh",2, "pat2sp1");
 		elseif M.patrol2start == 1 then	
 	--		break;
 	--	case 1:
-			M.pu1p2 = BuildObject ("svfigh",2, "pat2sp2");
+			M.pu1p2 = exu.BuildAsyncObject ("svfigh",2, "pat2sp2");
 		elseif M.patrol2start == 2 then
 	--		break;
 	--	case 2:
-			M.pu1p2 = BuildObject ("svtank",2, "pat2sp3");
+			M.pu1p2 = exu.BuildAsyncObject ("svtank",2, "pat2sp3");
 		elseif M.patrol2start == 3 then
 	--		break;
 	--	case 3:
-			M.pu1p2 = BuildObject ("svfigh",2, "pat2sp4");
+			M.pu1p2 = exu.BuildAsyncObject ("svfigh",2, "pat2sp4");
 		end
 		M.patrol2set = true;
 	end
@@ -478,19 +478,19 @@ function Update()
 	--	switch (M.patrol3start)
 		if M.patrol3start == 0 then
 	--	case 0:
-			M.pu1p3 = BuildObject ("svfigh",2, "pat3sp1");
+			M.pu1p3 = exu.BuildAsyncObject ("svfigh",2, "pat3sp1");
 		elseif M.patrol3start == 1 then	
 	--		break;
 	--	case 1:
-			M.pu1p3 = BuildObject ("svfigh",2, "pat3sp2");
+			M.pu1p3 = exu.BuildAsyncObject ("svfigh",2, "pat3sp2");
 		elseif M.patrol3start == 2 then
 	--		break;
 	--	case 2:
-			M.pu1p3 = BuildObject ("svtank",2, "pat3sp3");
+			M.pu1p3 = exu.BuildAsyncObject ("svtank",2, "pat3sp3");
 		elseif M.patrol3start == 3 then	
 	--		break;
 	--	case 3:
-			M.pu1p3 = BuildObject ("svfigh",2, "pat3sp4");
+			M.pu1p3 = exu.BuildAsyncObject ("svfigh",2, "pat3sp4");
 		end
 		M.patrol3set = true;
 	end
@@ -548,7 +548,7 @@ function Update()
 			if ((IsAlive(M.pu1p1))  and 
 				(GetNearestEnemy (M.pu1p1) < 450.0))
 			then
-				M.pu2p1 = BuildObject ("svtank",2, M.pu1p1);
+				M.pu2p1 = exu.BuildAsyncObject ("svtank",2, M.pu1p1);
 				--M.pu3p1 = BuildObject ("svtank",2, M.pu1p1);
 				--M.pu4p1 = BuildObject ("svtank",2, M.pu1p1);
 				M.patrol1spawned = true;
@@ -568,7 +568,7 @@ function Update()
 			if ((IsAlive(M.pu1p2)) and               -- added GEC, sometimes this guy is dead
 				(GetNearestEnemy (M.pu1p2) < 450.0)) 
 			then
-				M.pu2p2 = BuildObject ("svfigh",2, M.pu1p2);
+				M.pu2p2 = exu.BuildAsyncObject ("svfigh",2, M.pu1p2);
 				--M.pu3p2 = BuildObject ("svtank",2, M.pu1p2);
 				--M.pu4p2 = BuildObject ("svtank",2, M.pu1p2);
 				M.patrol2spawned = true;
@@ -588,7 +588,7 @@ function Update()
 			if
 				(GetNearestEnemy (M.pu1p3) < 450.0)
 			then
-				M.pu2p3 = BuildObject ("svfigh",2, M.pu1p3);
+				M.pu2p3 = exu.BuildAsyncObject ("svfigh",2, M.pu1p3);
 				--M.pu3p3 = BuildObject ("svtank",2, M.pu1p3);
 				--M.pu4p3 = BuildObject ("svtank",2, M.pu1p3);
 				M.patrol3spawned = true;
@@ -937,7 +937,7 @@ function Update()
 		)
 	then
 		SetObjectiveOff (M.rendezvous);
-		M.starportcam = BuildObject ("apcamr",1,"cam1spawn");
+		M.starportcam = exu.BuildAsyncObject ("apcamr",1,"cam1spawn");
 		SetObjectiveName(M.starportcam, "Starport");
 		M.buildcam = false;
 		M.newobjective = true;
@@ -1215,9 +1215,9 @@ function Update()
 		(M.wave1 < GetTime()) and (M.wave1start == false) and (IsAlive (M.svrec))
 		)
 	then
-		M.w1u1 = BuildObject ("svfigh",2, M.svrec);
-		M.w1u2 = BuildObject ("svtank",2, M.svrec);
-		M.w1u3 = BuildObject ("svfigh",2, M.svrec);
+		M.w1u1 = exu.BuildAsyncObject ("svfigh",2, M.svrec);
+		M.w1u2 = exu.BuildAsyncObject ("svtank",2, M.svrec);
+		M.w1u3 = exu.BuildAsyncObject ("svfigh",2, M.svrec);
 		Attack (M.w1u1, M.avrec);
 		Attack (M.w1u2, M.avrec);
 		Attack (M.w1u3, M.avrec);
@@ -1231,9 +1231,9 @@ function Update()
 		(M.wave2 < GetTime()) and (M.wave2start == false) and (IsAlive (M.svrec))
 		)
 	then
-		M.w2u1 = BuildObject ("svfigh",2, M.svrec);
-		M.w2u2 = BuildObject ("svtank",2, M.svrec);
-		M.w2u3 = BuildObject ("svfigh",2, M.svrec);
+		M.w2u1 = exu.BuildAsyncObject ("svfigh",2, M.svrec);
+		M.w2u2 = exu.BuildAsyncObject ("svtank",2, M.svrec);
+		M.w2u3 = exu.BuildAsyncObject ("svfigh",2, M.svrec);
 		Attack (M.w2u1, M.avrec);
 		Attack (M.w2u2, M.avrec);
 		Attack (M.w2u3, M.avrec);
@@ -1247,9 +1247,9 @@ function Update()
 		(M.wave3 < GetTime()) and (M.wave3start == false) and (IsAlive (M.svrec))
 		)
 	then
-		M.w3u1 = BuildObject ("svfigh",2, M.svrec);
-		M.w3u2 = BuildObject ("svtank",2, M.svrec);
-		M.w3u3 = BuildObject ("svfigh",2, M.svrec);
+		M.w3u1 = exu.BuildAsyncObject ("svfigh",2, M.svrec);
+		M.w3u2 = exu.BuildAsyncObject ("svtank",2, M.svrec);
+		M.w3u3 = exu.BuildAsyncObject ("svfigh",2, M.svrec);
 		Attack (M.w3u1, M.avrec);
 		Attack (M.w3u2, M.avrec);
 		Attack (M.w3u3, M.avrec);
@@ -1329,16 +1329,16 @@ function Update()
 			(GetDistance(M.bogey, M.player) > 400.0)
 		then
 
-		M.sim1 = BuildObject("avtank", 3, "M.sim1");
-		M.sim2 = BuildObject("avtank", 3, "M.sim2");
-		M.sim3 = BuildObject("avtank", 3, "M.sim3");
-		M.sim4 = BuildObject("avtank", 3, "M.sim4");
-		M.sim5 = BuildObject("avtank", 3, "M.sim5");
-		M.sim6 = BuildObject("avfigh", 3, "M.sim6");
-		M.sim7 = BuildObject("avfigh", 3, "M.sim7");
-		M.sim8 = BuildObject("avfigh", 3, "M.sim8");
-		M.sim9 = BuildObject("avfigh", 3, "M.sim9");
-		M.sim10 = BuildObject("avfigh", 3, "M.sim10");
+		M.sim1 = exu.BuildAsyncObject("avtank", 3, "M.sim1");
+		M.sim2 = exu.BuildAsyncObject("avtank", 3, "M.sim2");
+		M.sim3 = exu.BuildAsyncObject("avtank", 3, "M.sim3");
+		M.sim4 = exu.BuildAsyncObject("avtank", 3, "M.sim4");
+		M.sim5 = exu.BuildAsyncObject("avtank", 3, "M.sim5");
+		M.sim6 = exu.BuildAsyncObject("avfigh", 3, "M.sim6");
+		M.sim7 = exu.BuildAsyncObject("avfigh", 3, "M.sim7");
+		M.sim8 = exu.BuildAsyncObject("avfigh", 3, "M.sim8");
+		M.sim9 = exu.BuildAsyncObject("avfigh", 3, "M.sim9");
+		M.sim10 = exu.BuildAsyncObject("avfigh", 3, "M.sim10");
 		--[[
 			Jens
 			this cineractive now
@@ -1542,7 +1542,7 @@ function Update()
 		AudioMessage ("misn0629.wav");
 		AudioMessage ("misn0630.wav");
 		AudioMessage ("misn0647.wav");
-		M.ccap1 = BuildObject ("svfigh",2,"ccaplatoonspawn");
+		M.ccap1 = exu.BuildAsyncObject ("svfigh",2,"ccaplatoonspawn");
 		Attack (M.ccap1, M.avrec);
 		SetIndependence (M.ccap1, 1);
 		--M.bugout = false;
@@ -1566,7 +1566,7 @@ function Update()
 		AudioMessage ("misn0629.wav");
 		AudioMessage ("misn0630.wav");
 		--AudioMessage ("misn0647.wav");
-		M.ccap1 = BuildObject ("svfigh",2,"ccaplatoonspawn");
+		M.ccap1 = exu.BuildAsyncObject ("svfigh",2,"ccaplatoonspawn");
 		Attack (M.ccap1, M.avrec);
 		SetIndependence (M.ccap1, 1);
 		--M.bugout = false;
@@ -1607,7 +1607,7 @@ function Update()
 		M.death = true;
 		M.deathtime = 99999999999999.0;
 		AudioMessage ("misn0635.wav");
-		M.ccap1 = BuildObject ("svfigh",2,"ccaplatoonspawn");
+		M.ccap1 = exu.BuildAsyncObject ("svfigh",2,"ccaplatoonspawn");
 		Attack (M.ccap1, M.avrec);
 	end
 
@@ -1617,19 +1617,19 @@ function Update()
 	--	switch (extractpoint)
 		if extractpoint == 0 then
 	--	case 0:
-			M.dustoffcam = BuildObject ("apcamr", 1, "bugout1");
+			M.dustoffcam = exu.BuildAsyncObject ("apcamr", 1, "bugout1");
 		elseif extractpoint == 1 then
 	--		break;
 	--	case 1:
-			M.dustoffcam = BuildObject ("apcamr", 1, "bugout2");
+			M.dustoffcam = exu.BuildAsyncObject ("apcamr", 1, "bugout2");
 		elseif extractpoint == 2 then
 	--		break;
 	--	case 2:
-			M.dustoffcam = BuildObject ("apcamr", 1, "bugout3");
+			M.dustoffcam = exu.BuildAsyncObject ("apcamr", 1, "bugout3");
 		elseif extractpoint == 3 then
 	--		break;
 	--	case 3:
-			M.dustoffcam = BuildObject ("apcamr", 1, "bugout4");
+			M.dustoffcam = exu.BuildAsyncObject ("apcamr", 1, "bugout4");
 	--	break;
 		end
 		SetObjectiveName(M.dustoffcam, "Dust Off");
@@ -1669,7 +1669,7 @@ function Update()
 	then
 		AudioMessage ("misn0635.wav");
 		AudioMessage ("misn0648.wav");
-		M.ccap1 = BuildObject ("svfigh",2,"ccaplatoonspawn");
+		M.ccap1 = exu.BuildAsyncObject ("svfigh",2,"ccaplatoonspawn");
 		Attack (M.ccap1, M.avrec);
 		SetIndependence (M.ccap1, 1);
 		M.platoonhere = false;
@@ -1688,14 +1688,14 @@ function Update()
 		(GetDistance(M.ccap1, M.spawnme) < 410) and (M.economyccaplatoon == false)
 		)
 	then
-		M.ccap2 = BuildObject ("svfigh",2,M.ccap1);
-		M.ccap3 = BuildObject ("svfigh",2,M.ccap1);
-		M.ccap4 = BuildObject ("svfigh",2,M.ccap1);
-		M.ccap5 = BuildObject ("svfigh",2,M.ccap1);
-		M.ccap6 = BuildObject ("svtank",2,M.ccap1);
-		M.ccap7 = BuildObject ("svtank",2,M.ccap1);
-		M.ccap8 = BuildObject ("svtank",2,M.ccap1);
-		M.ccap9 = BuildObject ("svtank",2,M.ccap1);
+		M.ccap2 = exu.BuildAsyncObject ("svfigh",2,M.ccap1);
+		M.ccap3 = exu.BuildAsyncObject ("svfigh",2,M.ccap1);
+		M.ccap4 = exu.BuildAsyncObject ("svfigh",2,M.ccap1);
+		M.ccap5 = exu.BuildAsyncObject ("svfigh",2,M.ccap1);
+		M.ccap6 = exu.BuildAsyncObject ("svtank",2,M.ccap1);
+		M.ccap7 = exu.BuildAsyncObject ("svtank",2,M.ccap1);
+		M.ccap8 = exu.BuildAsyncObject ("svtank",2,M.ccap1);
+		M.ccap9 = exu.BuildAsyncObject ("svtank",2,M.ccap1);
 		--M.ccap10 = BuildObject ("svtank",2,M.ccap1);
 		--M.ccap11 = BuildObject ("svtank",2,M.ccap1);
 		--M.ccap12 = BuildObject ("svturr",2,M.ccap1);
@@ -1761,7 +1761,7 @@ function Update()
 			( not IsAlive(M.ccap9))
 			)
 		then
-			M.ccap1 = BuildObject("svfigh", 2, "ccaplatoonspawn");
+			M.ccap1 = exu.BuildAsyncObject("svfigh", 2, "ccaplatoonspawn");
 			M.respawn = true;
 			M.economyccaplatoon = false;
 		end

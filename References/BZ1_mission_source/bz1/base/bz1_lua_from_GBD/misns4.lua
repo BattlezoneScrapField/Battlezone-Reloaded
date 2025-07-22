@@ -96,8 +96,8 @@ function Update()
 		M.start_done = true;
 		M.convoy_time = GetTime()+420.0;
 		M.wakeup_time = GetTime()+30.0;
-		BuildObject("avartl",2,"spawn2");
-		M.cam1 = BuildObject("spcamr",1,"camerapt");
+		exu.BuildAsyncObject("avartl",2,"spawn2");
+		M.cam1 = exu.BuildAsyncObject("spcamr",1,"camerapt");
 		M.raider_time = GetTime()+30.0;
 		M.army_time = GetTime()+100.0;
 		AddScrap(1,50);
@@ -108,15 +108,15 @@ function Update()
 		AudioMessage("misns401.wav");
 		StartCockpitTimer(420,300,0);	
 		SetObjectiveName(M.cam1, "Bridge");
-		BuildObject("abtowe",2,"tower1");
-		BuildObject("abtowe",2,"tower2");
-		BuildObject("ablpow",2,"power1");
-		BuildObject("ablpow",2,"power2");
-		BuildObject("svcnst",1,"svcnst");
+		exu.BuildAsyncObject("abtowe",2,"tower1");
+		exu.BuildAsyncObject("abtowe",2,"tower2");
+		exu.BuildAsyncObject("ablpow",2,"power1");
+		exu.BuildAsyncObject("ablpow",2,"power2");
+		exu.BuildAsyncObject("svcnst",1,"svcnst");
 	end
 	if (GetTime()>M.wakeup_time)
 	then
-		local h = BuildObject("avfigh",2,"spawn4");
+		local h = exu.BuildAsyncObject("avfigh",2,"spawn4");
 		Goto(h,"wakeup"); -- a little reminder
 		M.wakeup_time = 99999.0;
 	end
@@ -129,7 +129,7 @@ function Update()
 			HideCockpitTimer();
 			M.first = true;
 		end
-		local hauler = BuildObject("svhaul",1,"spawn1");
+		local hauler = exu.BuildAsyncObject("svhaul",1,"spawn1");
 		M.convoy_count = M.convoy_count + 1;
 		M.convoy_handle[M.convoy_count] = hauler;
 		Goto(hauler,"escort");
@@ -144,16 +144,16 @@ function Update()
 	end
 	if (GetTime()>M.raider_time)
 	then
-		BuildObject("avfigh",2,"spawn4");
-		BuildObject("avfigh",2,"spawn4");
+		exu.BuildAsyncObject("avfigh",2,"spawn4");
+		exu.BuildAsyncObject("avfigh",2,"spawn4");
 	--	BuildObject("avltnk",2,"spawn4");
 		M.raider_time = 99999.0;
 	end
 	if (GetTime()>M.army_time)
 	then
-		M.t1 = BuildObject("avtank",2,"sbridge");
-		M.t2 = BuildObject("avtank",2,"sbridge");
-		M.b1 = BuildObject("avhraz",2,"sbridge");
+		M.t1 = exu.BuildAsyncObject("avtank",2,"sbridge");
+		M.t2 = exu.BuildAsyncObject("avtank",2,"sbridge");
+		M.b1 = exu.BuildAsyncObject("avhraz",2,"sbridge");
 	--	M.b2 = BuildObject("avhraz",2,"sbridge");
 		M.army_time = 99999.0;
 	end
@@ -169,10 +169,10 @@ function Update()
 	then
 		M.north_bridge = true;
 	--	BuildObject("avtank",2,"spawn3");
-		BuildObject("avltnk",2,"spawn3");
-		BuildObject("avturr",2,"spawn3");
-		BuildObject("avscav",2,"spawn3");
-		BuildObject("avrecy",2,"spawn3");
+		exu.BuildAsyncObject("avltnk",2,"spawn3");
+		exu.BuildAsyncObject("avturr",2,"spawn3");
+		exu.BuildAsyncObject("avscav",2,"spawn3");
+		exu.BuildAsyncObject("avrecy",2,"spawn3");
 		--[[
 			Now load an AIP.
 		--]]
@@ -200,10 +200,10 @@ function Update()
 		)
 
 	then
-		M.counter1 = BuildObject("avrckt",2,"counter");
-		M.counter2 = BuildObject("avrckt",2,"counter");
-		M.counter3 = BuildObject("avrckt",2,"counter");
-		M.counter4 = BuildObject("avrckt",2,"counter");
+		M.counter1 = exu.BuildAsyncObject("avrckt",2,"counter");
+		M.counter2 = exu.BuildAsyncObject("avrckt",2,"counter");
+		M.counter3 = exu.BuildAsyncObject("avrckt",2,"counter");
+		M.counter4 = exu.BuildAsyncObject("avrckt",2,"counter");
 		Goto(M.counter1,"sbridge");
 		Goto(M.counter2,"sbridge");
 		Goto(M.counter3,"sbridge");

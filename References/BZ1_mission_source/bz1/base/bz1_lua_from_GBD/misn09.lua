@@ -682,25 +682,25 @@ function Update()
 	-- this is going to set up a fortification of turrets
 	if	((IsAlive(M.ccarecycle)) and (M.turret1_set == false))
 	then
-		M.cca1 = BuildObject("svturr", 2, "post1");
+		M.cca1 = exu.BuildAsyncObject("svturr", 2, "post1");
 		M.turret1_set = true;
 		Defend(M.cca1);
 	end
 	if	((IsAlive(M.ccarecycle)) and (M.turret2_set == false))
 	then
-		M.cca2 = BuildObject("svturr", 2, "post2");
+		M.cca2 = exu.BuildAsyncObject("svturr", 2, "post2");
 		M.turret2_set = true;
 		Defend(M.cca2);
 	end
 	if	((IsAlive(M.ccarecycle)) and (M.turret3_set == false))
 	then
-		M.cca3 = BuildObject("svturr", 2, "post3");
+		M.cca3 = exu.BuildAsyncObject("svturr", 2, "post3");
 		M.turret3_set = true;
 		Defend(M.cca3);
 	end
 	if	((IsAlive(M.ccarecycle)) and (M.turret4_set == false))
 	then
-		M.cca4 = BuildObject("svturr", 2, "post4");
+		M.cca4 = exu.BuildAsyncObject("svturr", 2, "post4");
 		M.turret4_set = true;
 		Defend(M.cca4);
 	end
@@ -764,18 +764,18 @@ function Update()
 
 		if (GetDistance(M.user, M.convoy_geyser) > 500.0)
 		then
-			M.relic = BuildObject("obdata", 0, M.convoy_geyser);
-			M.ccatug = BuildObject("svhaul", 2, "spawn1");
-			M.convoy1 = BuildObject("svfigh", 2, "spawn2");
-			M.convoy2 = BuildObject("svfigh", 2, "spawn2");
-			M.convoy3 = BuildObject("svfigh", 2, "spawn2");
-			M.convoy4 = BuildObject("svfigh", 2, "spawn3");
-			M.convoy5 = BuildObject("svtank", 2, "spawn3");
-			M.convoy6 = BuildObject("svtank", 2, "spawn3");
-			M.convoy7 = BuildObject("svtank", 2, "spawn4");
-			M.convoy8 = BuildObject("svtank", 2, "spawn4");
-			M.convoy9 = BuildObject("svapc", 2, "spawn4");
-			M.convoy0 = BuildObject("svapc", 2, "spawn4");
+			M.relic = exu.BuildAsyncObject("obdata", 0, M.convoy_geyser);
+			M.ccatug = exu.BuildAsyncObject("svhaul", 2, "spawn1");
+			M.convoy1 = exu.BuildAsyncObject("svfigh", 2, "spawn2");
+			M.convoy2 = exu.BuildAsyncObject("svfigh", 2, "spawn2");
+			M.convoy3 = exu.BuildAsyncObject("svfigh", 2, "spawn2");
+			M.convoy4 = exu.BuildAsyncObject("svfigh", 2, "spawn3");
+			M.convoy5 = exu.BuildAsyncObject("svtank", 2, "spawn3");
+			M.convoy6 = exu.BuildAsyncObject("svtank", 2, "spawn3");
+			M.convoy7 = exu.BuildAsyncObject("svtank", 2, "spawn4");
+			M.convoy8 = exu.BuildAsyncObject("svtank", 2, "spawn4");
+			M.convoy9 = exu.BuildAsyncObject("svapc", 2, "spawn4");
+			M.convoy0 = exu.BuildAsyncObject("svapc", 2, "spawn4");
 			Defend(M.convoy1);
 			Defend(M.convoy2);
 			Defend(M.convoy3);
@@ -864,7 +864,7 @@ function Update()
 	if ((M.charon_found) and (IsInfo("hbchar") == true) and ( not M.charon_build))
 	then
 		AudioMessage("misn0916.wav");-- well done, we'll drop a nav camera here to come back to this, this looks like a good spot to go after artils
-		M.charon_nav = BuildObject ("apcamr", 1, "charon_spawn"); 
+		M.charon_nav = exu.BuildAsyncObject ("apcamr", 1, "charon_spawn"); 
 		SetObjectiveName(M.charon_nav, "Alien Relic");
 		M.charon_build = true;
 	end

@@ -437,8 +437,8 @@ function Update()
 
 	if (( not M.second_wave_done) and (M.second_wave_time < GetTime()))
 	then
-		M.wave2_1 = BuildObject("svfigh",2,"spawn_scrap1");
-		M.wave2_2 = BuildObject("svfigh",2,"spawn_scrap1");
+		M.wave2_1 = exu.BuildAsyncObject("svfigh",2,"spawn_scrap1");
+		M.wave2_2 = exu.BuildAsyncObject("svfigh",2,"spawn_scrap1");
 --		M.wave2_3 = BuildObject("svfigh",2,"spawn_scrap1");	
 
 		Attack(M.wave2_1, M.solar1);
@@ -450,8 +450,8 @@ function Update()
 
 	if (( not M.third_wave_done) and (M.third_wave_time < GetTime()))
 	then
-		M.wave3_1 = BuildObject("svfigh",2,"spawn_scrap1");
-		M.wave3_2 = BuildObject("svfigh",2,"spawn_scrap1");
+		M.wave3_1 = exu.BuildAsyncObject("svfigh",2,"spawn_scrap1");
+		M.wave3_2 = exu.BuildAsyncObject("svfigh",2,"spawn_scrap1");
 --		M.wave3_3 = BuildObject("svfigh",2,"spawn_scrap1");
 			
 		Attack(M.wave3_1, M.solar1, 1);
@@ -483,10 +483,10 @@ function Update()
 
 	if (( not M.fourth_wave_done) and (M.fourth_wave_time < GetTime()))
 	then
-		M.wave4_1 = BuildObject("svapc",2,"spawn_scrap1");
-		M.wave4_2 = BuildObject("svtank",2,"spawn_scrap1");
+		M.wave4_1 = exu.BuildAsyncObject("svapc",2,"spawn_scrap1");
+		M.wave4_2 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
 --		M.wave4_3 = BuildObject("svtank",2,"spawn_scrap1");
-		M.wave5_1 = BuildObject("svfigh",2,"spawn_scrap1");
+		M.wave5_1 = exu.BuildAsyncObject("svfigh",2,"spawn_scrap1");
 
 		if (IsAlive(M.avrecycler))
 		then
@@ -526,8 +526,8 @@ function Update()
 	
 	if (( not M.help_spawn) and (M.support_time < GetTime()))
 	then
-		M.help1 = BuildObject("avfigh",1,"spawn_scrap2");
-		M.help2 = BuildObject("avtank",1,"spawn_scrap2");
+		M.help1 = exu.BuildAsyncObject("avfigh",1,"spawn_scrap2");
+		M.help2 = exu.BuildAsyncObject("avtank",1,"spawn_scrap2");
 		AudioMessage("misn0314.wav");
 		Goto(M.help1, M.solar2, 1);
 		Goto(M.help2, M.solar2, 1);
@@ -583,17 +583,17 @@ function Update()
 		CameraReady();
 		M.movie_time = GetTime() + 14.5;
 		M.new_unit_time = GetTime() + 7.5;
-		M.prop1 = BuildObject("svrecy", 2, "recy_spawn");
-		M.prop2 = BuildObject("svmuf", 2, "muf_spawn");
-		M.prop3 = BuildObject("svtank", 2, "tank1_spawn");
-		M.prop4 = BuildObject("svtank", 2, "tank2_spawn");
-		M.prop5 = BuildObject("svfigh", 2, "fighter1_spawn");
+		M.prop1 = exu.BuildAsyncObject("svrecy", 2, "recy_spawn");
+		M.prop2 = exu.BuildAsyncObject("svmuf", 2, "muf_spawn");
+		M.prop3 = exu.BuildAsyncObject("svtank", 2, "tank1_spawn");
+		M.prop4 = exu.BuildAsyncObject("svtank", 2, "tank2_spawn");
+		M.prop5 = exu.BuildAsyncObject("svfigh", 2, "fighter1_spawn");
 --		M.prop6 = BuildObject("svtank", 2, "fighter2_spawn");
 --		M.prop7 = BuildObject("svtank", 2, "fighter3_spawn");
-		M.guy1 = BuildObject("sssold",2,"guy1_spawn");
-		M.guy2 = BuildObject("sssold",2,"guy2_spawn");
-		M.guy3 = BuildObject("sssold",2,"guy1_spawn");
-		M.guy4 = BuildObject("sssold",2,"guy2_spawn");
+		M.guy1 = exu.BuildAsyncObject("sssold",2,"guy1_spawn");
+		M.guy2 = exu.BuildAsyncObject("sssold",2,"guy2_spawn");
+		M.guy3 = exu.BuildAsyncObject("sssold",2,"guy1_spawn");
+		M.guy4 = exu.BuildAsyncObject("sssold",2,"guy2_spawn");
 
 		Defend(M.prop1, 1);
 --		Defend(M.prop6, 1);
@@ -620,8 +620,8 @@ function Update()
 	then
 		if (M.new_unit_time < GetTime())
 		then
-			M.prop8 = BuildObject("svfigh", 2, "muf_spawn");
-			M.prop9 = BuildObject("svfigh", 2, "muf_spawn");
+			M.prop8 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn");
+			M.prop9 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn");
 --			Goto(M.prop6, "cool_path2", 1);
 --			Goto(M.prop7, "cool_path2", 1);
 			Goto(M.prop8, "tank2_spawn", 1);
@@ -640,8 +640,8 @@ function Update()
 	then
 		CameraFinish();
 		StopAudioMessage(M.audmsg);
-		M.rescue1 = BuildObject("avapc",1, "apc1_spawn");
-		M.rescue2 = BuildObject("avapc",1, "apc2_spawn");
+		M.rescue1 = exu.BuildAsyncObject("avapc",1, "apc1_spawn");
+		M.rescue2 = exu.BuildAsyncObject("avapc",1, "apc2_spawn");
 
 		M.pull_out_time = GetTime() + 28.0;
 		M.turret_move_time = GetTime() + 30.0;
@@ -753,9 +753,9 @@ function Update()
 	if ((M.trans_underway) and (M.ambush_message_time < GetTime()) and ( not M.ambush_message))
 	then
 		AudioMessage("misn0315.wav");
-		M.wave6_1 = BuildObject("svfigh",2,"spawn_scrap1");
-		M.wave6_2 = BuildObject("svtank",2,"spawn_scrap1");
-		M.wave6_3 = BuildObject("svtank",2,"spawn_scrap1");
+		M.wave6_1 = exu.BuildAsyncObject("svfigh",2,"spawn_scrap1");
+		M.wave6_2 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
+		M.wave6_3 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
 		Attack (M.wave6_1, M.solar2, 1);
 		Attack (M.wave6_2, M.solar1, 1);
 		Goto (M.wave6_3, "base", 1);
@@ -777,9 +777,9 @@ function Update()
 		ClearObjectives();
 		AddObjective("misn0313.otf", "GREEN");
 		AddObjective("misn0304.otf", "WHITE");
-		M.wave7_1 = BuildObject("svtank",2,"spawn_scrap1");
-		M.wave7_2 = BuildObject("svtank",2,"spawn_scrap1");
-		M.wave7_3 = BuildObject("svtank",2,"spawn_scrap1");
+		M.wave7_1 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
+		M.wave7_2 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
+		M.wave7_3 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
 		Goto (M.wave7_1, "base", 1);
 		Goto (M.wave7_2, "base", 1);
 		Goto (M.wave7_3, "base", 1);	
@@ -809,8 +809,8 @@ function Update()
 
 	if (( not M.final_objective) and (M.third_objective) and ( not M.final_objective) and (CountUnitsNearObject(M.geyser, 5000.0, 2, "svtank")) < 5.0)
 	then
-		M.wave7_4 = BuildObject("svtank",2,"spawn_scrap1");
-		M.wave7_5 = BuildObject("svtank",2,"spawn_scrap1");
+		M.wave7_4 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
+		M.wave7_5 = exu.BuildAsyncObject("svtank",2,"spawn_scrap1");
 		Goto (M.wave7_4, "base", 1);
 		Goto (M.wave7_5, "base", 1);
 	end
@@ -969,9 +969,9 @@ function Update()
 		M.next_shot = GetTime() + 18.5;
 		M.new_unit_time = GetTime() + 2.0;
 		M.audmsg = AudioMessage("misn0316.wav");
-		M.prop1 = BuildObject("svtank", 2, "spawna");
-		M.prop2 = BuildObject("svtank", 2, "spawnb");
-		M.prop3 = BuildObject("svtank", 2, "spawnc");
+		M.prop1 = exu.BuildAsyncObject("svtank", 2, "spawna");
+		M.prop2 = exu.BuildAsyncObject("svtank", 2, "spawnb");
+		M.prop3 = exu.BuildAsyncObject("svtank", 2, "spawnc");
 		CameraReady();
 		M.startfinishingmovie = true;
 	end
@@ -1081,7 +1081,7 @@ function Update()
 --		then
 --			RemoveObject(M.build2);
 --		end
-		M.prop8 = BuildObject("svtank", 2, M.cam_geyser);
+		M.prop8 = exu.BuildAsyncObject("svtank", 2, M.cam_geyser);
 		Retreat(M.prop8, "climax_path2", 1);
 		M.clear_debis = true;
 	end
@@ -1091,8 +1091,8 @@ function Update()
 		if (GetDistance(M.prop1, M.cam_geyser) < 100.0)
 		then
 			Retreat(M.prop1, "climax_path2", 1);
-			M.prop9 = BuildObject("svfigh", 2, "solar_spot");
-			M.prop0 = BuildObject("svfigh", 2, "solar_spot");
+			M.prop9 = exu.BuildAsyncObject("svfigh", 2, "solar_spot");
+			M.prop0 = exu.BuildAsyncObject("svfigh", 2, "solar_spot");
 			Retreat(M.prop9, "camera_pass", 1);
 			Retreat(M.prop0, "camera_pass", 1);
 			if (IsAlive(M.hanger))
@@ -1129,7 +1129,7 @@ function Update()
 
 		Retreat(M.prop2, "solar_spot");
 		Retreat(M.prop8, "spawn_scrap1", 1);
-		sucker = BuildObject("abwpow", 1, "sucker_spot");
+		sucker = exu.BuildAsyncObject("abwpow", 1, "sucker_spot");
 --		M.clear_debis_time = GetTime() + 6.0;
 		M.last_blown = true;
 	end

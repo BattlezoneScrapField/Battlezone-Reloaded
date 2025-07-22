@@ -15,6 +15,7 @@ local reloaded = {}
 do
     reloaded.ai               = require("rl_ai")
     reloaded.coop_mission     = require("rl_coop_mission")
+    reloaded.empty_ship      = require("rl_empty_ship")
     reloaded.mission          = require("rl_mission")
     reloaded.service_building = require("rl_service_building")
     reloaded.team             = require("rl_team")
@@ -38,6 +39,7 @@ do
         vsp.CreateObject(h)
 
         reloaded.coop_mission.CreateObject(h)
+        reloaded.empty_ship.CreateObject(h)
         reloaded.mission.CreateObject(h)
     end
 

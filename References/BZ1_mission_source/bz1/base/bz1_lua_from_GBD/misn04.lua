@@ -245,7 +245,7 @@ function Update()
 		M.basecam = GetHandle("apcamr-1_camerapod");
 		M.svrec = GetHandle("svrecy-1_recycler");
 		M.avrec = GetHandle("avrecy-1_recycler");
-		M.relic = BuildObject("obdata", 0, "relicstart1");
+		M.relic = exu.BuildAsyncObject("obdata", 0, "relicstart1");
 		M.pu1 = GetHandle("svfigh-1_wingman");
 		--M.pu2 = GetHandle("svfigh281_wingman");
 		M.pu3 = GetHandle("svfigh282_wingman");
@@ -317,12 +317,12 @@ function Update()
 		(GetDistance (M.player, M.relic) < 600.0)
 		)
 	then
-			M.cheat1 = BuildObject ("svfigh",2,M.relic);
-			M.cheat2 = BuildObject ("svfigh",2,M.relic);
-			M.cheat3 = BuildObject ("svfigh",2,M.relic);
-			M.cheat4 = BuildObject ("svfigh",2,M.relic);
-			M.cheat5 = BuildObject ("svfigh",2,M.relic);
-			M.cheat6 = BuildObject ("svfigh",2,M.relic);
+			M.cheat1 = exu.BuildAsyncObject ("svfigh",2,M.relic);
+			M.cheat2 = exu.BuildAsyncObject ("svfigh",2,M.relic);
+			M.cheat3 = exu.BuildAsyncObject ("svfigh",2,M.relic);
+			M.cheat4 = exu.BuildAsyncObject ("svfigh",2,M.relic);
+			M.cheat5 = exu.BuildAsyncObject ("svfigh",2,M.relic);
+			M.cheat6 = exu.BuildAsyncObject ("svfigh",2,M.relic);
 			if
 				(M.relicstartpos == 0)
 			then
@@ -424,8 +424,8 @@ function Update()
 		(M.fetch < GetTime ()) and (M.surveysent == false)
 		)
 	then
-		M.surv1 = BuildObject ("svfigh",2,M.relic);
-		M.surv2 = BuildObject ("svfigh",2,M.relic);
+		M.surv1 = exu.BuildAsyncObject ("svfigh",2,M.relic);
+		M.surv2 = exu.BuildAsyncObject ("svfigh",2,M.relic);
 		--M.surv3 = BuildObject ("svfigh",2,M.relic);
 		--M.surv4 = BuildObject ("svfigh",2,M.relic);
 		if
@@ -472,7 +472,7 @@ function Update()
 		(M.tur1sent == false) and (M.tur1 < GetTime()) and (IsAlive(M.svrec))
 		)
 	then
-		M.turret1 = BuildObject ("svturr", 2, M.svrec);
+		M.turret1 = exu.BuildAsyncObject ("svturr", 2, M.svrec);
 		Goto (M.turret1, "turret1");
 		M.tur1sent = true;
 	end
@@ -481,7 +481,7 @@ function Update()
 		(M.tur2sent == false) and (M.tur2 < GetTime()) and (IsAlive(M.svrec))
 		)
 	then
-		M.turret2 = BuildObject ("svturr", 2, M.svrec);
+		M.turret2 = exu.BuildAsyncObject ("svturr", 2, M.svrec);
 		Goto (M.turret2, "turret2");
 		M.tur2sent = true;
 	end
@@ -490,7 +490,7 @@ function Update()
 		(M.tur3sent == false) and (M.tur3 < GetTime()) and (IsAlive(M.svrec))
 		)
 	then
-		M.turret3 = BuildObject ("svturr", 2, M.svrec);
+		M.turret3 = exu.BuildAsyncObject ("svturr", 2, M.svrec);
 		Goto (M.turret3, "turret3");
 		M.tur3sent = true;
 	end
@@ -499,7 +499,7 @@ function Update()
 		(M.tur4sent == false) and (M.tur4 < GetTime()) and (IsAlive(M.svrec))
 		)
 	then
-		M.turret4 = BuildObject ("svturr", 2, M.svrec);
+		M.turret4 = exu.BuildAsyncObject ("svturr", 2, M.svrec);
 		Goto (M.turret4, "turret4");
 		M.tur4sent = true;
 	end
@@ -512,7 +512,7 @@ function Update()
 		)
 	then
 		M.aud4 = AudioMessage ("misn0406.wav");
-		M.reliccam = BuildObject ("apcamr", 1, ("reliccam%d"):format(M.relicstartpos + 1));
+		M.reliccam = exu.BuildAsyncObject ("apcamr", 1, ("reliccam%d"):format(M.relicstartpos + 1));
 	--[[	-- Ugly code made simplier by Mario. -GBD
 	--	switch (M.relicstartpos)
 	--	then
@@ -596,9 +596,9 @@ function Update()
 		(M.ccatug < GetTime()) and (M.ccatugsent == false) and (IsAlive(M.svrec))
 		)
 	then
-		M.svtug = BuildObject ("svhaul", 2, M.svrec);
-		M.tuge1 = BuildObject ("svfigh", 2, M.svrec);
-		M.tuge2 = BuildObject ("svfigh", 2, M.svrec);
+		M.svtug = exu.BuildAsyncObject ("svhaul", 2, M.svrec);
+		M.tuge1 = exu.BuildAsyncObject ("svfigh", 2, M.svrec);
+		M.tuge2 = exu.BuildAsyncObject ("svfigh", 2, M.svrec);
 		Pickup (M.svtug, M.relic);
 		Follow (M.tuge1, M.svtug);
 		Follow (M.tuge2, M.svtug);
@@ -859,8 +859,8 @@ function Update()
 		(M.wavenumber == 1) and (GetTime( ) > M.wave1)
 		)
 	then
-		M.w1u1 = BuildObject ("svfigh",2,"wave1");
-		M.w1u2 = BuildObject ("svfigh",2,"wave1");
+		M.w1u1 = exu.BuildAsyncObject ("svfigh",2,"wave1");
+		M.w1u2 = exu.BuildAsyncObject ("svfigh",2,"wave1");
 		Attack (M.w1u1, M.avrec,1);
 		Attack (M.w1u2, M.avrec,1);
 		SetIndependence (M.w1u1, 1);
@@ -897,8 +897,8 @@ function Update()
 		(M.wave2 < GetTime ( )) and (IsAlive(M.svrec))
 		)
 	then
-		M.w2u1 = BuildObject ("svtank",2,"spawn2new");
-		M.w2u2 = BuildObject ("svfigh",2,"spawn2new");
+		M.w2u1 = exu.BuildAsyncObject ("svtank",2,"spawn2new");
+		M.w2u2 = exu.BuildAsyncObject ("svfigh",2,"spawn2new");
 		--M.w2u3 = BuildObject ("svtank",2,"spawn2new");
 		Goto(M.w2u1, M.avrec,1);
 		Goto(M.w2u2, M.avrec,1);
@@ -936,9 +936,9 @@ function Update()
 		)
 	then
 		
-		M.w3u1 = BuildObject ("svfigh",2,M.svrec);
-		M.w3u2 = BuildObject ("svfigh",2,M.svrec);
-		M.w3u3 = BuildObject ("svfigh",2,M.svrec);
+		M.w3u1 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w3u2 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w3u3 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
 		--M.w3u4 = BuildObject ("svfigh",2,M.svrec);
 		Goto(M.w3u1, M.avrec,1);
 		Goto(M.w3u2, M.avrec,1);
@@ -981,9 +981,9 @@ function Update()
 		)
 	then
 		
-		M.w4u1 = BuildObject ("svtank",2,"spawnotherside");
-		M.w4u2 = BuildObject ("svfigh",2,"spawnotherside");
-		M.w4u3 = BuildObject ("svfigh",2,"spawnotherside");
+		M.w4u1 = exu.BuildAsyncObject ("svtank",2,"spawnotherside");
+		M.w4u2 = exu.BuildAsyncObject ("svfigh",2,"spawnotherside");
+		M.w4u3 = exu.BuildAsyncObject ("svfigh",2,"spawnotherside");
 		--M.w4u4 = BuildObject ("svfigh",2,"spawnotherside");
 		--M.w4u5 = BuildObject ("svtank",2,"spawnotherside");
 		Goto(M.w4u1, M.avrec,1);
@@ -1032,10 +1032,10 @@ function Update()
 		)
 	then
 		
-		M.w5u1 = BuildObject ("svtank",2,M.svrec);
-		M.w5u2 = BuildObject ("svfigh",2,M.svrec);
-		M.w5u3 = BuildObject ("svfigh",2,M.svrec);
-		M.w5u4 = BuildObject ("svfigh",2,M.svrec);
+		M.w5u1 = exu.BuildAsyncObject ("svtank",2,M.svrec);
+		M.w5u2 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w5u3 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w5u4 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
 		--M.w5u5 = BuildObject ("svtank",2,M.svrec);
 		--M.w5u6 = BuildObject ("svfigh",2,M.svrec);
 		Goto(M.w5u1, M.avrec,1);

@@ -27,10 +27,10 @@ do
 
     coop_mission.enemy_team = 15
 
-    function coop_mission:coop_mission(team)
-        -- even though the base constructor takes no parameters we still need to pass one
-        -- since otherwise it just returns the base class instance to get methods from
-        self:super(true)
+    --- @param team team
+    --- @param config table
+    function coop_mission:coop_mission(team, config)
+        self:super(config)
 
         self.team = team
         self.spawn_directions = {}
@@ -39,9 +39,10 @@ do
 
     --- Makes a coop mission instance with the given team
     --- @param team team
+    --- @param config? table coop mission configuration file
     --- @return coop_mission
-    function rl_coop_mission.make_coop(team)
-        return coop_mission:new(team)
+    function rl_coop_mission.make_coop(team, config)
+        return coop_mission:new(team, config)
     end
 
     vsp.net.set_function("coop_change_state", coop_mission:super().change_state)
@@ -135,20 +136,37 @@ do
     function coop_mission:build_single_object(...)
         if vsp.net.is_hosting() then
             return self:super():build_single_object(...)
+        else
+            return nil
         end
     end
 
     --- Build multiple objects around the given area from the host only
-    --- @param odfname string
+    --- @param odfname string object to build
     --- @param teamnum integer
+    --- @param count integer
     --- @param position any
-    --- @return table<userdata> | table<nil>
+    --- @return table<userdata> | nil
     function coop_mission:build_multiple_objects(odfname, teamnum, count, position)
         if vsp.net.is_singleplayer_or_solo() then
             return self:super():build_multiple_objects(odfname, teamnum, count, position)
         end
-        if not vsp.net.is_hosting() then return {} end
+        if not vsp.net.is_hosting() then return nil end
+        
         return self:super():build_multiple_objects(odfname, teamnum, count, position)
+    end
+
+    --- Build objects with the count scaled according to the config
+    --- @param odfname string object to build
+    --- @param teamnum integer
+    --- @param unscaled_count integer actual count may be more depending on scaling settings
+    --- @param position any
+    --- @return table<userdata> | nil
+    function coop_mission:build_scaled(odfname, teamnum, unscaled_count, position)
+        if self.cfg.enemy_count_scaling then
+            unscaled_count = unscaled_count * vsp.net_player.get_player_count()
+        end
+        return self:build_multiple_objects(odfname, teamnum, unscaled_count, position)
     end
 
     --- These are fooked right now do not use
@@ -226,17 +244,12 @@ do
         end
     end
 
-    local function apply_mission_alliances()
-        mission.get_current_mission().team:do_ally()
-    end
-
     function rl_coop_mission.Start()
         if not mission.get_current_mission() then return end
 
         apply_my_spawn_direction()
         apply_starting_lives()
         apply_shared_satellite()
-        apply_mission_alliances()
     end
 
     function rl_coop_mission.Update(dt)

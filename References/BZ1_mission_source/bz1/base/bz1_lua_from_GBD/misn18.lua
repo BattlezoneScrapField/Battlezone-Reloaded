@@ -452,8 +452,8 @@ function Update()
 			)
 		)
 	then
-		M.w1u1 = BuildObject ("hvsat",2, "spawn1b");
-		M.w1u3 = BuildObject ("hvsat",2, "spawnalt1b");
+		M.w1u1 = exu.BuildAsyncObject ("hvsat",2, "spawn1b");
+		M.w1u3 = exu.BuildAsyncObject ("hvsat",2, "spawnalt1b");
 		Goto (M.w1u1, "transport1");
 		Goto (M.w1u3, "transport2");
 		SetIndependence (M.w1u1, 1);
@@ -472,8 +472,8 @@ function Update()
 		
 		)
 	then
-		M.w2u2 = BuildObject ("hvsat",2, "spawn2b");
-		M.w2u4 = BuildObject ("hvsat",2, "spawnalt2b");
+		M.w2u2 = exu.BuildAsyncObject ("hvsat",2, "spawn2b");
+		M.w2u4 = exu.BuildAsyncObject ("hvsat",2, "spawnalt2b");
 		Goto (M.w2u2, "transport3");
 		Goto (M.w2u4, "transport4");
 		SetIndependence (M.w2u2, 1);
@@ -491,8 +491,8 @@ function Update()
 			)
 		)
 	then
-		M.w3u1 = BuildObject ("hvsat",2, "spawn3b");
-		M.w3u3 = BuildObject ("hvsat",2, "spawnalt3b");
+		M.w3u1 = exu.BuildAsyncObject ("hvsat",2, "spawn3b");
+		M.w3u3 = exu.BuildAsyncObject ("hvsat",2, "spawnalt3b");
 		Goto (M.w3u1, "transport5");
 		Goto (M.w3u3, "transport6");
 		SetIndependence (M.w3u1, 1);
@@ -505,7 +505,7 @@ function Update()
 		(M.rand1 < GetTime()) and (M.rand1brk == false)
 		)
 	then
-		M.rand1a = BuildObject ("hvsav",2, "spawnrand");
+		M.rand1a = exu.BuildAsyncObject ("hvsav",2, "spawnrand");
 		Goto (M.rand1a, "transport7");
 		SetIndependence (M.rand1a, 1);
 		M.rand1brk = true;
@@ -515,7 +515,7 @@ function Update()
 		(M.rand2 < GetTime()) and (M.rand2brk == false)
 		)
 	then
-		M.rand2a = BuildObject ("hvsav",2, "spawnrand");
+		M.rand2a = exu.BuildAsyncObject ("hvsav",2, "spawnrand");
 		Goto (M.rand2a, "transport8");
 		SetIndependence (M.rand2a, 1);
 		M.rand2brk = true;
@@ -526,7 +526,7 @@ function Update()
 		(M.rand3 < GetTime()) and (M.rand3brk == false)
 		)
 	then
-		M.rand3a = BuildObject ("hvsav",2, "spawnrand");
+		M.rand3a = exu.BuildAsyncObject ("hvsav",2, "spawnrand");
 		Goto (M.rand3a, "transport9");
 		SetIndependence (M.rand3a, 1);
 		M.rand3brk = true;
@@ -550,8 +550,8 @@ function Update()
 		(M.dg1 == false)
 		)
 	then
-		M.dg1a = BuildObject ("hvsat",2, "dgs1");
-		M.dg1b = BuildObject ("hvsav",2, "spawn1");
+		M.dg1a = exu.BuildAsyncObject ("hvsat",2, "dgs1");
+		M.dg1b = exu.BuildAsyncObject ("hvsav",2, "spawn1");
 		M.dg1 = true;
 	end
 
@@ -563,8 +563,8 @@ function Update()
 		)
 
 	then
-		M.dg2a = BuildObject ("hvsat",2, "dgs2");
-		M.dg2b = BuildObject ("hvsav",2, "spawn1");
+		M.dg2a = exu.BuildAsyncObject ("hvsat",2, "dgs2");
+		M.dg2b = exu.BuildAsyncObject ("hvsav",2, "spawn1");
 		M.dg2 = true;
 	end
 
@@ -576,8 +576,8 @@ function Update()
 		)
 
 	then
-		M.dg3a = BuildObject ("hvsat",2,"dgs3");
-		M.dg3b = BuildObject ("hvsav",2,"spawn1");
+		M.dg3a = exu.BuildAsyncObject ("hvsat",2,"dgs3");
+		M.dg3b = exu.BuildAsyncObject ("hvsav",2,"spawn1");
 		M.dg3 = true;
 	end
 
@@ -678,8 +678,8 @@ function Update()
 		if
 			(M.wave1start == false)
 		then
-		M.w1u1 = BuildObject ("hvsat",2, "spawn1b");
-		M.w1u3 = BuildObject ("hvsat",2, "spawnalt1b");
+		M.w1u1 = exu.BuildAsyncObject ("hvsat",2, "spawn1b");
+		M.w1u3 = exu.BuildAsyncObject ("hvsat",2, "spawnalt1b");
 		Goto (M.w1u1, "transport1");
 		Goto (M.w1u3, "transport2");
 		SetIndependence (M.w1u1, 1);
@@ -689,8 +689,8 @@ function Update()
 		if
 			(M.wave2start == false)
 		then
-		M.w2u2 = BuildObject ("hvsat",2, "spawn2b");
-		M.w2u4 = BuildObject ("hvsat",2, "spawnalt2b");
+		M.w2u2 = exu.BuildAsyncObject ("hvsat",2, "spawn2b");
+		M.w2u4 = exu.BuildAsyncObject ("hvsat",2, "spawnalt2b");
 		Goto (M.w2u2, "transport3");
 		Goto (M.w2u4, "transport4");
 		SetIndependence (M.w2u2, 1);
@@ -700,8 +700,8 @@ function Update()
 		if
 			(M.wave3start == false)
 		then
-		M.w3u1 = BuildObject ("hvsat",2, "spawn3b");
-		M.w3u3 = BuildObject ("hvsat",2, "spawnalt3b");
+		M.w3u1 = exu.BuildAsyncObject ("hvsat",2, "spawn3b");
+		M.w3u3 = exu.BuildAsyncObject ("hvsat",2, "spawnalt3b");
 		Goto (M.w3u1, "transport5");
 		Goto (M.w3u3, "transport6");
 		SetIndependence (M.w3u1, 1);
@@ -716,10 +716,10 @@ function Update()
 		)
 	then
 		M.savwaves = true;
-		M.fury1 = BuildObject("hvsav", 2, "spawnrand");
-		M.fury2 = BuildObject("hvsav", 2, "spawnrand");
-		M.fury3 = BuildObject("hvsav", 2, "spawnrand2");
-		M.fury4 = BuildObject("hvsav", 2, "spawnrand2");
+		M.fury1 = exu.BuildAsyncObject("hvsav", 2, "spawnrand");
+		M.fury2 = exu.BuildAsyncObject("hvsav", 2, "spawnrand");
+		M.fury3 = exu.BuildAsyncObject("hvsav", 2, "spawnrand2");
+		M.fury4 = exu.BuildAsyncObject("hvsav", 2, "spawnrand2");
 		Attack (M.fury1, M.avrec);
 		Attack (M.fury2, M.avrec);
 		Attack (M.fury3, M.avrec);
@@ -737,10 +737,10 @@ function Update()
 			( not IsAlive(M.fury4)) 
 			)
 		then
-			M.fury1 = BuildObject("hvsav", 2, "spawnrand");
-		M.fury2 = BuildObject("hvsav", 2, "spawnrand");
-		M.fury3 = BuildObject("hvsav", 2, "spawnrand2");
-		M.fury4 = BuildObject("hvsav", 2, "spawnrand2");
+			M.fury1 = exu.BuildAsyncObject("hvsav", 2, "spawnrand");
+		M.fury2 = exu.BuildAsyncObject("hvsav", 2, "spawnrand");
+		M.fury3 = exu.BuildAsyncObject("hvsav", 2, "spawnrand2");
+		M.fury4 = exu.BuildAsyncObject("hvsav", 2, "spawnrand2");
 		Attack (M.fury1, M.avrec);
 		Attack (M.fury2, M.avrec);
 		Attack (M.fury3, M.avrec);
@@ -801,7 +801,7 @@ function Update()
 		 and  (M.returnwave == false) and (M.transdestroyed == true)
 		)
 	then
-		M.sav1 = BuildObject ("hvsat",2, "spawnreturn");
+		M.sav1 = exu.BuildAsyncObject ("hvsat",2, "spawnreturn");
 		--M.sav2 = BuildObject ("hvsat",2, "spawnreturn");
 		--M.sav3 = BuildObject ("hvsav",2, "spawnreturn");
 		M.returnwave = true;

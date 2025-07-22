@@ -104,8 +104,8 @@ function Update()
 		M.apc_wave = GetTime()+70.0;
 		M.start_done = true;
 		M.t4 = GetHandle("sbhang0_repairdepot");
-		M.a1 = BuildObject("avartl",2,"spawn1");
-		M.a2 = BuildObject("avartl",2,"spawn2");
+		M.a1 = exu.BuildAsyncObject("avartl",2,"spawn1");
+		M.a2 = exu.BuildAsyncObject("avartl",2,"spawn2");
 		CameraReady();
 		M.aud = AudioMessage("misns501.wav");
 	end
@@ -158,7 +158,7 @@ function Update()
 	end
 	if (GetTime()>M.add_defender)
 	then
-		BuildObject("avwalk",2,"spawn3");
+		exu.BuildAsyncObject("avwalk",2,"spawn3");
 		-- BuildObject("avtank",2,"spawn3");
 		M.add_defender = 99999.0;
 		SetPilot(2,30);  -- in case we load AIP
@@ -178,16 +178,16 @@ function Update()
 	if (GetTime()>M.chaff)
 	then
 		M.chaff = GetTime()+50.0 + math.random(0, 3) * 10.0;
-		BuildObject("avfigh",2,"spawn5");
+		exu.BuildAsyncObject("avfigh",2,"spawn5");
 	end
 	if (GetTime()>M.apc_wave)
 	then
-		M.h1 = BuildObject("avapc",2,"spawn6");
-		M.h2 = BuildObject("avapc",2,"spawn6");
-		M.killme = BuildObject("avrecy",2,"spawn7");
-		local protect = BuildObject("bvtank",2,"spawn7");
+		M.h1 = exu.BuildAsyncObject("avapc",2,"spawn6");
+		M.h2 = exu.BuildAsyncObject("avapc",2,"spawn6");
+		M.killme = exu.BuildAsyncObject("avrecy",2,"spawn7");
+		local protect = exu.BuildAsyncObject("bvtank",2,"spawn7");
 		Defend(protect,M.killme);
-		protect = BuildObject("bvtank",2,"spawn7");
+		protect = exu.BuildAsyncObject("bvtank",2,"spawn7");
 		Defend(protect,M.killme);
 		Attack(M.h1,M.muf);
 		Attack(M.h2,M.muf);
@@ -207,13 +207,13 @@ function Update()
 		AudioMessage("misns505.wav");
 		if (M.wave_count ~= 1)
 		then
-			BuildObject("bvltnk",2,"spawn5");
-			BuildObject("bvltnk",2,"spawn5");
-			BuildObject("bvltnk",2,"spawn5");
+			exu.BuildAsyncObject("bvltnk",2,"spawn5");
+			exu.BuildAsyncObject("bvltnk",2,"spawn5");
+			exu.BuildAsyncObject("bvltnk",2,"spawn5");
 		else
-			BuildObject("bvhraz",2,"spawn6");
-			BuildObject("bvhraz",2,"spawn6");
-			BuildObject("bvhraz",2,"spawn6");
+			exu.BuildAsyncObject("bvhraz",2,"spawn6");
+			exu.BuildAsyncObject("bvhraz",2,"spawn6");
+			exu.BuildAsyncObject("bvhraz",2,"spawn6");
 		end
 		if (M.wave_count == 3)
 		then
@@ -224,9 +224,9 @@ function Update()
 			--]]
 			M.last_phase = true;
 --			M.killme = BuildObject("avrecy",2,"spawn7");
-			BuildObject("avscav",2,"spawn7");
-			BuildObject("avscav",2,"spawn7");
-			local sam = BuildObject("spcamr",1,"camera1");
+			exu.BuildAsyncObject("avscav",2,"spawn7");
+			exu.BuildAsyncObject("avscav",2,"spawn7");
+			local sam = exu.BuildAsyncObject("spcamr",1,"camera1");
 			SetObjectiveOn(M.killme);  -- should be sam
 			AddObjective("misns502.otf","WHITE");
 			AudioMessage("misns506.wav");
