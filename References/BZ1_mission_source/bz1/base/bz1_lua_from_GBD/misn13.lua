@@ -360,7 +360,7 @@ function Update()
 		Defend(M.artil3);
 		Defend(M.artil4);
 --		Defend(M.ccaapc);
-		M.escort_tank = BuildObject("svtank", 2, M.artil1);
+		M.escort_tank = exu.BuildAsyncObject("svtank", 2, M.artil1);
 		SetObjectiveName(M.nav1, "Drop Zone");
 		Defend(M.escort_tank);
 		M.first_wave_time = GetTime()+5.0;
@@ -1205,25 +1205,25 @@ function Update()
 		then
 			if (M.svscav1 ~= nil)
 			then
-				M.svscav5 = BuildObject("svscav", 2, M.svscav1);
+				M.svscav5 = exu.BuildAsyncObject("svscav", 2, M.svscav1);
 				RemoveObject(M.svscav1);
 				Goto(M.svscav5, M.center_geyser);
 			end
 			if (M.svscav2 ~= nil)
 			then
-				M.svscav6 = BuildObject("svscav", 2, M.svscav2);
+				M.svscav6 = exu.BuildAsyncObject("svscav", 2, M.svscav2);
 				RemoveObject(M.svscav2);
 				Goto(M.svscav6, M.center_geyser);
 			end
 			if (M.svscav3 ~= nil)
 			then
-				M.svscav7 = BuildObject("svscav", 2, M.svscav3);
+				M.svscav7 = exu.BuildAsyncObject("svscav", 2, M.svscav3);
 				RemoveObject(M.svscav3);
 				Goto(M.svscav7, M.center_geyser);
 			end
 			if (M.svscav4 ~= nil)
 			then
-				M.svscav8 = BuildObject("svscav", 2, M.svscav4);
+				M.svscav8 = exu.BuildAsyncObject("svscav", 2, M.svscav4);
 				RemoveObject(M.svscav4);
 				Goto(M.svscav8, M.center_geyser);
 			end

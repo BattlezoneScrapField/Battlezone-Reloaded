@@ -199,11 +199,11 @@ function Update()
 		 and  (M.bdspawned == false)
 		)
 	then
-		M.bd1 = BuildObject ("avtank", 2, "bdspawn1");
-		M.bd2 = BuildObject ("avtank", 2, "bdspawn1");
-		M.bd3 = BuildObject ("avtank", 2, "bdspawn1");
-		M.bd4 = BuildObject ("avfigh", 2, "bdspawn1");
-		M.bd5 = BuildObject ("avfigh", 2, "bdspawn1");
+		M.bd1 = exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
+		M.bd2 = exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
+		M.bd3 = exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
+		M.bd4 = exu.BuildAsyncObject ("avfigh", 2, "bdspawn1");
+		M.bd5 = exu.BuildAsyncObject ("avfigh", 2, "bdspawn1");
 		Attack(M.bd1, M.player);
 		Attack(M.bd2, M.player);
 		Attack(M.bd3, M.player);
@@ -262,11 +262,11 @@ function Update()
 			( not IsAlive(M.bd5))
 			)
 		then
-		M.bd1 = BuildObject ("avtank", 2, "bdspawn1");
-		M.bd2 = BuildObject ("avtank", 2, "bdspawn1");
-		M.bd3 = BuildObject ("avtank", 2, "bdspawn1");
-		M.bd4 = BuildObject ("avfigh", 2, "bdspawn1");
-		M.bd5 = BuildObject ("avfigh", 2, "bdspawn1");
+		M.bd1 = exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
+		M.bd2 = exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
+		M.bd3 = exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
+		M.bd4 = exu.BuildAsyncObject ("avfigh", 2, "bdspawn1");
+		M.bd5 = exu.BuildAsyncObject ("avfigh", 2, "bdspawn1");
 		end
 		M.Checkalive = GetTime() + 8.0;
 	end
@@ -281,10 +281,10 @@ function Update()
 		if
 			(M.bdspawned2 == false)
 		then
-		M.bd50 =  BuildObject ("avtank", 2, "bdspawn1");
-		M.bd60 = BuildObject ("avfigh", 2, "bdspawn1");
-		M.bd70 = BuildObject ("avfigh", 2, "bdspawn1");
-		M.bd80 = BuildObject ("avtank", 2, "bdspawn1");
+		M.bd50 =  exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
+		M.bd60 = exu.BuildAsyncObject ("avfigh", 2, "bdspawn1");
+		M.bd70 = exu.BuildAsyncObject ("avfigh", 2, "bdspawn1");
+		M.bd80 = exu.BuildAsyncObject ("avtank", 2, "bdspawn1");
 		Goto (M.bd50, "bdpath1");
 		Goto (M.bd60, "bdpath2");
 		Goto (M.bd70, "bdpath3");
@@ -306,8 +306,8 @@ function Update()
 		 and  (M.unit1spawned == false)
 		)
 	then
-		M.bd51 = BuildObject ("avtank", 2, M.bd50);
-		M.bd52 = BuildObject ("avtank", 2, M.bd50);
+		M.bd51 = exu.BuildAsyncObject ("avtank", 2, M.bd50);
+		M.bd52 = exu.BuildAsyncObject ("avtank", 2, M.bd50);
 		Follow (M.bd51, M.bd50);
 		Follow (M.bd52, M.bd50);
 		M.unit1spawned = true;
@@ -319,8 +319,8 @@ function Update()
 		 and  (M.unit2spawned == false)
 		)
 	then
-		M.bd61 = BuildObject ("avfigh", 2, M.bd60);
-		M.bd62 = BuildObject ("avfigh", 2, M.bd60);
+		M.bd61 = exu.BuildAsyncObject ("avfigh", 2, M.bd60);
+		M.bd62 = exu.BuildAsyncObject ("avfigh", 2, M.bd60);
 		Follow (M.bd61, M.bd60);
 		Follow (M.bd62, M.bd60);
 		M.unit2spawned = true;
@@ -332,8 +332,8 @@ function Update()
 		 and  (M.unit3spawned == false)
 		)
 	then
-		M.bd71 = BuildObject ("avfigh", 2, M.bd70);
-		M.bd72 = BuildObject ("avtank", 2, M.bd70);
+		M.bd71 = exu.BuildAsyncObject ("avfigh", 2, M.bd70);
+		M.bd72 = exu.BuildAsyncObject ("avtank", 2, M.bd70);
 		Follow (M.bd71, M.bd70);
 		Follow (M.bd72, M.bd70);
 		M.unit3spawned = true;
@@ -345,8 +345,8 @@ function Update()
 		 and  (M.unit4spawned == false)
 		)
 	then
-		M.bd81 = BuildObject ("avtank", 2, M.bd80);
-		M.bd82 = BuildObject ("avtank", 2, M.bd80);
+		M.bd81 = exu.BuildAsyncObject ("avtank", 2, M.bd80);
+		M.bd82 = exu.BuildAsyncObject ("avtank", 2, M.bd80);
 		Follow (M.bd81, M.bd80);
 		Follow (M.bd82, M.bd80);
 		M.unit4spawned = true;
@@ -442,8 +442,8 @@ function Update()
 						(GetDistance (M.player, "patroltrig1") < 100.0)
 						)
 					then
-						M.pat1 = BuildObject("bvraz", 2, "patrolspawn1");
-						M.pat2 = BuildObject("bvraz", 2, "patrolspawn1");
+						M.pat1 = exu.BuildAsyncObject("bvraz", 2, "patrolspawn1");
+						M.pat2 = exu.BuildAsyncObject("bvraz", 2, "patrolspawn1");
 						AudioMessage("misns219.wav");
 						Goto(M.pat1, "patrolpath1");
 						Goto(M.pat2, "patrolpath1");
@@ -460,8 +460,8 @@ function Update()
 						(GetDistance (M.player, "patroltrig2") < 100.0)
 						)
 					then
-						M.pat1 = BuildObject("bvraz", 2, "patrolspawn2");
-						M.pat2 = BuildObject("bvraz", 2, "patrolspawn2");
+						M.pat1 = exu.BuildAsyncObject("bvraz", 2, "patrolspawn2");
+						M.pat2 = exu.BuildAsyncObject("bvraz", 2, "patrolspawn2");
 						AudioMessage("misns219.wav");
 						Goto(M.pat1, "patrolpath2");
 						Goto(M.pat2, "patrolpath2");
@@ -523,17 +523,17 @@ function Update()
 		)
 		)
 	then
-		BuildObject("proxmine", 2, "path_1");
-		BuildObject("proxmine", 2, "path_2");
-		BuildObject("proxmine", 2, "path_3");
-		BuildObject("proxmine", 2, "path_4");
-		BuildObject("proxmine", 2, "path_5");
-		BuildObject("proxmine", 2, "path_6");
-		BuildObject("proxmine", 2, "path_7");
-		BuildObject("proxmine", 2, "path_8");
-		BuildObject("proxmine", 2, "path_9");
-		BuildObject("proxmine", 2, "path_10");
-		BuildObject("proxmine", 2, "path_11");
+		exu.BuildAsyncObject("proxmine", 2, "path_1");
+		exu.BuildAsyncObject("proxmine", 2, "path_2");
+		exu.BuildAsyncObject("proxmine", 2, "path_3");
+		exu.BuildAsyncObject("proxmine", 2, "path_4");
+		exu.BuildAsyncObject("proxmine", 2, "path_5");
+		exu.BuildAsyncObject("proxmine", 2, "path_6");
+		exu.BuildAsyncObject("proxmine", 2, "path_7");
+		exu.BuildAsyncObject("proxmine", 2, "path_8");
+		exu.BuildAsyncObject("proxmine", 2, "path_9");
+		exu.BuildAsyncObject("proxmine", 2, "path_10");
+		exu.BuildAsyncObject("proxmine", 2, "path_11");
 		M.minefield1 = true;
 	end
 	if
@@ -545,17 +545,17 @@ function Update()
 		)
 		)
 	then
-		BuildObject("proxmine", 2, "path_12");
-		BuildObject("proxmine", 2, "path_13");
-		BuildObject("proxmine", 2, "path_14");
-		BuildObject("proxmine", 2, "path_15");
-		BuildObject("proxmine", 2, "path_16");
-		BuildObject("proxmine", 2, "path_17");
-		BuildObject("proxmine", 2, "path_18");
-		BuildObject("proxmine", 2, "path_19");
-		BuildObject("proxmine", 2, "path_20");
-		BuildObject("proxmine", 2, "path_21");
-		BuildObject("proxmine", 2, "path_22");
+		exu.BuildAsyncObject("proxmine", 2, "path_12");
+		exu.BuildAsyncObject("proxmine", 2, "path_13");
+		exu.BuildAsyncObject("proxmine", 2, "path_14");
+		exu.BuildAsyncObject("proxmine", 2, "path_15");
+		exu.BuildAsyncObject("proxmine", 2, "path_16");
+		exu.BuildAsyncObject("proxmine", 2, "path_17");
+		exu.BuildAsyncObject("proxmine", 2, "path_18");
+		exu.BuildAsyncObject("proxmine", 2, "path_19");
+		exu.BuildAsyncObject("proxmine", 2, "path_20");
+		exu.BuildAsyncObject("proxmine", 2, "path_21");
+		exu.BuildAsyncObject("proxmine", 2, "path_22");
 		M.minefield2 = true;
 	end
 	if
@@ -567,18 +567,18 @@ function Update()
 		)
 		)
 	then
-		BuildObject("proxmine", 2, "path_23");
-		BuildObject("proxmine", 2, "path_24");
-		BuildObject("proxmine", 2, "path_25");
-		BuildObject("proxmine", 2, "path_26");
-		BuildObject("proxmine", 2, "path_27");
-		BuildObject("proxmine", 2, "path_28");
-		BuildObject("proxmine", 2, "path_29");
-		BuildObject("proxmine", 2, "path_30");
-		BuildObject("proxmine", 2, "path_31");
-		BuildObject("proxmine", 2, "path_32");
-		BuildObject("proxmine", 2, "path_33");
-		BuildObject("proxmine", 2, "path_34");
+		exu.BuildAsyncObject("proxmine", 2, "path_23");
+		exu.BuildAsyncObject("proxmine", 2, "path_24");
+		exu.BuildAsyncObject("proxmine", 2, "path_25");
+		exu.BuildAsyncObject("proxmine", 2, "path_26");
+		exu.BuildAsyncObject("proxmine", 2, "path_27");
+		exu.BuildAsyncObject("proxmine", 2, "path_28");
+		exu.BuildAsyncObject("proxmine", 2, "path_29");
+		exu.BuildAsyncObject("proxmine", 2, "path_30");
+		exu.BuildAsyncObject("proxmine", 2, "path_31");
+		exu.BuildAsyncObject("proxmine", 2, "path_32");
+		exu.BuildAsyncObject("proxmine", 2, "path_33");
+		exu.BuildAsyncObject("proxmine", 2, "path_34");
 		M.minefield3 = true;
 	end
 

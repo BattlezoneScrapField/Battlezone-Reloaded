@@ -279,9 +279,9 @@ function Update()
 
 	if ((M.fresh_meat_time < GetTime()) and ( not M.colorado_under_attack) and ( not M.fresh_meat))
 	then
-		M.cannon_fodder1 = BuildObject("svfigh", 2, M.ccarecycle);
-		M.cannon_fodder2 = BuildObject("svfigh", 2, M.ccarecycle);
-		M.cannon_fodder3 = BuildObject("svfigh", 2, M.ccarecycle);
+		M.cannon_fodder1 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);
+		M.cannon_fodder2 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);
+		M.cannon_fodder3 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);
 		Goto(M.cannon_fodder1, "gech_path2");
 		Goto(M.cannon_fodder2, "gech_path2");
 		Goto(M.cannon_fodder3, "gech_path2");
@@ -303,9 +303,9 @@ function Update()
 
 		if (GetDistance(M.user, M.nav5) > 400.0)
 		then
-			M.svpatrol2_2 = BuildObject("svfigh", 2, M.ccarecycle);
-			M.svpatrol2_2 = BuildObject("svltnk", 2, M.ccarecycle);
-			M.ccagech3 = BuildObject("svwalk", 2, "gech_spawn");
+			M.svpatrol2_2 = exu.BuildAsyncObject("svfigh", 2, M.ccarecycle);
+			M.svpatrol2_2 = exu.BuildAsyncObject("svltnk", 2, M.ccarecycle);
+			M.ccagech3 = exu.BuildAsyncObject("svwalk", 2, "gech_spawn");
 			SetWeaponMask(M.ccagech3, 1);
 			Attack(M.ccagech3, M.colorado, 1);
 			AudioMessage("misn0801.wav");-- player gets message that M.colorado is encountering hostiles "standby"
@@ -566,7 +566,7 @@ function Update()
 		if ((M.gech_found1) and (GetDistance(M.gech_trigger2, M.ccagech2) < 100.0) and ( not M.second_gech_warning))
 		then
 			AudioMessage("misn0815.wav"); --V.O. looks like we've got another one coming out of the west
-			M.nav2 = BuildObject ("apcamr", 1, "cam2_spawn"); -- builds camera near gech
+			M.nav2 = exu.BuildAsyncObject ("apcamr", 1, "cam2_spawn"); -- builds camera near gech
 			SetObjectiveName(M.nav2, "Nav Alpha 1");
 			M.second_gech_warning = true;
 		end
@@ -574,7 +574,7 @@ function Update()
 		if ((M.gech_found2) and (GetDistance(M.gech_trigger3,M.ccagech1) < 100.0) and ( not M.second_gech_warning))
 		then
 			AudioMessage("misn0814.wav"); --V.O. warns player of second gech
-			M.nav3 = BuildObject ("apcamr", 1, "cam3_spawn"); -- builds camera near gech
+			M.nav3 = exu.BuildAsyncObject ("apcamr", 1, "cam3_spawn"); -- builds camera near gech
 			SetObjectiveName(M.nav3, "Nav Alpha 2");
 			M.second_gech_warning = true;
 		end
@@ -611,7 +611,7 @@ function Update()
 	if ((M.gech_at_nav2) and (M.gech_warning_message < GetTime()) and ( not M.player_warned_ofgech)) --if player ignores M.gech_at_nav message
 	then
 		AudioMessage("misn0814.wav"); -- Check it out - we're dropping a nav camera there now
-		M.nav2 = BuildObject ("apcamr", 1, "cam2_spawn"); -- builds camera near gech
+		M.nav2 = exu.BuildAsyncObject ("apcamr", 1, "cam2_spawn"); -- builds camera near gech
 		SetObjectiveName(M.nav2, "Nav Alpha 1");
 		M.time_waist = GetTime() + 14.0;
 		M.stumble1_check = GetTime() + 100.0;
@@ -621,7 +621,7 @@ function Update()
 	if ((M.gech_at_nav3) and (M.gech_warning_message < GetTime()) and ( not M.player_warned_ofgech)) --if player ignores M.gech_at_nav message
 	then
 		AudioMessage("misn0815.wav"); -- Check it out - we're dropping a nav camera there now
-		M.nav3 = BuildObject ("apcamr", 1, "cam3_spawn"); -- builds camera near gech
+		M.nav3 = exu.BuildAsyncObject ("apcamr", 1, "cam3_spawn"); -- builds camera near gech
 		SetObjectiveName(M.nav3, "Nav Alpha 2");
 		M.time_waist = GetTime() + 14.0;
 		M.stumble1_check = GetTime() + 100.0;
@@ -637,7 +637,7 @@ function Update()
 		if ((M.gech_at_nav2) and (GetDistance(M.gech_trigger3,M.ccagech1) < 75.0) and ( not M.second_gech_warning)) --second gech found
 		then
 			AudioMessage("misn0812.wav");  --looks like we've got another one coming out of the east
-			M.nav3 = BuildObject ("apcamr", 1, "cam3_spawn"); -- builds camera near gech
+			M.nav3 = exu.BuildAsyncObject ("apcamr", 1, "cam3_spawn"); -- builds camera near gech
 			SetObjectiveName(M.nav3, "Nav Alpha 2");
 			M.second_gech_warning = true;
 		end
@@ -645,7 +645,7 @@ function Update()
 		if ((M.gech_at_nav3) and (GetDistance(M.gech_trigger2, M.ccagech2) < 75.0) and ( not M.second_gech_warning)) --second gech found
 		then
 			AudioMessage("misn0811.wav"); --looks like we've got another one coming out of the west
-			M.nav2 = BuildObject ("apcamr", 1, "cam2_spawn"); -- builds camera near gech
+			M.nav2 = exu.BuildAsyncObject ("apcamr", 1, "cam2_spawn"); -- builds camera near gech
 			SetObjectiveName(M.nav2, "Nav Alpha 1");
 			M.second_gech_warning = true;
 		end

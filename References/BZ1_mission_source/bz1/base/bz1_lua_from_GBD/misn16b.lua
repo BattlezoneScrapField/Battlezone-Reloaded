@@ -209,53 +209,53 @@ function Update()
 					hauling battilion
 				--]]
 				AudioMessage("misn1603.wav");
-				BuildObject("svfigh",1,"starta");
-				BuildObject("svhaul",1,"starta2");
-				BuildObject("svhaul",1,"starta3");
+				exu.BuildAsyncObject("svfigh",1,"starta");
+				exu.BuildAsyncObject("svhaul",1,"starta2");
+				exu.BuildAsyncObject("svhaul",1,"starta3");
 			elseif (M.rtype == 2)
 			then
 				--[[
 					Eighth scrap auxilliries
 				--]]
 				AudioMessage("misn1604.wav");
-				BuildObject("svscav",1,"startb");
-				BuildObject("svscav",1,"startb2");
-				BuildObject("svfigh",1,"startb3");
+				exu.BuildAsyncObject("svscav",1,"startb");
+				exu.BuildAsyncObject("svscav",1,"startb2");
+				exu.BuildAsyncObject("svfigh",1,"startb3");
 			elseif (M.rtype == 3)
 			then
 				--[[
 					Remenants of various units
 				--]]
 				AudioMessage("misn1605.wav");
-				BuildObject("svscav",1,"starta");
-				BuildObject("svturr",1,"starta2");
-				BuildObject("svfigh",1,"starta3");
+				exu.BuildAsyncObject("svscav",1,"starta");
+				exu.BuildAsyncObject("svturr",1,"starta2");
+				exu.BuildAsyncObject("svfigh",1,"starta3");
 			elseif (M.rtype == 4)
 			then
 				--[[
 					A scout unit
 				--]]
 				AudioMessage("misn1606.wav");
-				BuildObject("svfigh",1,"startb");
-				BuildObject("svfigh",1,"startb2");
+				exu.BuildAsyncObject("svfigh",1,"startb");
+				exu.BuildAsyncObject("svfigh",1,"startb2");
 			elseif (M.rtype == 5)
 			then
 				--[[
 					A light armor unit
 				--]]
 				AudioMessage("misn1607.wav");
-				BuildObject("svfigh",1,"starta");
-				BuildObject("svfigh",1,"starta2");
-				BuildObject("svtank",1,"starta3");
+				exu.BuildAsyncObject("svfigh",1,"starta");
+				exu.BuildAsyncObject("svfigh",1,"starta2");
+				exu.BuildAsyncObject("svtank",1,"starta3");
 			elseif (M.rtype == 6)
 			then
 				--[[ 
 					A strike wing
 				--]]
 				AudioMessage("misn1607.wav");
-				BuildObject("svtank",1,"startb");
-				BuildObject("svtank",1,"startb2");
-				BuildObject("svtank",1,"startb3");
+				exu.BuildAsyncObject("svtank",1,"startb");
+				exu.BuildAsyncObject("svtank",1,"startb2");
+				exu.BuildAsyncObject("svtank",1,"startb3");
 			--	BuildObject("svfigh",1,"reinforce24");
 			elseif (M.rtype == 7)
 			then
@@ -263,9 +263,9 @@ function Update()
 					Heavy armor
 				--]]
 				AudioMessage("misn1608.wav");
-				BuildObject("svwalk",1,"starta");
-				BuildObject("svwalk",1,"starta2");
-				BuildObject("svwalk",1,"starta3");
+				exu.BuildAsyncObject("svwalk",1,"starta");
+				exu.BuildAsyncObject("svwalk",1,"starta2");
+				exu.BuildAsyncObject("svwalk",1,"starta3");
 			--	BuildObject("svtank",1,"reinforce14");
 			end
 
@@ -306,7 +306,7 @@ function Update()
 
 	if (GetTime()>M.alien_wave)
 	then
-		BuildObject("hvsav",2,M.base2);
+		exu.BuildAsyncObject("hvsav",2,M.base2);
 		M.alien_wave = GetTime()+M.wave_gap;
 		if (M.wave_gap>60.0) then 
 			M.wave_gap = M.wave_gap-5.0;
@@ -314,9 +314,9 @@ function Update()
 	end
 	if (GetTime()>M.alien_wave1)
 	then
-		local sat = BuildObject("hvsat",2,"sat1");
+		local sat = exu.BuildAsyncObject("hvsat",2,"sat1");
 		Goto(sat,"strike1");
-		sat = BuildObject("hvsat",2,"sat2");
+		sat = exu.BuildAsyncObject("hvsat",2,"sat2");
 		Goto(sat,"strike2");
 		M.alien_wave1 = M.alien_wave+90.0;
 	end
@@ -341,8 +341,8 @@ function Update()
 			entrances is open.
 			Counter attack not  not 
 		--]]
-		local sav1 = BuildObject("hvsav",2,M.base2);
-		local sav2 = BuildObject("hvsav",2,M.base2);
+		local sav1 = exu.BuildAsyncObject("hvsav",2,M.base2);
+		local sav2 = exu.BuildAsyncObject("hvsav",2,M.base2);
 --		local sav3 = BuildObject("hvsav",2,M.base2);
 		Attack(sav1,M.muf,1);
 		Attack(sav2,M.muf,1);
@@ -352,8 +352,8 @@ function Update()
 	end
 	if (GetTime()>M.counter_strike2)
 	then
-		local sav1 = BuildObject("hvsav",2,M.base2);
-		local sav2 = BuildObject("hvsav",2,M.base2);
+		local sav1 = exu.BuildAsyncObject("hvsav",2,M.base2);
+		local sav2 = exu.BuildAsyncObject("hvsav",2,M.base2);
 --		local sav3 = BuildObject("hvsav",2,M.base2);
 		Attack(sav1,M.recy,1);
 		Attack(sav2,M.recy,1);

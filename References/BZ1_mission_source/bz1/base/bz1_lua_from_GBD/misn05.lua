@@ -327,8 +327,8 @@ function Update()
 			(M.randomwave < GetTime()) and (IsAlive(M.svrec))
 			)
 		then
-			M.rand1 = BuildObject("svfigh",2,M.svrec);
-			M.rand2 = BuildObject("svfigh",2,M.svrec);
+			M.rand1 = exu.BuildAsyncObject("svfigh",2,M.svrec);
+			M.rand2 = exu.BuildAsyncObject("svfigh",2,M.svrec);
 			--M.rand3 = BuildObject("svfigh",2,M.svrec);
 			Attack (M.rand1, M.avrec);
 			Attack (M.rand2, M.avrec);
@@ -369,7 +369,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_1" ,1);
 			if (GetDistance(meat, "path_1") < 400.0)
 			then
-				M.MINE1 = BuildObject ("boltM.mine", 2, "path_1");
+				M.MINE1 = exu.BuildAsyncObject ("boltM.mine", 2, "path_1");
 				M.mine1built = true;
 			end
 		end
@@ -388,7 +388,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_2" ,1);
 			if (GetDistance(meat, "path_2") < 400.0)
 			then
-				M.MINE2 = BuildObject ("boltM.mine", 2, "path_2");
+				M.MINE2 = exu.BuildAsyncObject ("boltM.mine", 2, "path_2");
 				M.mine2built = true;
 			end
 		end
@@ -407,7 +407,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_3" ,1);
 			if (GetDistance(meat, "path_3") < 400.0)
 			then
-				M.MINE3 = BuildObject ("boltM.mine", 2, "path_3");
+				M.MINE3 = exu.BuildAsyncObject ("boltM.mine", 2, "path_3");
 				M.mine3built = true;
 			end
 		end
@@ -427,7 +427,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_4" ,1);
 			if (GetDistance(meat, "path_4") < 400.0)
 			then
-				M.MINE4 = BuildObject ("boltM.mine", 2, "path_4");
+				M.MINE4 = exu.BuildAsyncObject ("boltM.mine", 2, "path_4");
 				M.mine4built = true;
 			end
 		end
@@ -446,7 +446,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_5" ,1);
 			if (GetDistance(meat, "path_5") < 400.0)
 			then
-				M.MINE5 = BuildObject ("boltM.mine", 2, "path_5");
+				M.MINE5 = exu.BuildAsyncObject ("boltM.mine", 2, "path_5");
 				M.mine5built = true;
 			end
 		end
@@ -466,7 +466,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_6" ,1);
 			if (GetDistance(meat, "path_6") < 400.0)
 			then
-				M.MINE6 = BuildObject ("boltM.mine", 2, "path_6");
+				M.MINE6 = exu.BuildAsyncObject ("boltM.mine", 2, "path_6");
 				M.mine6built = true;
 			end
 		end
@@ -486,7 +486,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_7" ,1);
 			if (GetDistance(meat, "path_7") < 400.0)
 			then
-				M.MINE7 = BuildObject ("boltM.mine", 2, "path_7");
+				M.MINE7 = exu.BuildAsyncObject ("boltM.mine", 2, "path_7");
 				M.mine7built = true;
 			end
 		end
@@ -506,7 +506,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_8" ,1);
 			if (GetDistance(meat, "path_8") < 400.0)
 			then
-				M.MINE8 = BuildObject ("boltM.mine", 2, "path_8");
+				M.MINE8 = exu.BuildAsyncObject ("boltM.mine", 2, "path_8");
 				M.mine8built = true;
 			end
 		end
@@ -526,7 +526,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_9" ,1);
 			if (GetDistance(meat, "path_9") < 400.0)
 			then
-				M.MINE9 = BuildObject ("boltM.mine", 2, "path_9");
+				M.MINE9 = exu.BuildAsyncObject ("boltM.mine", 2, "path_9");
 				M.mine9built = true;
 			end
 		end
@@ -546,7 +546,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_10" ,1);
 			if (GetDistance(meat, "path_10") < 400.0)
 			then
-				M.MINE10 = BuildObject ("boltM.mine", 2, "path_10");
+				M.MINE10 = exu.BuildAsyncObject ("boltM.mine", 2, "path_10");
 				M.mine10built = true;
 			end
 		end
@@ -566,7 +566,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_11" ,1);
 			if (GetDistance(meat, "path_11") < 400.0)
 			then
-				M.MINE11 = BuildObject ("boltM.mine", 2, "path_11");
+				M.MINE11 = exu.BuildAsyncObject ("boltM.mine", 2, "path_11");
 				M.mine11built = true;
 			end
 		end
@@ -586,7 +586,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_12" ,1);
 			if (GetDistance(meat, "path_12") < 400.0)
 			then
-				M.MINE12 = BuildObject ("boltM.mine", 2, "path_12");
+				M.MINE12 = exu.BuildAsyncObject ("boltM.mine", 2, "path_12");
 				M.mine12built = true;
 			end
 		end
@@ -606,7 +606,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_13" ,1);
 			if (GetDistance(meat, "path_13") < 400.0)
 			then
-				M.MINE13 = BuildObject ("boltM.mine", 2, "path_13");
+				M.MINE13 = exu.BuildAsyncObject ("boltM.mine", 2, "path_13");
 				M.mine13built = true;
 			end
 		end
@@ -626,7 +626,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_14" ,1);
 			if (GetDistance(meat, "path_14") < 400.0)
 			then
-				M.MINE14 = BuildObject ("boltM.mine", 2, "path_14");
+				M.MINE14 = exu.BuildAsyncObject ("boltM.mine", 2, "path_14");
 				M.mine14built = true;
 			end
 		end
@@ -646,7 +646,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_15" ,1);
 			if (GetDistance(meat, "path_15") < 400.0)
 			then
-				M.MINE15 = BuildObject ("boltM.mine", 2, "path_15");
+				M.MINE15 = exu.BuildAsyncObject ("boltM.mine", 2, "path_15");
 				M.mine15built = true;
 			end
 		end
@@ -666,7 +666,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_16" ,1);
 			if (GetDistance(meat, "path_16") < 400.0)
 			then
-				M.MINE16 = BuildObject ("boltM.mine", 2, "path_16");
+				M.MINE16 = exu.BuildAsyncObject ("boltM.mine", 2, "path_16");
 				M.mine16built = true;
 			end
 		end
@@ -686,7 +686,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_17" ,1);
 			if (GetDistance(meat, "path_17") < 400.0)
 			then
-				M.MINE17 = BuildObject ("boltM.mine", 2, "path_17");
+				M.MINE17 = exu.BuildAsyncObject ("boltM.mine", 2, "path_17");
 				M.mine17built = true;
 			end
 		end
@@ -706,7 +706,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_18" ,1);
 			if (GetDistance(meat, "path_18") < 400.0)
 			then
-				M.MINE18 = BuildObject ("boltM.mine", 2, "path_18");
+				M.MINE18 = exu.BuildAsyncObject ("boltM.mine", 2, "path_18");
 				M.mine18built = true;
 			end
 		end
@@ -726,7 +726,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_19" ,1);
 			if (GetDistance(meat, "path_19") < 400.0)
 			then
-				M.MINE19 = BuildObject ("boltM.mine", 2, "path_19");
+				M.MINE19 = exu.BuildAsyncObject ("boltM.mine", 2, "path_19");
 				M.mine19built = true;
 			end
 		end
@@ -746,7 +746,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_20" ,1);
 			if (GetDistance(meat, "path_20") < 400.0)
 			then
-				M.MINE20 = BuildObject ("boltM.mine", 2, "path_20");
+				M.MINE20 = exu.BuildAsyncObject ("boltM.mine", 2, "path_20");
 				M.mine20built = true;
 			end
 		end
@@ -766,7 +766,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_21" ,1);
 			if (GetDistance(meat, "path_21") < 400.0)
 			then
-				M.MINE21 = BuildObject ("boltM.mine", 2, "path_21");
+				M.MINE21 = exu.BuildAsyncObject ("boltM.mine", 2, "path_21");
 				M.mine21built = true;
 			end
 		end
@@ -786,7 +786,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_22" ,1);
 			if (GetDistance(meat, "path_22") < 400.0)
 			then
-				M.MINE22 = BuildObject ("boltM.mine", 2, "path_22");
+				M.MINE22 = exu.BuildAsyncObject ("boltM.mine", 2, "path_22");
 				M.mine22built = true;
 			end
 		end
@@ -806,7 +806,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_23" ,1);
 			if (GetDistance(meat, "path_23") < 400.0)
 			then
-				M.MINE23 = BuildObject ("boltM.mine", 2, "path_23");
+				M.MINE23 = exu.BuildAsyncObject ("boltM.mine", 2, "path_23");
 				M.mine23built = true;
 			end
 		end
@@ -826,7 +826,7 @@ function Update()
 			local meat = GetNearestVehicle ("path_24" ,1);
 			if (GetDistance(meat, "path_24") < 400.0)
 			then
-				M.MINE24 = BuildObject ("boltM.mine", 2, "path_24");
+				M.MINE24 = exu.BuildAsyncObject ("boltM.mine", 2, "path_24");
 				M.mine24built = true;
 			end
 		end
@@ -861,10 +861,10 @@ function Update()
 		(M.sendTime[0] < GetTime()) and (M.sent1Done == false)
 		)
 	then
-		M.w1u1 = BuildObject ("svfigh",2,M.svrec);
-		M.w1u2 = BuildObject ("svfigh",2,M.svrec);
-		M.w1u3 = BuildObject ("svturr",2,M.svrec);
-		M.w1u4 = BuildObject ("svturr",2,M.svrec);
+		M.w1u1 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w1u2 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w1u3 = exu.BuildAsyncObject ("svturr",2,M.svrec);
+		M.w1u4 = exu.BuildAsyncObject ("svturr",2,M.svrec);
 		M.sent1Done = true;
 		Follow (M.w1u1, M.w1u3);
 		Follow (M.w1u2, M.w1u4);
@@ -979,10 +979,10 @@ function Update()
 		(M.sendTime[1] < GetTime()) and (M.sent2Done == false)
 		)
 	then
-		M.w2u1 = BuildObject ("svtank",2,M.svrec);
-		M.w2u2 = BuildObject ("svtank",2,M.svrec);
-		M.w2u3 = BuildObject ("svturr",2,M.svrec);
-		M.w2u4 = BuildObject ("svturr",2,M.svrec);
+		M.w2u1 = exu.BuildAsyncObject ("svtank",2,M.svrec);
+		M.w2u2 = exu.BuildAsyncObject ("svtank",2,M.svrec);
+		M.w2u3 = exu.BuildAsyncObject ("svturr",2,M.svrec);
+		M.w2u4 = exu.BuildAsyncObject ("svturr",2,M.svrec);
 		M.sent2Done = true;
 		Follow (M.w2u1, M.w2u3);
 		Follow (M.w2u2, M.w2u4);
@@ -998,8 +998,8 @@ function Update()
 	then
 		--M.w3u1 = BuildObject ("svfigh",2,M.svrec);
 		--M.w3u2 = BuildObject ("svfigh",2,M.svrec);
-		M.w3u3 = BuildObject ("svfigh",2,M.svrec);
-		M.w3u4 = BuildObject ("svfigh",2,M.svrec);
+		M.w3u3 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w3u4 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
 		M.sent3Done = true;
 		--Patrol (M.w3u1, "attackpatrol1",1);
 		--Patrol (M.w3u2, "attackpatrol1",1);
@@ -1014,8 +1014,8 @@ function Update()
 	then
 		--M.w4u1 = BuildObject ("svfigh",2,M.svrec);
 		--M.w4u2 = BuildObject ("svfigh",2,M.svrec);
-		M.w4u3 = BuildObject ("svfigh",2,M.svrec);
-		M.w4u4 = BuildObject ("svfigh",2,M.svrec);
+		M.w4u3 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.w4u4 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
 		M.sent4Done = true;
 		--Patrol (M.w4u1, "attackpatrol1",1);
 		--Patrol (M.w4u2, "attackpatrol1",1);
@@ -1108,9 +1108,9 @@ function Update()
 		(M.reconfactory == true)
 		)
 	then
-		M.wBu1 = BuildObject ("svtank",2,M.svrec);
-		M.wBu2 = BuildObject ("svfigh",2,M.svrec);
-		M.wBu3 = BuildObject ("svfigh",2,M.svrec);
+		M.wBu1 = exu.BuildAsyncObject ("svtank",2,M.svrec);
+		M.wBu2 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
+		M.wBu3 = exu.BuildAsyncObject ("svfigh",2,M.svrec);
 		Attack (M.wBu1, M.avrec);
 		Attack (M.wBu2, M.avrec);
 		Attack (M.wBu3, M.avrec);
@@ -1200,9 +1200,9 @@ function Update()
 	--	switch (M.attacksent)
 		if M.attacksent == 0 then
 		--	case 0:
-			M.aw1 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw2 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw3 = BuildObject ("svhraz", 2, M.svrec);
+			M.aw1 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw2 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw3 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
 			--M.aw4 = BuildObject ("svhraz", 2, M.svrec);
 			--M.aw5 = BuildObject ("svhraz", 2, M.svrec);
 			Goto (M.aw1, "destroy1");
@@ -1213,9 +1213,9 @@ function Update()
 		elseif M.attacksent == 1 then
 		--	break;
 		--	case 1:
-			M.aw1 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw2 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw3 = BuildObject ("svhraz", 2, M.svrec);
+			M.aw1 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw2 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw3 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
 			--M.aw4 = BuildObject ("svhraz", 2, M.svrec);
 			--M.aw5 = BuildObject ("svhraz", 2, M.svrec);
 			Goto (M.aw1, "destroy2");
@@ -1226,9 +1226,9 @@ function Update()
 		elseif M.attacksent == 2 then
 		--	break;
 		--	case 2:
-			M.aw1 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw2 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw3 = BuildObject ("svhraz", 2, M.svrec);
+			M.aw1 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw2 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw3 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
 			--M.aw4 = BuildObject ("svhraz", 2, M.svrec);
 			--M.aw5 = BuildObject ("svhraz", 2, M.svrec);
 			Goto (M.aw1, "destroy3");
@@ -1239,9 +1239,9 @@ function Update()
 		elseif M.attacksent == 3 then
 		--	break;
 		--	case 3:
-			M.aw1 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw2 = BuildObject ("svhraz", 2, M.svrec);
-			M.aw3 = BuildObject ("svhraz", 2, M.svrec);
+			M.aw1 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw2 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
+			M.aw3 = exu.BuildAsyncObject ("svhraz", 2, M.svrec);
 			--M.aw4 = BuildObject ("svhraz", 2, M.svrec);
 			--M.aw5 = BuildObject ("svhraz", 2, M.svrec);
 			Goto (M.aw1, "destroy4");
@@ -1381,7 +1381,7 @@ function Update()
 		)
 	then
 		--M.aw1a = BuildObject ("svfigh", 2, M.svrec);
-		M.aw2a = BuildObject ("svfigh", 2, M.svrec);
+		M.aw2a = exu.BuildAsyncObject ("svfigh", 2, M.svrec);
 		--Goto (M.aw1a, M.lemnos);
 		Attack (M.aw2a, M.lemnos);
 		SetIndependence(M.aw2a, 1);
@@ -1396,7 +1396,7 @@ function Update()
 		)
 	then
 		--M.aw3a = BuildObject ("svtank", 2, M.svrec);
-		M.aw4a = BuildObject ("svtank", 2, M.svrec);
+		M.aw4a = exu.BuildAsyncObject ("svtank", 2, M.svrec);
 		--Goto (M.aw3a, M.lemnos);
 		Attack (M.aw4a, M.lemnos);
 		SetIndependence(M.aw4a, 1);
@@ -1410,8 +1410,8 @@ function Update()
 		(IsAlive(M.svrec))
 		)
 	then
-		M.aw5a = BuildObject ("svfigh", 2, M.svrec);
-		M.aw6a = BuildObject ("svfigh", 2, M.svrec);
+		M.aw5a = exu.BuildAsyncObject ("svfigh", 2, M.svrec);
+		M.aw6a = exu.BuildAsyncObject ("svfigh", 2, M.svrec);
 		--M.aw7a = BuildObject ("svfigh", 2, M.svrec);
 		Attack (M.aw5a, M.lemnos);
 		Attack (M.aw6a, M.lemnos);
@@ -1428,8 +1428,8 @@ function Update()
 		(IsAlive(M.svrec))
 		)
 	then
-		M.aw8a = BuildObject ("svfigh", 2, M.svrec);
-		M.aw9a = BuildObject ("svtank", 2, M.svrec);
+		M.aw8a = exu.BuildAsyncObject ("svfigh", 2, M.svrec);
+		M.aw9a = exu.BuildAsyncObject ("svtank", 2, M.svrec);
 		Attack (M.aw8a, M.lemnos);
 		Attack (M.aw9a, M.lemnos);
 		SetIndependence(M.aw8a, 1);

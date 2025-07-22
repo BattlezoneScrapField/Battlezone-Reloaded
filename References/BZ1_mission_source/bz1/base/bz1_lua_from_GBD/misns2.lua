@@ -359,8 +359,8 @@ function Update()
 		(M.wave1start < GetTime()) and (M.wave1gone == false)
 		)
 	then
-		M.bd1 = BuildObject ("bvtank", 2, "bdsp1");
-		M.bd2 = BuildObject ("bvraz", 2, "bdsp1");
+		M.bd1 = exu.BuildAsyncObject ("bvtank", 2, "bdsp1");
+		M.bd2 = exu.BuildAsyncObject ("bvraz", 2, "bdsp1");
 		--M.bd3 = BuildObject ("bvraz", 2, "bdsp1");
 		--M.bd4 = BuildObject ("bvraz", 2, "bdsp1");
 		Attack (M.bd1, M.t1, 1);
@@ -401,17 +401,17 @@ function Update()
 		M.surrender = true;
 		CameraReady();
 		M.platooncam = GetTime () + 20.0;
-		M.bd100 = BuildObject("bvtank", 2, "100");
-		M.bd101 = BuildObject("bvtank", 2, "101");
-		M.bd102 = BuildObject("bvtank", 2, "102");
-		M.bd103 = BuildObject("bvtank", 2, "103");
-		M.bd104 = BuildObject("bvtank", 2, "104");
-		M.bd105 = BuildObject("bvtank", 2, "105");
-		M.bd106 = BuildObject("bvtank", 2, "106");
-		M.bd107 = BuildObject("bvtank", 2, "107");
-		M.bd108 = BuildObject("bvtank", 2, "108");
-		M.bd109 = BuildObject("bvtank", 2, "109");
-		M.bd110 = BuildObject("bvtank", 2, "110");
+		M.bd100 = exu.BuildAsyncObject("bvtank", 2, "100");
+		M.bd101 = exu.BuildAsyncObject("bvtank", 2, "101");
+		M.bd102 = exu.BuildAsyncObject("bvtank", 2, "102");
+		M.bd103 = exu.BuildAsyncObject("bvtank", 2, "103");
+		M.bd104 = exu.BuildAsyncObject("bvtank", 2, "104");
+		M.bd105 = exu.BuildAsyncObject("bvtank", 2, "105");
+		M.bd106 = exu.BuildAsyncObject("bvtank", 2, "106");
+		M.bd107 = exu.BuildAsyncObject("bvtank", 2, "107");
+		M.bd108 = exu.BuildAsyncObject("bvtank", 2, "108");
+		M.bd109 = exu.BuildAsyncObject("bvtank", 2, "109");
+		M.bd110 = exu.BuildAsyncObject("bvtank", 2, "110");
 	end
 
 	if
@@ -491,10 +491,10 @@ function Update()
 		(M.wave2gone == false) and (GetDistance(M.enemy3, "bdsp2") < 420.0)
 		)
 	then
-		M.bd5 = BuildObject ("bvraz", 2, "bdsp2");
-		M.bd6 = BuildObject ("bvraz", 2, "bdsp2");
-		M.bd7 = BuildObject ("bvraz", 2, "bdsp2");
-		M.bd8 = BuildObject ("bvtank", 2, "bdsp2");
+		M.bd5 = exu.BuildAsyncObject ("bvraz", 2, "bdsp2");
+		M.bd6 = exu.BuildAsyncObject ("bvraz", 2, "bdsp2");
+		M.bd7 = exu.BuildAsyncObject ("bvraz", 2, "bdsp2");
+		M.bd8 = exu.BuildAsyncObject ("bvtank", 2, "bdsp2");
 		Attack (M.bd5, M.t3, 1);
 		Attack (M.bd6, M.t1, 1);
 		Attack (M.bd7, M.t3, 1);
@@ -516,10 +516,10 @@ function Update()
 		 and  (M.wave2gone == false)
 		)
 	then
-		M.bd5 = BuildObject ("bvraz", 2, "bdsp2");
-		M.bd6 = BuildObject ("bvraz", 2, "bdsp2");
-		M.bd7 = BuildObject ("bvraz", 2, "bdsp2");
-		M.bd8 = BuildObject ("bvtank", 2, "bdsp2");
+		M.bd5 = exu.BuildAsyncObject ("bvraz", 2, "bdsp2");
+		M.bd6 = exu.BuildAsyncObject ("bvraz", 2, "bdsp2");
+		M.bd7 = exu.BuildAsyncObject ("bvraz", 2, "bdsp2");
+		M.bd8 = exu.BuildAsyncObject ("bvtank", 2, "bdsp2");
 		Attack (M.bd5, M.t1, 1);
 		Attack (M.bd6, M.t2, 1);
 		Attack (M.bd7, M.t2, 1);
@@ -544,9 +544,9 @@ function Update()
 		 and  (GetTeamNum(M.enemy1) == 1)
 		)
 	then
-		M.bd9 = BuildObject ("bvartl", 2, "bdsp3");
-		M.bd10 = BuildObject ("bvartl", 2, "bdsp3");
-		M.bd11 = BuildObject ("bvtank", 2, "bdsp3");
+		M.bd9 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+		M.bd10 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+		M.bd11 = exu.BuildAsyncObject ("bvtank", 2, "bdsp3");
 		SetIndependence(M.bd11, 1);
 		M.wave3gone = true;
 	end
@@ -561,34 +561,34 @@ function Update()
 			)
 		)
 	then
-		M.bd9 = BuildObject ("bvartl", 2, "bdsp3");
-		M.bd10 = BuildObject ("bvartl", 2, "bdsp3");
-		M.bd11 = BuildObject ("bvtank", 2, "bdsp3");
+		M.bd9 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+		M.bd10 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+		M.bd11 = exu.BuildAsyncObject ("bvtank", 2, "bdsp3");
 		--bdcutoff1 = BuildObject("bvraz", 2, "nav5");
 		--bdcutoff2 = BuildObject("bvraz", 2, "nav5");
 		--bdcutoff3 = BuildObject("bvraz", 2, "nav5");
 		--Attack(bdcutoff1, M.t1);
 		--Attack(bdcutoff2, M.t2);
 		--Attack(bdcut0ff2, M.t3);
-		BuildObject ("proxmine", 2, "mine1");
-		BuildObject ("proxmine", 2, "mine2");
-		BuildObject ("proxmine", 2, "mine3");
-		BuildObject ("proxmine", 2, "mine4");
-		BuildObject ("proxmine", 2, "mine5");
-		BuildObject ("proxmine", 2, "mine6");
-		BuildObject ("proxmine", 2, "mine7");
-		BuildObject ("proxmine", 2, "mine8");
-		BuildObject ("proxmine", 2, "mine9");
-		BuildObject ("proxmine", 2, "mine10");
-		BuildObject ("proxmine", 2, "mine11");
-		BuildObject ("proxmine", 2, "mine12");
-		BuildObject ("proxmine", 2, "mine13");
-		BuildObject ("proxmine", 2, "mine14");
-		BuildObject ("proxmine", 2, "mine15");
-		BuildObject ("proxmine", 2, "mine16");
-		BuildObject ("proxmine", 2, "mine17");
-		BuildObject ("proxmine", 2, "mine18");
-		BuildObject ("proxmine", 2, "mine19");
+		exu.BuildAsyncObject ("proxmine", 2, "mine1");
+		exu.BuildAsyncObject ("proxmine", 2, "mine2");
+		exu.BuildAsyncObject ("proxmine", 2, "mine3");
+		exu.BuildAsyncObject ("proxmine", 2, "mine4");
+		exu.BuildAsyncObject ("proxmine", 2, "mine5");
+		exu.BuildAsyncObject ("proxmine", 2, "mine6");
+		exu.BuildAsyncObject ("proxmine", 2, "mine7");
+		exu.BuildAsyncObject ("proxmine", 2, "mine8");
+		exu.BuildAsyncObject ("proxmine", 2, "mine9");
+		exu.BuildAsyncObject ("proxmine", 2, "mine10");
+		exu.BuildAsyncObject ("proxmine", 2, "mine11");
+		exu.BuildAsyncObject ("proxmine", 2, "mine12");
+		exu.BuildAsyncObject ("proxmine", 2, "mine13");
+		exu.BuildAsyncObject ("proxmine", 2, "mine14");
+		exu.BuildAsyncObject ("proxmine", 2, "mine15");
+		exu.BuildAsyncObject ("proxmine", 2, "mine16");
+		exu.BuildAsyncObject ("proxmine", 2, "mine17");
+		exu.BuildAsyncObject ("proxmine", 2, "mine18");
+		exu.BuildAsyncObject ("proxmine", 2, "mine19");
 		Attack(M.bd9, M.t3);
 		Attack(M.bd10, M.t2);
 		Follow(M.bd11, M.bd9);
@@ -623,9 +623,9 @@ function Update()
 		 and  (GetTeamNum(M.enemy2) == 1)
 		)
 	then
-		M.bd12 = BuildObject ("bvartl", 2, "bdsp4");
-		M.bd13 = BuildObject ("bvtank", 2, "bdsp4");
-		M.bd14 = BuildObject ("bvtank", 2, "bdsp4");
+		M.bd12 = exu.BuildAsyncObject ("bvartl", 2, "bdsp4");
+		M.bd13 = exu.BuildAsyncObject ("bvtank", 2, "bdsp4");
+		M.bd14 = exu.BuildAsyncObject ("bvtank", 2, "bdsp4");
 		SetIndependence(M.bd14, 1);
 		M.wave4gone = true;
 	end
@@ -640,9 +640,9 @@ function Update()
 		)
 		)
 	then
-		M.bd12 = BuildObject ("bvartl", 2, "bdsp4");
-		M.bd13 = BuildObject ("bvartl", 2, "bdsp4");
-		M.bd14 = BuildObject ("bvtank", 2, "bdsp4");
+		M.bd12 = exu.BuildAsyncObject ("bvartl", 2, "bdsp4");
+		M.bd13 = exu.BuildAsyncObject ("bvartl", 2, "bdsp4");
+		M.bd14 = exu.BuildAsyncObject ("bvtank", 2, "bdsp4");
 		Attack(M.bd12, M.t1);
 		Attack(M.bd13, M.t2);
 		Follow(M.bd14, M.bd12);
@@ -658,10 +658,10 @@ function Update()
 		( not IsAlive(M.bd13))
 		)
 	then
-		M.bd15 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd16 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd17 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd18 = BuildObject ("bvtank", 2, "bdspmain");
+		M.bd15 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd16 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd17 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd18 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
 		M.bdplatoonspawned = true;
 		Attack (M.bd15, M.t1);
 		Attack (M.bd16, M.t1);
@@ -680,9 +680,9 @@ function Update()
 		)
 		)
 	then
-		M.bd22 = BuildObject ("bvraz", 2, "bdsp5");
-		M.bd23 = BuildObject ("bvraz", 2, "bdsp5");
-		M.bd24 = BuildObject ("bvraz", 2, "bdsp5");
+		M.bd22 = exu.BuildAsyncObject ("bvraz", 2, "bdsp5");
+		M.bd23 = exu.BuildAsyncObject ("bvraz", 2, "bdsp5");
+		M.bd24 = exu.BuildAsyncObject ("bvraz", 2, "bdsp5");
 		--M.bd25 = BuildObject ("bvtank", 2, "bdsp5");
 		--M.bd26 = BuildObject ("bvtank", 2, "bdsp5");
 		Attack (M.bd22, M.t1);
@@ -704,13 +704,13 @@ function Update()
 		(M.bdplatoonspawned == false) and (GetTeamNum (M.dummy) == 1)
 		)
 	then
-		M.bd15 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd16 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd17 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd18 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd19 = BuildObject ("bvraz", 2, "bdspmain");
-		M.bd20 = BuildObject ("bvraz", 2, "bdspmain");
-		M.bd21 = BuildObject ("bvraz", 2, "bdspmain");
+		M.bd15 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd16 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd17 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd18 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd19 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
+		M.bd20 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
+		M.bd21 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
 		M.bdplatoonspawned = true;
 	end
 
@@ -726,12 +726,12 @@ function Update()
 		M.nav5 = BuildObject ("apcamr", 2, "bdnet5");
 		M.nav6 = BuildObject ("apcamr", 2, "bdnet6");--]]
 
-		M.cutoff1 = BuildObject ("bvtank", 2, "bdnet4");
-		M.cutoff2 = BuildObject ("bvtank", 2, "bdnet4");
-		M.cutoff3 = BuildObject ("bvraz", 2, "bdnet4");
-		M.cutoff4 = BuildObject ("bvraz", 2, "bdnet4");
-		M.cutoff5 = BuildObject ("bvraz", 2, "bdnet4");
-		M.cutoff6 = BuildObject ("bvraz", 2, "bdnet4");
+		M.cutoff1 = exu.BuildAsyncObject ("bvtank", 2, "bdnet4");
+		M.cutoff2 = exu.BuildAsyncObject ("bvtank", 2, "bdnet4");
+		M.cutoff3 = exu.BuildAsyncObject ("bvraz", 2, "bdnet4");
+		M.cutoff4 = exu.BuildAsyncObject ("bvraz", 2, "bdnet4");
+		M.cutoff5 = exu.BuildAsyncObject ("bvraz", 2, "bdnet4");
+		M.cutoff6 = exu.BuildAsyncObject ("bvraz", 2, "bdnet4");
 		Attack (M.cutoff1, M.t1);
 		SetIndependence (M.cutoff1, 1);
 		Attack (M.cutoff2, M.t1);
@@ -745,9 +745,9 @@ function Update()
 		Attack (M.cutoff6, M.t3);
 		SetIndependence (M.cutoff6, 1);
 		M.camnet1found = true;
-		M.bd12 = BuildObject ("bvartl", 2, "bdsp4");
-		M.bd13 = BuildObject ("bvartl", 2, "bdsp4");
-		M.bd14 = BuildObject ("bvtank", 2, "bdsp4");
+		M.bd12 = exu.BuildAsyncObject ("bvartl", 2, "bdsp4");
+		M.bd13 = exu.BuildAsyncObject ("bvartl", 2, "bdsp4");
+		M.bd14 = exu.BuildAsyncObject ("bvtank", 2, "bdsp4");
 		M.wave3gone = true;
 		Attack(M.bd12, M.t3);
 		Follow(M.bd13, M.bd12);
@@ -780,14 +780,14 @@ function Update()
 		 and  (M.camnet2found == false)
 		)
 	then
-		M.nav7 = BuildObject ("apcamr", 2, "bdnet7");
-		M.nav8 = BuildObject ("apcamr", 2, "bdnet8");
-		M.nav9 = BuildObject ("apcamr", 2, "bdnet9");
-		M.nav10 = BuildObject ("apcamr", 2, "bdnet10");
-		M.nav11 = BuildObject ("apcamr", 2, "bdnet11");
-		M.nav12 = BuildObject ("apcamr", 2, "bdnet12");
-		M.nav13 = BuildObject ("apcamr", 2, "bdnet13");
-		M.nav14 = BuildObject ("apcamr", 2, "bdnet14");
+		M.nav7 = exu.BuildAsyncObject ("apcamr", 2, "bdnet7");
+		M.nav8 = exu.BuildAsyncObject ("apcamr", 2, "bdnet8");
+		M.nav9 = exu.BuildAsyncObject ("apcamr", 2, "bdnet9");
+		M.nav10 = exu.BuildAsyncObject ("apcamr", 2, "bdnet10");
+		M.nav11 = exu.BuildAsyncObject ("apcamr", 2, "bdnet11");
+		M.nav12 = exu.BuildAsyncObject ("apcamr", 2, "bdnet12");
+		M.nav13 = exu.BuildAsyncObject ("apcamr", 2, "bdnet13");
+		M.nav14 = exu.BuildAsyncObject ("apcamr", 2, "bdnet14");
 		M.camnet2found = true;
 		AudioMessage ("misns207.wav");
 	end
@@ -816,9 +816,9 @@ function Update()
 				 and  (M.wave3gone == false)
 			)
 		then
-			M.bd9 = BuildObject ("bvartl", 2, "bdsp3");
-			M.bd10 = BuildObject ("bvartl", 2, "bdsp3");
-			M.bd11 = BuildObject ("bvtank", 2, "bdsp3");
+			M.bd9 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+			M.bd10 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+			M.bd11 = exu.BuildAsyncObject ("bvtank", 2, "bdsp3");
 			Attack(M.bd9, M.t3);
 			Attack(M.bd10, M.t2);
 			Follow(M.bd11, M.bd9);
@@ -851,8 +851,8 @@ function Update()
 		(M.sneaktime < GetTime()) and (M.patrolsent == false)
 		)
 	then
-		M.pat1 = BuildObject ("bvraz", 2, "bdspmain");
-		M.pat2 = BuildObject ("bvraz", 2, "bdspmain");
+		M.pat1 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
+		M.pat2 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
 		M.patrolsent = true;
 		Goto (M.pat1, "bdnet9");
 		Goto (M.pat2, "bdnet12");
@@ -873,9 +873,9 @@ function Update()
 		if
 			(M.wave3gone == false)
 			then
-		M.bd9 = BuildObject ("bvartl", 2, "bdsp3");
-			M.bd10 = BuildObject ("bvartl", 2, "bdsp3");
-			M.bd11 = BuildObject ("bvtank", 2, "bdsp3");
+		M.bd9 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+			M.bd10 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+			M.bd11 = exu.BuildAsyncObject ("bvtank", 2, "bdsp3");
 			Attack(M.bd9, M.t3);
 			Attack(M.bd10, M.t2);
 			Follow(M.bd11, M.bd9);
@@ -911,9 +911,9 @@ function Update()
 		if
 			(M.wave3gone == false)
 		then
-		M.bd9 = BuildObject ("bvartl", 2, "bdsp3");
-			M.bd10 = BuildObject ("bvartl", 2, "bdsp3");
-			M.bd11 = BuildObject ("bvtank", 2, "bdsp3");
+		M.bd9 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+			M.bd10 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+			M.bd11 = exu.BuildAsyncObject ("bvtank", 2, "bdsp3");
 			Attack(M.bd9, M.ten);
 			Attack(M.bd10, M.ten);
 			Follow(M.bd11, M.bd9);
@@ -953,13 +953,13 @@ function Update()
 		) and (M.bdplatoonspawned == false)
 		)
 	then
-		M.bd15 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd16 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd17 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd18 = BuildObject ("bvtank", 2, "bdspmain");
-		M.bd19 = BuildObject ("bvraz", 2, "bdspmain");
-		M.bd20 = BuildObject ("bvraz", 2, "bdspmain");
-		M.bd21 = BuildObject ("bvraz", 2, "bdspmain");
+		M.bd15 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd16 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd17 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd18 = exu.BuildAsyncObject ("bvtank", 2, "bdspmain");
+		M.bd19 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
+		M.bd20 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
+		M.bd21 = exu.BuildAsyncObject ("bvraz", 2, "bdspmain");
 		M.bdplatoonspawned = true;
 		Attack (M.bd15, M.t1);
 		SetIndependence (M.bd15, 1);
@@ -989,9 +989,9 @@ function Update()
 		if
 			(M.wave3gone == false)
 				then
-				M.bd9 = BuildObject ("bvartl", 2, "bdsp3");
-				M.bd10 = BuildObject ("bvartl", 2, "bdsp3");
-				M.bd11 = BuildObject ("bvtank", 2, "bdsp3");
+				M.bd9 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+				M.bd10 = exu.BuildAsyncObject ("bvartl", 2, "bdsp3");
+				M.bd11 = exu.BuildAsyncObject ("bvtank", 2, "bdsp3");
 				Attack(M.bd9, M.t3);
 				Attack(M.bd10, M.t2);
 				Follow(M.bd11, M.bd9);

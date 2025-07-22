@@ -30,7 +30,8 @@ do
         return current_mission
     end
 
-    function mission:mission()
+    function mission:mission(config)
+        self.cfg = config
         self.states = {}
         self.states.null_state = {
             update = function (state, dt) end,
@@ -48,10 +49,11 @@ do
     end
 
     --- Creates or gets the mission instance
+    --- @param config? table mission configuration file
     --- @return mission
-    function rl_mission.make_mission()
+    function rl_mission.make_mission(config)
         if current_mission then return current_mission end
-        return mission:new()
+        return mission:new(config)
     end
 
     --- Initializes a new mission state, does not change the current state
@@ -162,7 +164,7 @@ do
     --- Builds a single object (this is just here so that it works in both SP and MP)
     --- @param ... any build object params
     function mission:build_single_object(...)
-        return BuildObject(...)
+        return exu.BuildAsyncObject(...)
     end
 
     --- Build multiple objects around the given area

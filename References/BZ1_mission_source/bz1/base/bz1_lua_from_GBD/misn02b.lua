@@ -197,7 +197,7 @@ function Update()
 	then
 		--VECTOR_3D ted;	
 		--ted = GameObjectHandle::GetObj(M.bhandle)->GetPosition();
-		BuildObject("svfigh", 2, "spawn1");
+		exu.BuildAsyncObject("svfigh", 2, "spawn1");
 		AudioMessage("misn0233.wav");
 		M.message1 = true;
 		M.patrol1 = true;
@@ -216,14 +216,14 @@ function Update()
 	end
 	if ((M.message4) and ( not M.message5) and (GetDistance(M.bscav,M.bhandle2)<200.0))  -- was M.bgoal
 	then
-		BuildObject("svfigh",2,"spawn2");
+		exu.BuildAsyncObject("svfigh",2,"spawn2");
 --		if (M.bscout ~= nil) Attack(M.bscout,M.bscav,1);
 		M.message5 = true;
 		M.wave_timer = GetTime()+30.0;
 	end
 	if ((M.message5) and (GetTime()>M.wave_timer))
 	then
-		BuildObject("svfigh",2,"spawn2");
+		exu.BuildAsyncObject("svfigh",2,"spawn2");
 		M.wave_timer = GetTime()+45.0;
 	end
 	if ((M.message1) and (M.message5) and ( not M.message2)  and 
@@ -289,7 +289,7 @@ function Update()
 		--]]
 		Follow(M.bscav,M.bhome);
 		M.wave_timer = GetTime()+45.0;
-		M.scav2 = BuildObject("avscav",1,"spawn3");
+		M.scav2 = exu.BuildAsyncObject("avscav",1,"spawn3");
 		SetCritical(M.scav2, true);
 		Retreat(M.scav2,"retreat");
 		SetObjectiveOn(M.scav2);
@@ -305,7 +305,7 @@ function Update()
 	end
 	if (M.last_wave_time<GetTime())
 	then
-		local sid = BuildObject("svfigh",2,"spawn4");
+		local sid = exu.BuildAsyncObject("svfigh",2,"spawn4");
 		Attack(sid,M.scav2);
 		M.last_wave_time = 99999.0;
 	end

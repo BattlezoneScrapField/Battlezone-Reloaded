@@ -263,9 +263,9 @@ function Update()
 		--]]
 	
 		AudioMessage("misn1518.wav");
-		M.scavcam = BuildObject("avscav",1,"scav3here");
-		BuildObject("avapc",1,"mufhere");
-		BuildObject("avturr",1,"turhere");
+		M.scavcam = exu.BuildAsyncObject("avscav",1,"scav3here");
+		exu.BuildAsyncObject("avapc",1,"mufhere");
+		exu.BuildAsyncObject("avturr",1,"turhere");
 		M.found_group1 = true;
 		showStuff();
 		M.camera2 = true;
@@ -334,10 +334,10 @@ function Update()
 		local sav = nil;
 		if ((math.random(0 1)) == 1)
 		then
-			sav = BuildObject("hvsav",2,"alien1");
+			sav = exu.BuildAsyncObject("hvsav",2,"alien1");
 			Attack(sav,M.scav_du_jour);
 		else
-			sav = BuildObject("hvsav",2,"alien2");
+			sav = exu.BuildAsyncObject("hvsav",2,"alien2");
 			Attack(sav,M.scav_du_jour);
 		end
 		M.sav_timer = GetTime()+240.0;  -- was (rand()%5+9)*10.0;
@@ -370,8 +370,8 @@ function Update()
 	--]]
 	if ((M.misn15b) and (GetTime()>M.deny_time1))
 	then
-		M.sat1 = BuildObject("hvsat",2,"alien1");
-		M.sat2 = BuildObject("hvsat",2,"alien1");
+		M.sat1 = exu.BuildAsyncObject("hvsat",2,"alien1");
+		M.sat2 = exu.BuildAsyncObject("hvsat",2,"alien1");
 		Goto(M.sat1,"deny1");
 		Goto(M.sat2,"deny1");
 		M.deny_time1 = 99999.0;
@@ -383,8 +383,8 @@ function Update()
 	--]]
 	if ((M.misn15b) and (GetTime()>M.deny_time2))
 	then
-		M.sat1 = BuildObject("hvsat",2,"alien2");
-		M.sat2 = BuildObject("hvsat",2,"alien2");
+		M.sat1 = exu.BuildAsyncObject("hvsat",2,"alien2");
+		M.sat2 = exu.BuildAsyncObject("hvsat",2,"alien2");
 		Goto(M.sat1,"deny2");
 		Goto(M.sat2,"deny2");
 		M.deny_time2 = 99999.0;

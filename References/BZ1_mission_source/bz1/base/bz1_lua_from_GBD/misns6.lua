@@ -112,9 +112,9 @@ function Update()
 		local cam1 = GetHandle("spcamr0_camerapod");
 		SetObjectiveName(cam1, "Black Dog Base");
 		M.aip_time = GetTime()+120.0;
-		BuildObject("avmine",2,"m1");
-		BuildObject("avmine",2,"m2");
-		BuildObject("avmine",2,"m3");
+		exu.BuildAsyncObject("avmine",2,"m1");
+		exu.BuildAsyncObject("avmine",2,"m2");
+		exu.BuildAsyncObject("avmine",2,"m3");
 		M.goal = GetHandle("abcafe8_i76building");
 		M.art1 = GetHandle("avartl3_howitzer");
 		M.art2 = GetHandle("avartl4_howitzer");
@@ -162,8 +162,8 @@ function Update()
 				if ((GetLastEnemyShot(M.miners[count])>0) and ( not M.counter1))
 				then
 					M.counter1 = true;
-					local a1 = BuildObject("bvraz",2,"counter1");
-					local a2 = BuildObject("bvraz",2,"counter2");
+					local a1 = exu.BuildAsyncObject("bvraz",2,"counter1");
+					local a2 = exu.BuildAsyncObject("bvraz",2,"counter2");
 					Attack(a1,player);
 					Attack(a2,player);
 				end
@@ -199,9 +199,9 @@ function Update()
 	then
 		if (GetDistance(player,"counter2")<400.0)
 		then
-			BuildObject("bvtank",2,"counter2");
-			BuildObject("bvtank",2,"counter2");
-			BuildObject("bvturr",2,"counter2");
+			exu.BuildAsyncObject("bvtank",2,"counter2");
+			exu.BuildAsyncObject("bvtank",2,"counter2");
+			exu.BuildAsyncObject("bvturr",2,"counter2");
 			M.check1 = M.check1+300.0;
 		else 
 			M.check1 = GetTime()+3.0;
@@ -211,9 +211,9 @@ function Update()
 	then
 		if (GetDistance(player,"counter3")<400.0)
 		then
-			BuildObject("bvtank",2,"counter3");
-			BuildObject("bvtank",2,"counter3");
-			BuildObject("bvturr",2,"counter3");
+			exu.BuildAsyncObject("bvtank",2,"counter3");
+			exu.BuildAsyncObject("bvtank",2,"counter3");
+			exu.BuildAsyncObject("bvturr",2,"counter3");
 			M.check2 = M.check2+300.0;
 		else 
 			M.check2 = GetTime()+3.0;
@@ -223,9 +223,9 @@ function Update()
 	then
 		if (GetDistance(player,"counter4")<200.0)
 		then
-			BuildObject("bvtank",2,"counter4");
-			BuildObject("bvtank",2,"counter4");
-			BuildObject("bvturr",2,"counter4");
+			exu.BuildAsyncObject("bvtank",2,"counter4");
+			exu.BuildAsyncObject("bvtank",2,"counter4");
+			exu.BuildAsyncObject("bvturr",2,"counter4");
 			M.check3 = GetTime()+300.0;
 		else 
 			M.check3 = GetTime()+3.0;
@@ -235,9 +235,9 @@ function Update()
 	then
 		if (GetDistance(player,"counter5")<200.0)
 		then
-			BuildObject("bvtank",2,"counter5");
-			BuildObject("bvtank",2,"counter5");
-			BuildObject("bvturr",2,"counter5");
+			exu.BuildAsyncObject("bvtank",2,"counter5");
+			exu.BuildAsyncObject("bvtank",2,"counter5");
+			exu.BuildAsyncObject("bvturr",2,"counter5");
 			M.check4 = GetTime()+300.0;
 		else 
 			M.check4 = GetTime()+3.0;
@@ -252,15 +252,15 @@ function Update()
 	end
 	if (( not M.counter_attack) and (GetDistance(M.far_silo,player)<400.0))
 	then
-		local temp = BuildObject("bvltnk",2,"counter_attack");
+		local temp = exu.BuildAsyncObject("bvltnk",2,"counter_attack");
 		Goto(temp,"counter_attack_path",1);
-		temp = BuildObject("bvltnk",2,"counter_attack");
+		temp = exu.BuildAsyncObject("bvltnk",2,"counter_attack");
 		Goto(temp,"counter_attack_path",1);
-		temp = BuildObject("bvtank",2,"counter_attack");
+		temp = exu.BuildAsyncObject("bvtank",2,"counter_attack");
 		Goto(temp,"counter_attack_path",1);
-		temp = BuildObject("bvtank",2,"counter_attack");
+		temp = exu.BuildAsyncObject("bvtank",2,"counter_attack");
 		Goto(temp,"counter_attack_path",1);
-		temp = BuildObject("bvrckt",2,"counter_attack");
+		temp = exu.BuildAsyncObject("bvrckt",2,"counter_attack");
 		Goto(temp,"counter_attack_path",1);
 		AudioMessage("misns603.wav");
 		M.counter_attack = true;

@@ -39,7 +39,7 @@ local enemy_team = reloaded.team.make_team("Bogeys", coop_config.enemy_team_num)
 -- this initializes the coop mission wrappuh, this object inherits all methods
 -- from the regular mission class, and also contains special methods that we'll
 -- use for coop synchronization
-local mission = reloaded.coop_mission.make_coop(my_team)
+local mission = reloaded.coop_mission.make_coop(my_team, coop_config)
 
 -- This will be the state that the mission starts in when it's
 -- initialized in Start(), most things are initialized in Start()
@@ -77,7 +77,7 @@ function (state, dt) -- update function
 	-- the update function of the state should only be listening for conditions,
 	-- the AFFECTS of the conditions should be in the on_enter or on_exit functions,
 	-- that way the mission state is correctly propagated to remote players
-	if CameraPath("fixcam", 1200, 250, state.var.lander) or CameraCancelled() then
+	if CameraPath("fixcam", 1200, 250, state.var.lander) or vsp.cinematic.skipped() then
 		mission:change_state(mission_phase.intro_cinematic_2)
 	end
 end,
@@ -123,7 +123,7 @@ function (state) end
 
 mission:define_state(mission_phase.intro_cinematic_2,
 function (state, dt) -- update
-	if CameraPath("zoomcam", 1200, 800, mission.var.dummy_player) or CameraCancelled() then
+	if CameraPath("zoomcam", 1200, 800, mission.var.dummy_player) or vsp.cinematic.skipped() then
 		mission:change_state(mission_phase.wait_for_first_scavenger)
 	end
 end,
@@ -209,8 +209,7 @@ function (state, dt)
 	end
 end,
 function (state)
-	local scaled_fighter_count = reloaded.ai.scaling.get_scaled(reloaded.ai.scaling.count, 1)
-	mission:build_multiple_objects("svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn1"))
+	mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn1"))
 
 	AudioMessage("misn0233.wav")
 end,
@@ -243,8 +242,7 @@ function (state, dt)
 	end
 end,
 function (state)
-	local scaled_fighter_count = reloaded.ai.scaling.get_scaled(reloaded.ai.scaling.count, 1)
-	mission:build_multiple_objects("svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn2"))
+	mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn2"))
 end,
 function (state) end
 )
@@ -303,8 +301,7 @@ function (state)
 		-- an event listener for CreateObject (defined below)
 		mission:build_single_object("avscav", 1, GetPosition("spawn3"))
 
-		local scaled_fighter_count = reloaded.ai.scaling.get_scaled(reloaded.ai.scaling.count, 1)
-		vsp.utility.defer_for(10, mission.build_multiple_objects, mission, "svfigh", mission.enemy_team, scaled_fighter_count, GetPosition("spawn4"))
+		vsp.utility.defer_for(10, mission.build_scaled, mission, "svfigh", mission.enemy_team, 1, GetPosition("spawn4"))
 end,
 function (state) end
 )

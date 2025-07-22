@@ -279,13 +279,13 @@ function Update()
 		M.factorypart3 = GetHandle("factorypart3");
 		M.factorynav = GetHandle("factorynav");
 		M.basenav = GetHandle("basenav");
-		M.tower1 = BuildObject("hbptow", 2, "geizer1");
-		M.tower2 = BuildObject("hbptow", 2, "geizer2");
-		M.tower3 = BuildObject("hbptow", 2, "geizer3");
-		M.tower4 = BuildObject("hbptow", 2, "geizer4");
-		M.tower5 = BuildObject("hbptow", 2, "geizer5");
-		M.tower6 = BuildObject("hbptow", 2, "geizer6");
-		M.tower7 = BuildObject("hbptow", 2, "geizer7");
+		M.tower1 = exu.BuildAsyncObject("hbptow", 2, "geizer1");
+		M.tower2 = exu.BuildAsyncObject("hbptow", 2, "geizer2");
+		M.tower3 = exu.BuildAsyncObject("hbptow", 2, "geizer3");
+		M.tower4 = exu.BuildAsyncObject("hbptow", 2, "geizer4");
+		M.tower5 = exu.BuildAsyncObject("hbptow", 2, "geizer5");
+		M.tower6 = exu.BuildAsyncObject("hbptow", 2, "geizer6");
+		M.tower7 = exu.BuildAsyncObject("hbptow", 2, "geizer7");
 		SetObjectiveOn(M.tower1);
 		SetObjectiveOn(M.tower2);
 		SetObjectiveOn(M.tower3);
@@ -327,7 +327,7 @@ function Update()
 		(IsAlive(M.art1)) and ( not IsAlive(M.desart1))
 		)
 	then
-		M.desart1 = BuildObject("hvsav", 2, "counter");
+		M.desart1 = exu.BuildAsyncObject("hvsav", 2, "counter");
 		Attack(M.desart1, M.art1);
 	end
 if
@@ -335,7 +335,7 @@ if
 		(IsAlive(M.art2)) and ( not IsAlive(M.desart2))
 		)
 	then
-		M.desart2 = BuildObject("hvsav", 2, "counter");
+		M.desart2 = exu.BuildAsyncObject("hvsav", 2, "counter");
 		Attack(M.desart2, M.art2);
 	end
 if
@@ -343,7 +343,7 @@ if
 		(IsAlive(M.art3)) and ( not IsAlive(M.desart3))
 		)
 	then
-		M.desart3 = BuildObject("hvsav", 2, "counter");
+		M.desart3 = exu.BuildAsyncObject("hvsav", 2, "counter");
 		Attack(M.desart3, M.art3);
 	end
 if
@@ -351,7 +351,7 @@ if
 		(IsAlive(M.art4)) and ( not IsAlive(M.desart4))
 		)
 	then
-		M.desart4 = BuildObject("hvsav", 2, "counter");
+		M.desart4 = exu.BuildAsyncObject("hvsav", 2, "counter");
 		Attack(M.desart4, M.art4);
 	end
 if
@@ -359,7 +359,7 @@ if
 		(IsAlive(M.art5)) and ( not IsAlive(M.desart5))
 		)
 	then
-		M.desart5 = BuildObject("hvsav", 2, "counter");
+		M.desart5 = exu.BuildAsyncObject("hvsav", 2, "counter");
 		Attack(M.desart5, M.art5);
 	end
 	if 
@@ -503,7 +503,7 @@ if
 		( not IsAlive(M.factorypart1))
 		)
 	then
-		BuildObject("eggeizr1", 0, "part1geizer");
+		exu.BuildAsyncObject("eggeizr1", 0, "part1geizer");
 		M.factorypart1dead = true;
 	end
 
@@ -513,7 +513,7 @@ if
 		( not IsAlive(M.factorypart2))
 		)
 	then
-		BuildObject("eggeizr1", 0, "part2geizer");
+		exu.BuildAsyncObject("eggeizr1", 0, "part2geizer");
 		M.factorypart2dead = true;
 	end
 
@@ -523,7 +523,7 @@ if
 		( not IsAlive(M.factorypart3))
 		)
 	then
-		BuildObject("eggeizr1", 0, "part3geizer");
+		exu.BuildAsyncObject("eggeizr1", 0, "part3geizer");
 		M.factorypart3dead = true;
 	end
 
@@ -541,60 +541,60 @@ if
 		)
 
 		then
-		M.MINE[1] = BuildObject("boltmine2", 2, "mine54"); -- needs fixed in bzn
-		M.MINE[2] = BuildObject("boltmine2", 2, "mine1");
-		M.MINE[3] = BuildObject("boltmine2", 2, "mine2");
-		M.MINE[4] = BuildObject("boltmine2", 2, "mine3");
-		M.MINE[5] = BuildObject("boltmine2", 2, "mine4");
-		M.MINE[6] = BuildObject("boltmine2", 2, "mine5");
-		M.MINE[7] = BuildObject("boltmine2", 2, "mine6");
-		M.MINE[8] = BuildObject("boltmine2", 2, "mine7");
-		M.MINE[9] = BuildObject("boltmine2", 2, "mine8");
-		M.MINE[10] = BuildObject("boltmine2", 2, "mine9");
-		M.MINE[11] = BuildObject("boltmine2", 2, "mine10");
-		M.MINE[12] = BuildObject("boltmine2", 2, "mine11");
-		M.MINE[13] = BuildObject("boltmine2", 2, "mine12");
-		M.MINE[14] = BuildObject("boltmine2", 2, "mine13");
-		M.MINE[15] = BuildObject("boltmine2", 2, "mine14");
-		M.MINE[16] = BuildObject("boltmine2", 2, "mine15");
-		M.MINE[17] = BuildObject("boltmine2", 2, "mine16");
-		M.MINE[18] = BuildObject("boltmine2", 2, "mine17");
-		M.MINE[19] = BuildObject("boltmine2", 2, "mine18");
-		M.MINE[20] = BuildObject("boltmine2", 2, "mine19");
-		M.MINE[21] = BuildObject("boltmine2", 2, "mine20");
-		M.MINE[22] = BuildObject("boltmine2", 2, "mine21");
-		M.MINE[23] = BuildObject("boltmine2", 2, "mine22");
-		M.MINE[24] = BuildObject("boltmine2", 2, "mine23");
-		M.MINE[25] = BuildObject("boltmine2", 2, "mine24");
-		M.MINE[26] = BuildObject("boltmine2", 2, "mine25");
-		M.MINE[27] = BuildObject("boltmine2", 2, "mine26");
-		M.MINE[28] = BuildObject("boltmine2", 2, "mine27");
-		M.MINE[29] = BuildObject("boltmine2", 2, "mine28");
-		M.MINE[30] = BuildObject("boltmine2", 2, "mine29");
-		M.MINE[31] = BuildObject("boltmine2", 2, "mine30");
-		M.MINE[32] = BuildObject("boltmine2", 2, "mine31");
-		M.MINE[33] = BuildObject("boltmine2", 2, "mine32");
-		M.MINE[34] = BuildObject("boltmine2", 2, "mine33");
-		M.MINE[35] = BuildObject("boltmine2", 2, "mine34");
-		M.MINE[36] = BuildObject("boltmine2", 2, "mine35");
-		M.MINE[37] = BuildObject("boltmine2", 2, "mine36");
-		M.MINE[38] = BuildObject("boltmine2", 2, "mine37");
-		M.MINE[39] = BuildObject("boltmine2", 2, "mine38");
-		M.MINE[40] = BuildObject("boltmine2", 2, "mine39");
-		M.MINE[41] = BuildObject("boltmine2", 2, "mine40");
-		M.MINE[42] = BuildObject("boltmine2", 2, "mine41");
-		M.MINE[43] = BuildObject("boltmine2", 2, "mine42");
-		M.MINE[44] = BuildObject("boltmine2", 2, "mine43");
-		M.MINE[45] = BuildObject("boltmine2", 2, "mine44");
-		M.MINE[46] = BuildObject("boltmine2", 2, "mine45");
-		M.MINE[47] = BuildObject("boltmine2", 2, "mine46");
-		M.MINE[48] = BuildObject("boltmine2", 2, "mine47");
-		M.MINE[49] = BuildObject("boltmine2", 2, "mine48");
-		M.MINE[50] = BuildObject("boltmine2", 2, "mine49");
-		M.MINE[51] = BuildObject("boltmine2", 2, "mine55"); -- needs fixed in bzn
-		M.MINE[52] = BuildObject("boltmine2", 2, "mine56"); -- needs fixed in bzn
-		M.MINE[53] = BuildObject("boltmine2", 2, "mine52");
-		M.MINE[54] = BuildObject("boltmine2", 2, "mine53");
+		M.MINE[1] = exu.BuildAsyncObject("boltmine2", 2, "mine54"); -- needs fixed in bzn
+		M.MINE[2] = exu.BuildAsyncObject("boltmine2", 2, "mine1");
+		M.MINE[3] = exu.BuildAsyncObject("boltmine2", 2, "mine2");
+		M.MINE[4] = exu.BuildAsyncObject("boltmine2", 2, "mine3");
+		M.MINE[5] = exu.BuildAsyncObject("boltmine2", 2, "mine4");
+		M.MINE[6] = exu.BuildAsyncObject("boltmine2", 2, "mine5");
+		M.MINE[7] = exu.BuildAsyncObject("boltmine2", 2, "mine6");
+		M.MINE[8] = exu.BuildAsyncObject("boltmine2", 2, "mine7");
+		M.MINE[9] = exu.BuildAsyncObject("boltmine2", 2, "mine8");
+		M.MINE[10] = exu.BuildAsyncObject("boltmine2", 2, "mine9");
+		M.MINE[11] = exu.BuildAsyncObject("boltmine2", 2, "mine10");
+		M.MINE[12] = exu.BuildAsyncObject("boltmine2", 2, "mine11");
+		M.MINE[13] = exu.BuildAsyncObject("boltmine2", 2, "mine12");
+		M.MINE[14] = exu.BuildAsyncObject("boltmine2", 2, "mine13");
+		M.MINE[15] = exu.BuildAsyncObject("boltmine2", 2, "mine14");
+		M.MINE[16] = exu.BuildAsyncObject("boltmine2", 2, "mine15");
+		M.MINE[17] = exu.BuildAsyncObject("boltmine2", 2, "mine16");
+		M.MINE[18] = exu.BuildAsyncObject("boltmine2", 2, "mine17");
+		M.MINE[19] = exu.BuildAsyncObject("boltmine2", 2, "mine18");
+		M.MINE[20] = exu.BuildAsyncObject("boltmine2", 2, "mine19");
+		M.MINE[21] = exu.BuildAsyncObject("boltmine2", 2, "mine20");
+		M.MINE[22] = exu.BuildAsyncObject("boltmine2", 2, "mine21");
+		M.MINE[23] = exu.BuildAsyncObject("boltmine2", 2, "mine22");
+		M.MINE[24] = exu.BuildAsyncObject("boltmine2", 2, "mine23");
+		M.MINE[25] = exu.BuildAsyncObject("boltmine2", 2, "mine24");
+		M.MINE[26] = exu.BuildAsyncObject("boltmine2", 2, "mine25");
+		M.MINE[27] = exu.BuildAsyncObject("boltmine2", 2, "mine26");
+		M.MINE[28] = exu.BuildAsyncObject("boltmine2", 2, "mine27");
+		M.MINE[29] = exu.BuildAsyncObject("boltmine2", 2, "mine28");
+		M.MINE[30] = exu.BuildAsyncObject("boltmine2", 2, "mine29");
+		M.MINE[31] = exu.BuildAsyncObject("boltmine2", 2, "mine30");
+		M.MINE[32] = exu.BuildAsyncObject("boltmine2", 2, "mine31");
+		M.MINE[33] = exu.BuildAsyncObject("boltmine2", 2, "mine32");
+		M.MINE[34] = exu.BuildAsyncObject("boltmine2", 2, "mine33");
+		M.MINE[35] = exu.BuildAsyncObject("boltmine2", 2, "mine34");
+		M.MINE[36] = exu.BuildAsyncObject("boltmine2", 2, "mine35");
+		M.MINE[37] = exu.BuildAsyncObject("boltmine2", 2, "mine36");
+		M.MINE[38] = exu.BuildAsyncObject("boltmine2", 2, "mine37");
+		M.MINE[39] = exu.BuildAsyncObject("boltmine2", 2, "mine38");
+		M.MINE[40] = exu.BuildAsyncObject("boltmine2", 2, "mine39");
+		M.MINE[41] = exu.BuildAsyncObject("boltmine2", 2, "mine40");
+		M.MINE[42] = exu.BuildAsyncObject("boltmine2", 2, "mine41");
+		M.MINE[43] = exu.BuildAsyncObject("boltmine2", 2, "mine42");
+		M.MINE[44] = exu.BuildAsyncObject("boltmine2", 2, "mine43");
+		M.MINE[45] = exu.BuildAsyncObject("boltmine2", 2, "mine44");
+		M.MINE[46] = exu.BuildAsyncObject("boltmine2", 2, "mine45");
+		M.MINE[47] = exu.BuildAsyncObject("boltmine2", 2, "mine46");
+		M.MINE[48] = exu.BuildAsyncObject("boltmine2", 2, "mine47");
+		M.MINE[49] = exu.BuildAsyncObject("boltmine2", 2, "mine48");
+		M.MINE[50] = exu.BuildAsyncObject("boltmine2", 2, "mine49");
+		M.MINE[51] = exu.BuildAsyncObject("boltmine2", 2, "mine55"); -- needs fixed in bzn
+		M.MINE[52] = exu.BuildAsyncObject("boltmine2", 2, "mine56"); -- needs fixed in bzn
+		M.MINE[53] = exu.BuildAsyncObject("boltmine2", 2, "mine52");
+		M.MINE[54] = exu.BuildAsyncObject("boltmine2", 2, "mine53");
 		M.minesmade = true;
 		end
 		M.minedistancecheck = GetTime() + 3.0;
@@ -609,8 +609,8 @@ if
 		if
 			(GetDistance(M.tower1, M.trig1) < 400.0)
 		then
-			M.deftow1a = BuildObject("hvsat", 2, M.tower1);
-			M.deftow1b = BuildObject("hvsat", 2, M.tower1);
+			M.deftow1a = exu.BuildAsyncObject("hvsat", 2, M.tower1);
+			M.deftow1b = exu.BuildAsyncObject("hvsat", 2, M.tower1);
 			Defend2(M.deftow1a, M.tower1, 1000);
 			Defend2(M.deftow1b, M.tower1, 1000);
 			M.tower1spawn = true;
@@ -806,8 +806,8 @@ if
 		if
 			(GetDistance(M.tower2, M.trig2) < 400.0)
 		then
-			M.deftow2a = BuildObject("hvsat", 2, M.tower2);
-			M.deftow2b = BuildObject("hvsat", 2, M.tower2);
+			M.deftow2a = exu.BuildAsyncObject("hvsat", 2, M.tower2);
+			M.deftow2b = exu.BuildAsyncObject("hvsat", 2, M.tower2);
 			Defend2(M.deftow2a, M.tower2, 1000);
 			Defend2(M.deftow2b, M.tower2, 1000);
 			M.tower2spawn = true;
@@ -826,8 +826,8 @@ if
 		if
 			(GetDistance(M.tower3, M.trig3) < 400.0)
 		then
-			M.deftow3a = BuildObject("hvsat", 2, M.tower3);
-			M.deftow3b = BuildObject("hvsat", 2, M.tower3);
+			M.deftow3a = exu.BuildAsyncObject("hvsat", 2, M.tower3);
+			M.deftow3b = exu.BuildAsyncObject("hvsat", 2, M.tower3);
 			Defend2(M.deftow3a, M.tower3, 1000);
 			Defend2(M.deftow3b, M.tower3, 1000);
 			M.tower3spawn = true;
@@ -847,8 +847,8 @@ if
 		if
 			(GetDistance(M.tower4, M.trig4) < 400.0)
 		then
-			M.deftow4a = BuildObject("hvsat", 2, M.tower4);
-			M.deftow4b = BuildObject("hvsat", 2, M.tower4);
+			M.deftow4a = exu.BuildAsyncObject("hvsat", 2, M.tower4);
+			M.deftow4b = exu.BuildAsyncObject("hvsat", 2, M.tower4);
 			Defend2(M.deftow4a, M.tower4, 1000);
 			Defend2(M.deftow4b, M.tower4, 1000);
 			M.tower4spawn = true;
@@ -867,8 +867,8 @@ if
 		if
 			(GetDistance(M.tower5, M.trig5) < 400.0)
 		then
-			M.deftow5a = BuildObject("hvsat", 2, M.tower5);
-			M.deftow5b = BuildObject("hvsat", 2, M.tower5);
+			M.deftow5a = exu.BuildAsyncObject("hvsat", 2, M.tower5);
+			M.deftow5b = exu.BuildAsyncObject("hvsat", 2, M.tower5);
 			Defend2(M.deftow5a, M.tower5, 1000);
 			Defend2(M.deftow5b, M.tower5, 1000);
 			M.tower5spawn = true;
@@ -887,8 +887,8 @@ if
 		if
 			(GetDistance(M.tower6, M.trig6) < 400.0)
 		then
-			M.deftow6a = BuildObject("hvsat", 2, M.tower6);
-			M.deftow6b = BuildObject("hvsat", 2, M.tower6);
+			M.deftow6a = exu.BuildAsyncObject("hvsat", 2, M.tower6);
+			M.deftow6b = exu.BuildAsyncObject("hvsat", 2, M.tower6);
 			Defend2(M.deftow6a, M.tower6, 1000);
 			Defend2(M.deftow6b, M.tower6, 1000);
 			M.tower6spawn = true;
@@ -907,8 +907,8 @@ if
 		if
 			(GetDistance(M.tower7, M.trig7) < 400.0)
 		then
-			M.deftow7a = BuildObject("hvsat", 2, M.tower7);
-			M.deftow7b = BuildObject("hvsat", 2, M.tower7);
+			M.deftow7a = exu.BuildAsyncObject("hvsat", 2, M.tower7);
+			M.deftow7b = exu.BuildAsyncObject("hvsat", 2, M.tower7);
 			Defend2(M.deftow7a, M.tower7, 1000);
 			Defend2(M.deftow7b, M.tower7, 1000);
 			M.tower7spawn = true;
@@ -922,7 +922,7 @@ if
 		( not IsAlive(M.tower1)) and (M.tower1dead == false)
 		)
 	then
-		BuildObject("eggeizr1", 0, "geizer1");
+		exu.BuildAsyncObject("eggeizr1", 0, "geizer1");
 		M.tower1dead = true;
 	end
 	if
@@ -930,7 +930,7 @@ if
 		( not IsAlive(M.tower2)) and (M.tower2dead == false)
 		)
 	then
-		BuildObject("eggeizr1", 0, "geizer2");
+		exu.BuildAsyncObject("eggeizr1", 0, "geizer2");
 		M.tower2dead = true;
 	end
 	if
@@ -938,7 +938,7 @@ if
 		( not IsAlive(M.tower3)) and (M.tower3dead == false)
 		)
 	then
-		BuildObject("eggeizr1", 0, "geizer3");
+		exu.BuildAsyncObject("eggeizr1", 0, "geizer3");
 		M.tower3dead = true;
 	end
 	if
@@ -946,7 +946,7 @@ if
 		( not IsAlive(M.tower4)) and (M.tower4dead == false)
 		)
 	then
-		BuildObject("eggeizr1", 0, "geizer4");
+		exu.BuildAsyncObject("eggeizr1", 0, "geizer4");
 		M.tower4dead = true;
 	end
 	if
@@ -954,7 +954,7 @@ if
 		( not IsAlive(M.tower5)) and (M.tower5dead == false)
 		)
 	then
-		BuildObject("eggeizr1", 0, "geizer5");
+		exu.BuildAsyncObject("eggeizr1", 0, "geizer5");
 		M.tower5dead = true;
 	end
 	if
@@ -962,7 +962,7 @@ if
 		( not IsAlive(M.tower6)) and (M.tower6dead == false)
 		)
 	then
-		BuildObject("eggeizr1", 0, "geizer6");
+		exu.BuildAsyncObject("eggeizr1", 0, "geizer6");
 		M.tower6dead = true;
 	end
 	if
@@ -970,7 +970,7 @@ if
 		( not IsAlive(M.tower7)) and (M.tower7dead == false)
 		)
 	then
-		BuildObject("eggeizr1", 0, "geizer7");
+		exu.BuildAsyncObject("eggeizr1", 0, "geizer7");
 		M.tower7dead = true;
 	end
 	if 
@@ -1005,25 +1005,25 @@ if
 	if
 		(M.spawntime1 < GetTime())
 	then
-		BuildObject("hvsat", 2, M.savfactory1);
+		exu.BuildAsyncObject("hvsat", 2, M.savfactory1);
 		M.spawntime1 = GetTime () + 400.0;
 	end
 	if
 		(M.spawntime2 < GetTime())
 	then
-		BuildObject("hvsav", 2, M.savfactory2);
+		exu.BuildAsyncObject("hvsav", 2, M.savfactory2);
 		M.spawntime2 = GetTime () + 400.0;
 	end
 	if
 		(M.spawntime3 < GetTime())
 	then
-		BuildObject("hvsat", 2, M.savfactory3);
+		exu.BuildAsyncObject("hvsat", 2, M.savfactory3);
 		M.spawntime3 = GetTime () + 400.0;
 	end
 	if
 		(M.spawntime4 < GetTime())
 	then
-		BuildObject("hvsat", 2, M.savfactory4);
+		exu.BuildAsyncObject("hvsat", 2, M.savfactory4);
 		M.spawntime4 = GetTime () + 400.0;
 	end
 
@@ -1036,10 +1036,10 @@ if
 		if
 		(GetDistance(M.prey1, "savspawn", 1) < 450.0) 
 		then
-			M.ip1 = BuildObject("hvsav", 2, M.savfactory1);
-			M.ip2 = BuildObject("hvsat", 2, M.savfactory2);
-			M.ip3 = BuildObject("hvsat", 2, M.savfactory3);
-			M.ip4 = BuildObject("hvsav", 2, M.savfactory4);
+			M.ip1 = exu.BuildAsyncObject("hvsav", 2, M.savfactory1);
+			M.ip2 = exu.BuildAsyncObject("hvsat", 2, M.savfactory2);
+			M.ip3 = exu.BuildAsyncObject("hvsat", 2, M.savfactory3);
+			M.ip4 = exu.BuildAsyncObject("hvsav", 2, M.savfactory4);
 			M.defenders = true;
 			Defend2(M.ip1, M.savfactory1);
 			Defend2(M.ip2, M.savfactory2);
@@ -1207,60 +1207,60 @@ if
 		then
 			GetRidOfSomeScrap();
 
-		M.MINE[1] = BuildObject("boltmine2", 2, "mine54"); -- needs fixed in bzn
-		M.MINE[2] = BuildObject("boltmine2", 2, "mine1");
-		M.MINE[3] = BuildObject("boltmine2", 2, "mine2");
-		M.MINE[4] = BuildObject("boltmine2", 2, "mine3");
-		M.MINE[5] = BuildObject("boltmine2", 2, "mine4");
-		M.MINE[6] = BuildObject("boltmine2", 2, "mine5");
-		M.MINE[7] = BuildObject("boltmine2", 2, "mine6");
-		M.MINE[8] = BuildObject("boltmine2", 2, "mine7");
-		M.MINE[9] = BuildObject("boltmine2", 2, "mine8");
-		M.MINE[10] = BuildObject("boltmine2", 2, "mine9");
-		M.MINE[11] = BuildObject("boltmine2", 2, "mine10");
-		M.MINE[12] = BuildObject("boltmine2", 2, "mine11");
-		M.MINE[13] = BuildObject("boltmine2", 2, "mine12");
-		M.MINE[14] = BuildObject("boltmine2", 2, "mine13");
-		M.MINE[15] = BuildObject("boltmine2", 2, "mine14");
-		M.MINE[16] = BuildObject("boltmine2", 2, "mine15");
-		M.MINE[17] = BuildObject("boltmine2", 2, "mine16");
-		M.MINE[18] = BuildObject("boltmine2", 2, "mine17");
-		M.MINE[19] = BuildObject("boltmine2", 2, "mine18");
-		M.MINE[20] = BuildObject("boltmine2", 2, "mine19");
-		M.MINE[21] = BuildObject("boltmine2", 2, "mine20");
-		M.MINE[22] = BuildObject("boltmine2", 2, "mine21");
-		M.MINE[23] = BuildObject("boltmine2", 2, "mine22");
-		M.MINE[24] = BuildObject("boltmine2", 2, "mine23");
-		M.MINE[25] = BuildObject("boltmine2", 2, "mine24");
-		M.MINE[26] = BuildObject("boltmine2", 2, "mine25");
-		M.MINE[27] = BuildObject("boltmine2", 2, "mine26");
-		M.MINE[28] = BuildObject("boltmine2", 2, "mine27");
-		M.MINE[29] = BuildObject("boltmine2", 2, "mine28");
-		M.MINE[30] = BuildObject("boltmine2", 2, "mine29");
-		M.MINE[31] = BuildObject("boltmine2", 2, "mine30");
-		M.MINE[32] = BuildObject("boltmine2", 2, "mine31");
-		M.MINE[33] = BuildObject("boltmine2", 2, "mine32");
-		M.MINE[34] = BuildObject("boltmine2", 2, "mine33");
-		M.MINE[35] = BuildObject("boltmine2", 2, "mine34");
-		M.MINE[36] = BuildObject("boltmine2", 2, "mine35");
-		M.MINE[37] = BuildObject("boltmine2", 2, "mine36");
-		M.MINE[38] = BuildObject("boltmine2", 2, "mine37");
-		M.MINE[39] = BuildObject("boltmine2", 2, "mine38");
-		M.MINE[40] = BuildObject("boltmine2", 2, "mine39");
-		M.MINE[41] = BuildObject("boltmine2", 2, "mine40");
-		M.MINE[42] = BuildObject("boltmine2", 2, "mine41");
-		M.MINE[43] = BuildObject("boltmine2", 2, "mine42");
-		M.MINE[44] = BuildObject("boltmine2", 2, "mine43");
-		M.MINE[45] = BuildObject("boltmine2", 2, "mine44");
-		M.MINE[46] = BuildObject("boltmine2", 2, "mine45");
-		M.MINE[47] = BuildObject("boltmine2", 2, "mine46");
-		M.MINE[48] = BuildObject("boltmine2", 2, "mine47");
-		M.MINE[49] = BuildObject("boltmine2", 2, "mine48");
-		M.MINE[50] = BuildObject("boltmine2", 2, "mine49");
-		M.MINE[51] = BuildObject("boltmine2", 2, "mine55"); -- needs fixed in bzn
-		M.MINE[52] = BuildObject("boltmine2", 2, "mine56"); -- needs fixed in bzn
-		M.MINE[53] = BuildObject("boltmine2", 2, "mine52");
-		M.MINE[54] = BuildObject("boltmine2", 2, "mine53");
+		M.MINE[1] = exu.BuildAsyncObject("boltmine2", 2, "mine54"); -- needs fixed in bzn
+		M.MINE[2] = exu.BuildAsyncObject("boltmine2", 2, "mine1");
+		M.MINE[3] = exu.BuildAsyncObject("boltmine2", 2, "mine2");
+		M.MINE[4] = exu.BuildAsyncObject("boltmine2", 2, "mine3");
+		M.MINE[5] = exu.BuildAsyncObject("boltmine2", 2, "mine4");
+		M.MINE[6] = exu.BuildAsyncObject("boltmine2", 2, "mine5");
+		M.MINE[7] = exu.BuildAsyncObject("boltmine2", 2, "mine6");
+		M.MINE[8] = exu.BuildAsyncObject("boltmine2", 2, "mine7");
+		M.MINE[9] = exu.BuildAsyncObject("boltmine2", 2, "mine8");
+		M.MINE[10] = exu.BuildAsyncObject("boltmine2", 2, "mine9");
+		M.MINE[11] = exu.BuildAsyncObject("boltmine2", 2, "mine10");
+		M.MINE[12] = exu.BuildAsyncObject("boltmine2", 2, "mine11");
+		M.MINE[13] = exu.BuildAsyncObject("boltmine2", 2, "mine12");
+		M.MINE[14] = exu.BuildAsyncObject("boltmine2", 2, "mine13");
+		M.MINE[15] = exu.BuildAsyncObject("boltmine2", 2, "mine14");
+		M.MINE[16] = exu.BuildAsyncObject("boltmine2", 2, "mine15");
+		M.MINE[17] = exu.BuildAsyncObject("boltmine2", 2, "mine16");
+		M.MINE[18] = exu.BuildAsyncObject("boltmine2", 2, "mine17");
+		M.MINE[19] = exu.BuildAsyncObject("boltmine2", 2, "mine18");
+		M.MINE[20] = exu.BuildAsyncObject("boltmine2", 2, "mine19");
+		M.MINE[21] = exu.BuildAsyncObject("boltmine2", 2, "mine20");
+		M.MINE[22] = exu.BuildAsyncObject("boltmine2", 2, "mine21");
+		M.MINE[23] = exu.BuildAsyncObject("boltmine2", 2, "mine22");
+		M.MINE[24] = exu.BuildAsyncObject("boltmine2", 2, "mine23");
+		M.MINE[25] = exu.BuildAsyncObject("boltmine2", 2, "mine24");
+		M.MINE[26] = exu.BuildAsyncObject("boltmine2", 2, "mine25");
+		M.MINE[27] = exu.BuildAsyncObject("boltmine2", 2, "mine26");
+		M.MINE[28] = exu.BuildAsyncObject("boltmine2", 2, "mine27");
+		M.MINE[29] = exu.BuildAsyncObject("boltmine2", 2, "mine28");
+		M.MINE[30] = exu.BuildAsyncObject("boltmine2", 2, "mine29");
+		M.MINE[31] = exu.BuildAsyncObject("boltmine2", 2, "mine30");
+		M.MINE[32] = exu.BuildAsyncObject("boltmine2", 2, "mine31");
+		M.MINE[33] = exu.BuildAsyncObject("boltmine2", 2, "mine32");
+		M.MINE[34] = exu.BuildAsyncObject("boltmine2", 2, "mine33");
+		M.MINE[35] = exu.BuildAsyncObject("boltmine2", 2, "mine34");
+		M.MINE[36] = exu.BuildAsyncObject("boltmine2", 2, "mine35");
+		M.MINE[37] = exu.BuildAsyncObject("boltmine2", 2, "mine36");
+		M.MINE[38] = exu.BuildAsyncObject("boltmine2", 2, "mine37");
+		M.MINE[39] = exu.BuildAsyncObject("boltmine2", 2, "mine38");
+		M.MINE[40] = exu.BuildAsyncObject("boltmine2", 2, "mine39");
+		M.MINE[41] = exu.BuildAsyncObject("boltmine2", 2, "mine40");
+		M.MINE[42] = exu.BuildAsyncObject("boltmine2", 2, "mine41");
+		M.MINE[43] = exu.BuildAsyncObject("boltmine2", 2, "mine42");
+		M.MINE[44] = exu.BuildAsyncObject("boltmine2", 2, "mine43");
+		M.MINE[45] = exu.BuildAsyncObject("boltmine2", 2, "mine44");
+		M.MINE[46] = exu.BuildAsyncObject("boltmine2", 2, "mine45");
+		M.MINE[47] = exu.BuildAsyncObject("boltmine2", 2, "mine46");
+		M.MINE[48] = exu.BuildAsyncObject("boltmine2", 2, "mine47");
+		M.MINE[49] = exu.BuildAsyncObject("boltmine2", 2, "mine48");
+		M.MINE[50] = exu.BuildAsyncObject("boltmine2", 2, "mine49");
+		M.MINE[51] = exu.BuildAsyncObject("boltmine2", 2, "mine55"); -- needs fixed in bzn
+		M.MINE[52] = exu.BuildAsyncObject("boltmine2", 2, "mine56"); -- needs fixed in bzn
+		M.MINE[53] = exu.BuildAsyncObject("boltmine2", 2, "mine52");
+		M.MINE[54] = exu.BuildAsyncObject("boltmine2", 2, "mine53");
 		M.minesmade = true;
 		end
 		CameraReady();
@@ -1321,11 +1321,11 @@ if
 		M.missionwon = true;
 		SucceedMission(GetTime() + 7.0, "misn17w1.des");
 		CameraReady();
-		M.cinscrap = BuildObject("eggeizr1", 3, "cinscrap");
+		M.cinscrap = exu.BuildAsyncObject("eggeizr1", 3, "cinscrap");
 		if ( not M.savfactory1)
 		then
 			local EndScenePos = SetVector(2990, 64, 101376);   --forcing this because if you have a save game where you blew up the M.savfactory1 its position is not retrievable hence this nasty hack.
-			M.savfactory1 = BuildObject("eggeizr1", 3, EndScenePos);		--if we killed the factory put a geyser where it used to be.
+			M.savfactory1 = exu.BuildAsyncObject("eggeizr1", 3, EndScenePos);		--if we killed the factory put a geyser where it used to be.
 		end
 		--		CameraObject(M.cinscrap, 1000, 8000, 1000, M.savfactory1);
 		CameraObject(M.cinscrap, 1000, 8000, 1000, M.savfactory1);

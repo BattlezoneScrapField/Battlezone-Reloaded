@@ -401,8 +401,8 @@ function Update()
 
 	if ((M.start_done) and (M.build_scav_time < GetTime()) and not (M.build_scav))
 	then
-		M.avscav1 = BuildObject("bvscav", 2, "muf_point");
-		M.avscav2 = BuildObject("bvscav", 2, "muf_point");
+		M.avscav1 = exu.BuildAsyncObject("bvscav", 2, "muf_point");
+		M.avscav2 = exu.BuildAsyncObject("bvscav", 2, "muf_point");
 --		M.main_tower = BuildObject("abtowe", 2, "main_tower");
 		Goto(M.avscav1, M.fed_up_scrap, 0);
 		Goto(M.avscav2, M.fed_up_scrap, 0);
@@ -441,7 +441,7 @@ function Update()
 	-- the nsdf adjusts by building fighters and sending them after the player
 	if ((M.nsdf_adjust) and not (M.fight1_built))
 	then
-		M.avfight1 = BuildObject("bvraz", 2, "muf_point");
+		M.avfight1 = exu.BuildAsyncObject("bvraz", 2, "muf_point");
 		Attack(M.avfight1, M.user);
 		M.avfigh2_time = GetTime() + 20.0;
 		M.fight1_built = true;
@@ -449,7 +449,7 @@ function Update()
 
 	if ((M.nsdf_adjust) and (M.fight1_built) and (M.avfigh2_time < GetTime()) and not (M.fight2_built))
 	then
-		M.avfight2 = BuildObject ("bvraz", 2, "muf_point");
+		M.avfight2 = exu.BuildAsyncObject ("bvraz", 2, "muf_point");
 		Attack(M.avfight2, M.user);
 		M.avfigh3_time = GetTime() + 20.0;
 		M.fight2_built = true;
@@ -457,7 +457,7 @@ function Update()
 
 	if ((M.nsdf_adjust) and (M.fight2_built) and (M.avfigh3_time < GetTime()) and not (M.fight3_built))
 	then
-		M.avfight3 = BuildObject ("bvraz", 2, "muf_point");
+		M.avfight3 = exu.BuildAsyncObject ("bvraz", 2, "muf_point");
 			-- this is going to send the third fighter after the apc if the 
 			-- second fighter is still alive and the apc is within radar range
 			if (IsAlive(M.avfight2))
@@ -473,7 +473,7 @@ function Update()
 
 	if ((M.nsdf_adjust) and (IsAlive(M.avfight3)) and not (M.jail_dead) and not (M.build_turret))
 	then
-		M.avturr1 = BuildObject("bvturr", 2, "muf_point");
+		M.avturr1 = exu.BuildAsyncObject("bvturr", 2, "muf_point");
 		M.build_turret = true;
 	end
 
@@ -495,9 +495,9 @@ function Update()
 
 	if ((M.jail_dead) and (M.con_spawn_time < GetTime()) and not (M.jail_unit_spawn))
 	then
-		M.con1 = BuildObject("sssold",1, "con1_spot");
-		M.con2 = BuildObject("sssold",1, "con2_spot");
-		M.con3 = BuildObject("sssold",1, "con3_spot");
+		M.con1 = exu.BuildAsyncObject("sssold",1, "con1_spot");
+		M.con2 = exu.BuildAsyncObject("sssold",1, "con2_spot");
+		M.con3 = exu.BuildAsyncObject("sssold",1, "con3_spot");
 		SetIndependence(M.con1, 0);
 		SetIndependence(M.con2, 0);
 		SetIndependence(M.con3, 0);
@@ -539,7 +539,7 @@ function Update()
 
 	if ((M.jail_camera_off) and (M.muf_build_time < GetTime()) and not (M.avmuf_built))
 	then
-		M.avmuf = BuildObject("bvmuf", 2, "muf_point");
+		M.avmuf = exu.BuildAsyncObject("bvmuf", 2, "muf_point");
 		Defend(M.avmuf);
 		Goto(M.avmuf, M.geyser1);
 		M.avfigh1_time = GetTime() + 30.0;
@@ -563,7 +563,7 @@ function Update()
 	-- now that the nsdf has built an muf it will start building fighters
 	if ((M.avmuf_built) and (M.avfigh1_time < GetTime()) and not (M.fight1_built))
 	then
-		M.avfight1 = BuildObject("bvraz", 2, "muf_point");
+		M.avfight1 = exu.BuildAsyncObject("bvraz", 2, "muf_point");
 		SetPerceivedTeam(M.guntower1, 2);
 		SetPerceivedTeam(M.guntower2, 2);
 		SetPerceivedTeam(M.svrecycle, 2);
@@ -573,7 +573,7 @@ function Update()
 
 	if ((M.avmuf_built) and (M.fight1_built) and (M.avfigh2_time < GetTime()) and not (M.fight2_built))
 	then
-		M.avfight2 = BuildObject ("bvraz", 2, "muf_point");
+		M.avfight2 = exu.BuildAsyncObject ("bvraz", 2, "muf_point");
 		-- this is going to send the second fighter after the apc if the first fighter is still alive and the apc is within radar range 
 		if ((IsAlive(M.avfight1)) and (GetDistance(M.apc, M.boxes) < 200.0))
 		then
@@ -936,7 +936,7 @@ end
 
 		if ((M.camera_on_recycle) and (M.unit_spawn_time1 < GetTime()) and not (M.svrecycle_unit_spawn))
 		then
-			M.engineer = BuildObject("sssold",1,M.apc);
+			M.engineer = exu.BuildAsyncObject("sssold",1,M.apc);
 			Retreat (M.engineer, M.svrecycle, 1);
 			AddPilot(1, -1);
 			M.svrecycle_unit_spawn = true;
@@ -955,10 +955,10 @@ end
 			then
 				RemoveObject(M.engineer);
 			end
-			M.temp = BuildObject("svmine", 0, M.svrecycle);
+			M.temp = exu.BuildAsyncObject("svmine", 0, M.svrecycle);
 			Defend(M.temp);
 			RemoveObject(M.svrecycle);
-			M.svrecycle = BuildObject("svrecy", 1, M.temp);
+			M.svrecycle = exu.BuildAsyncObject("svrecy", 1, M.temp);
 			RemoveObject(M.temp);
 --			if (IsAlive(M.guntower1))
 --			then
@@ -1072,7 +1072,7 @@ then
 
 			if ((M.camera_on_muf) and (M.unit_spawn_time1 < GetTime()) and not (M.svmuf_unit_spawn))
 			then
-				M.engineer = BuildObject("sssold",1,M.apc);
+				M.engineer = exu.BuildAsyncObject("sssold",1,M.apc);
 				Retreat (M.engineer, M.svmuf, 1);
 				AddPilot(1, -1);
 				M.svmuf_unit_spawn = true;
@@ -1090,10 +1090,10 @@ then
 				then
 					RemoveObject(M.engineer);
 				end
-				M.temp = BuildObject("svmine", 0, M.svmuf);
+				M.temp = exu.BuildAsyncObject("svmine", 0, M.svmuf);
 				Defend(M.temp);
 				RemoveObject(M.svmuf);
-				M.svmuf = BuildObject("svmuf", 1, M.temp);
+				M.svmuf = exu.BuildAsyncObject("svmuf", 1, M.temp);
 				RemoveObject(M.temp);
 				AddScrap(1, 20);
 				CameraFinish();
@@ -1198,7 +1198,7 @@ then
 
 		if ((M.camera_on_supply) and (M.unit_spawn_time1 < GetTime()) and not (M.supply_unit_spawn))
 		then
-			M.engineer = BuildObject("sssold",1,M.apc);
+			M.engineer = exu.BuildAsyncObject("sssold",1,M.apc);
 			Retreat (M.engineer, "con_path", 1);
 			AddPilot(1, -1);
 			M.supply_unit_spawn = true;
@@ -1249,15 +1249,15 @@ then
 
 		if ((M.supply2_message) and (M.supply_spawn_time < GetTime()) and not (M.supplies_spawned)) 
 		then
-			M.supply1 = BuildObject("svscav", 1, "supply1");
-			M.supply2 = BuildObject("svturr", 1, "supply2");
-			M.supply3 = BuildObject("svturr", 1, "supply3");
-			M.supply4 = BuildObject("svscav", 1, "supply4");
-			M.supply5 = BuildObject("spammo", 1, "supply5");
-			M.supply6 = BuildObject("spammo", 1, "supply6");
-			M.supply7 = BuildObject("spammo", 1, "supply7");
-			M.supply8 = BuildObject("sprepa", 1, "supply8");
-			M.supply9 = BuildObject("sprepa", 1, "supply9");
+			M.supply1 = exu.BuildAsyncObject("svscav", 1, "supply1");
+			M.supply2 = exu.BuildAsyncObject("svturr", 1, "supply2");
+			M.supply3 = exu.BuildAsyncObject("svturr", 1, "supply3");
+			M.supply4 = exu.BuildAsyncObject("svscav", 1, "supply4");
+			M.supply5 = exu.BuildAsyncObject("spammo", 1, "supply5");
+			M.supply6 = exu.BuildAsyncObject("spammo", 1, "supply6");
+			M.supply7 = exu.BuildAsyncObject("spammo", 1, "supply7");
+			M.supply8 = exu.BuildAsyncObject("sprepa", 1, "supply8");
+			M.supply9 = exu.BuildAsyncObject("sprepa", 1, "supply9");
 			Stop(M.supply1, 0);
 			Stop(M.supply4, 0);
 			M.supplies_spawned = true;
@@ -1508,7 +1508,7 @@ end
 
 		if (GetDistance(M.user, M.avrecycle) < 400.0)
 		then
-			M.avrig = BuildObject("avcns7", 2, "barrack_spot");
+			M.avrig = exu.BuildAsyncObject("avcns7", 2, "barrack_spot");
 			Defend(M.avrig);
 			Build(M.avrig, "abbarr");
 			M.rig_check = GetTime() + 20.0;
@@ -1519,7 +1519,7 @@ end
 	if ((M.rig_show) and (IsAlive(M.avrig)) and (M.rig_check < GetTime()) and not (M.blah))
 	then
 		Dropoff(M.avrig, "barrack_spot"); -- this is avbarrack
-		M.avturr4 = BuildObject("bvturr", 2, "muf_point");
+		M.avturr4 = exu.BuildAsyncObject("bvturr", 2, "muf_point");
 		Goto(M.avturr4, "base_turret_spot1", 1);
 		M.turret_check = GetTime() + 60.0;
 		M.blah = true;

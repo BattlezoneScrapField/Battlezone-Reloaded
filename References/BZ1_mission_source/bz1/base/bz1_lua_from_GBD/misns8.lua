@@ -498,10 +498,10 @@ function Update()
 		ClearObjectives();
 		AddObjective("misns800.otf", "WHITE");
 --		AddObjective("misns800.otf", "WHITE");
-		M.avscav1 = BuildObject("bvsca8", 2, "american_spawn");
+		M.avscav1 = exu.BuildAsyncObject("bvsca8", 2, "american_spawn");
 		--M.avscav2 = BuildObject("bvsca8", 2, "american_spawn");
 		--M.avscav3 = BuildObject("bvsca8", 2, "american_spawn");
-		M.nark = BuildObject("bvra8", 2, "american_spawn");
+		M.nark = exu.BuildAsyncObject("bvra8", 2, "american_spawn");
 		SetObjectiveName(M.cam1, "Black Dog Base");
 		SetObjectiveName(M.cam2, "Drop Zone");
 		M.defense_check = GetTime() + 60.0;
@@ -689,7 +689,7 @@ function Update()
 -- building artil w/poppers
 	if (( not M.artil_build) and (M.rig_movea))
 	then
-		M.popartil = BuildObject("avart8", 2, "american_spawn");
+		M.popartil = exu.BuildAsyncObject("avart8", 2, "american_spawn");
 		M.artil_build = true;
 	end
 
@@ -999,7 +999,7 @@ function Update()
 				if (GetDistance(M.avmuf, M.dis_geyser1) < 100.0)
 				then
 					AudioMessage("misns801.wav");
-					M.cam3 = BuildObject ("apcamr", 1, "cam_spawn");
+					M.cam3 = exu.BuildAsyncObject ("apcamr", 1, "cam_spawn");
 					SetObjectiveName(M.cam3, "Choke Point");
 					ClearObjectives();
 					AddObjective("misns800.otf", "WHITE");
@@ -1035,14 +1035,14 @@ function Update()
 
 		if ((M.convoy_start) and ( not IsAlive(M.avmuf)) and ( not M.new_muf))
 		then
-			M.screwu1 = BuildObject("bvtavk", 2, "t1post");
-			M.screwu2 = BuildObject("bvtavk", 2, "t1post");
+			M.screwu1 = exu.BuildAsyncObject("bvtavk", 2, "t1post");
+			M.screwu2 = exu.BuildAsyncObject("bvtavk", 2, "t1post");
 			if (IsAlive(M.ccarecycle))
 			then
 				Attack(M.screwu1, M.ccarecycle);
 				Attack(M.screwu2, M.ccarecycle);
 			end
-			M.avmuf = BuildObject("bvmuf", 2, "american_spawn");
+			M.avmuf = exu.BuildAsyncObject("bvmuf", 2, "american_spawn");
 			Goto(M.avmuf, M.avmuf_geyser);
 			M.muf_deployed = false;
 			M.new_muf = true;
@@ -1528,7 +1528,7 @@ function Update()
 
 	if ((M.plan_c) and ( not M.general_spawn))	
 	then
-		M.key_tank = BuildObject ("svtank", 1, "romeski_spawn");
+		M.key_tank = exu.BuildAsyncObject ("svtank", 1, "romeski_spawn");
 
 		if (IsAlive(M.avrecycle))
 		then
@@ -1905,7 +1905,7 @@ function Update()
 	then
 		if (( not M.sav1_swap) and (IsAlive(M.sav1)))
 		then
-			M.badsav1 = BuildObject("savs8", 2, M.sav1);
+			M.badsav1 = exu.BuildAsyncObject("savs8", 2, M.sav1);
 			SetIndependence(M.badsav1, 1);
 			RemoveObject(M.sav1);
 
@@ -1925,7 +1925,7 @@ function Update()
 
 		if (( not M.sav2_swap) and (IsAlive(M.sav2)))
 		then
-			M.badsav2 = BuildObject("savs8", 2, M.sav2);
+			M.badsav2 = exu.BuildAsyncObject("savs8", 2, M.sav2);
 			SetIndependence(M.badsav2, 1);
 			RemoveObject(M.sav2);
 
@@ -1945,7 +1945,7 @@ function Update()
 
 		if (( not M.sav3_swap) and (IsAlive(M.sav3)))
 		then
-			M.badsav3 = BuildObject("savs8", 2, M.sav3);
+			M.badsav3 = exu.BuildAsyncObject("savs8", 2, M.sav3);
 			SetIndependence(M.badsav3, 1);
 			RemoveObject(M.sav3);
 
@@ -1965,7 +1965,7 @@ function Update()
 
 		if (( not M.sav4_swap) and (IsAlive(M.sav4)))
 		then
-			M.badsav4 = BuildObject("savs8", 2, M.sav4);
+			M.badsav4 = exu.BuildAsyncObject("savs8", 2, M.sav4);
 			SetIndependence(M.badsav4, 1);
 			RemoveObject(M.sav4);
 
@@ -1985,7 +1985,7 @@ function Update()
 
 		if (( not M.sav5_swap) and (IsAlive(M.sav5)))
 		then
-			M.badsav5 = BuildObject("savs8", 2, M.sav5);
+			M.badsav5 = exu.BuildAsyncObject("savs8", 2, M.sav5);
 			SetIndependence(M.badsav5, 1);
 			RemoveObject(M.sav5);
 
@@ -2005,7 +2005,7 @@ function Update()
 
 		if (( not M.sav6_swap) and (IsAlive(M.sav6)))
 		then
-			M.badsav6 = BuildObject("savs8", 2, M.sav6);
+			M.badsav6 = exu.BuildAsyncObject("savs8", 2, M.sav6);
 			SetIndependence(M.badsav6, 1);
 			RemoveObject(M.sav6);
 

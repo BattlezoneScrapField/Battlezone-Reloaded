@@ -301,14 +301,14 @@ function Update()
 		SetObjectiveOn(M.checkpoint1);
 		SetObjectiveName(M.checkpoint1, "Check Point");
 
-		M.center_cam = BuildObject ("apcamr", 3, "center_cam");
-		M.start_cam = BuildObject ("apcamr", 3, "start_cam");
-		M.check2_cam = BuildObject ("apcamr", 3, "check2_cam");
-		M.check3_cam = BuildObject ("apcamr", 3, "check3_cam");
-		M.check4_cam = BuildObject ("apcamr", 3, "check4_cam");
-		M.goal_cam = BuildObject ("apcamr", 3, "goal_cam");
+		M.center_cam = exu.BuildAsyncObject ("apcamr", 3, "center_cam");
+		M.start_cam = exu.BuildAsyncObject ("apcamr", 3, "start_cam");
+		M.check2_cam = exu.BuildAsyncObject ("apcamr", 3, "check2_cam");
+		M.check3_cam = exu.BuildAsyncObject ("apcamr", 3, "check3_cam");
+		M.check4_cam = exu.BuildAsyncObject ("apcamr", 3, "check4_cam");
+		M.goal_cam = exu.BuildAsyncObject ("apcamr", 3, "goal_cam");
 
-		M.key_ship = BuildObject("svfi12", 2, M.spawn_geyser);
+		M.key_ship = exu.BuildAsyncObject("svfi12", 2, M.spawn_geyser);
 		SetWeaponMask(M.key_ship, 3);
 		Goto(M.key_ship, "first_path"); -- gets the patrol ship to move towards M.checkpoint1
 		M.key_check = GetTime() + 2.0;
@@ -369,10 +369,10 @@ function Update()
 	if ((M.game_blown) and (M.death_spawn < GetTime()))
 	then
 		M.death_spawn = GetTime() + 120.0;
-		M.death_squad1 = BuildObject("svfigh", 2, M.spawn_geyser);
-		M.death_squad2 = BuildObject("svfigh", 2, M.spawn_geyser);
-		M.death_squad3 = BuildObject("svltnk", 2, M.spawn_geyser);
-		M.death_squad4 = BuildObject("svltnk", 2, M.spawn_geyser);
+		M.death_squad1 = exu.BuildAsyncObject("svfigh", 2, M.spawn_geyser);
+		M.death_squad2 = exu.BuildAsyncObject("svfigh", 2, M.spawn_geyser);
+		M.death_squad3 = exu.BuildAsyncObject("svltnk", 2, M.spawn_geyser);
+		M.death_squad4 = exu.BuildAsyncObject("svltnk", 2, M.spawn_geyser);
 		Attack(M.death_squad1, M.user);
 		Attack(M.death_squad2, M.user);
 		Attack(M.death_squad3, M.user);
@@ -669,7 +669,7 @@ then
 		if (GetDistance(M.key_ship, M.spawn_geyser) < 100.0)
 		then
 			RemoveObject(M.key_ship);
-			M.key_ship = BuildObject("svfi12", 2, M.spawn_geyser);
+			M.key_ship = exu.BuildAsyncObject("svfi12", 2, M.spawn_geyser);
 			SetWeaponMask(M.key_ship, 3);
 			Goto(M.key_ship, "first_path");
 			M.checked_in = false;
@@ -1311,10 +1311,10 @@ then
 			AddObjective("misn1206.otf", "WHITE");
 		end
 		SetPerceivedTeam(M.user, 1);
-		M.guard1 = BuildObject("svtank", 2, M.spawn_point1);
-		M.guard2 = BuildObject("svtank", 2, M.spawn_point1);
-		M.guard3 = BuildObject("svtank", 2, M.spawn_point2);
-		M.guard4 = BuildObject("svtank", 2, M.spawn_point2);
+		M.guard1 = exu.BuildAsyncObject("svtank", 2, M.spawn_point1);
+		M.guard2 = exu.BuildAsyncObject("svtank", 2, M.spawn_point1);
+		M.guard3 = exu.BuildAsyncObject("svtank", 2, M.spawn_point2);
+		M.guard4 = exu.BuildAsyncObject("svtank", 2, M.spawn_point2);
 		Goto(M.parked_tank2, M.ccacom_tower);
 		Goto(M.parked_tank1, M.ccacom_tower);
 		Attack (M.guard1, M.user, 1);
@@ -1333,10 +1333,10 @@ then
 
 	if ((M.discovered) and ( not IsAlive(M.guard1)) and ( not IsAlive(M.guard2)) and ( not IsAlive(M.guard3)))
 	then
-		M.guard1 = BuildObject("svtank", 2, M.spawn_point1);
-		M.guard2 = BuildObject("svtank", 2, M.spawn_point1);
-		M.guard3 = BuildObject("svtank", 2, M.spawn_point2);
-		M.guard4 = BuildObject("svtank", 2, M.spawn_point2);
+		M.guard1 = exu.BuildAsyncObject("svtank", 2, M.spawn_point1);
+		M.guard2 = exu.BuildAsyncObject("svtank", 2, M.spawn_point1);
+		M.guard3 = exu.BuildAsyncObject("svtank", 2, M.spawn_point2);
+		M.guard4 = exu.BuildAsyncObject("svtank", 2, M.spawn_point2);
 		Attack (M.guard1, M.user, 1);
 		Attack (M.guard2, M.user, 1);
 		Attack (M.guard3, M.user, 1);
@@ -1364,10 +1364,10 @@ then
 
 		if ((GetDistance(M.user, M.checkpoint4)) > (GetDistance(M.user, M.checkpoint3))) -- he's at 3
 		then
-			M.follower = BuildObject("svfigh", 2, "3spawn");
+			M.follower = exu.BuildAsyncObject("svfigh", 2, "3spawn");
 			Follow(M.follower, M.user);
 		else
-			M.follower = BuildObject("svfigh", 2, "4spawn");
+			M.follower = exu.BuildAsyncObject("svfigh", 2, "4spawn");
 			Follow(M.follower, M.user);
 		end
 
