@@ -41,12 +41,12 @@ do
         end
     --]]
 
-    function ai_squad:goto(where)
-        self:for_each(Goto, where, 1)
+    function ai_squad:goto(where, independence)
+        self:for_each(Goto, where, independence)
     end
 
-    function ai_squad:stop()
-        self:for_each(Stop, 0)
+    function ai_squad:stop(independence)
+        self:for_each(Stop, independence)
     end
 
     function ai_squad:attack(target)

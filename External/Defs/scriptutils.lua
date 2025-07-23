@@ -13,7 +13,7 @@
 -- Type declarations
 
 --- A handle to a game object. This is a unique identifier for the object in the game world.
---- @class Handle
+--- @class Handle<userdata>
 
 --- A handle to an audio message.
 --- @alias AudioMessage integer
@@ -86,14 +86,14 @@ function RepeatAudioMessage() end
 --- @param filename string
 --- @return AudioMessage
 function AudioMessage(filename)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the audio message has stopped. Returns false otherwise.
 --- @param msg AudioMessage
 --- @return boolean
 function IsAudioMessageDone(msg)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Stops the given audio message.
@@ -103,7 +103,7 @@ function StopAudioMessage(msg) end
 --- Returns true if <em>any</em> audio message is playing. Returns false otherwise.
 --- @return boolean
 function IsAudioMessagePlaying()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ function StopSound(filename, h) end
 --- @param label string
 --- @return Handle?
 function GetHandle(label)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Creates a game object with the given odf name, team number, and location.
@@ -153,7 +153,7 @@ end
 --- @param point? integer If the location is a path this is the path point index, defaults to 0.
 --- @return Handle?
 function BuildObject(odfname, teamnum, location, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Removes the game object with the given handle.
@@ -165,28 +165,28 @@ function RemoveObject(h) end
 --- @param odfname string
 --- @return boolean
 function IsOdf(h, odfname)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the odf name of the game object. Returns nil if none exists.
 --- @param h Handle
 --- @return string?
 function GetOdf(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the base config of the game object which determines what VDF/SDF model it uses. Returns nil if none exists.
 --- @param h Handle
 --- @return string?
 function GetBase(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the label of the game object (e.g. "avtank0_wingman"). Returns nil if none exists.
 --- @param h Handle
 --- @return string?
 function GetLabel(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Set the label of the game object (e.g. "tank1").
@@ -198,14 +198,14 @@ function SetLabel(h, label) end
 --- @param h Handle
 --- @return string?
 function GetClassSig(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the class label of the game object (e.g. "wingman"). Returns nil if none exists.
 --- @param h Handle
 --- @return string?
 function GetClassLabel(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the numeric class identifier of the game object. Returns nil if none exists.
@@ -213,102 +213,102 @@ end
 --- @param h Handle
 --- @return integer?
 function GetClassId(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- This is a global table that converts between class identifier numbers and class identifier names.
 --- Many of these values likely never appear in game and are leftover from Interstate '76
 --- @enum ClassId
 ClassId = {
-	NONE = 0, -- 0
+    NONE = 0,                 -- 0
 
-	HELICOPTER = 1, -- 1
-	STRUCTURE1 = 2, -- 2 (Wooden Structures)
-	POWERUP = 3, -- 3
-	PERSON = 4, -- 4
-	SIGN = 5, -- 5
-	VEHICLE = 6, -- 6
-	SCRAP = 7, -- 7
-	BRIDGE = 8, -- 8 (A structure which can contain the floor)
-	FLOOR = 9, -- 9 (The floor in a bridge)
-	STRUCTURE2 = 10, -- 10 (Metal Structures)
-	SCROUNGE = 11, -- 11
-	SPINNER = 15, -- 15
+    HELICOPTER = 1,           -- 1
+    STRUCTURE1 = 2,           -- 2 (Wooden Structures)
+    POWERUP = 3,              -- 3
+    PERSON = 4,               -- 4
+    SIGN = 5,                 -- 5
+    VEHICLE = 6,              -- 6
+    SCRAP = 7,                -- 7
+    BRIDGE = 8,               -- 8 (A structure which can contain the floor)
+    FLOOR = 9,                -- 9 (The floor in a bridge)
+    STRUCTURE2 = 10,          -- 10 (Metal Structures)
+    SCROUNGE = 11,            -- 11
+    SPINNER = 15,             -- 15
 
-	HEADLIGHT_MASK = 38, -- 38
+    HEADLIGHT_MASK = 38,      -- 38
 
-	EYEPOINT = 40, -- 40
-	COM = 42, -- 42
+    EYEPOINT = 40,            -- 40
+    COM = 42,                 -- 42
 
-	WEAPON = 50, -- 50
-	ORDNANCE = 51, -- 51
-	EXPLOSION = 52, -- 52
-	CHUNK = 53, -- 53
-	SORT_OBJECT = 54, -- 54
-	NONCOLLIDABLE = 55, -- 55
+    WEAPON = 50,              -- 50
+    ORDNANCE = 51,            -- 51
+    EXPLOSION = 52,           -- 52
+    CHUNK = 53,               -- 53
+    SORT_OBJECT = 54,         -- 54
+    NONCOLLIDABLE = 55,       -- 55
 
-	VEHICLE_GEOMETRY = 60, -- 60
-	STRUCTURE_GEOMETRY = 61, -- 61
-	WEAPON_GEOMETRY = 63, -- 63
-	ORDNANCE_GEOMETRY = 64, -- 64
-	TURRET_GEOMETRY = 65, -- 65
-	ROTOR_GEOMETRY = 66, -- 66
-	NACELLE_GEOMETRY = 67, -- 67
-	FIN_GEOMETRY = 68, -- 68
-	COCKPIT_GEOMETRY = 69, -- 69
+    VEHICLE_GEOMETRY = 60,    -- 60
+    STRUCTURE_GEOMETRY = 61,  -- 61
+    WEAPON_GEOMETRY = 63,     -- 63
+    ORDNANCE_GEOMETRY = 64,   -- 64
+    TURRET_GEOMETRY = 65,     -- 65
+    ROTOR_GEOMETRY = 66,      -- 66
+    NACELLE_GEOMETRY = 67,    -- 67
+    FIN_GEOMETRY = 68,        -- 68
+    COCKPIT_GEOMETRY = 69,    -- 69
 
-	WEAPON_HARDPOINT = 70, -- 70
-	CANNON_HARDPOINT = 71, -- 71
-	ROCKET_HARDPOINT = 72, -- 72
-	MORTAR_HARDPOINT = 73, -- 73
-	SPECIAL_HARDPOINT = 74, -- 74
+    WEAPON_HARDPOINT = 70,    -- 70
+    CANNON_HARDPOINT = 71,    -- 71
+    ROCKET_HARDPOINT = 72,    -- 72
+    MORTAR_HARDPOINT = 73,    -- 73
+    SPECIAL_HARDPOINT = 74,   -- 74
 
-	FLAME_EMITTER = 75, -- 75
-	SMOKE_EMITTER = 76, -- 76
-	DUST_EMITTER = 77, -- 77
+    FLAME_EMITTER = 75,       -- 75
+    SMOKE_EMITTER = 76,       -- 76
+    DUST_EMITTER = 77,        -- 77
 
-	PARKING_LOT = 81, -- 81
+    PARKING_LOT = 81,         -- 81
 
-	[0] = "NONE", -- NONE
-	[1] = "HELICOPTER", -- HELICOPTER
-	[2] = "STRUCTURE1", -- STRUCTURE1
-	[3] = "POWERUP", -- POWERUP
-	[4] = "PERSON", -- PERSON
-	[5] = "SIGN", -- SIGN
-	[6] = "VEHICLE", -- VEHICLE
-	[7] = "SCRAP", -- SCRAP
-	[8] = "BRIDGE", -- BRIDGE
-	[9] = "FLOOR", -- FLOOR
-	[10] = "STRUCTURE2", -- STRUCTURE2
-	[11] = "SCROUNGE", -- SCROUNGE
-	[15] = "SPINNER", -- SPINNER
-	[38] = "HEADLIGHT_MASK", -- HEADLIGHT_MASK
-	[40] = "EYEPOINT", -- EYEPOINT
-	[42] = "COM", -- COM
-	[50] = "WEAPON", -- WEAPON
-	[51] = "ORDNANCE", -- ORDNANCE
-	[52] = "EXPLOSION", -- EXPLOSION
-	[53] = "CHUNK", -- CHUNK
-	[54] = "SORT_OBJECT", -- SORT_OBJECT
-	[55] = "NONCOLLIDABLE", -- NONCOLLIDABLE
-	[60] = "VEHICLE_GEOMETRY", -- VEHICLE_GEOMETRY
-	[61] = "STRUCTURE_GEOMETRY", -- STRUCTURE_GEOMETRY
-	[63] = "WEAPON_GEOMETRY", -- WEAPON_GEOMETRY
-	[64] = "ORDNANCE_GEOMETRY", -- ORDNANCE_GEOMETRY
-	[65] = "TURRET_GEOMETRY", -- TURRET_GEOMETRY
-	[66] = "ROTOR_GEOMETRY", -- ROTOR_GEOMETRY
-	[67] = "NACELLE_GEOMETRY", -- NACELLE_GEOMETRY
-	[68] = "FIN_GEOMETRY", -- FIN_GEOMETRY
-	[69] = "COCKPIT_GEOMETRY", -- COCKPIT_GEOMETRY
-	[70] = "WEAPON_HARDPOINT", -- WEAPON_HARDPOINT
-	[71] = "CANNON_HARDPOINT", -- CANNON_HARDPOINT
-	[72] = "ROCKET_HARDPOINT", -- ROCKET_HARDPOINT
-	[73] = "MORTAR_HARDPOINT", -- MORTAR_HARDPOINT
-	[74] = "SPECIAL_HARDPOINT", -- SPECIAL_HARDPOINT
-	[75] = "FLAME_EMITTER", -- FLAME_EMITTER
-	[76] = "SMOKE_EMITTER", -- SMOKE_EMITTER
-	[77] = "DUST_EMITTER", -- DUST_EMITTER
-	[81] = "PARKING_LOT", -- PARKING_LOT
+    [0] = "NONE",             -- NONE
+    [1] = "HELICOPTER",       -- HELICOPTER
+    [2] = "STRUCTURE1",       -- STRUCTURE1
+    [3] = "POWERUP",          -- POWERUP
+    [4] = "PERSON",           -- PERSON
+    [5] = "SIGN",             -- SIGN
+    [6] = "VEHICLE",          -- VEHICLE
+    [7] = "SCRAP",            -- SCRAP
+    [8] = "BRIDGE",           -- BRIDGE
+    [9] = "FLOOR",            -- FLOOR
+    [10] = "STRUCTURE2",      -- STRUCTURE2
+    [11] = "SCROUNGE",        -- SCROUNGE
+    [15] = "SPINNER",         -- SPINNER
+    [38] = "HEADLIGHT_MASK",  -- HEADLIGHT_MASK
+    [40] = "EYEPOINT",        -- EYEPOINT
+    [42] = "COM",             -- COM
+    [50] = "WEAPON",          -- WEAPON
+    [51] = "ORDNANCE",        -- ORDNANCE
+    [52] = "EXPLOSION",       -- EXPLOSION
+    [53] = "CHUNK",           -- CHUNK
+    [54] = "SORT_OBJECT",     -- SORT_OBJECT
+    [55] = "NONCOLLIDABLE",   -- NONCOLLIDABLE
+    [60] = "VEHICLE_GEOMETRY", -- VEHICLE_GEOMETRY
+    [61] = "STRUCTURE_GEOMETRY", -- STRUCTURE_GEOMETRY
+    [63] = "WEAPON_GEOMETRY", -- WEAPON_GEOMETRY
+    [64] = "ORDNANCE_GEOMETRY", -- ORDNANCE_GEOMETRY
+    [65] = "TURRET_GEOMETRY", -- TURRET_GEOMETRY
+    [66] = "ROTOR_GEOMETRY",  -- ROTOR_GEOMETRY
+    [67] = "NACELLE_GEOMETRY", -- NACELLE_GEOMETRY
+    [68] = "FIN_GEOMETRY",    -- FIN_GEOMETRY
+    [69] = "COCKPIT_GEOMETRY", -- COCKPIT_GEOMETRY
+    [70] = "WEAPON_HARDPOINT", -- WEAPON_HARDPOINT
+    [71] = "CANNON_HARDPOINT", -- CANNON_HARDPOINT
+    [72] = "ROCKET_HARDPOINT", -- ROCKET_HARDPOINT
+    [73] = "MORTAR_HARDPOINT", -- MORTAR_HARDPOINT
+    [74] = "SPECIAL_HARDPOINT", -- SPECIAL_HARDPOINT
+    [75] = "FLAME_EMITTER",   -- FLAME_EMITTER
+    [76] = "SMOKE_EMITTER",   -- SMOKE_EMITTER
+    [77] = "DUST_EMITTER",    -- DUST_EMITTER
+    [81] = "PARKING_LOT",     -- PARKING_LOT
 }
 
 --- Returns the one-letter nation code of the game object (e.g. "a" for American, "b" for Black Dog, "c" for Chinese, and "s" for Soviet).
@@ -316,49 +316,49 @@ ClassId = {
 --- @param h Handle
 --- @return string
 function GetNation(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object exists. Returns false otherwise.
 --- @param h Handle
 --- @return boolean
 function IsValid(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object exists and (if the object is a vehicle) controlled. Returns false otherwise.
 --- @param h Handle
 --- @return boolean
 function IsAlive(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object exists and (if the object is a vehicle) controlled and piloted. Returns false otherwise.
 --- @param h Handle
 --- @return boolean
 function IsAliveAndPilot(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object exists and is a vehicle. Returns false otherwise.
 --- @param h Handle
 --- @return boolean
 function IsCraft(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object exists and is a building. Returns false otherwise.
 --- @param h Handle
 --- @return boolean
 function IsBuilding(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object exists and is a person. Returns false otherwise.
 --- @param h Handle
 --- @return boolean
 function IsPerson(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object exists and has less health than the threshold. Returns false otherwise.
@@ -366,7 +366,7 @@ end
 --- @param threshold? number float
 --- @return boolean
 function IsDamaged(h, threshold)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object was recycled by a Construction Rig on the given team.
@@ -375,7 +375,7 @@ end
 --- @param team TeamNum
 --- @return boolean
 function IsRecycledByTeam(h, team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -388,7 +388,7 @@ end
 --- @param h Handle
 --- @return TeamNum
 function GetTeamNum(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the game object's team number.
@@ -401,7 +401,7 @@ function SetTeamNum(h, team) end
 --- @param h Handle
 --- @return TeamNum
 function GetPerceivedTeam(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Set the game object's perceived team number (as opposed to its real team number).
@@ -424,7 +424,7 @@ function SetUserTarget(t) end
 --- Returns the local player's target. Returns nil if it has none.
 --- @return Handle?
 function GetUserTarget()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the game object's target.
@@ -436,7 +436,7 @@ function SetTarget(h, t) end
 --- @param h Handle
 --- @return Handle?
 function GetTarget(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -455,7 +455,7 @@ function SetOwner(h, o) end
 --- @param h Handle
 --- @return Handle?
 function GetOwner(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -473,7 +473,7 @@ function SetPilotClass(h, odfname) end
 --- @param h Handle
 --- @return string?
 function GetPilotClass(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -493,14 +493,14 @@ function SetPosition(h, target, point) end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return Vector?
 function GetPosition(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the game object's front vector. Returns nil if none exists.
 --- @param h Handle
 --- @return Vector?
 function GetFront(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Teleports the game object to the given transform matrix.
@@ -512,7 +512,7 @@ function SetTransform(h, transform) end
 --- @param h Handle
 --- @return Matrix?
 function GetTransform(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -525,7 +525,7 @@ end
 --- @param h Handle
 --- @return Vector
 function GetVelocity(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the game object's angular velocity vector.
@@ -543,7 +543,7 @@ function SetVelocity(h, velocity) end
 --- @param h Handle
 --- @return Vector
 function GetOmega(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the game object's angular velocity vector.
@@ -566,7 +566,7 @@ function SetOmega(h, omega) end
 --- @param angle? number
 --- @return Vector
 function GetCircularPos(center, radius, angle)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns a ground position in a ring around the center between minradius and maxradius with roughly the same terrain height as the terrain height at the center.
@@ -577,7 +577,7 @@ end
 --- @param maxradius? number
 --- @return Vector
 function GetPositionNear(center, minradius, maxradius)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -590,21 +590,21 @@ end
 --- @param h Handle
 --- @return Handle
 function GetWhoShotMe(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the last time an enemy shot the game object.
 --- @param h Handle
 --- @return number float
 function GetLastEnemyShot(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the last time a friend shot the game object.
 --- @param h Handle
 --- @return number float
 function GetLastFriendShot(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -640,7 +640,7 @@ function UnAlly(team1, team2) end
 --- @param team2 integer
 --- @return boolean
 function IsTeamAllied(team1, team2)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if game object "me" considers game object "him" an ally. Returns false otherwise.
@@ -649,7 +649,7 @@ end
 --- @param him Handle
 --- @return boolean
 function IsAlly(me, him)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -672,14 +672,14 @@ function SetObjectiveOff(h) end
 --- @param h Handle
 --- @return boolean
 function IsObjectiveOn(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Gets the game object's visible name.
 --- @param h Handle
 --- @return string
 function GetObjectiveName(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the game object's visible name.
@@ -705,7 +705,7 @@ function SetName(h, name) end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return number
 function GetDistance(h1, target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the units are closer than the given distance of each other. Returns false otherwise.
@@ -715,7 +715,7 @@ end
 --- @param dist number
 --- @return boolean
 function IsWithin(h1, h2, dist)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the bounding spheres of the two game objects are within the specified tolerance. The default tolerance is 1.3 meters if not specified.
@@ -725,7 +725,7 @@ end
 --- @param tolerance? number
 --- @return boolean
 function IsTouching(h1, h2, tolerance)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -739,7 +739,7 @@ end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return Handle
 function GetNearestObject(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the craft closest to a position vector, transform matrix, another object, or point on a named path.
@@ -747,7 +747,7 @@ end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return Handle
 function GetNearestVehicle(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the building closest to a position vector, transform matrix, another object, or point on a named path.
@@ -755,7 +755,7 @@ end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return Handle
 function GetNearestBuilding(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the enemy closest to a position vector, transform matrix, another object, or point on a named path.
@@ -763,7 +763,7 @@ end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return Handle
 function GetNearestEnemy(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the friend closest to a position vector, transform matrix, another object, or point on a named path.
@@ -772,7 +772,7 @@ end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return Handle
 function GetNearestFriend(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the friend closest to the given reference point. Returns nil if none exists.
@@ -827,7 +827,7 @@ function GetNearestUnitOnTeam(...) end
 --- @param odfname string
 --- @return integer
 function CountUnitsNearObject(h, dist, team, odfname)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -842,32 +842,32 @@ end
 --- @param point? integer If the target is a path this is the path point index, defaults to 0.
 --- @return fun():Handle iterator
 function ObjectsInRange(dist, target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Enumerates all game objects.
 --- Use this function sparingly at runtime since it enumerates <em>all</em> game objects, including every last piece of scrap. If you're specifically looking for craft, use AllCraft() instead.
 --- @return fun():Handle iterator
 function AllObjects()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Enumerates all craft.
 --- @return fun():Handle iterator
 function AllCraft()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Enumerates all game objects currently selected by the local player.
 --- @return fun():Handle iterator
 function SelectedObjects()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Enumerates all game objects marked as objectives.
 --- @return fun():Handle iterator
 function ObjectiveObjects()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -897,75 +897,75 @@ function ClearScrapAround(distance, target, point) end
 --- Slots starting with MIN_ and MAX_ represent the lower and upper bound of a range of slots.
 --- @enum TeamSlot
 TeamSlot = {
-	UNDEFINED = -1, -- invalid, -1
-	PLAYER = 0, -- 0
+    UNDEFINED = -1,     -- invalid, -1
+    PLAYER = 0,         -- 0
 
-	RECYCLER = 1, -- 1
-	FACTORY = 2, -- 2
-	ARMORY = 3, -- 3
-	CONSTRUCT = 4, -- 4
+    RECYCLER = 1,       -- 1
+    FACTORY = 2,        -- 2
+    ARMORY = 3,         -- 3
+    CONSTRUCT = 4,      -- 4
 
-	MIN_OFFENSE = 5, -- 5
-	MAX_OFFENSE = 14, -- 14
-	MIN_DEFENSE = 15, -- 15
-	MAX_DEFENSE = 24, -- 24
-	MIN_UTILITY = 25, -- 25
-	MAX_UTILITY = 34, -- 34
+    MIN_OFFENSE = 5,    -- 5
+    MAX_OFFENSE = 14,   -- 14
+    MIN_DEFENSE = 15,   -- 15
+    MAX_DEFENSE = 24,   -- 24
+    MIN_UTILITY = 25,   -- 25
+    MAX_UTILITY = 34,   -- 34
 
-	MIN_BEACON = 35, -- 35
-	MAX_BEACON = 44, -- 44
+    MIN_BEACON = 35,    -- 35
+    MAX_BEACON = 44,    -- 44
 
-	MIN_POWER = 45, -- 45
-	MAX_POWER = 54, -- 54
-	MIN_COMM = 55, -- 55
-	MAX_COMM = 59, -- 59
-	MIN_REPAIR = 60, -- 60
-	MAX_REPAIR = 64, -- 64
-	MIN_SUPPLY = 65, -- 65
-	MAX_SUPPLY = 69, -- 69
-	MIN_SILO = 70, -- 70
-	MAX_SILO = 74, -- 74
-	MIN_BARRACKS = 75, -- 75
-	MAX_BARRACKS = 79, -- 79
-	MIN_GUNTOWER = 80, -- 80
-	MAX_GUNTOWER = 89, -- 89
+    MIN_POWER = 45,     -- 45
+    MAX_POWER = 54,     -- 54
+    MIN_COMM = 55,      -- 55
+    MAX_COMM = 59,      -- 59
+    MIN_REPAIR = 60,    -- 60
+    MAX_REPAIR = 64,    -- 64
+    MIN_SUPPLY = 65,    -- 65
+    MAX_SUPPLY = 69,    -- 69
+    MIN_SILO = 70,      -- 70
+    MAX_SILO = 74,      -- 74
+    MIN_BARRACKS = 75,  -- 75
+    MAX_BARRACKS = 79,  -- 79
+    MIN_GUNTOWER = 80,  -- 80
+    MAX_GUNTOWER = 89,  -- 89
 
-	PORTAL = 90, -- 90 [2.2.315+]
+    PORTAL = 90,        -- 90 [2.2.315+]
 
-	[-1] = "UNDEFINED", -- UNDEFINED
-	[0] = "PLAYER", -- PLAYER
+    [-1] = "UNDEFINED", -- UNDEFINED
+    [0] = "PLAYER",     -- PLAYER
 
-	[1] = "RECYCLER", -- RECYCLER
-	[2] = "FACTORY", -- FACTORY
-	[3] = "ARMORY", -- ARMORY
-	[4] = "CONSTRUCT", -- CONSTRUCT
+    [1] = "RECYCLER",   -- RECYCLER
+    [2] = "FACTORY",    -- FACTORY
+    [3] = "ARMORY",     -- ARMORY
+    [4] = "CONSTRUCT",  -- CONSTRUCT
 
-	[5] = "MIN_OFFENSE", -- MIN_OFFENSE
-	[14] = "MAX_OFFENSE", -- MAX_OFFENSE
-	[15] = "MIN_DEFENSE", -- MIN_DEFENSE
-	[24] = "MAX_DEFENSE", -- MAX_DEFENSE
-	[25] = "MIN_UTILITY", -- MIN_UTILITY
-	[34] = "MAX_UTILITY", -- MAX_UTILITY
+    [5] = "MIN_OFFENSE", -- MIN_OFFENSE
+    [14] = "MAX_OFFENSE", -- MAX_OFFENSE
+    [15] = "MIN_DEFENSE", -- MIN_DEFENSE
+    [24] = "MAX_DEFENSE", -- MAX_DEFENSE
+    [25] = "MIN_UTILITY", -- MIN_UTILITY
+    [34] = "MAX_UTILITY", -- MAX_UTILITY
 
-	[35] = "MIN_BEACON", -- MIN_BEACON
-	[44] = "MAX_BEACON", -- MAX_BEACON
+    [35] = "MIN_BEACON", -- MIN_BEACON
+    [44] = "MAX_BEACON", -- MAX_BEACON
 
-	[45] = "MIN_POWER", -- MIN_POWER
-	[54] = "MAX_POWER", -- MAX_POWER
-	[55] = "MIN_COMM", -- MIN_COMM
-	[59] = "MAX_COMM", -- MAX_COMM
-	[60] = "MIN_REPAIR", -- MIN_REPAIR
-	[64] = "MAX_REPAIR", -- MAX_REPAIR
-	[65] = "MIN_SUPPLY", -- MIN_SUPPLY
-	[69] = "MAX_SUPPLY", -- MAX_SUPPLY
-	[70] = "MIN_SILO", -- MIN_SILO
-	[74] = "MAX_SILO", -- MAX_SILO
-	[75] = "MIN_BARRACKS", -- MIN_BARRACKS
-	[79] = "MAX_BARRACKS", -- MAX_BARRACKS
-	[80] = "MIN_GUNTOWER", -- MIN_GUNTOWER
-	[89] = "MAX_GUNTOWER", -- MAX_GUNTOWER
+    [45] = "MIN_POWER", -- MIN_POWER
+    [54] = "MAX_POWER", -- MAX_POWER
+    [55] = "MIN_COMM",  -- MIN_COMM
+    [59] = "MAX_COMM",  -- MAX_COMM
+    [60] = "MIN_REPAIR", -- MIN_REPAIR
+    [64] = "MAX_REPAIR", -- MAX_REPAIR
+    [65] = "MIN_SUPPLY", -- MIN_SUPPLY
+    [69] = "MAX_SUPPLY", -- MAX_SUPPLY
+    [70] = "MIN_SILO",  -- MIN_SILO
+    [74] = "MAX_SILO",  -- MAX_SILO
+    [75] = "MIN_BARRACKS", -- MIN_BARRACKS
+    [79] = "MAX_BARRACKS", -- MAX_BARRACKS
+    [80] = "MIN_GUNTOWER", -- MIN_GUNTOWER
+    [89] = "MAX_GUNTOWER", -- MAX_GUNTOWER
 
-	[90] = "PORTAL", -- PORTAL [2.2.315+]
+    [90] = "PORTAL",    -- PORTAL [2.2.315+]
 }
 
 --- Get the game object in the specified team slot.
@@ -974,7 +974,7 @@ TeamSlot = {
 --- @param team? TeamNum
 --- @return Handle
 function GetTeamSlot(slot, team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the game object controlled by the player on the given team. Returns nil if none exists.
@@ -982,7 +982,7 @@ end
 --- @param team? TeamNum
 --- @return Handle
 function GetPlayerHandle(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the Recycler on the given team. Returns nil if none exists.
@@ -990,7 +990,7 @@ end
 --- @param team? TeamNum
 --- @return Handle
 function GetRecyclerHandle(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the Factory on the given team. Returns nil if none exists.
@@ -998,7 +998,7 @@ end
 --- @param team? TeamNum
 --- @return Handle
 function GetFactoryHandle(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the Armory on the given team. Returns nil if none exists.
@@ -1006,7 +1006,7 @@ end
 --- @param team? TeamNum
 --- @return Handle
 function GetArmoryHandle(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the Constructor on the given team. Returns nil if none exists.
@@ -1014,7 +1014,7 @@ end
 --- @param team? TeamNum
 --- @return Handle
 function GetConstructorHandle(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1029,7 +1029,7 @@ end
 --- @param count integer
 --- @return integer
 function AddPilot(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the team's pilot count, clamped between zero and maximum count.
@@ -1038,14 +1038,14 @@ end
 --- @param count integer
 --- @return integer
 function SetPilot(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the team's pilot count.
 --- @param team TeamNum
 --- @return integer
 function GetPilot(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Adds pilots to the team's maximum pilot count.
@@ -1054,7 +1054,7 @@ end
 --- @param count integer
 --- @return integer
 function AddMaxPilot(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the team's maximum pilot count.
@@ -1063,14 +1063,14 @@ end
 --- @param count integer
 --- @return integer
 function SetMaxPilot(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the team's maximum pilot count.
 --- @param team TeamNum
 --- @return integer
 function GetMaxPilot(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1085,7 +1085,7 @@ end
 --- @param count integer
 --- @return integer
 function AddScrap(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the team's scrap count, clamped between zero and maximum count.
@@ -1094,14 +1094,14 @@ end
 --- @param count integer
 --- @return integer
 function SetScrap(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the team's scrap count.
 --- @param team TeamNum
 --- @return integer
 function GetScrap(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Adds to the team's maximum scrap count.
@@ -1110,7 +1110,7 @@ end
 --- @param count integer
 --- @return integer
 function AddMaxScrap(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the team's maximum scrap count.
@@ -1119,14 +1119,14 @@ end
 --- @param count integer
 --- @return integer
 function SetMaxScrap(team, count)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the team's maximum scrap count.
 --- @param team TeamNum
 --- @return integer
 function GetMaxScrap(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1139,7 +1139,7 @@ end
 --- @param h Handle
 --- @return boolean
 function IsDeployed(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Tells the game object to deploy.
@@ -1156,7 +1156,7 @@ function Deploy(h) end
 --- @param h Handle
 --- @return boolean
 function IsSelected(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1170,7 +1170,7 @@ end
 --- @param h Handle
 --- @return boolean
 function IsCritical(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the game object's mission-critical status.
@@ -1206,7 +1206,7 @@ function GiveWeapon(h, weaponname, slot) end
 --- @param slot integer
 --- @return string
 function GetWeaponClass(h, slot)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Tells the game object to fire at the given target.
@@ -1228,19 +1228,19 @@ function Damage(h, amount) end
 --- Returns the elapsed time in seconds since the start of the mission.
 --- @return number
 function GetTime()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the simulation time step in seconds.
 --- @return number
 function GetTimeStep()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the current system time in milliseconds. This is mostly useful for performance profiling.
 --- @return number
 function GetTimeNow()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1260,7 +1260,7 @@ function SetAIControl(team, control) end
 --- @param team TeamNum
 --- @return boolean
 function GetAIControl(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the current AIP for the team. It uses team 2 if no team number is given.
@@ -1268,7 +1268,7 @@ end
 --- @return string
 --- @function GetAIP
 function GetAIP(team)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Switches the team's AI plan. It uses team 2 if no team number is given.
@@ -1342,7 +1342,7 @@ function HideCockpitTimer() end
 --- Returns the current time in seconds on the cockpit timer.
 --- @return integer
 function GetCockpitTimer()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1386,7 +1386,7 @@ function SetPathType(path, type) end
 --- @param path string
 --- @return integer
 function GetPathType(path)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Changes the named path to one-way. Once a unit reaches the end of the path, it will stop.
@@ -1411,7 +1411,7 @@ function SetPathLoop(path) end
 --- @param path string
 --- @return integer
 function GetPathPointCount(path)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1427,7 +1427,7 @@ end
 --- @param target Vector|Matrix|string
 --- @return integer
 function GetWindingNumber(path, target)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the given position vector, transform matrix, or object is inside the area bounded by the named path. Returns false otherwise.
@@ -1437,7 +1437,7 @@ end
 --- @param target Vector|Matrix|Handle
 --- @return boolean
 function IsInsideArea(path, target)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1449,106 +1449,106 @@ end
 --- This is a global table that converts between command numbers and command names. For example, AiCommand.GO or AiCommand["GO"] returns the command number (3) for the "go" command; AiCommand[3] returns the command name ("GO") for command number 3. For maintainability, always use this table instead of raw command numbers.
 --- @enum AiCommand
 AiCommand = {
-	NONE = 0, -- 0
-	SELECT = 1, -- 1
-	STOP = 2, -- 2
-	GO = 3, -- 3
-	ATTACK = 4, -- 4
-	FOLLOW = 5, -- 5
-	FORMATION = 6, -- 6
-	PICKUP = 7, -- 7
-	DROPOFF = 8, -- 8
-	NO_DROPOFF = 9, -- 9
-	GET_REPAIR = 10, -- 10
-	GET_RELOAD = 11, -- 11
-	GET_WEAPON = 12, -- 12
-	GET_CAMERA = 13, -- 13
-	GET_BOMB = 14, -- 14
-	DEFEND = 15, -- 15
-	GO_TO_GEYSER = 16, -- 16
-	RESCUE = 17, -- 17
-	RECYCLE = 18, -- 18
-	SCAVENGE = 19, -- 19
-	HUNT = 20, -- 20
-	BUILD = 21, -- 21
-	PATROL = 22, -- 22
-	STAGE = 23, -- 23
-	SEND = 24, -- 24
-	GET_IN = 25, -- 25
-	LAY_MINES = 26, -- 26
-	CLOAK = 27, -- 27 [2.1+]
-	DECLOAK = 28, -- 28 [2.1+]
-	[0] = "NONE", -- NONE
-	[1] = "SELECT", -- SELECT
-	[2] = "STOP", -- STOP
-	[3] = "GO", -- GO
-	[4] = "ATTACK", -- ATTACK
-	[5] = "FOLLOW", -- FOLLOW
-	[6] = "FORMATION", -- FORMATION
-	[7] = "PICKUP", -- PICKUP
-	[8] = "DROPOFF", -- DROPOFF
-	[9] = "NO_DROPOFF", -- NO_DROPOFF
-	[10] = "GET_REPAIR", -- GET_REPAIR
-	[11] = "GET_RELOAD", -- GET_RELOAD
-	[12] = "GET_WEAPON", -- GET_WEAPON
-	[13] = "GET_CAMERA", -- GET_CAMERA
-	[14] = "GET_BOMB", -- GET_BOMB
-	[15] = "DEFEND", -- DEFEND
-	[16] = "GO_TO_GEYSER", -- GO_TO_GEYSER
-	[17] = "RESCUE", -- RESCUE
-	[18] = "RECYCLE", -- RECYCLE
-	[19] = "SCAVENGE", -- SCAVENGE
-	[20] = "HUNT", -- HUNT
-	[21] = "BUILD", -- BUILD
-	[22] = "PATROL", -- PATROL
-	[23] = "STAGE", -- STAGE
-	[24] = "SEND", -- SEND
-	[25] = "GET_IN", -- GET_IN
-	[26] = "LAY_MINES", -- LAY_MINES
-	[27] = "CLOAK", -- CLOAK [2.1+]
-	[28] = "DECLOAK", -- DECLOAK [2.1+]
+    NONE = 0,           -- 0
+    SELECT = 1,         -- 1
+    STOP = 2,           -- 2
+    GO = 3,             -- 3
+    ATTACK = 4,         -- 4
+    FOLLOW = 5,         -- 5
+    FORMATION = 6,      -- 6
+    PICKUP = 7,         -- 7
+    DROPOFF = 8,        -- 8
+    NO_DROPOFF = 9,     -- 9
+    GET_REPAIR = 10,    -- 10
+    GET_RELOAD = 11,    -- 11
+    GET_WEAPON = 12,    -- 12
+    GET_CAMERA = 13,    -- 13
+    GET_BOMB = 14,      -- 14
+    DEFEND = 15,        -- 15
+    GO_TO_GEYSER = 16,  -- 16
+    RESCUE = 17,        -- 17
+    RECYCLE = 18,       -- 18
+    SCAVENGE = 19,      -- 19
+    HUNT = 20,          -- 20
+    BUILD = 21,         -- 21
+    PATROL = 22,        -- 22
+    STAGE = 23,         -- 23
+    SEND = 24,          -- 24
+    GET_IN = 25,        -- 25
+    LAY_MINES = 26,     -- 26
+    CLOAK = 27,         -- 27 [2.1+]
+    DECLOAK = 28,       -- 28 [2.1+]
+    [0] = "NONE",       -- NONE
+    [1] = "SELECT",     -- SELECT
+    [2] = "STOP",       -- STOP
+    [3] = "GO",         -- GO
+    [4] = "ATTACK",     -- ATTACK
+    [5] = "FOLLOW",     -- FOLLOW
+    [6] = "FORMATION",  -- FORMATION
+    [7] = "PICKUP",     -- PICKUP
+    [8] = "DROPOFF",    -- DROPOFF
+    [9] = "NO_DROPOFF", -- NO_DROPOFF
+    [10] = "GET_REPAIR", -- GET_REPAIR
+    [11] = "GET_RELOAD", -- GET_RELOAD
+    [12] = "GET_WEAPON", -- GET_WEAPON
+    [13] = "GET_CAMERA", -- GET_CAMERA
+    [14] = "GET_BOMB",  -- GET_BOMB
+    [15] = "DEFEND",    -- DEFEND
+    [16] = "GO_TO_GEYSER", -- GO_TO_GEYSER
+    [17] = "RESCUE",    -- RESCUE
+    [18] = "RECYCLE",   -- RECYCLE
+    [19] = "SCAVENGE",  -- SCAVENGE
+    [20] = "HUNT",      -- HUNT
+    [21] = "BUILD",     -- BUILD
+    [22] = "PATROL",    -- PATROL
+    [23] = "STAGE",     -- STAGE
+    [24] = "SEND",      -- SEND
+    [25] = "GET_IN",    -- GET_IN
+    [26] = "LAY_MINES", -- LAY_MINES
+    [27] = "CLOAK",     -- CLOAK [2.1+]
+    [28] = "DECLOAK",   -- DECLOAK [2.1+]
 }
 
 --- Returns true if the game object can be commanded. Returns false otherwise.
 --- @param me Handle
 --- @return boolean
 function CanCommand(me)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object is a producer that can build at the moment. Returns false otherwise.
 --- @param me Handle
 --- @return boolean
 function CanBuild(me)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object is a producer and currently busy. Returns false otherwise.
 --- @param me Handle
 --- @return boolean
 function IsBusy(me)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the current command for the game object. Looking up the command number in the AiCommand table will convert it to a string. Looking up the command string in the AiCommand table will convert it back to a number.
 --- @param me Handle
 --- @return AiCommand
 function GetCurrentCommand(me)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the target of the current command for the game object. Returns nil if it has none.
 --- @param me Handle
 --- @return Handle
 function GetCurrentWho(me)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Gets the independence of a unit.
 --- @param me Handle
 --- @return integer
 function GetIndependence(me)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the independence of a unit. 1 (the default) lets the unit take initiative (e.g. attack nearby enemies), while 0 prevents that.
@@ -1606,7 +1606,7 @@ function Follow(me, him, priority) end
 --- @param him Handle
 --- @return boolean
 function IsFollowing(me, him)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Commands the unit to defend its current location.
@@ -1707,7 +1707,7 @@ function Hunt(me, priority) end
 --- @param tug Handle
 --- @return boolean
 function HasCargo(tug)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the handle of the cargo if the unit is a tug carrying cargo. Returns nil otherwise.
@@ -1715,14 +1715,14 @@ end
 --- @param tug Handle
 --- @return Handle?
 function GetCargo(tug)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the handle of the tug carrying the object. Returns nil if not carried.
 --- @param cargo Handle
 --- @return Handle
 function GetTug(cargo)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1751,7 +1751,7 @@ function RemovePilot(h) end
 --- @param h Handle
 --- @return Handle
 function HoppedOutOf(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1764,21 +1764,21 @@ end
 --- @param h Handle
 --- @return number
 function GetHealth(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the current health value of the game object.
 --- @param h Handle
 --- @return number
 function GetCurHealth(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the maximum health value of the game object.
 --- @param h Handle
 --- @return number
 function GetMaxHealth(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the current health of the game object.
@@ -1811,21 +1811,21 @@ function GiveMaxHealth(h) end
 --- @param h Handle
 --- @return number
 function GetAmmo(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the current ammo value of the game object.
 --- @param h Handle
 --- @return number
 function GetCurAmmo(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the maximum ammo value of the game object.
 --- @param h Handle
 --- @return number
 function GetMaxAmmo(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the current ammo of the game object.
@@ -1858,7 +1858,7 @@ function GiveMaxAmmo(h) end
 --- Always returns true.
 --- @return boolean
 function CameraReady()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Moves a cinematic camera along a path at a given height and speed while looking at a target game object.
@@ -1869,7 +1869,7 @@ end
 --- @param target Handle
 --- @return boolean
 function CameraPath(path, height, speed, target)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Moves a cinematic camera long a path at a given height and speed while looking along the path direction.
@@ -1879,7 +1879,7 @@ end
 --- @param speed integer
 --- @return boolean
 function CameraPathDir(path, height, speed)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Moves a cinematic camera along a path at a given height and speed while looking at a target path.
@@ -1890,13 +1890,13 @@ end
 --- @param target string
 --- @return boolean
 function CameraPathPath(path, height, speed, target)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true when the camera arrives at its destination. Returns false otherwise.
 --- @return boolean
 function PanDone()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Offsets a cinematic camera from a base game object while looking at a target game object. The right, up, and forward offsets are in centimeters.
@@ -1908,20 +1908,20 @@ end
 --- @param target Handle
 --- @return boolean
 function CameraObject(base, right, up, forward, target)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Finishes the cinematic camera and enables normal input.
 --- Always returns true.
 --- @return boolean
 function CameraFinish()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the player canceled the cinematic. Returns false otherwise.
 --- @return boolean
 function CameraCancelled()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1933,7 +1933,7 @@ end
 --- @param odfname string
 --- @return boolean
 function IsInfo(odfname)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -1945,13 +1945,13 @@ end
 --- Returns true if the game is a network game. Returns false otherwise.
 --- @return boolean
 function IsNetGame()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the local machine is hosting a network game. Returns false otherwise.
 --- @return boolean
 function IsHosting()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Sets the game object as local to the machine the script is running on, transferring ownership from its original owner if it was remote. Important safety tip: only call this on one machine at a time!
@@ -1962,14 +1962,14 @@ function SetLocal(h) end
 --- @param h Handle
 --- @return boolean
 function IsLocal(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the game object is remote to the machine the script is running on. Returns false otherwise.
 --- @param h Handle
 --- @return boolean
 function IsRemote(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Adds a system text message to the chat window on the local machine.
@@ -2016,7 +2016,7 @@ function Send(to, type, ...) end
 --- @param filename string
 --- @return ParameterDB
 function OpenODF(filename)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Reads a boolean value from the named label in the named section of the ODF file. Use a nil section to read labels that aren't in a section.
@@ -2030,7 +2030,7 @@ end
 --- @return boolean
 --- @return boolean
 function GetODFBool(odf, section, label, default)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Reads an integer value from the named label in the named section of the ODF file. Use nil as the section to read labels that aren't in a section.
@@ -2043,7 +2043,7 @@ end
 --- @return integer
 --- @return boolean
 function GetODFInt(odf, section, label, default)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Reads a floating-point value from the named label in the named section of the ODF file. Use nil as the section to read labels that aren't in a section.
@@ -2056,7 +2056,7 @@ end
 --- @return number
 --- @return boolean
 function GetODFFloat(odf, section, label, default)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Reads a string value from the named label in the named section of the ODF file. Use nil as the section to read labels that aren't in a section.
@@ -2069,7 +2069,7 @@ end
 --- @return string
 --- @return boolean
 function GetODFString(odf, section, label, default)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -2084,7 +2084,7 @@ end
 --- @return number
 --- @return Vector
 function GetTerrainHeightAndNormal(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -2099,7 +2099,7 @@ end
 --- @return number
 --- @return Vector
 function GetFloorHeightAndNormal(target, point)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -2111,13 +2111,13 @@ end
 --- [2.0+]
 --- @return string
 function GetMissionFilename()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the name of the TRN file for the map. This can be used with OpenODF() to read values from the TRN file.
 --- @return string
 function GetMapTRNFilename()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -2171,7 +2171,7 @@ local Vector = {}
 --- @param z? number
 --- @return Vector
 function SetVector(x, y, z)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the <a href="http://en.wikipedia.org/wiki/Dot_product">dot product</a> between vectors a and b.
@@ -2180,7 +2180,7 @@ end
 --- @param b Vector
 --- @return number
 function DotProduct(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the <a href="http://en.wikipedia.org/wiki/Cross_product">cross product</a> between vectors a and b.
@@ -2189,7 +2189,7 @@ end
 --- @param b Vector
 --- @return Vector
 function CrossProduct(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the vector scaled to unit length.
@@ -2197,7 +2197,7 @@ end
 --- @param v Vector
 --- @return Vector
 function Normalize(v)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the length of the vector.
@@ -2205,7 +2205,7 @@ end
 --- @param v Vector
 --- @return number
 function Length(v)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the squared length of the vector.
@@ -2213,7 +2213,7 @@ end
 --- @param v Vector
 --- @return number
 function LengthSquared(v)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the 2D distance between vectors a and b.
@@ -2223,7 +2223,7 @@ end
 --- @return number
 --- @function Distance2D
 function Distance2D(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the squared 2D distance of the vector.
@@ -2233,7 +2233,7 @@ end
 --- @return number
 --- @function Distance2DSquared
 function Distance2DSquared(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the 3D distance between vectors a and b.
@@ -2243,7 +2243,7 @@ end
 --- @return number
 --- @function Distance3D
 function Distance3D(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns the squared 3D distance of the vector.
@@ -2253,7 +2253,7 @@ end
 --- @return number
 --- @function Distance3DSquared
 function Distance3DSquared(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Negate the vector.
@@ -2263,7 +2263,7 @@ end
 --- @return Vector v
 --- @function Vector.__unm
 function Vector.__unm(v)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Add two vectors.
@@ -2274,7 +2274,7 @@ end
 --- @return Vector v
 --- @function Vector.__add
 function Vector.__add(v1, v2)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Subtract two vectors.
@@ -2285,7 +2285,7 @@ end
 --- @return Vector v
 --- @function Vector.__sub
 function Vector.__sub(v1, v2)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Multiply a number by a vector.
@@ -2327,7 +2327,7 @@ end
 --- @return Vector vector The resulting vector after multiplication.
 --- @function Vector.__mul
 function Vector.__mul(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Divide a number by a vector.
@@ -2369,7 +2369,7 @@ end
 --- @return Vector vector The resulting vector after division.
 --- @function Vector.__mul
 function Vector.__div(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Check if two vectors are equal.
@@ -2379,7 +2379,7 @@ end
 --- @return boolean
 --- @function Vector.__eq
 function Vector.__eq(v1, v2)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -2418,7 +2418,7 @@ end
 --- @param posit_z? number
 --- @return Matrix
 function SetMatrix(right_x, right_y, right_z, up_x, up_y, up_z, front_x, front_y, front_z, posit_x, posit_y, posit_z)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 local Matrix = {}
@@ -2428,7 +2428,7 @@ local Matrix = {}
 --- @return Matrix
 --- @function matrix IdentityMatrix
 function IdentityMatrix()
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Build a matrix representing a rotation by an angle around an axis. The angle is in radians. If no value is given for the angle or an axis component, the default value is zero. The axis must be unit-length (i.e. axis_x<sup>2</sup> + axis_y<sup>2</sup> + axis_z<sup>2</sup> = 1.0 or the resulting matrix will be wrong.
@@ -2438,7 +2438,7 @@ end
 --- @param axis_z? number
 --- @return Matrix
 function BuildAxisRotationMatrix(angle, axis_x, axis_y, axis_z)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Build a matrix representing a rotation by an angle around an axis. The angle is in radians. If no value is given for the angle, the default value is zero. The axis must be unit-length (i.e. axis.x<sup>2</sup> + axis.y<sup>2</sup> + axis.z<sup>2</sup> = 1.0 or the resulting matrix will be wrong.
@@ -2446,7 +2446,7 @@ end
 --- @param axis Vector
 --- @return Matrix
 function BuildAxisRotationMatrix(angle, axis)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Build a matrix with the given pitch, yaw, and roll angles and position. The angles are in radians. If no value is given for a component, the default value is zero.
@@ -2458,7 +2458,7 @@ end
 --- @param posit_z? number
 --- @return Matrix
 function BuildPositionRotationMatrix(pitch, yaw, roll, posit_x, posit_y, posit_z)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Build a matrix with the given pitch, yaw, and roll angles and position. The angles are in radians. If no value is given for a component, the default value is zero.
@@ -2468,7 +2468,7 @@ end
 --- @param position Vector
 --- @return Matrix
 function BuildPositionRotationMatrix(pitch, yaw, roll, position)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Build a matrix with zero position, its up axis along the specified up vector, oriented so that its front axis points as close as possible to the heading vector. If up is not specified, the default value is the Y axis. If heading is not specified, the default value is the Z axis.
@@ -2476,7 +2476,7 @@ end
 --- @param heading? Vector
 --- @return Matrix
 function BuildOrthogonalMatrix(up, heading)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Build a matrix with the given position vector, its front axis pointing along the direction vector, and zero roll. If position is not specified, the default value is a zero vector. If direction is not specified, the default value is the Z axis.
@@ -2484,7 +2484,7 @@ end
 --- @param direction? Vector
 --- @return Matrix
 function BuildDirectionalMatrix(position, direction)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Multiply two matrices.
@@ -2505,7 +2505,7 @@ end
 --- @param a Matrix The Matrix to multiply.
 --- @param b Matrix|Vector The Matrix or Vector to multiply.
 function Matrix:__mul(a, b)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -2539,7 +2539,7 @@ function ActivatePortal(portal) end
 --- @param portal Handle
 --- @return boolean
 function IsIn(portal)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Returns true if the specified Portal is active. Returns false otherwise.
@@ -2549,7 +2549,7 @@ end
 --- @return boolean
 --- @diagnostic disable-next-line: lowercase-global
 function isPortalActive(portal)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Creates a game object with the given odf name and team number at the location of a portal.
@@ -2560,7 +2560,7 @@ end
 --- @param portal Handle
 --- @return Handle
 function BuildObjectAtPortal(odfname, teamnum, portal)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 -------------------------------------------------------------------------------
@@ -2596,7 +2596,7 @@ function SetDecloaked(h) end
 --- @param h Handle
 --- @return boolean
 function IsCloaked(h)
-	error("This function is provided by the engine.")
+    error("This function is provided by the engine.")
 end
 
 --- Enable or disable cloaking for a specified cloaking-capable unit.

@@ -1,10 +1,10 @@
 --[[
 =======================================
 *   Battlezone: Reloaded
-*   
+*
 *   Coop Campaign
 *
-*	NSDF02 - Eagle's Nest 1
+*   NSDF02 - Eagle's Nest 1
 =======================================
 --]]
 
@@ -16,17 +16,19 @@ local vsp = require("vsp")
 local coop_config = require("rl_coop_campaign")
 
 local mission_phase = vsp.enum.make_string_enum(
-	"startup",
-	"wait_for_recycler",
-	"first_wave",
-	"recycler_ready",
-	"build_defenses",
-	"second_wave",
-	"third_wave",
-	"fourth_wave",
-	"backup_arrived",
-	"strike_cinematic_1",
-	"strike_cinematic_2"
+    "startup",
+    "wait_for_recycler",
+    "first_wave",
+    "recycler_ready",
+    "build_defenses",
+    "second_wave",
+    "third_wave",
+    "fourth_wave",
+    "backup_arrived",
+    "strike_cinematic_1",
+    "strike_cinematic_2",
+    "transports_arrived",
+    "evacuate_transports"
 )
 
 local my_team = reloaded.team.make_team("4th Platoon", vsp.utility.sequence(coop_config.max_players))
@@ -37,253 +39,353 @@ local mission = reloaded.coop_mission.make_coop(my_team, coop_config)
 mission:set_initial_state(mission_phase.startup)
 
 for i = 1, mission.team:get_player_count() do
-	mission:set_spawn_direction(i, vsp.math3d.east)
+    mission:set_spawn_direction(i, vsp.math3d.east)
 end
 
 mission.var.wave_time = 30.0 -- Time in between soviet attack waves
 
+-- Some objects will need to be deleted for the final cutscene, so we track them here
+mission.var.objects_to_delete = {}
+mission.var.deletable = vsp.set.make_set(
+    "avturr",
+    "avscav"
+)
+mission:define_global_listener("CreateObject", function(h)
+    if mission.var.deletable:contains(GetOdf(h)) then
+        table.insert(mission.var.objects_to_delete, h)
+    end
+end)
+
 mission:define_state(mission_phase.startup,
-function (state, dt) end,
-function (state)
-	mission.var.command_tower = GetHandle("command") -- this is errorneouSly called "solar1" in the original script
-	mission.var.s_powers = {
-		solar_2 = GetHandle("solar2"),
-		solar_3 = GetHandle("solar3"),
-		solar_4 = GetHandle("solar4")
-	}
-	mission.var.recycler = GetHandle("avrec3-1_recycler")
-	
-	SetScrap(reloaded.team.my_team_num(), 80)
-	SetPilot(reloaded.team.my_team_num(), 10)
+    nil,
+    function(state)
+        mission.var.command_tower = GetHandle("command") -- this is errorneouSly called "solar1" in the original script
+        mission.var.s_powers = {
+            solar_2 = GetHandle("solar2"),
+            solar_3 = GetHandle("solar3"),
+            solar_4 = GetHandle("solar4")
+        }
+        mission.var.recycler = GetHandle("avrec3-1_recycler")
 
-	SetObjectiveOn(mission.var.command_tower)
-	SetObjectiveName(mission.var.command_tower, "Command Tower")
+        SetScrap(reloaded.team.my_team_num(), 80)
+        SetPilot(reloaded.team.my_team_num(), 10)
 
-	SetObjectiveOn(mission.var.s_powers.solar_2)
-	SetObjectiveName(mission.var.s_powers.solar_2, "Solar Array")
+        SetObjectiveOn(mission.var.command_tower)
+        SetObjectiveName(mission.var.command_tower, "Command Tower")
 
-	Goto(mission.var.recycler, "recycle_point")
-	ClearObjectives()
-	AddObjective("misn0301.otf")
+        SetObjectiveOn(mission.var.s_powers.solar_2)
+        SetObjectiveName(mission.var.s_powers.solar_2, "Solar Array")
 
-	-- The command tower slowly regenerates over time
-	mission.var.command_regen = vsp.time.make_timer(1.0, true, function ()
-		if not IsAlive(mission.var.command_tower) then return end
-		AddHealth(mission.var.command_tower, 50.0)
-	end):start()
+        Goto(mission.var.recycler, "recycle_point")
+        ClearObjectives()
+        AddObjective("misn0301.otf")
 
-	-- The command tower will paint nearby targets
-	mission.var.command_target_painting = vsp.time.make_timer(5.0, true, function ()
-		for obj in ObjectsInRange(100.0, mission.var.command_tower) do
-			if GetTeamNum(obj) == mission.cfg.enemy_team_num then
-				SetObjectiveOn(obj)
-			end
-		end
-	end):start()
+        -- The command tower slowly regenerates over time
+        mission.var.command_regen = vsp.time.make_timer(1.0, true, function()
+            if not IsAlive(mission.var.command_tower) then return end
+            AddHealth(mission.var.command_tower, 50.0)
+        end):start()
 
-	-- This is General Collins commander, you're just in time...
-	AudioMessage("misn0311.wav")
+        -- The command tower will paint nearby targets
+        mission.var.command_target_painting = vsp.time.make_timer(5.0, true, function()
+            for obj in ObjectsInRange(100.0, mission.var.command_tower) do
+                if GetTeamNum(obj) == mission.cfg.enemy_team_num then
+                    SetObjectiveOn(obj)
+                end
+            end
+        end):start()
 
-	mission:change_state(mission_phase.wait_for_recycler)
-end,
-function (state) end
+        -- This is General Collins commander, you're just in time...
+        AudioMessage("misn0311.wav")
+
+        mission:change_state(mission_phase.wait_for_recycler)
+    end,
+    nil
 )
 
 mission:define_state(mission_phase.wait_for_recycler,
-function (state, dt)
-	if GetDistance(mission.var.recycler, "recycle_point") < 50.0 then
-		mission:change_state(mission_phase.first_wave)
-	end
-end,
-function (state)
-	
-end,
-function (state)
-	
-end
+    function(state, dt)
+        if GetDistance(mission.var.recycler, "recycle_point") < 50.0 then
+            mission:change_state(mission_phase.first_wave)
+        end
+    end,
+    nil,
+    nil
 )
 
 mission:define_state(mission_phase.first_wave,
-function (state, dt) -- Send the first wave retreating after one of them dies
-	local done = false
-	if not IsAlive(state.var.fighter_1) then
-		Retreat(state.var.fighter_2, "retreat_path", 1)
-		done = true
-	elseif not IsAlive(state.var.fighter_2) then
-		Retreat(state.var.fighter_1, "retreat_path", 1)
-		done = true
-	end
-	
-	if done then
-		mission:change_state(mission_phase.recycler_ready)
-	end
-end,
-function (state)
-	Stop(mission.var.recycler, 0)
+    function(state, dt) -- Send the first wave retreating after one of them dies
+        local done = false
+        if not IsAlive(state.var.fighter_1) then
+            Retreat(state.var.fighter_2, "retreat_path", 1)
+            done = true
+        elseif not IsAlive(state.var.fighter_2) then
+            Retreat(state.var.fighter_1, "retreat_path", 1)
+            done = true
+        end
 
-	state.var.fighter_1 = GetHandle("svfigh1")
-	state.var.fighter_2 = GetHandle ("svfigh2")
+        if done then
+            mission:change_state(mission_phase.recycler_ready)
+        end
+    end,
+    function(state)
+        Stop(mission.var.recycler, 0)
 
-	Attack(state.var.fighter_1, mission.var.command_tower, 1)
-	Attack(state.var.fighter_2, mission.var.command_tower, 1)
-end,
-function (state)
+        state.var.fighter_1 = GetHandle("svfigh1")
+        state.var.fighter_2 = GetHandle("svfigh2")
 
-end
+        Attack(state.var.fighter_1, mission.var.command_tower, 1)
+        Attack(state.var.fighter_2, mission.var.command_tower, 1)
+    end,
+    nil
 )
 
 mission:define_state(mission_phase.recycler_ready,
-function (state, dt) end,
-function (state)
-	vsp.utility.defer_for(10.0, function ()
-		-- The soviet forces are withdrawing commander...
-		AudioMessage("misn0312.wav")
-		ClearObjectives()
-		AddObjective("misn0302.otf", "white")
-		AddObjective("misn0301.otf", "white")
-		mission:change_state(mission_phase.build_defenses)
-	end)
-end,
-function (state) end)
+    nil,
+    function(state)
+        vsp.utility.defer_for(10.0, function()
+            -- The soviet forces are withdrawing commander...
+            AudioMessage("misn0312.wav")
+            ClearObjectives()
+            AddObjective("misn0302.otf", "white")
+            AddObjective("misn0301.otf", "white")
+            mission:change_state(mission_phase.build_defenses)
+        end)
+    end,
+    nil
+)
 
 mission:define_state(mission_phase.build_defenses,
-function (state, dt)
-	if CountUnitsNearObject(mission.var.command_tower, 200.0, 1, "avturr") > 3 then
-		mission:change_state(mission_phase.second_wave)
-	end
-end,
-function (state) end,
-function (state) end
+    function(state, dt)
+        if CountUnitsNearObject(mission.var.command_tower, 200.0, 1, "avturr") > 3 then
+            mission:change_state(mission_phase.second_wave)
+        end
+    end,
+    nil,
+    nil
 )
 
 mission:define_state(mission_phase.second_wave,
-function (state, dt) end,
-function (state)
-	local fighters = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 2, "spawn_scrap1")
-	-- Note from VT, I think it's cleaner to just return nil for clients and then in the script handle it as:
-	-- if (the local player owns these uses) then do stuff with them, as opposed to using a create object listener
-	if fighters then
-		reloaded.ai.squad.make_squad(fighters):attack(mission.var.command_tower)
-		vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.third_wave)
-	end
-end,
-function (state) end
+    nil,
+    function(state)
+        local fighters = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 2, "spawn_scrap1")
+        -- Note from VT, I think it's cleaner to just return nil for clients and then in the script handle it as:
+        -- if (the local player owns these uses) then do stuff with them, as opposed to using a create object listener
+        if fighters then
+            reloaded.ai.squad.make_squad(fighters):attack(mission.var.command_tower)
+            vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.third_wave)
+        end
+    end,
+    nil
 )
 
 mission:define_state(mission_phase.third_wave,
-function (state, dt) end,
-function (state)
-	local fighters = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 2, "spawn_scrap1")
-	if fighters then
-		reloaded.ai.squad.make_squad(fighters):attack(mission.var.command_tower)
-		vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.fourth_wave)
-	end
-end,
-function (state) end
+    nil,
+    function(state)
+        local fighters = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 2, "spawn_scrap1")
+        if fighters then
+            reloaded.ai.squad.make_squad(fighters):attack(mission.var.command_tower)
+            vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.fourth_wave)
+        end
+    end,
+    nil
 )
 
 mission:define_state(mission_phase.fourth_wave,
-function (state, dt)
+    function(state, dt)
 
-end,
-function (state)
-	local apcs = mission:build_scaled("svapc", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
-	local tanks = mission:build_scaled("svtank", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
-	local fighters = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+    end,
+    function(state)
+        local apcs = mission:build_scaled("svapc", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+        local tanks = mission:build_scaled("svtank", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+        local fighters = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
 
-	if not apcs or not tanks or not fighters then return end
+        -- Clients will not have a handle to these objects so only the host
+        -- runs the following code
+        if not apcs or not tanks or not fighters then return end
 
-	local apc_strike_force = reloaded.ai.make_squad(unpack(apcs), unpack(fighters))
-	if IsAlive(mission.var.recycler) then
-		apc_strike_force:attack(mission.var.recycler)
-	elseif IsAlive(mission.var.s_powers.solar_3) then
-		apc_strike_force:attack(mission.var.s_powers.solar_3)
-	elseif IsAlive(mission.var.s_powers.solar_4) then
-		apc_strike_force:attack(mission.var.s_powers.solar_4)
-	end
+        local apc_strike_force = reloaded.ai.make_squad(unpack(apcs), unpack(fighters))
+        if IsAlive(mission.var.recycler) then
+            apc_strike_force:attack(mission.var.recycler)
+        elseif IsAlive(mission.var.s_powers.solar_3) then
+            apc_strike_force:attack(mission.var.s_powers.solar_3)
+        elseif IsAlive(mission.var.s_powers.solar_4) then
+            apc_strike_force:attack(mission.var.s_powers.solar_4)
+        end
 
-	local tank_force = reloaded.ai.make_squad(unpack(tanks))
-	tank_force:attack(mission.var.s_powers.solar_2)
+        local tank_force = reloaded.ai.make_squad(unpack(tanks))
+        tank_force:attack(mission.var.s_powers.solar_2)
 
-	vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.backup_arrived)
-end,
-function (state)
-	
-end
+        vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.backup_arrived)
+    end,
+    nil
 )
 
 mission:define_state(mission_phase.backup_arrived,
-function (state, dt)
-	if not state.var.backup then return end
-	if GetDistance(state.var.backup.leader, mission.var.s_powers.solar_2) < 75.0 then
-		state.var.backup:stop()
-		vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.strike_cinematic_1)
-	end
-end,
-function (state)
-	local scouts = mission:build_scaled("avfigh", 1, 1, "spawn_scrap2")
-	local tanks = mission:build_scaled("avtank", 1, 1, "spawn_scrap2")
-	AudioMessage("misn0314.wav")
-	if scouts and tanks then
-		state.var.backup = reloaded.ai.make_squad(unpack(tanks), unpack(scouts))
-		backup:goto(mission.var.s_powers.solar_2)
-	end
-end,
-function (state) end
+    function(state, dt) -- which unit in the backup table doesn't really matter
+        if GetDistance(state.var.my_backup[1], mission.var.s_powers.solar_2) < 75.0 then
+            state.var.backup:stop(0)
+            vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.strike_cinematic_1)
+        end
+    end,
+    function(state)
+        state.var.my_backup = {} -- backup units local to the player
+
+        -- This code runs per player
+        local my_scout = exu.BuildSyncObject("avfigh", exu.GetMyNetID(), "spawn_scrap2")
+        local my_tank = exu.BuildSyncObject("avtank", exu.GetMyNetID(), "spawn_scrap2")
+        table.insert(state.var.my_backup, my_scout)
+        table.insert(state.var.my_backup, my_tank)
+
+        -- Commander, reinforcements are returning from outpost 2...
+        AudioMessage("misn0314.wav")
+
+        for _, backup in ipairs(state.var.my_backup) do
+            Goto(backup, mission.var.s_powers.solar_2, 1)
+        end
+    end,
+    nil
 )
 
 mission:define_state(mission_phase.strike_cinematic_1,
-function (state, dt)
-	CameraPath("movie_path", 175, 850, mission.var.prop1)
-end,
-function (state)
-	mission.var.audmsg = AudioMessage("misn0305.wav")
-	vsp.cinematic.try_ready()
+    function(state, dt)
+        CameraPath("movie_path", 175, 850, mission.var.prop1)
+        Defend(mission.var.prop1, 1)
+    end,
+    function(state)
+        -- Satellite recon indicates that a massive soviet strike force has landed...
+        mission.var.audmsg = AudioMessage("misn0305.wav")
+        vsp.cinematic.try_ready()
 
-	-- Using async objects here since they are "props" and makes the netcode simpler
-	mission.var.prop1 = exu.BuildAsyncObject("svrecy", mission.cfg.enemy_team_num, "recy_spawn")
-	mission.var.prop2 = exu.BuildAsyncObject("svmuf", mission.cfg.enemy_team_num, "muf_spawn")
-	mission.var.prop3 = exu.BuildAsyncObject("svtank", mission.cfg.enemy_team_num, "tank1_spawn")
-	mission.var.prop4 = exu.BuildAsyncObject("svtank", mission.cfg.enemy_team_num, "tank2_spawn")
-	mission.var.prop5 = exu.BuildAsyncObject("svfigh", mission.cfg.enemy_team_num, "fighter1_spawn")
-	mission.var.guy1 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
-	mission.var.guy2 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
-	mission.var.guy3 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
-	mission.var.guy4 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
+        local mvar = mission.var -- alias for brevity
 
-	vsp.utility.defer_for(7.5, mission.change_state, mission, mission_phase.strike_cinematic_2)
+        -- Using async objects here since they are "props" and makes the netcode simpler
+        mvar.prop1 = exu.BuildAsyncObject("svrecy", mission.cfg.enemy_team_num, "recy_spawn")
+        mvar.prop2 = exu.BuildAsyncObject("svmuf", mission.cfg.enemy_team_num, "muf_spawn")
+        mvar.prop3 = exu.BuildAsyncObject("svtank", mission.cfg.enemy_team_num, "tank1_spawn")
+        mvar.prop4 = exu.BuildAsyncObject("svtank", mission.cfg.enemy_team_num, "tank2_spawn")
+        mvar.prop5 = exu.BuildAsyncObject("svfigh", mission.cfg.enemy_team_num, "fighter1_spawn")
 
-end,
-function (state) end
+        mvar.guy1 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
+        mvar.guy2 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
+        mvar.guy3 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
+        mvar.guy4 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
+
+        Defend(mvar.prop1, 1)
+        Goto(mvar.prop2, "tank1_spawn", 1)
+        Goto(mvar.prop3, "that_path", 1)
+        Goto(mvar.prop4, "cool_path", 1)
+        Goto(mvar.prop5, "cool_path", 1)
+        Goto(mvar.guy1, "guy_spot", 1)
+        Goto(mvar.guy2, "guy_spot", 1)
+        Goto(mvar.guy3, "guy_spot", 1)
+        Goto(mvar.guy4, "guy_spot", 1)
+
+        vsp.utility.defer_for(7.5, mission.change_state, mission, mission_phase.strike_cinematic_2)
+    end,
+    nil
 )
 
 mission:define_state(mission_phase.strike_cinematic_2,
-function (state, dt)
-	CameraPath("movie_path", 175, 850, mission.var.prop1)
-end,
-function (state)
-	mission.var.prop8 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn")
-	mission.var.prop9 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn")
-	Goto(prop8, "tank2_spawn", 1)
-	Goto(prop9, "fighter1_spawn", 1)
-end,
-function (state)
-	
-end
+    function(state, dt)
+        CameraPath("movie_path", 175, 850, mission.var.prop1)
+    end,
+    function(state)
+        mission.var.prop8 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn")
+        mission.var.prop9 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn")
+        Goto(mission.var.prop8, "tank2_spawn", 1)
+        Goto(mission.var.prop9, "fighter1_spawn", 1)
+
+        -- The cinematic automatically ends after 7 seconds
+        state.var.end_timer = vsp.time.make_timer(7.0, false, mission.change_state, mission,
+            mission_phase.transports_arrived):start()
+    end,
+    function(state)
+        StopAudioMessage(mission.var.audmsg)
+
+        local mvar = mission.var
+
+        -- These are async objects so it's fine to remove normally
+        RemoveObject(mvar.prop1)
+        RemoveObject(mvar.prop2)
+        RemoveObject(mvar.prop3)
+        RemoveObject(mvar.prop4)
+        RemoveObject(mvar.prop5)
+        RemoveObject(mvar.prop6)
+        RemoveObject(mvar.prop7)
+        RemoveObject(mvar.prop8)
+        RemoveObject(mvar.prop9)
+        RemoveObject(mvar.guy1)
+        RemoveObject(mvar.guy2)
+        RemoveObject(mvar.guy3)
+        RemoveObject(mvar.guy4)
+    end
+)
+
+mission:define_state(mission_phase.transports_arrived,
+    nil,
+    function(state)
+        vsp.cinematic.try_finish()
+
+        mission.var.rescue_1 = mission:build_single_object("avapc", 1, "apc1_spawn")
+        mission.var.rescue_2 = mission:build_single_object("avapc", 1, "apc2_spawn")
+
+        SetObjectiveOff(mission.var.command_tower)
+        SetObjectiveOff(mission.var.s_powers[1])
+
+        SetObjectiveOn(mission.var.rescue_1)
+        SetObjectiveName(mission.var.rescue_1, "Transport 1")
+
+        SetObjectiveOn(mission.var.rescue_2)
+        SetObjectiveName(mission.var.rescue_2, "Transport 2")
+
+        mission.var.launch_pad = GetHandle("launch_pad")
+
+        ClearObjectives()
+        AddObjective("misn0311.otf", "green")
+        AddObjective("misn0312.otf", "green")
+        AddObjective("misn0303.otf", "white")
+
+        vsp.utility.defer_for(30.0, mission.change_state, mission, mission_phase.evacuate_transports)
+    end,
+    nil
+)
+
+mission:define_state(mission_phase.evacuate_transports,
+    function(state, dt)
+
+    end,
+    function(state)
+        if mission.var.rescue_1 then
+            Retreat(mission.var.rescue_1, "rescue_path")
+            Retreat(mission.var.rescue_2, "rescue_path")
+        end
+
+        Retreat(GetHandle("enemyturret_1"), "turret_path1")
+        Retreat(GetHandle("enemyturret_2"), "turret_path2")
+        Retreat(GetHandle("enemyturret_3"), "turret_path3")
+        Retreat(GetHandle("enemyturret_4"), "base")
+
+        -- Commander, take up a position in front of the transports...
+        AudioMessage("misn0315.wav")
+    end,
+    function(state)
+
+    end
 )
 
 --- Stock event handlers
 
 function Start()
-	reloaded.Start()
+    reloaded.Start()
 end
 
 function Update(dt)
-	reloaded.Update(dt)
+    reloaded.Update(dt)
 end
 
 function CreateObject(h)
-	reloaded.CreateObject(h)
+    reloaded.CreateObject(h)
 end
 
 function DeleteObject(h)
@@ -291,19 +393,19 @@ function DeleteObject(h)
 end
 
 function CreatePlayer(id, name, team)
-	reloaded.CreatePlayer(id, name, team)
+    reloaded.CreatePlayer(id, name, team)
 end
 
 function DeletePlayer(id, name, team)
-	reloaded.DeletePlayer(id, name, team)
+    reloaded.DeletePlayer(id, name, team)
 end
 
 function Receive(from, type, ...)
-	reloaded.Receive(from, type, ...)
+    reloaded.Receive(from, type, ...)
 end
 
 --- Extra Utilities event handlers
 
 function exu.AddScrap(team, amount)
-	reloaded.AddScrap(team, amount)
+    reloaded.AddScrap(team, amount)
 end
