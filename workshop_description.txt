@@ -1,1 +1,14 @@
 [h1]Battlezone: Reloaded[/h1]
+
+[i][h3]Classic Battlezone, modern gameplay[/h3][/i]
+
+This mod aims to provide all the bug fixes and quality of life features from SBP/BZP and more, in a no BS, robust and extensible platform for both players and modders.
+
+Some features that will be included with the full release are:
+[list]
+    [*] NSDF campaign ported to 4 player coop 
+    [*] Modernized and fully featured deathmatch
+    [*] And eventually a strategy variant
+[/list]
+
+If this is something you're interested in working on, hit me up on discord @vtrider, any kind of contributions are welcome! The project is hosted on the [url=https://github.com/BattlezoneScrapField/Battlezone-Reloaded]Battlezone Scrap Field GitHub page.[/url]
