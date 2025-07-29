@@ -76,5 +76,3 @@ if __name__ == "__main__":
         for missing_file in missing_files:
             print(missing_file)
         print("\nDid you remember to compile the binaries?")
-    
-    os.system("pause")

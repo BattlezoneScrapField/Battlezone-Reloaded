@@ -59,7 +59,6 @@ def build_workshop() -> None:
 
     set_local_dll_path(reloaded_path)
     print(f"Built workshop at {reloaded_path}")
-    os.system("pause")
 
 
 if __name__ == "__main__":
@@ -67,4 +66,3 @@ if __name__ == "__main__":
         build_workshop()
     except Exception as e:
         print(f"An error occurred: {e}")
-        os.system("pause")

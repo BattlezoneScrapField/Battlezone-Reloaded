@@ -14,7 +14,6 @@ ADDON_FOLDER = os.path.join(get_addon_path(), "reloaded")
 def clean():
     shutil.rmtree(ADDON_FOLDER)
     print("Cleaned addon build folder")
-    os.system("pause")
 
 
 if __name__ == "__main__":
