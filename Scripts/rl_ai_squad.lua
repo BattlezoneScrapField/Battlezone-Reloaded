@@ -43,25 +43,30 @@ do
 
     function ai_squad:goto(where, independence)
         self:for_each(Goto, where, independence)
+        return self
     end
 
     function ai_squad:stop(independence)
         self:for_each(Stop, independence)
+        return self
     end
 
     function ai_squad:attack(target)
         self:for_each(Attack, target)
+        return self
     end
 
     --- Calls the provided function on each squad member, passing in their handle as the first
     --- argument, with any user supplied arguments passed in after in order 
     --- @param func fun(unit: userdata, ...?)
     --- @param ...? any
+    --- @return self
     function ai_squad:for_each(func, ...)
         vsp.utility.required_param(func, "func", "function", "Reloaded")
         for unit in self.members:iterator() do
             func(unit, ...)
         end
+        return self
     end
 end
 return rl_ai_squad

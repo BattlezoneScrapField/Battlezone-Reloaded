@@ -209,21 +209,14 @@ function (state, dt)
 	end
 end,
 function (state)
-	mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn1"))
+	local fighters = mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn1"))
+    if fighters then
+        reloaded.ai.squad.make_squad(fighters):goto("patrol1", 0):for_each(SetObjectiveOn)
+    end
 
 	AudioMessage("misn0233.wav")
 end,
 function (state) end
-)
-
-mission:define_event_listener(mission_phase.first_fighter_attack,
-"CreateObject",
-function (h)
-	if IsOdf(h, "svfigh") then
-		Goto(h, "patrol1", 0)
-		SetObjectiveOn(h)
-	end
-end
 )
 
 mission:define_state(mission_phase.second_fighter_attack,

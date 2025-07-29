@@ -147,6 +147,9 @@ function GetHandle(label)
 end
 
 --- Creates a game object with the given odf name, team number, and location.
+---
+--- Multiplayer remarks: Objects built by the host are always synchronized, objects built by clients will always be desynchronized initially,
+--- but can be synchronized by calling SetLocal(). To build a desynchronized object as the host, use exu.BuildAsyncObject().
 --- @param odfname string
 --- @param teamnum TeamNum
 --- @param location Vector|Matrix|Handle|string Position vector, ransform matrix, Object, or path name.
@@ -157,6 +160,14 @@ function BuildObject(odfname, teamnum, location, point)
 end
 
 --- Removes the game object with the given handle.
+---
+--- Remarks: Unsafe to use on a handle passed in by CreateObject(h), doing so will crash the game. If you need this functionality,
+--- you should defer the deletion until the next Update(dt).
+---
+--- Multiplayer remarks: Very dangerous. There are innumerable cases which can cause objects to be improperly deleted and/or
+--- spawn explosion chunks which may only be visible to certain players. In order to safely delete a distributed object,
+--- ALL players must call RemoveObject(h) on the target object simultaneously. Additionally, attempting to delete the starting
+--- recycler in a strategy or MPI game will crash the game, if you need this functionality use exu.DisableStartingRecycler().
 --- @param h Handle
 function RemoveObject(h) end
 
@@ -660,10 +671,14 @@ end
 -- Objectives are visible to all teams from any distance and from any direction, with an arrow pointing to off-screen objectives. There is currently no way to make team-specific objectives.
 
 --- Sets the game object as an objective to all teams.
+---
+--- Multiplayer remarks: The object `h` must be local to the caller
 --- @param h Handle
 function SetObjectiveOn(h) end
 
 --- Sets the game object back to normal.
+---
+--- Multiplayer remarks: The object `h` must be local to the caller
 --- @param h Handle
 function SetObjectiveOff(h) end
 
@@ -1955,6 +1970,8 @@ function IsHosting()
 end
 
 --- Sets the game object as local to the machine the script is running on, transferring ownership from its original owner if it was remote. Important safety tip: only call this on one machine at a time!
+---
+--- Multiplayer remarks: Safe to call in singleplayer, has no function. If called on a remote object, it will break their ai irreversibly.
 --- @param h Handle
 function SetLocal(h) end
 
@@ -1973,6 +1990,9 @@ function IsRemote(h)
 end
 
 --- Adds a system text message to the chat window on the local machine.
+---
+--- Multiplayer remarks: The displayed message is entirely local regardless of hosting status, if you want a message to be visible to all players
+--- you should Send() a message to all players to display the given message.
 --- @param message string
 function DisplayMessage(message) end
 
@@ -2636,6 +2656,8 @@ function UnHide(h) end
 
 --- Creates an explosion with the given odf name at the target position vector, transform matrix, object, or the start of the named path.
 --- [2.1+]
+---
+--- Multiplayer remarks: Explosions are entirely local, this includes the visuals and the damage. This can be used to create clientside graphics.
 --- @param odfname string
 --- @param target Vector|Matrix|Handle|string Position vector, ransform matrix, Object, or path name.
 function MakeExplosion(odfname, target) end
