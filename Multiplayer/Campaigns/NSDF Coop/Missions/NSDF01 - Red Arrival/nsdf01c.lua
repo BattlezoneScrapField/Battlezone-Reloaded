@@ -421,6 +421,10 @@ function GameKey(key)
     end
 
     if key == "B" then
-        exu.BuildAsyncObject("aprepa", GetTeamNum(GetPlayerHandle()), exu.GetReticlePos())
+        exu.BuildAsyncObject("avtank", GetTeamNum(GetPlayerHandle()), exu.GetReticlePos())
+    end
+
+    if key == "N" then
+        SetLocal(GetUserTarget())
     end
 end
