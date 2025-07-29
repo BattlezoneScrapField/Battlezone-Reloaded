@@ -413,6 +413,7 @@ end
 
 vsp.net.set_function("test", function (handle)
     DisplayMessage(tostring(IsValid(handle)))
+    SetObjectiveOn(handle)
 end)
 
 function GameKey(key)
