@@ -57,11 +57,6 @@ mission:define_global_listener("CreateObject", function(h)
     end
 end)
 
-print("feuker")
-for key, value in pairs(reloaded.ai) do
-    print(key)
-    print(value)
-end
 
 mission:define_state(mission_phase.startup,
 nil,
@@ -106,18 +101,35 @@ function(state)
     -- to it to undefine it later
     mission.var.keep_command_alive = mission:define_global_listener("Update", function(dt)
         if not IsAlive(mission.var.command_tower) then
+            mission.var.fail_delay = 5.0
+
+            -- You lost the command tower grizzly one...
+            AudioMessage("misn0302.wav")
+            ClearObjectives()
+            AddObjective("misn0311.otf", "red")
+            AddObjective("misn0312.otf", "white")
+
             if mission.var.turrets_set then
-                mission:fail("misn03f1.des") -- didn't build turrets and lost command
+                mission.var.fail_message = "misn03f1.des" -- forgot to build turrets and lost command tower?
             else
-                mission:fail("misn03f2.des") -- lost command tower
+                mission.var.fail_message = "misn03f2.des" -- lost command tower
             end
+
+            mission:change_state(mission_phase.mission_failed)
         end
     end)
 
     mission.var.keep_spower_alive = mission:define_global_listener("Update", function(dt)
+        -- In the original script it checks if turrets are set, but it fails the mission with the same message so it was presumably cut from the game
         if not IsAlive(mission.var.s_powers.solar_2) then
-            if mission.var.turrets_set then
-            end
+            AudioMessage("misn0303.wav") -- commander you lost the solar arrays...
+            ClearObjectives()
+            AddObjective("misn0311.otf", "red")
+            AddObjective("misn0312.otf", "white")
+
+            mission.var.fail_delay = 5.0
+            mission.var.fail_message = "misn03f3.des" -- you lost the solar array
+            mission:change_state(mission_phase.mission_failed)
         end
     end)
 
@@ -249,7 +261,9 @@ nil
 
 mission:define_state(mission_phase.backup_arrived,
 function(state, dt) -- which unit in the backup table doesn't really matter
+    if state.var.wait_for_cinematic == true then return end -- we only want this to run once and since it's such a small part it's not worth making a new state for it
     if GetDistance(state.var.my_backup.leader, mission.var.s_powers.solar_2) < 75.0 then
+        state.var.wait_for_cinematic = true
         state.var.my_backup:stop(0)
         vsp.utility.defer_for(mission.var.wave_time, mission.change_state, mission, mission_phase.strike_cinematic_1)
     end
@@ -265,6 +279,8 @@ function(state)
 
     -- Commander, reinforcements are returning from outpost 2...
     AudioMessage("misn0314.wav")
+
+    state.var.wait_for_cinematic = false
 end,
 nil
 )
@@ -349,6 +365,12 @@ nil,
 function(state)
     vsp.cinematic.try_finish()
 
+    -- Once the transports arrive the command and solar arrays are allowed to die, and we stop healing the command tower and disable it's target painting
+    mission:undefine_global_listener("Update", mission.var.keep_command_alive)
+    mission:undefine_global_listener("Update", mission.var.keep_spower_alive)
+    mission.var.command_regen:stop()
+    mission.var.command_target_painting:stop()
+
     mission.var.rescue_1 = mission:build_single_object("avapc", 1, "apc1_spawn")
     mission.var.rescue_2 = mission:build_single_object("avapc", 1, "apc2_spawn")
 
@@ -398,15 +420,11 @@ end)
 
 
 mission:define_state(mission_phase.mission_failed,
-function (state, dt)
-    
-end,
+nil,
 function (state)
-    
+    vsp.utility.defer_for(mission.var.fail_delay, mission.fail, mission, mission.var.fail_message)
 end,
-function (state)
-    
-end)
+nil)
 
 --- Stock event handlers
 

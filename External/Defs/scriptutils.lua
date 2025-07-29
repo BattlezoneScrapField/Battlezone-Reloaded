@@ -13,7 +13,7 @@
 -- Type declarations
 
 --- A handle to a game object. This is a unique identifier for the object in the game world.
---- @class Handle<userdata>
+--- @alias Handle userdata
 
 --- A handle to an audio message.
 --- @alias AudioMessage integer
