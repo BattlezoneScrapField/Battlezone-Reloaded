@@ -51,8 +51,8 @@ do
         return self
     end
 
-    function ai_squad:attack(target)
-        self:for_each(Attack, target)
+    function ai_squad:attack(target, priority)
+        self:for_each(Attack, target, priority)
         return self
     end
 

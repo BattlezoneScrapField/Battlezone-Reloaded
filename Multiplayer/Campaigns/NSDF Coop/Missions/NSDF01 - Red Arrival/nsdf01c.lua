@@ -209,7 +209,7 @@ function (state, dt)
 	end
 end,
 function (state)
-	local fighters = mission:build_multiple_objects("svfigh", mission.enemy_team, 2, GetPosition("spawn1"))-- mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn1"))
+	local fighters = mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn1"))
     if fighters then
         reloaded.ai.squad.make_squad(fighters):goto("patrol1", 0):for_each(SetObjectiveOn)
     end
@@ -235,20 +235,17 @@ function (state, dt)
 	end
 end,
 function (state)
-	mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn2"))
+	local fighters = mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn2"))
+    if fighters then
+        local squad = reloaded.ai.squad.make_squad(fighters)
+        if GetDistance(mission.var.first_scav, mission.var.bgoal) < 200.0 then
+            squad:attack(mission.var.first_scav)
+        else
+            squad:goto("patrol2", 0)
+        end
+    end
 end,
 function (state) end
-)
-
-mission:define_event_listener(mission_phase.second_fighter_attack, "CreateObject", function (h)
-	if IsOdf(h, "svfigh") then
-		if GetDistance(mission.var.first_scav, mission.var.bgoal) < 200.0 then
-			Attack(h, mission.var.first_scav)
-		else
-			Goto(h, "patrol2", 0) -- attack scrap field
-		end
-	end
-end
 )
 
 -- This state may or not be triggered depending on if the scav takes damage
@@ -289,40 +286,36 @@ function (state)
 			scavenger
 		--]]
 		Follow(mission.var.first_scav, mission.var.my_comm_tower)
-		-- Remember that only the host builds objects, so when we need
-		-- all clients to get their handle and perform actions we need to use
-		-- an event listener for CreateObject (defined below)
-		mission:build_single_object("avscav", 1, GetPosition("spawn3"))
 
+        -- Remember this method returns a handle for the host, but nil for clients,
+        -- since the host owns this object they will manage it
+		local scav = mission:build_single_object("avscav", 1, GetPosition("spawn3"))
+        if scav then
+            mission.var.second_scav = scav -- only the host will have this var
+            SetCritical(scav, true)
+            Retreat(scav, "retreat")
+            SetObjectiveOn(scav) -- this function propagates to all clients
+
+            mission:define_global_listener("Update", function (dt)
+                if not IsAlive(mission.var.second_scav) then
+                    mission:change_state(mission_phase.mission_failed)
+                end
+            end)
+        end
+
+        -- Good work, unfortunately we've got another scavenger out there that's
+        -- being threatened by soviet wingmen
+        AudioMessage("misn0228.wav")
+
+        vsp.utility.defer_for(10.0, function ()
+            local fighters = mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn4"))
+            if fighters then
+                reloaded.ai.squad.make_squad(fighters):attack(mission.var.second_scav)
+            end
+        end)
 		vsp.utility.defer_for(10, mission.build_scaled, mission, "svfigh", mission.enemy_team, 1, GetPosition("spawn4"))
 end,
 function (state) end
-)
-
-mission:define_event_listener(mission_phase.escort_second_scavenger, "CreateObject", function (h)
-	if IsOdf(h, "avscav") then
-		mission.var.second_scav = h
-		SetCritical(h, true)
-		Retreat(h, "retreat")
-		SetObjectiveOn(h)
-		AudioMessage("misn0228.wav")
-
-		-- track the scav and make sure it stays alive
-		mission:define_global_listener("Update", function (dt)
-			if not IsAlive(mission.var.second_scav) then
-				mission:change_state(mission_phase.mission_failed)
-			end
-		end)
-	end
-end
-)
-
--- This tells the built fighter(s) to attack the second scav
-mission:define_event_listener(mission_phase.escort_second_scavenger, "CreateObject", function (h)
-	if IsOdf(h, "svfigh") then
-		Attack(h, mission.var.second_scav)
-	end
-end
 )
 
 mission:define_state(mission_phase.mission_success,
