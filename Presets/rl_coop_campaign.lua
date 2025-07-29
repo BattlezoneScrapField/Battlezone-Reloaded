@@ -36,7 +36,7 @@ do
     cfg.enemy_count_scaling = true    -- Set built in AI scaling methods to scale linearly with player count if used
 
     -- Apply runnable options
-    
+
     -- This needs to run post Start()
     vsp.utility.defer(function ()
         exu.SetLives(cfg.starting_lives)

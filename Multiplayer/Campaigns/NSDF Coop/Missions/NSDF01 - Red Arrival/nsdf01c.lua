@@ -209,6 +209,7 @@ function (state, dt)
 	end
 end,
 function (state)
+    -- This function returns nil for clients, and a handle for the host
 	local fighters = mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn1"))
     if fighters then
         reloaded.ai.squad.make_squad(fighters):goto("patrol1", 0):for_each(SetObjectiveOn)
@@ -313,7 +314,6 @@ function (state)
                 reloaded.ai.squad.make_squad(fighters):attack(mission.var.second_scav)
             end
         end)
-		vsp.utility.defer_for(10, mission.build_scaled, mission, "svfigh", mission.enemy_team, 1, GetPosition("spawn4"))
 end,
 function (state) end
 )
@@ -395,23 +395,4 @@ end
 
 function exu.AddScrap(team, amount)
 	reloaded.AddScrap(team, amount)
-end
-
-vsp.net.set_function("test", function (handle)
-    DisplayMessage(tostring(IsValid(handle)))
-    SetObjectiveOn(handle)
-end)
-
-function GameKey(key)
-    if key == "G" then
-        vsp.net.async(vsp.net.all_players, "test", GetTarget(GetPlayerHandle()))
-    end
-
-    if key == "B" then
-        exu.BuildAsyncObject("avtank", GetTeamNum(GetPlayerHandle()), exu.GetReticlePos())
-    end
-
-    if key == "N" then
-        SetLocal(GetUserTarget())
-    end
 end

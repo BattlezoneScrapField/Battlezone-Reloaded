@@ -200,7 +200,9 @@ function(state, dt)
     end
 end,
 nil,
-nil
+function (state)
+    mission.var.turrets_set = true
+end
 )
 
 mission:define_state(mission_phase.second_wave,
