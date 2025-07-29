@@ -209,7 +209,6 @@ function (state, dt)
 	end
 end,
 function (state)
-    DisplayMessage(tostring(vsp.net.is_singleplayer_or_solo()))
 	local fighters = mission:build_multiple_objects("svfigh", mission.enemy_team, 2, GetPosition("spawn1"))-- mission:build_scaled("svfigh", mission.enemy_team, 1, GetPosition("spawn1"))
     if fighters then
         reloaded.ai.squad.make_squad(fighters):goto("patrol1", 0):for_each(SetObjectiveOn)
