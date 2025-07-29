@@ -672,13 +672,15 @@ end
 
 --- Sets the game object as an objective to all teams.
 ---
---- Multiplayer remarks: The object `h` must be local to the caller
+--- Multiplayer remarks: The object `h` must be local to the caller and synchronized.
+--- Calling this function on a desynchronized object will result in the status not being propagated to remote players.
 --- @param h Handle
 function SetObjectiveOn(h) end
 
 --- Sets the game object back to normal.
 ---
---- Multiplayer remarks: The object `h` must be local to the caller
+--- Multiplayer remarks: The object `h` must be local to the caller and synchronized.
+--- Calling this function on a desynchronized object will result in the status not being propagated to remote players.
 --- @param h Handle
 function SetObjectiveOff(h) end
 
