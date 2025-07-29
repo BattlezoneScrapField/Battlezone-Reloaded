@@ -152,7 +152,7 @@ do
             return self:super():build_multiple_objects(odfname, teamnum, count, position)
         end
         if not vsp.net.is_hosting() then return nil end
-        
+
         return self:super():build_multiple_objects(odfname, teamnum, count, position)
     end
 
