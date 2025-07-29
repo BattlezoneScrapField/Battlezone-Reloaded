@@ -410,3 +410,13 @@ end
 function exu.AddScrap(team, amount)
 	reloaded.AddScrap(team, amount)
 end
+
+vsp.net.set_function("test", function (handle)
+    DisplayMessage(tostring(IsValid(handle)))
+end)
+
+function GameKey(key)
+    if key == "G" then
+        vsp.net.async(vsp.net.all_players, "test", GetTarget(GetPlayerHandle()))
+    end
+end
