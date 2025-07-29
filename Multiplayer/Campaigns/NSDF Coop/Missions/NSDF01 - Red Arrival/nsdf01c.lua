@@ -419,4 +419,8 @@ function GameKey(key)
     if key == "G" then
         vsp.net.async(vsp.net.all_players, "test", GetTarget(GetPlayerHandle()))
     end
+
+    if key == "B" then
+        exu.BuildAsyncObject("aprepa", GetTeamNum(GetPlayerHandle()), exu.GetReticlePos())
+    end
 end
