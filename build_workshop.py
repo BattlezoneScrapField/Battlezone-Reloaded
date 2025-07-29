@@ -58,7 +58,7 @@ def build_workshop() -> None:
             shutil.copyfile(os.path.join(path, file), os.path.join(reloaded_path, file))
 
     set_local_dll_path(reloaded_path)
-    print(f"Built addon at {reloaded_path}")
+    print(f"Built workshop at {reloaded_path}")
     os.system("pause")
 
 
