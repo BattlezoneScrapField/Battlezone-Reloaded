@@ -642,6 +642,6 @@ end
 
 function GameKey(key)
     if key == "G" then
-        mission:build_single_object("avturr", reloaded.team.get_my_team(), exu.GetReticlePos())
+        mission:build_single_object("avturr", GetTeamNum(GetPlayerHandle()), exu.GetReticlePos())
     end
 end
