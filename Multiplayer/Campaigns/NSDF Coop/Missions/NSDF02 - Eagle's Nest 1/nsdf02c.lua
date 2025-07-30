@@ -457,14 +457,12 @@ end)
 
 mission:define_state(mission_phase.transports_safe,
 function (state, dt)
-    -- Wait for all players to reach the launch pad
-    for player = 1, vsp.net_player.get_player_count() do
-        if GetDistance(GetPlayerHandle(player), mission.var.launch_pad) > 100.0 then
-            return
-        end
+    if GetDistance(GetPlayerHandle(), mission.var.launch_pad) < 100.0 then
+        vsp.net.display_message_all_clients(string.format("%s has reached the launch pad!", vsp.net_player.get_my_name()))
+        vsp.net.wait_for_all_clients(function ()
+            mission:change_state(mission_phase.ending_cinematic_1)
+        end)
     end
-
-    mission:change_state(mission_phase.ending_cinematic_1)
 end,
 function (state)
     -- Nice job grizzly one, now get to the launch pad

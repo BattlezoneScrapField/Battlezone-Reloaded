@@ -207,6 +207,14 @@ do
     --- @param callback? function callback
     --- @param ...? any callback params
     function coop_mission:sync_mission_var(name, var, callback, ...)
+        if vsp.net.is_singleplayer_or_solo() then
+            self.var[name] = var
+            if callback then
+                callback(...)
+            end
+            return
+        end
+
         if vsp.net.is_hosting() then
             self.var[name] = var
 
@@ -234,6 +242,13 @@ do
     --- @param ...? any callback params
     function coop_mission:sync_state_var(state, name, var, callback, ...)
         if vsp.net.is_hosting() then
+            if vsp.net.is_singleplayer_or_solo() then
+                self.states[state].var[name] = var
+                if callback then
+                    callback(...)
+                end
+            end
+
             self.states[state].var[name] = var
 
             local results = vsp.net.async(vsp.net.all_players, "sync_state_var", state, name, var)
