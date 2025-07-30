@@ -25,7 +25,7 @@ do
     local current_mission = nil
 
     --- Gets the current mission instance if it exists.
-    --- @return any
+    --- @return mission
     function rl_mission.get_current_mission()
         return current_mission
     end
@@ -164,7 +164,7 @@ do
     --- Builds a single object (this is just here so that it works in both SP and MP)
     --- @param ... any build object params
     function mission:build_single_object(...)
-        return exu.BuildAsyncObject(...)
+        return exu.BuildSyncObject(...)
     end
 
     --- Build multiple objects around the given area
