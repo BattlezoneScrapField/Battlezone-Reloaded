@@ -639,3 +639,9 @@ end
 function exu.AddScrap(team, amount)
     reloaded.AddScrap(team, amount)
 end
+
+function GameKey(key)
+    if key == "G" then
+        mission:build_single_object("avturr", reloaded.team.get_my_team(), exu.GetReticlePos())
+    end
+end
