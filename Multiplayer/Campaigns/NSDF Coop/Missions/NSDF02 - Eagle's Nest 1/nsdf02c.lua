@@ -297,15 +297,15 @@ function(state, dt)
     end
 end,
 function(state)
-    -- Satellite recon indicates that a massive soviet strike force has landed...
-    mission.var.audmsg = AudioMessage("misn0305.wav")
-    vsp.cinematic.try_ready()
-
     local mvar = mission.var -- alias for brevity
 
     -- The host manages the props, but clients need a handle to prop1 for the cinematic
     local prop1 = mission:build_single_object("svrecy", mission.cfg.enemy_team_num, "recy_spawn")
     mission:sync_mission_var("prop1", prop1, function ()
+        -- Satellite recon indicates that a massive soviet strike force has landed...
+        mission.var.audmsg = AudioMessage("misn0305.wav")
+        vsp.cinematic.try_ready()
+
         mvar.prop2 = mission:build_single_object("svmuf", mission.cfg.enemy_team_num, "muf_spawn")
         mvar.prop3 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, "tank1_spawn")
         mvar.prop4 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, "tank2_spawn")
