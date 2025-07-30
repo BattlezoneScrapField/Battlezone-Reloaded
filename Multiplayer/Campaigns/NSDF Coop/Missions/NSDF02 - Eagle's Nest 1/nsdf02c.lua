@@ -85,6 +85,7 @@ function(state)
     -- The command tower slowly regenerates over time
     mission.var.command_regen = vsp.time.make_timer(1.0, true, function()
         if not IsAlive(mission.var.command_tower) then return end
+        if not vsp.net.is_hosting() then return end -- we only want to apply the healing once not once per player
         AddHealth(mission.var.command_tower, 50.0)
     end):start()
 
@@ -289,8 +290,11 @@ nil
 
 mission:define_state(mission_phase.strike_cinematic_1,
 function(state, dt)
+    if not state.var.cinematic_ready then return end
     CameraPath("movie_path", 175, 850, mission.var.prop1)
-    Defend(mission.var.prop1, 1)
+    if mission.var.prop1 then
+        Defend(mission.var.prop1, 1)
+    end
 end,
 function(state)
     -- Satellite recon indicates that a massive soviet strike force has landed...
@@ -299,30 +303,37 @@ function(state)
 
     local mvar = mission.var -- alias for brevity
 
-    -- Using async objects here since they are "props" and makes the netcode simpler
-    mvar.prop1 = exu.BuildAsyncObject("svrecy", mission.cfg.enemy_team_num, "recy_spawn")
-    mvar.prop2 = exu.BuildAsyncObject("svmuf", mission.cfg.enemy_team_num, "muf_spawn")
-    mvar.prop3 = exu.BuildAsyncObject("svtank", mission.cfg.enemy_team_num, "tank1_spawn")
-    mvar.prop4 = exu.BuildAsyncObject("svtank", mission.cfg.enemy_team_num, "tank2_spawn")
-    mvar.prop5 = exu.BuildAsyncObject("svfigh", mission.cfg.enemy_team_num, "fighter1_spawn")
+    -- The host manages the props, but clients need a handle to prop1 for the cinematic
+    local prop1 = mission:build_single_object("svrecy", mission.cfg.enemy_team_num, "recy_spawn")
+    mission:sync_mission_var("prop1", prop1, function ()
+        mvar.prop2 = mission:build_single_object("svmuf", mission.cfg.enemy_team_num, "muf_spawn")
+        mvar.prop3 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, "tank1_spawn")
+        mvar.prop4 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, "tank2_spawn")
+        mvar.prop5 = mission:build_single_object("svfigh", mission.cfg.enemy_team_num, "fighter1_spawn")
 
-    mvar.guy1 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
-    mvar.guy2 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
-    mvar.guy3 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
-    mvar.guy4 = exu.BuildAsyncObject("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
+        mvar.guy1 = mission:build_single_object("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
+        mvar.guy2 = mission:build_single_object("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
+        mvar.guy3 = mission:build_single_object("sssold", mission.cfg.enemy_team_num, "guy1_spawn")
+        mvar.guy4 = mission:build_single_object("sssold", mission.cfg.enemy_team_num, "guy2_spawn")
 
-    Defend(mvar.prop1, 1)
-    Goto(mvar.prop2, "tank1_spawn", 1)
-    Goto(mvar.prop3, "that_path", 1)
-    Goto(mvar.prop4, "cool_path", 1)
-    Goto(mvar.prop5, "cool_path", 1)
-    Goto(mvar.guy1, "guy_spot", 1)
-    Goto(mvar.guy2, "guy_spot", 1)
-    Goto(mvar.guy3, "guy_spot", 1)
-    Goto(mvar.guy4, "guy_spot", 1)
+        -- All props are host-managed so we just need to check one
+        if mvar.prop2 then
+            Defend(mvar.prop1, 1)
+            Goto(mvar.prop2, "tank1_spawn", 1)
+            Goto(mvar.prop3, "that_path", 1)
+            Goto(mvar.prop4, "cool_path", 1)
+            Goto(mvar.prop5, "cool_path", 1)
+            Goto(mvar.guy1, "guy_spot", 1)
+            Goto(mvar.guy2, "guy_spot", 1)
+            Goto(mvar.guy3, "guy_spot", 1)
+            Goto(mvar.guy4, "guy_spot", 1)
+        end
 
-    vsp.utility.defer_for(7.5, mission.change_state, mission, mission_phase.strike_cinematic_2)
-end,
+        state.var.cinematic_ready = true
+
+        vsp.utility.defer_for(7.5, mission.change_state, mission, mission_phase.strike_cinematic_2)
+        end)
+    end,
 nil
 )
 
@@ -331,10 +342,12 @@ function(state, dt)
     CameraPath("movie_path", 175, 850, mission.var.prop1)
 end,
 function(state)
-    mission.var.prop8 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn")
-    mission.var.prop9 = exu.BuildAsyncObject("svfigh", 2, "muf_spawn")
-    Goto(mission.var.prop8, "tank2_spawn", 1)
-    Goto(mission.var.prop9, "fighter1_spawn", 1)
+    mission.var.prop8 = mission:build_single_object("svfigh", mission.cfg.enemy_team_num, "muf_spawn")
+    mission.var.prop9 = mission:build_single_object("svfigh", mission.cfg.enemy_team_num, "muf_spawn")
+    if mission.var.prop8 then
+        Goto(mission.var.prop8, "tank2_spawn", 1)
+        Goto(mission.var.prop9, "fighter1_spawn", 1)
+    end
 
     -- The cinematic automatically ends after 7 seconds
     state.var.end_timer = vsp.time.make_timer(7.0, false, mission.change_state, mission,
@@ -345,20 +358,19 @@ function(state)
 
     local mvar = mission.var
 
-    -- These are async objects so it's fine to remove normally
-    RemoveObject(mvar.prop1)
-    RemoveObject(mvar.prop2)
-    RemoveObject(mvar.prop3)
-    RemoveObject(mvar.prop4)
-    RemoveObject(mvar.prop5)
-    RemoveObject(mvar.prop6)
-    RemoveObject(mvar.prop7)
-    RemoveObject(mvar.prop8)
-    RemoveObject(mvar.prop9)
-    RemoveObject(mvar.guy1)
-    RemoveObject(mvar.guy2)
-    RemoveObject(mvar.guy3)
-    RemoveObject(mvar.guy4)
+    vsp.net.remove_sync_object(mvar.prop1)
+    vsp.net.remove_sync_object(mvar.prop2)
+    vsp.net.remove_sync_object(mvar.prop3)
+    vsp.net.remove_sync_object(mvar.prop4)
+    vsp.net.remove_sync_object(mvar.prop5)
+    vsp.net.remove_sync_object(mvar.prop6)
+    vsp.net.remove_sync_object(mvar.prop7)
+    vsp.net.remove_sync_object(mvar.prop8)
+    vsp.net.remove_sync_object(mvar.prop9)
+    vsp.net.remove_sync_object(mvar.guy1)
+    vsp.net.remove_sync_object(mvar.guy2)
+    vsp.net.remove_sync_object(mvar.guy3)
+    vsp.net.remove_sync_object(mvar.guy4)
 end
 )
 

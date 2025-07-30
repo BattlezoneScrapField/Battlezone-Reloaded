@@ -182,13 +182,19 @@ do
 
     vsp.net.set_function("sync_state_var", function (state, name, var)
         local m = mission.get_current_mission()
-        assert(m, "VSP: Current mission is nil")
+        assert(m, "Reloaded: Current mission is nil")
 
-        m.states[state][name] = var
+        m.states[state].var[name] = var
 
         return true
     end)
 
+    --- Syncs a mission var and executes the callback when completed,
+    --- the var is unsafe to use until after the callback is executed
+    --- @param name string name of the var
+    --- @param var any value of the var
+    --- @param callback function callback
+    --- @param ... any callback params
     function coop_mission:sync_mission_var(name, var, callback, ...)
         if vsp.net.is_hosting() then
             self.var[name] = var
@@ -202,10 +208,23 @@ do
         end
     end
 
+    --- Syncs a state var and executes the callback when completed,
+    --- the var is unsafe to use until after the callback is executed
+    --- @param state string name of the state
+    --- @param name string name of the var
+    --- @param var any value of the var
+    --- @param callback function callback
+    --- @param ... any callback params
     function coop_mission:sync_state_var(state, name, var, callback, ...)
         if vsp.net.is_hosting() then
+            self.states[state].var[name] = var
+
             local results = vsp.net.async(vsp.net.all_players, "sync_state_var", state, name, var)
-            vsp.future.wait_all(results, callback)
+            local params = {...}
+
+            vsp.future.wait_all(results, function ()
+                callback(unpack(params))
+            end)
         end
     end
 

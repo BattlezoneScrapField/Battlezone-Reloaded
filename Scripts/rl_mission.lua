@@ -25,7 +25,7 @@ do
     local current_mission = nil
 
     --- Gets the current mission instance if it exists.
-    --- @return any
+    --- @return mission
     function rl_mission.get_current_mission()
         return current_mission
     end
