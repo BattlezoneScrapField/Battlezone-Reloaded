@@ -171,11 +171,18 @@ do
 
     --- These are fooked right now do not use
 
+    local current_client_sync_callback = function (...) end
+    local current_client_sync_params = {}
+
     vsp.net.set_function("sync_mission_var", function (name, var)
         local m = mission.get_current_mission()
         assert(m, "Reloaded: Current mission is nil")
 
         m.var[name] = var
+
+        current_client_sync_callback(unpack(current_client_sync_params))
+        current_client_sync_callback = function (...) end
+        current_client_sync_params = {}
 
         return true
     end)
@@ -185,6 +192,10 @@ do
         assert(m, "Reloaded: Current mission is nil")
 
         m.states[state].var[name] = var
+
+        current_client_sync_callback(unpack(current_client_sync_params))
+        current_client_sync_callback = function (...) end
+        current_client_sync_params = {}
 
         return true
     end)
@@ -206,6 +217,9 @@ do
                 if not callback then return end
                 callback(unpack(params))
             end)
+        else
+            current_client_sync_callback = callback
+            current_client_sync_params = {...}
         end
     end
 
@@ -227,6 +241,9 @@ do
                 if not callback then return end
                 callback(unpack(params))
             end)
+        else
+            current_client_sync_callback = callback
+            current_client_sync_params = {...}
         end
     end
 
