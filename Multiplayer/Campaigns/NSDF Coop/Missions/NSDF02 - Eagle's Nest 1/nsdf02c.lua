@@ -385,8 +385,10 @@ function(state)
     mission.var.command_regen:stop()
     mission.var.command_target_painting:stop()
 
-    mission.var.rescue_1 = mission:build_single_object("avapc", 1, "apc1_spawn")
-    mission.var.rescue_2 = mission:build_single_object("avapc", 1, "apc2_spawn")
+    local rescue_1 = mission:build_single_object("avapc", 1, "apc1_spawn")
+    local rescue_2 = mission:build_single_object("avapc", 1, "apc2_spawn")
+    mission:sync_mission_var("rescue_1", rescue_1)
+    mission:sync_mission_var("rescue_2", rescue_2)
 
     SetObjectiveOff(mission.var.command_tower)
     SetObjectiveOff(mission.var.s_powers[1])
@@ -411,7 +413,9 @@ nil
 
 mission:define_state(mission_phase.evacuate_transports,
 function(state, dt)
-
+    if GetDistance(mission.var.rescue_1, mission.var.launch_pad) then
+        mission:change_state(mission_phase.transports_safe)
+    end
 end,
 function(state)
     if mission.var.rescue_1 then
@@ -427,6 +431,16 @@ function(state)
 
     -- Commander, take up a position in front of the transports...
     AudioMessage("misn0315.wav")
+
+    local fighter_squad = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+    local tank_squad_1 = mission:build_scaled("svtank", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+    local tank_squad_2 = mission:build_scaled("svtank", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+
+    if fighter_squad then
+        reloaded.ai.make_squad(fighter_squad):attack(mission.var.s_powers.solar_2, 1)
+        reloaded.ai.make_squad(tank_squad_1):attack(mission.var.command_tower, 1)
+        reloaded.ai.make_squad(tank_squad_2):goto("base", 1)
+    end
 end,
 function(state)
 

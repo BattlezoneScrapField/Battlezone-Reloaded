@@ -193,8 +193,8 @@ do
     --- the var is unsafe to use until after the callback is executed
     --- @param name string name of the var
     --- @param var any value of the var
-    --- @param callback function callback
-    --- @param ... any callback params
+    --- @param callback? function callback
+    --- @param ...? any callback params
     function coop_mission:sync_mission_var(name, var, callback, ...)
         if vsp.net.is_hosting() then
             self.var[name] = var
@@ -203,6 +203,7 @@ do
             local params = {...}
 
             vsp.future.wait_all(results, function ()
+                if not callback then return end
                 callback(unpack(params))
             end)
         end
@@ -213,8 +214,8 @@ do
     --- @param state string name of the state
     --- @param name string name of the var
     --- @param var any value of the var
-    --- @param callback function callback
-    --- @param ... any callback params
+    --- @param callback? function callback
+    --- @param ...? any callback params
     function coop_mission:sync_state_var(state, name, var, callback, ...)
         if vsp.net.is_hosting() then
             self.states[state].var[name] = var
@@ -223,6 +224,7 @@ do
             local params = {...}
 
             vsp.future.wait_all(results, function ()
+                if not callback then return end
                 callback(unpack(params))
             end)
         end
