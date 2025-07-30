@@ -218,8 +218,10 @@ do
                 callback(unpack(params))
             end)
         else
-            current_client_sync_callback = callback
-            current_client_sync_params = {...}
+            if callback then
+                current_client_sync_callback = callback
+                current_client_sync_params = {...}
+            end
         end
     end
 
@@ -242,8 +244,10 @@ do
                 callback(unpack(params))
             end)
         else
-            current_client_sync_callback = callback
-            current_client_sync_params = {...}
+            if callback then
+                current_client_sync_callback = callback
+                current_client_sync_params = {...}
+            end
         end
     end
 

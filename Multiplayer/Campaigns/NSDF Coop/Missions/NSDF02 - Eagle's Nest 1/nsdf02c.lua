@@ -49,7 +49,7 @@ for i = 1, mission.team:get_player_count() do
     mission:set_spawn_direction(i, vsp.math3d.east)
 end
 
-mission.var.wave_time = 30.0 -- Time in between soviet attack waves
+mission.var.wave_time = 10.0 -- Time in between soviet attack waves
 
 -- Some objects will need to be deleted for the final cutscene, so we track them here
 mission.var.objects_to_delete = {}
@@ -458,7 +458,7 @@ end)
 mission:define_state(mission_phase.transports_safe,
 function (state, dt)
     -- Wait for all players to reach the launch pad
-    for player in vsp.net_player.get_player_count() do
+    for player = 1, vsp.net_player.get_player_count() do
         if GetDistance(GetPlayerHandle(player), mission.var.launch_pad) > 100.0 then
             return
         end
