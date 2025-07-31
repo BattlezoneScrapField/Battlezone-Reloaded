@@ -23,6 +23,7 @@ do
     function reloaded.Start()
         vsp.Start()
 
+        reloaded.ai.Start()
         reloaded.coop_mission.Start()
         reloaded.mission.Start()
         reloaded.service_building.Start()
@@ -31,6 +32,7 @@ do
     function reloaded.Update(dt)
         vsp.Update(dt)
 
+        reloaded.ai.Update(dt)
         reloaded.coop_mission.Update(dt)
         reloaded.mission.Update(dt)
     end

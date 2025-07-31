@@ -14,6 +14,7 @@
 =======================================
 --]]
 
+local exu = require("exu")
 local vsp = require("vsp")
 
 local rl_mission = {}

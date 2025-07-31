@@ -18,6 +18,7 @@
 local mission = require("rl_mission")
 local team = require("rl_team")
 
+local exu = require("exu")
 local vsp = require("vsp")
 
 local rl_coop_mission = {}
