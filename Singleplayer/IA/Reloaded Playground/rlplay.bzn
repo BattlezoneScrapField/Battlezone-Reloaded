@@ -146,7 +146,7 @@ curPilot [1] =
 asuser
 perceivedTeam [1] =
 1
-name = EmptyMission
+name = MultSTMission
 sObject = 00000002
 [AiMission]
 [AOIs]

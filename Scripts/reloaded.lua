@@ -1,7 +1,7 @@
 --[[
 =======================================
 *   Battlezone: Reloaded
-*   
+*
 *   Standard script entry point
 =======================================
 --]]
@@ -18,6 +18,7 @@ do
     reloaded.empty_ship       = require("rl_empty_ship")
     reloaded.mission          = require("rl_mission")
     reloaded.service_building = require("rl_service_building")
+    reloaded.smart_turrets    = require("rl_smart_turrets")
     reloaded.team             = require("rl_team")
 
     function reloaded.Start()

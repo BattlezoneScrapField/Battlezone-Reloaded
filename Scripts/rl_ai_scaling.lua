@@ -1,7 +1,7 @@
 --[[
 =======================================
 *   Battlezone: Reloaded
-*   
+*
 *   AI Scaling Module
 *
 *	Required Event Handlers:

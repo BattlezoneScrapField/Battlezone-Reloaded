@@ -1,7 +1,7 @@
 --[[
 =======================================
 *   Battlezone: Reloaded
-*   
+*
 *   AI Squad Module
 *
 *	Required Event Handlers:

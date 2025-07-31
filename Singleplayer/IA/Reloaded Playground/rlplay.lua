@@ -11,6 +11,12 @@ local reloaded = require("reloaded")
 local exu = require("exu")
 local vsp = require("vsp")
 
+function GameKey(key)
+    if key == "G" then
+        reloaded.smart_turrets.make_smart_turret(GetTarget(GetPlayerHandle()))
+    end
+end
+
 function Start()
     reloaded.Start()
 end
