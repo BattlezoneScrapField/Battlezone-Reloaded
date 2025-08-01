@@ -28,6 +28,7 @@ do
         reloaded.coop_mission.Start()
         reloaded.mission.Start()
         reloaded.service_building.Start()
+        reloaded.smart_turrets.Start()
     end
 
     function reloaded.Update(dt)
@@ -44,6 +45,7 @@ do
         reloaded.coop_mission.CreateObject(h)
         reloaded.empty_ship.CreateObject(h)
         reloaded.mission.CreateObject(h)
+        reloaded.smart_turrets.CreateObject(h)
     end
 
     function reloaded.DeleteObject(h)

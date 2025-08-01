@@ -40,8 +40,8 @@ do
         end
 
         table.sort(objs, function (a, b)
-            local dist_a = Distance3D(vsp.utility.get_any_position(where), GetPosition(a))
-            local dist_b = Distance3D(vsp.utility.get_any_position(where), GetPosition(b))
+            local dist_a = Distance3D(GetPosition(where), GetPosition(a))
+            local dist_b = Distance3D(GetPosition(where), GetPosition(b))
             return dist_a < dist_b
         end)
 

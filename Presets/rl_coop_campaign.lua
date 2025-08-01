@@ -34,6 +34,7 @@ do
     cfg.extended_smart_reticle = true -- Extend the range of the smart reticle (like BZ2)
     cfg.smart_reticle_range = 500.0   -- The new range of the reticle of extended range is enabled
     cfg.enemy_count_scaling = true    -- Set built in AI scaling methods to scale linearly with player count if used
+    cfg.smart_turrets = true          -- Enable enhanced turret/tower AI (like BZP)
 
     -- Apply runnable options
 
@@ -64,6 +65,10 @@ do
                 return initial_count * vsp.net_player.get_player_count()
             end)
         end)
+    end
+
+    if cfg.smart_turrets then
+        reloaded.smart_turrets.enable_smart_turrets()
     end
 
     -- Make cfg read only
