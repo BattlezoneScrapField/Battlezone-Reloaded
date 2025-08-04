@@ -12,16 +12,17 @@ local exu = require("exu")
 local vsp = require("vsp")
 
 reloaded.smart_turrets.enable_smart_turrets()
+reloaded.smart_turrets.auto_detect()
 
 function GameKey(key)
     if key == "G" then
         reloaded.smart_turrets.make_smart_turret(GetTarget(GetPlayerHandle()))
     end
     if key == "B" then
-        Attack(GetUserTarget(), exu.GetReticleObject())
+
     end
     if key == "N" then
-        Stop(GetUserTarget(), 1)
+
     end
 end
 

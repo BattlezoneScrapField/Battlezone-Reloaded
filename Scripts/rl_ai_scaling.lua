@@ -42,8 +42,8 @@ do
     --- @param initial_value any the initial value, make sure it's valid for the current scaling method
     --- @return any scaled_result
     function rl_ai_scaling.get_scaled(type, initial_value)
-        vsp.utility.required_param(type, "type", "number", "Reloaded")
-        vsp.utility.required_param(initial_value, "initial_value", "any", "Reloaded")
+        vsp.functional.required_param(type, "type", "number", "Reloaded")
+        vsp.functional.required_param(initial_value, "initial_value", "any", "Reloaded")
         assert(scaling_methods[type], string.format("Scaling type is invalid"))
 
         return scaling_methods[type](initial_value)
@@ -53,8 +53,8 @@ do
     --- @param type integer a scaling type constant defined in rl_ai_scaling.lua
     --- @param method fun(initial_value: any): any
     function rl_ai_scaling.set_scaling_method(type, method)
-        vsp.utility.required_param(type, "type", "number", "Reloaded")
-        vsp.utility.required_param(method, "method", "function", "Reloaded")
+        vsp.functional.required_param(type, "type", "number", "Reloaded")
+        vsp.functional.required_param(method, "method", "function", "Reloaded")
 
         scaling_methods[type] = method
     end

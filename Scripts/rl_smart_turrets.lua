@@ -22,8 +22,29 @@ do
     local smart_turrets_enabled = false
     local auto_smart_turrets = false
 
+    --- @type parameter_pack
+    local default_attributes = vsp.functional.parameter_pack({
+        targeting_program = ai_targeting.program.target_closest,
+        occluded_retry_time = 5.0
+    })
+
+    --- @type parameter_pack
+    local auto_attributes
+
+    --- Enable smart turrets, this is a one-way trip! It irreversibly breaks
+    --- the stock ai.
     function rl_smart_turrets.enable_smart_turrets()
         smart_turrets_enabled = true
+    end
+
+    --- Enables automatic smart AI on newly built turrets
+    function rl_smart_turrets.auto_detect()
+        assert(smart_turrets_enabled, "Reloaded: smart turrets are disabled")
+        auto_smart_turrets = true
+    end
+
+    function rl_smart_turrets.set_auto_attributes(creation_attributes)
+        
     end
 
     --- @class smart_turret : managed_ai, object
@@ -59,13 +80,22 @@ do
 
         self:super(h)
 
+        local pack
+        if creation_attributes then
+            pack = vsp.functional.parameter_pack(creation_attributes)
+        else
+            pack = default_attributes
+        end
+
         self.odf = vsp.odf.open(h)
         self.type = smart_turret.type[class_label_to_type(class_label)]
         self.team = GetTeamNum(h)
         self.range = self:__find_longest_range()
-        self.targeting_program = ai_targeting.program.target_closest
+
+        self.targeting_program = pack:required("targeting_program")
 
         self.current_target = nil
+        self.occluded_retry_time = pack:required("occluded_retry_time")
     end
 
     --- Scans all weapons and picks the one with the longest range to be the smart turret's
@@ -96,17 +126,27 @@ do
     end
 
     --- Returns the best target according to the current targeting program
-    --- @return Handle best_target
+    --- @return Handle? best_target
     function smart_turret:__find_best_target()
-        local function is_enemy(h)
-            return GetPerceivedTeam(h) ~= self.team
+        local function target_conditions(h)
+            if GetPerceivedTeam(h) == self.team then return false end
+            if not IsCraft(h) or not IsBuilding(h) then return false end
+            if GetClassLabel(h) == "scrap" then return false end
+            --- @diagnostic disable-next-line:param-type-mismatch current target will always have a position
+            if vsp.math3d.is_occluded(self.position, GetPosition(self.current_target)) then return false end
+            return true
         end
-        return self.targeting_program(self.handle, self.range, is_enemy)
+
+        local function target_conditions()
+            return true
+        end
+
+        return self.targeting_program(self.handle, self.range, target_conditions)
     end
 
     function smart_turret:__update(dt)
         if not smart_turrets_enabled then return end
-        if not IsDeployed(self.handle) then return end
+        if not IsDeployed(self.handle) then return end -- Gun towers are always "deployed" too
 
         if not IsAlive(self.current_target) then
             self.current_target = nil
@@ -157,15 +197,16 @@ do
         if not smart_turrets_enabled then return end
         if not auto_smart_turrets then return end
         if valid_class_labels:contains(GetClassLabel(h)) then
-            smart_turret:new(h)
+            vsp.utility.defer(rl_smart_turrets.make_smart_turret, h)
         end
     end
 
     function rl_smart_turrets.Start()
         if not smart_turrets_enabled then return end
+        if not auto_smart_turrets then return end
         for _, obj in ipairs(vsp.object_service.get_start_objects():get()) do
             if valid_class_labels:contains(GetClassLabel(obj)) then
-                smart_turret:new(obj)
+                vsp.utility.defer(rl_smart_turrets.make_smart_turret, h)
             end
         end
     end

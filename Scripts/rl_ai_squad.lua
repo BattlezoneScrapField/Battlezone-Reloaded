@@ -18,10 +18,10 @@ do
 
     function ai_squad:ai_squad(leader_or_table, ...)
         if type(leader_or_table) == "table" then
-            self.leader = vsp.utility.required_param(leader_or_table[1], "leader", "userdata", "Reloaded")
+            self.leader = vsp.functional.required_param(leader_or_table[1], "leader", "userdata", "Reloaded")
             self.members = vsp.set.make_set(self.leader, unpack(leader_or_table, 2, #leader_or_table))
         else
-            self.leader = vsp.utility.required_param(leader_or_table, "leader", "userdata", "Reloaded")
+            self.leader = vsp.functional.required_param(leader_or_table, "leader", "userdata", "Reloaded")
             self.members = vsp.set.make_set(self.leader, ...)
         end
     end

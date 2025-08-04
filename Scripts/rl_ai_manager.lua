@@ -19,20 +19,21 @@ local vsp = require("vsp")
 
 local rl_ai_manager = {}
 do
-    local all_managed_ai = vsp.set.make_set()
+    --- @type table<Handle, managed_ai>
+    local all_managed_ai = {}
 
     --- @class managed_ai : object
     local managed_ai = vsp.object.make_class("managed_ai")
 
     --- @param h Handle
     function managed_ai:managed_ai(h)
-        self.handle = vsp.utility.required_param(h, "h", "userdata", "Reloaded")
+        self.handle = vsp.functional.required_param(h, "h", "userdata", "Reloaded")
 
-        all_managed_ai:insert(self)
+        all_managed_ai[h] = self
     end
 
     function managed_ai:__update(dt)
-        self:abstract("__update")
+        self.position = GetPosition(self.handle)
     end
 
     --- Marks an AI unit as managed by Reloaded
@@ -41,10 +42,22 @@ do
         return managed_ai:new(h)
     end
 
+    --- Checks if an object is a managed ai, returns
+    --- a handle to the managed ai if it is, else false
+    --- @param h Handle
+    --- @return managed_ai | nil
+    function rl_ai_manager.check_managed_ai(h)
+        if all_managed_ai[h] then
+            return all_managed_ai[h]
+        else
+            return nil
+        end
+    end
+
     local function update_all_managed_ai(dt)
-        for ai in all_managed_ai:iterator() do
-            if not IsValid(ai.handle) then
-                all_managed_ai:remove(ai)
+        for h, ai in pairs(all_managed_ai) do
+            if not IsValid(h) then
+                all_managed_ai[h] = nil
             else
                 ai:__update(dt)
             end

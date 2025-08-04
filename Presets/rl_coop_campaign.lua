@@ -69,6 +69,7 @@ do
 
     if cfg.smart_turrets then
         reloaded.smart_turrets.enable_smart_turrets()
+        reloaded.smart_turrets.auto_detect()
     end
 
     -- Make cfg read only
