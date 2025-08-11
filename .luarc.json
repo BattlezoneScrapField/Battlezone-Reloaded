@@ -1,10 +1,11 @@
 {
-	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
-	"runtime.version": "Lua 5.1",
-	"workspace.library": [
-		"./External/Defs",
-		"./External/RequireFix",
-		"./External/VTScrapPool/src",
-		"./Scripts"
-	]
+    "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+    "runtime.version": "Lua 5.1",
+    "workspace.library": [
+        "./External/Defs",
+        "./External/ExtraUtilities/Definitions",
+        "./External/RequireFix",
+        "./External/VTScrapPool/src",
+        "./Scripts"
+    ]
 }
