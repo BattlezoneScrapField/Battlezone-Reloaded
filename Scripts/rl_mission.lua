@@ -14,6 +14,7 @@
 =======================================
 --]]
 
+local exu = require("exu")
 local vsp = require("vsp")
 
 local rl_mission = {}
@@ -83,7 +84,7 @@ do
 
         assert(self.states[new_state], string.format("Reloaded: Requested state %s is undefined", new_state))
 
-        print("changing state to " .. tostring(new_state))
+        DisplayMessage("changing state to " .. tostring(new_state))
 
         self.current_state_id = new_state
 

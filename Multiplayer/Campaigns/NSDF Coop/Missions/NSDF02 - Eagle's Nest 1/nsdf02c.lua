@@ -29,6 +29,12 @@ local mission_phase = vsp.enum.make_string_enum(
     "strike_cinematic_2",
     "transports_arrived",
     "evacuate_transports",
+    "transports_safe",
+    "ending_cinematic_1",
+    "ending_cinematic_2",
+    "ending_cinematic_3",
+    "ending_cinematic_4",
+    "ending_cinematic_5",
     "mission_failed"
 )
 
@@ -37,19 +43,30 @@ local enemy_team = reloaded.team.make_team("6th Tank Battalion", coop_config.ene
 
 local mission = reloaded.coop_mission.make_coop(my_team, coop_config)
 
-mission:set_initial_state(mission_phase.startup)
+SetVelocity(GetPlayerHandle, SetVector(200, 1000))
+mission:set_initial_state(mission_phase.ending_cinematic_1)
+mission.var.command_tower = GetHandle("command") -- this is errorneouSly called "solar1" in the original script
+    mission.var.s_powers = {
+        solar_2 = GetHandle("solar2"),
+        solar_3 = GetHandle("solar3"),
+        solar_4 = GetHandle("solar4")
+    }
+    mission.var.recycler = GetHandle("avrec3-1_recycler")
 
 for i = 1, mission.team:get_player_count() do
     mission:set_spawn_direction(i, vsp.math3d.east)
 end
 
-mission.var.wave_time = 30.0 -- Time in between soviet attack waves
+mission.var.wave_time = 1.0 -- Time in between soviet attack waves
 
 -- Some objects will need to be deleted for the final cutscene, so we track them here
 mission.var.objects_to_delete = {}
 mission.var.deletable = vsp.set.make_set(
     "avturr",
-    "avscav"
+    "avscav",
+    "svfigh",
+    "svtank",
+    "svapc"
 )
 mission:define_global_listener("CreateObject", function(h)
     if mission.var.deletable:contains(GetOdf(h)) then
@@ -385,8 +402,10 @@ function(state)
     mission.var.command_regen:stop()
     mission.var.command_target_painting:stop()
 
-    mission.var.rescue_1 = mission:build_single_object("avapc", 1, "apc1_spawn")
-    mission.var.rescue_2 = mission:build_single_object("avapc", 1, "apc2_spawn")
+    local rescue_1 = mission:build_single_object("avapc", 1, "apc1_spawn")
+    local rescue_2 = mission:build_single_object("avapc", 1, "apc2_spawn")
+    mission:sync_mission_var("rescue_1", rescue_1)
+    mission:sync_mission_var("rescue_2", rescue_2)
 
     SetObjectiveOff(mission.var.command_tower)
     SetObjectiveOff(mission.var.s_powers[1])
@@ -411,7 +430,9 @@ nil
 
 mission:define_state(mission_phase.evacuate_transports,
 function(state, dt)
-
+    if GetDistance(mission.var.rescue_1, mission.var.launch_pad) < 100.0 then
+        mission:change_state(mission_phase.transports_safe)
+    end
 end,
 function(state)
     if mission.var.rescue_1 then
@@ -427,11 +448,166 @@ function(state)
 
     -- Commander, take up a position in front of the transports...
     AudioMessage("misn0315.wav")
+
+    local fighter_squad = mission:build_scaled("svfigh", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+    local tank_squad_1 = mission:build_scaled("svtank", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+    local tank_squad_2 = mission:build_scaled("svtank", mission.cfg.enemy_team_num, 1, "spawn_scrap1")
+
+    if fighter_squad then
+        reloaded.ai.make_squad(fighter_squad):attack(mission.var.s_powers.solar_2, 1)
+        reloaded.ai.make_squad(tank_squad_1):attack(mission.var.command_tower, 1)
+        reloaded.ai.make_squad(tank_squad_2):goto("base", 1)
+    end
 end,
 function(state)
 
 end)
 
+mission:define_state(mission_phase.transports_safe,
+function (state, dt)
+    if GetDistance(GetPlayerHandle(), mission.var.launch_pad) < 100.0 then
+        vsp.net.display_message_all_clients(string.format("%s has reached the launch pad", vsp.net_player.get_my_name()))
+        vsp.net.wait_for_all_clients(function ()
+            mission:change_state(mission_phase.ending_cinematic_1)
+        end)
+    end
+end,
+function (state)
+    -- Nice job grizzly one, now get to the launch pad
+    AudioMessage("misn0310.wav")
+    SetObjectiveOff(mission.var.rescue_1)
+    SetObjectiveOff(mission.var.rescue_2)
+
+    ClearObjectives()
+    AddObjective("misn0313.otf", "green")
+    AddObjective("misn0304.otf", "white")
+
+    local tank_wave = mission:build_scaled("svtank", mission.cfg.enemy_team_num, 3, "spawn_scrap_1")
+    if tank_wave then
+        reloaded.ai.make_squad(tank_wave):goto("base", 1)
+    end
+end,
+function (state)
+    -- Remove all the friendly and enemy units to prepare for the cinematic
+    vsp.net.remove_sync_object(mission.var.recycler)
+    for _, obj in ipairs(mission.var.objects_to_delete) do
+        vsp.net.remove_sync_object(obj)
+    end
+end)
+
+mission:define_state(mission_phase.ending_cinematic_1,
+function (state, dt)
+        CameraPath("camera_path", state.var.x, 3500, mission.var.shot_geyser)
+        state.var.x = math.max(160, state.var.x - (240 * dt))
+end,
+function (state)
+    -- Well done commander, well done...
+    state.var.audmsg = AudioMessage("misn0316.wav")
+
+    mission.var.prop1 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, "spawna")
+    mission.var.prop2 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, "spawnb")
+    mission.var.prop3 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, "spawnc")
+    mission:sync_mission_var("prop1", mission.var.prop1)
+
+    state.var.x = 4000 -- magic number related to the camera path
+    mission.var.shot_geyser = GetHandle("shot_geyser")
+    mission.var.cam_geyser = GetHandle("cam_geyser")
+    mission:sync_mission_var("cam_geyser", mission.var.cam_geyser)
+    vsp.utility.defer_for(18.5, function ()
+        mission:change_state(mission_phase.ending_cinematic_2)
+    end)
+
+    vsp.cinematic.try_ready()
+
+    Goto(mission.var.prop1, "line1", 1)
+    Goto(mission.var.prop2, "line2", 1)
+    Goto(mission.var.prop3, "line3", 1)
+end)
+
+mission:define_state(mission_phase.ending_cinematic_2,
+function (state, dt)
+    CameraPath("inbase_path", 160, 90, mission.var.prop1)
+
+    if state.var.done_attack then return end
+    if GetDistance(mission.var.prop1, mission.var.shot_geyser) < 20.0 then
+        Attack(mission.var.prop1, mission.var.command_tower)
+        Attack(mission.var.prop2, mission.var.command_tower)
+        for _, s_power in ipairs(mission.var.s_powers) do
+            Damage(s_power, 20000)
+        end
+        state.var.done_attack = true
+
+        vsp.utility.defer_for(7.0, mission.change_state, mission, mission_phase.ending_cinematic_3)
+    end
+end,
+function (state)
+    -- We underestimated the soviet strength...
+    mission.var.audmsg = AudioMessage("misn0317.wav")
+end)
+
+mission:define_state(mission_phase.ending_cinematic_3,
+function (state, dt)
+    CameraPath("inbase_path", 160, 90, mission.var.prop1)
+end,
+function (state)
+    Damage(mission.var.command_tower, 25000)
+
+    Retreat(mission.var.prop1, "climax_path1", 1)
+    Retreat(mission.var.prop2, "spawn_scrap1", 1)
+    Retreat(mission.var.prop3, "spawn_scrap_1", 1)
+ 
+    -- If it's a war they want, then it's a war they shall get!
+    mission.var.audmsg = AudioMessage("misn0318.wav")
+
+    vsp.utility.defer_for(6.0, mission.change_state, mission, mission_phase.ending_cinematic_4)
+end)
+
+mission:define_state(mission_phase.ending_cinematic_4,
+function (state, dt)
+    CameraPath("inbase_path", 160, 90, mission.var.prop1)
+
+    if GetDistance(mission.var.prop1, mission.var.cam_geyser) < 100.0 then
+        Retreat(mission.var.prop1, "climax_path2", 1)
+
+        mission.var.prop9 = mission:build_single_object("svfigh", mission.cfg.enemy_team_num, "solar_spot")
+        mission.var.prop0 = mission:build_single_object("svfigh", mission.cfg.enemy_team_num, "solar_spot")
+
+        Retreat(mission.var.prop9, "camera_pass", 1)
+        Retreat(mission.var.prop0, "camera_pass", 1)
+
+        Damage(GetHandle("hanger"), 20000)
+        Damage(GetHandle("box1"), 20000)
+        Damage(GetHandle("build1"), 20000)
+        Damage(GetHandle("crate1"), 20000)
+        Damage(GetHandle("crate2"), 20000)
+        Damage(GetHandle("crate3"), 20000)
+
+        Retreat(mission.var.prop2, "solar_spot")
+        Retreat(mission.var.prop8, "spawn_scrap1", 1)
+
+        mission.var.sucker = mission:build_single_object("abwpow", 1, GetPosition("sucker_spot"))
+
+        vsp.net.wait_for_all_clients(mission.change_state, mission, mission_phase.ending_cinematic_5)
+    end
+end,
+function (state)
+    Damage(GetHandle("build_3"), 20000)
+
+    mission.var.prop8 = mission:build_single_object("svtank", mission.cfg.enemy_team_num, mission.var.cam_geyser)
+end)
+
+mission:define_state(mission_phase.ending_cinematic_5,
+function (state, dt)
+    CameraPath("inbase_path", 160, 90, mission.var.prop1)
+end,
+function (state)
+    Attack(mission.var.prop1, mission.var.sucker, 1)
+    vsp.utility.defer_for(1.5, function ()
+        vsp.cinematic.try_finish()
+        StopAudioMessage(mission.var.audmsg)
+        mission:succeed("misn03w1.des")
+    end)
+end)
 
 mission:define_state(mission_phase.mission_failed,
 nil,
@@ -474,4 +650,10 @@ end
 
 function exu.AddScrap(team, amount)
     reloaded.AddScrap(team, amount)
+end
+
+function GameKey(key)
+    if key == "G" then
+        mission:build_single_object("avturr", GetTeamNum(GetPlayerHandle()), exu.GetReticlePos())
+    end
 end

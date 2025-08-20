@@ -38,6 +38,7 @@ add_item_recurse("Assets")
 add_item_recurse("Multiplayer")
 add_item_recurse("Presets")
 add_item_recurse("Scripts")
+add_item_recurse("Singleplayer")
 
 add_item_recurse("External", "ExtraUtilities", "Release")
 add_item_recurse("External", "VTScrapPool", "src")

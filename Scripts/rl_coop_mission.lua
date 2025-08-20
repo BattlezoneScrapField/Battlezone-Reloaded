@@ -18,6 +18,7 @@
 local mission = require("rl_mission")
 local team = require("rl_team")
 
+local exu = require("exu")
 local vsp = require("vsp")
 
 local rl_coop_mission = {}
@@ -171,11 +172,18 @@ do
 
     --- These are fooked right now do not use
 
+    local current_client_sync_callback = function (...) end
+    local current_client_sync_params = {}
+
     vsp.net.set_function("sync_mission_var", function (name, var)
         local m = mission.get_current_mission()
         assert(m, "Reloaded: Current mission is nil")
 
         m.var[name] = var
+
+        current_client_sync_callback(unpack(current_client_sync_params))
+        current_client_sync_callback = function (...) end
+        current_client_sync_params = {}
 
         return true
     end)
@@ -186,6 +194,10 @@ do
 
         m.states[state].var[name] = var
 
+        current_client_sync_callback(unpack(current_client_sync_params))
+        current_client_sync_callback = function (...) end
+        current_client_sync_params = {}
+
         return true
     end)
 
@@ -193,9 +205,17 @@ do
     --- the var is unsafe to use until after the callback is executed
     --- @param name string name of the var
     --- @param var any value of the var
-    --- @param callback function callback
-    --- @param ... any callback params
+    --- @param callback? function callback
+    --- @param ...? any callback params
     function coop_mission:sync_mission_var(name, var, callback, ...)
+        if vsp.net.is_singleplayer_or_solo() then
+            self.var[name] = var
+            if callback then
+                callback(...)
+            end
+            return
+        end
+
         if vsp.net.is_hosting() then
             self.var[name] = var
 
@@ -203,8 +223,14 @@ do
             local params = {...}
 
             vsp.future.wait_all(results, function ()
+                if not callback then return end
                 callback(unpack(params))
             end)
+        else
+            if callback then
+                current_client_sync_callback = callback
+                current_client_sync_params = {...}
+            end
         end
     end
 
@@ -213,18 +239,31 @@ do
     --- @param state string name of the state
     --- @param name string name of the var
     --- @param var any value of the var
-    --- @param callback function callback
-    --- @param ... any callback params
+    --- @param callback? function callback
+    --- @param ...? any callback params
     function coop_mission:sync_state_var(state, name, var, callback, ...)
         if vsp.net.is_hosting() then
+            if vsp.net.is_singleplayer_or_solo() then
+                self.states[state].var[name] = var
+                if callback then
+                    callback(...)
+                end
+            end
+
             self.states[state].var[name] = var
 
             local results = vsp.net.async(vsp.net.all_players, "sync_state_var", state, name, var)
             local params = {...}
 
             vsp.future.wait_all(results, function ()
+                if not callback then return end
                 callback(unpack(params))
             end)
+        else
+            if callback then
+                current_client_sync_callback = callback
+                current_client_sync_params = {...}
+            end
         end
     end
 

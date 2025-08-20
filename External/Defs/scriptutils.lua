@@ -1210,18 +1210,24 @@ function SetCritical(h, critical) end
 --- @param mask integer
 function SetWeaponMask(h, mask) end
 
---- Gives the game object the named weapon in the given slot. If no slot is given, it chooses a slot based on hardpoint type and weapon priority like a weapon powerup would. If the weapon name is empty, nil, or blank and a slot is given, it removes the weapon in that slot.
+--- Gives the game object the named weapon in the given slot. If no slot is given, it chooses a slot based on hardpoint type and weapon priority like a weapon powerup would.
+--- If the weapon name is empty, nil, or blank and a slot is given, it removes the weapon in that slot.
 --- Returns true if it succeeded. Returns false otherwise.
 --- @param h Handle
 --- @param weaponname? string
 --- @param slot? integer
-function GiveWeapon(h, weaponname, slot) end
+--- @return boolean
+function GiveWeapon(h, weaponname, slot)
+    error("This function is provided by the engine.")
+end
 
 --- Returns the odf name of the weapon in the given slot on the game object. Returns nil if the game object does not exist or the slot is empty.
 --- For example, an "avtank" game object would return "gatstab" for index 0 and "gminigun" for index 1.
+---
+--- Remarks: Unsafe in CreateObject, will always return nil, should be deferred until the next Update
 --- @param h Handle
 --- @param slot integer
---- @return string
+--- @return string | nil
 function GetWeaponClass(h, slot)
     error("This function is provided by the engine.")
 end

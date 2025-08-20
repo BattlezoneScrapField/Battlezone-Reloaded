@@ -1,0 +1,67 @@
+--[[
+=======================================
+*   Battlezone: Reloaded
+*
+*   AI Targeting Module
+*
+*   Required Event Handlers:
+*   - Update(dt)
+=======================================
+--]]
+
+local vsp = require("vsp")
+
+local rl_ai_targeting = {}
+do
+    --- A target function should take a position value `where`, a number in meters `range`,
+    --- and a predicate function `valid_target` which should match the signature `fun(h: Handle): boolean`.
+    --- This function should return true if the target is valid, and false if not, according to any additional
+    --- logic required by the targeting program. The target function returns a target if one is found and validated,
+    --- or nil if there are no targets matching the criteria in range.
+    --- @alias target_function_t fun(where: position_t, range: number, valid_target: fun(h:Handle): boolean): Handle | nil
+
+    --- Basic targeting programs
+    --- @type table<string, target_function_t>
+    local program = {}
+
+    function program.target_closest(where, range, valid_target)
+        -- Handle the base case first before proceeding to the more
+        -- intensive search
+        local closest_obj = GetNearestObject(where)
+        if not closest_obj then return nil end
+        if GetDistance(closest_obj, where) < range and valid_target(closest_obj) then
+            return closest_obj
+        end
+
+        local objs = {}
+        for obj in ObjectsInRange(range, where) do
+            if valid_target(obj) then
+                objs[#objs+1] = obj
+            end
+        end
+
+        local where_pos = GetPosition(where)
+        table.sort(objs, function (a, b)
+            local dist_a = Distance3DSquared(where_pos, GetPosition(a))
+            local dist_b = Distance3DSquared(where_pos, GetPosition(b))
+            return dist_a < dist_b
+        end)
+
+        return objs[1] -- first element will be the nearest
+    end
+
+    function program.target_weakest(where, range)
+        
+    end
+
+    function program.target_strongest(where, range)
+        
+    end
+
+    function program.target_player(where, range)
+        
+    end
+
+    rl_ai_targeting.program = program
+end
+return rl_ai_targeting
