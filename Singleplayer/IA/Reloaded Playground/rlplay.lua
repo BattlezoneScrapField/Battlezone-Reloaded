@@ -19,10 +19,8 @@ function GameKey(key)
         reloaded.smart_turrets.make_smart_turret(GetTarget(GetPlayerHandle()))
     end
     if key == "B" then
-
     end
     if key == "N" then
-
     end
 end
 

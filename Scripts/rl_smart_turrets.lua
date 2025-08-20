@@ -125,26 +125,30 @@ do
         return longest_range
     end
 
+    -- These are lifted out of the function to avoid making a closure which is very expensive
+    -- since this is a hot path (I profiled it)
+    local _team
+    local _position
+
+    local function target_conditions(h)
+        if GetPerceivedTeam(h) == _team then return false end
+        if GetClassLabel(h) == "scrap" then return false end
+        if vsp.math3d.is_occluded(_position, GetPosition(h)) then return false end
+        return true
+    end
+
     --- Returns the best target according to the current targeting program
     --- @return Handle? best_target
     function smart_turret:__find_best_target()
-        local function target_conditions(h)
-            if GetPerceivedTeam(h) == self.team then return false end
-            if not IsCraft(h) or not IsBuilding(h) then return false end
-            if GetClassLabel(h) == "scrap" then return false end
-            --- @diagnostic disable-next-line:param-type-mismatch current target will always have a position
-            if vsp.math3d.is_occluded(self.position, GetPosition(self.current_target)) then return false end
-            return true
-        end
-
-        local function target_conditions()
-            return true
-        end
-
+        _team = self.team
+        _position = self.position
+        -- return GetNearestEnemy(_position)
         return self.targeting_program(self.handle, self.range, target_conditions)
     end
 
     function smart_turret:__update(dt)
+        self:super().__update(self, dt)
+
         if not smart_turrets_enabled then return end
         if not IsDeployed(self.handle) then return end -- Gun towers are always "deployed" too
 
@@ -156,7 +160,6 @@ do
 
         if best_target ~= self.current_target then
             self.current_target = best_target
-            -- Stop(self.handle)
             Attack(self.handle, self.current_target)
         end
     end
@@ -197,7 +200,7 @@ do
         if not smart_turrets_enabled then return end
         if not auto_smart_turrets then return end
         if valid_class_labels:contains(GetClassLabel(h)) then
-            vsp.utility.defer(rl_smart_turrets.make_smart_turret, h)
+            vsp.utility.defer_for(1.0, rl_smart_turrets.make_smart_turret, h)
         end
     end
 
@@ -206,7 +209,7 @@ do
         if not auto_smart_turrets then return end
         for _, obj in ipairs(vsp.object_service.get_start_objects():get()) do
             if valid_class_labels:contains(GetClassLabel(obj)) then
-                vsp.utility.defer(rl_smart_turrets.make_smart_turret, h)
+                vsp.utility.defer_for(1.0, rl_smart_turrets.make_smart_turret, obj)
             end
         end
     end
