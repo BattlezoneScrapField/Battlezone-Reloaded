@@ -1,0 +1,94 @@
+[OrdnanceClass] // TRO, CP-Stabber.
+classLabel = "rocket"
+
+shotGeometry = "gspst04.mesh" //"gspst00.geo"
+shotSound = "Ordin_b.wav"
+
+xplGround = "xpltrsi"
+xplVehicle = "xpltrsg"
+xplBuilding = "xpltrsh"
+
+renderName = "rocket3a.render"
+
+ammoCost = 100
+lifeSpan = 2.0
+shotSpeed = 130.0
+damageBallistic = 750
+damageConcussion = 50
+damageFlame = 0
+damageImpact = 0
+
+[RocketClass]
+//flameLength = 0.4
+//smokeRadius = 0.8
+//smokeDelay = 0.015
+//smokePause = 0.001 //0.005
+//smokeTexture = "gpuff.0"
+//smokeFrames = 16
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 6
+renderName1 = "rocket3a.core"
+renderName2 = "rocket3a.flame"
+renderName3 = "rocket3a.glow"
+renderName4 = "rocket3a.light"
+renderName5 = "rocket3a.flare"
+renderName6 = "rocket3a.light"
+
+[Core]
+renderBase = "draw_twirl_trail"
+textureName = "gpuff_0.tga"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 0" //"255 255 255 127"
+startRadius = 0.60 //0.25
+finishRadius = 0.40
+animateTime = 0.075 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.08 //0.16
+//maxCount = 10000
+
+[Flame]
+renderBase = "draw_twirl_trail"
+textureName = "gpuff_0.tga"
+startColor = "127 255 55 127"
+finishColor = "127 255 55 0" //"55 255 127 0"
+startRadius = 0.80 //0.45
+finishRadius = 0.5 //0.1
+animateTime = 0.19 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.20 //0.16
+
+[Glow]
+renderBase = "draw_twirl_trail"
+textureName = "gpuff_0.tga"
+startColor = "95 255 20 67" //"20 255 95 67"
+finishColor = "95 255 20 0"
+startRadius = 0.85 //0.5
+finishRadius = 0.60 //0.25 //0.05
+animateTime = 0.33 //0.30 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.34 //0.32 //0.16
+
+[Flare]
+renderBase = "draw_sprite"
+textureName = "flarewide.tga"
+//textureBlend = "one one modulate"
+startColor = "255 255 255 127"
+finishColor = "255 255 255 127"
+startRadius = 5.0
+finishRadius = 5.0
+//rotationRate = 10.0
+
+[Light]
+renderBase = "draw_light"
+startColor = "150 255 50 255"
+finishColor = "150 255 50 255"
+startRadius = 50.0
+finishRadius = 50.0

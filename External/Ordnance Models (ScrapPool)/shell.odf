@@ -1,0 +1,60 @@
+[OrdnanceClass]
+classLabel = "grenade"
+
+shotGeometry = "ghartl02.mesh" //"ghartl00.geo"
+shotSound = "Ordin_c.wav"
+
+xplGround = "xgasgnd"
+xplVehicle = "xgasxpl"
+xplBuilding = "xgasxpl"
+
+renderName = "shell.render"
+
+ammoCost = 5
+lifeSpan = 1e30
+shotSpeed = 75.0
+damageBallistic = 0
+damageConcussion = 250
+damageFlame = 0
+damageImpact = 0
+
+//[RocketClass]
+//smokeRadius = 0.5
+//smokeDelay = 0.05
+//smokePause = 0.01
+//smokeTexture = "lsmoke.0"
+//smokeFrames = 16
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 2
+renderName1 = "shell.smoke"
+renderName2 = "shell.smoke2"
+
+[Smoke]
+renderBase = "draw_twirl_trail"
+textureName = "flamealpha.tga" //"smoke2.tga" //"flame.tga" //"smokeflame.tga"
+//textureBlend = "srcalpha invsrcalpha modulatealpha" //"one one modulate"
+startColor = "191 191 191 63" //"191 191 191 191" //"255 255 255 127"
+finishColor = "127 127 127 0" //"255 255 255 0"
+startRadius = 0.5
+finishRadius = 1.0 //0.25
+animateTime = 0.8
+emitDelay = 0.01
+emitVelocity = "0.0 0.0 -3.0"
+emitVariance = "1.5 1.5 1.0" //"1.0 1.0 1.0"
+emitLife = 0.8
+
+[Smoke2]
+renderBase = "draw_twirl_trail"
+textureName = "smoke2.tga" //"flame.tga" //"smokeflame.tga"
+//textureBlend = "srcalpha invsrcalpha modulatealpha" //"one one modulate"
+startColor = "191 191 191 191" //"255 255 255 127"
+finishColor = "127 127 127 0" //"255 255 255 0"
+startRadius = 0.6
+finishRadius = 1.2 //0.8 //0.2
+animateTime = 1.2
+emitDelay = 0.02
+emitVelocity = "0.0 0.0 -3.0"
+emitVariance = "2.5 2.5 1.0" //"1.0 1.0 1.0"
+emitLife = 1.2

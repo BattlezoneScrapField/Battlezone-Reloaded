@@ -41,8 +41,9 @@ add_item_recurse("Scripts")
 add_item_recurse("Singleplayer")
 
 add_item_recurse("External", "ExtraUtilities", "Release")
-add_item_recurse("External", "VTScrapPool", "src")
+add_item_recurse("External", "Ordnance Models (ScrapPool)")
 add_item_recurse("External", "RequireFix")
+add_item_recurse("External", "VTScrapPool", "src")
 
 
 def squish() -> None:

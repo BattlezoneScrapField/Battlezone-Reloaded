@@ -1,0 +1,79 @@
+[OrdnanceClass]
+classLabel = "missile"
+
+shotGeometry = "gtagg04.mesh" //"gtagg01.geo"
+xplGround = "xmslgnd"
+xplVehicle = "xmslcar"
+xplBuilding = "xmslbld"
+
+renderName = "swarmer.render"
+
+ammoCost = 10
+lifeSpan = 4.0
+shotSpeed = 50.0
+damageBallistic = 90
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 0
+
+[RocketClass]
+flameRadius = 0.2
+flameLength = 2.0
+flameTexture = "exhaust_r.0"
+flameFrames = 4
+flareRadius = 0.5
+flareDelay = 0.1
+flareTexture = "flare.0"
+flareFrames = 4
+//smokeRadius = 0.4
+//smokeDelay = 0.01
+//smokePause = 0.01
+//smokeTexture = "rsmoke.0"
+//smokeFrames = 16
+
+[MissileClass]
+omegaTurn = 5.5
+shotAccel = 100.0
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 2
+renderName1 = "swarmer.smoke"
+//renderName2 = "swarmer.smoke2"
+renderName2 = "swarmer.light"
+//renderName3 = "swarmer.light2"
+
+[Light]
+renderBase = "draw_light"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 255"
+startRadius = 25 //150.0
+finishRadius = 25 //150.0
+
+[Smoke]
+renderBase = "draw_twirl_trail"
+textureName = "flamealpha.tga" //"smokeflame2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.3
+finishRadius = 1.0
+animateTime = 0.4 //1.28
+emitDelay = 0.01
+emitVelocity = "0.0 0.0 -4.0"
+emitVariance = "1.0 1.0 0.5"
+emitLife = 0.4
+
+[Smoke2]
+renderBase = "draw_twirl_trail"
+textureName = "smoke2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.4
+finishRadius = 1.25
+animateTime = 0.64
+emitDelay = 0.013
+emitVelocity = "0.0 0.0 -8.0"
+emitVariance = "2.0 2.0 0.5"
+emitLife = 0.64

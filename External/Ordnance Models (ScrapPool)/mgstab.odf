@@ -1,0 +1,113 @@
+[OrdnanceClass]
+baseName = "rocket"
+classLabel = "anchor"
+
+shotGeometry = "gsand01.mesh" //"gsand00.geo"
+shotSound = "anchor.wav"//"gmagg01.wav"
+
+xplGround = "xmslgnd"
+xplVehicle = "xmslcar"
+xplBuilding = "xmslbld"
+
+ammoCost = 12
+lifeSpan = 1.7 //2.0
+shotSpeed = 100.0 //70.0
+damageBallistic = 0
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 80
+
+renderName = "mgstab.render"
+
+[RocketClass]
+//flameRadius = 0.1
+//flameLength = 1.0
+//flameTexture = "exhaust_r.0"
+//flameFrames = 4
+//flareRadius = 0.5
+//flareTexture = "flare.0"
+//flareFrames = 4
+//flameLength = 0.3
+//smokeDevRadial = 0.0
+//smokeDevAxial = 0.0
+//smokeInherit = 0.2
+//smokeRadius = 0.5
+//smokeDelay = 0.030
+//smokePause = 0.001 //0.005
+//smokeTexture = "bpuff.0"
+//smokeFrames = 16
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 5
+renderName1 = "mgstab.core"
+renderName2 = "mgstab.flame"
+renderName3 = "mgstab.glow"
+renderName4 = "mgstab.flare"
+renderName5 = "mgstab.light"
+
+[Core]
+renderBase = "draw_twirl_trail"
+textureName = "bpuff_0.tga"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 0" //"255 255 255 127"
+startRadius = 0.30 //0.25
+finishRadius = 0.10
+animateTime = 0.05 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.06 //0.16
+//maxCount = 10000
+
+[Flame]
+renderBase = "draw_twirl_trail"
+textureName = "bpuff_0.tga"
+startColor = "55 127 255 127"
+finishColor = "55 127 255 0" //"255 127 55 67"
+startRadius = 0.50 //0.45
+finishRadius = 0.2 //0.1
+animateTime = 0.15 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.16 //0.16
+
+[Glow]
+renderBase = "draw_twirl_trail"
+textureName = "bpuff_0.tga"
+startColor = "20 95 255 67"
+finishColor = "20 95 255 0"
+startRadius = 0.55 //0.5
+finishRadius = 0.30 //0.25 //0.05
+animateTime = 0.26 //0.30 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.27 //0.32 //0.16
+
+[Flare]
+renderBase = "draw_sprite"
+textureName = "flarewide.tga"
+//textureBlend = "one one modulate"
+startColor = "255 255 255 127"
+finishColor = "255 255 255 127"
+startRadius = 5.0
+finishRadius = 5.0
+//rotationRate = 10.0
+
+[Light]
+renderBase = "draw_light"
+startColor = "50 150 255 255"
+finishColor = "50 150 255 255"
+startRadius = 30.0
+finishRadius = 30.0
+
+[AnchorRocketClass]
+accelDrag = 20 //-100.0
+alphaDrag = 12 //-2000.0 //-8.0 //
+anchorTime = 0.2
+
+//accelDrag = 8.0
+//alphaDrag = 0.5
+//anchorTime = 5.0

@@ -1,0 +1,95 @@
+[OrdnanceClass]
+classLabel = "thermalmissile"
+
+shotGeometry = "ghorn02.mesh" //"ghorn01.mesh" //"ghorn00.geo"
+shotSound = "Ordin_e.wav"
+
+xplGround = "xmslgnd"
+xplVehicle = "xmslcar"
+xplBuilding = "xmslbld"
+
+renderName = "heatmsl.render"
+
+ammoCost = 125
+lifeSpan = 10.0
+shotSpeed = 35.0
+damageBallistic = 900
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 0
+
+[RocketClass]
+flameRadius = 0.5
+flameLength = 5.0
+flameTexture = "exhaust_r.0"
+flameFrames = 4
+flareRadius = 3.0
+flareTexture = "flare.0"
+flareFrames = 4
+//smokeRadius = 0.8
+//smokeDelay = 0.08
+//smokePause = 0.025
+//smokeTexture = "rsmoke.0"
+//smokeFrames = 16
+
+[MissileClass]
+omegaTurn = 3.0
+shotAccel = 100.0
+
+[ThermalMissileClass]
+coneAngle = 0.2
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 4
+//renderName1 = "heatmsl.flare"
+renderName1 = "heatmsl.smoke"
+renderName2 = "heatmsl.smoke2"
+renderName3 = "rocket2.light1"
+renderName4 = "rocket2.light2"
+
+//[Light]
+//renderBase = "draw_light"
+//startColor = "255 255 255 255"
+//finishColor = "255 255 255 255"
+//startRadius = 50 //150.0
+//finishRadius = 50 //150.0
+
+//[Flare]
+//renderBase = "draw_twirl"
+//textureName = "flare_bz2.tga"
+//textureBlend = "one one modulate"
+//textureBlend = "srcalpha one modulatealpha"
+//startColor = "255 255 255 255"
+//finishColor = "255 255 255 255"
+//startRadius = 3.0
+//finishRadius = 3.0
+//rotationRate = 1.0
+
+[Smoke]
+renderBase = "draw_twirl_trail"
+textureName = "flamealpha.tga" //"smokeflame2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 65" //"153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.75
+finishRadius = 1.5
+animateTime = 1.0 //1.28
+emitDelay = 0.008 //0.025
+emitVelocity = "0.0 0.0 -3.5"
+emitVariance = "1.0 1.0 0.5"
+emitLife = 1.0
+
+[Smoke2]
+renderBase = "draw_twirl_trail"
+textureName = "smoke2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 65" //"153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 1.25
+finishRadius = 2.0
+animateTime = 1.28
+emitDelay = 0.01 //0.028
+emitVelocity = "0.0 0.0 -7.0"
+emitVariance = "2.5 2.5 0.5"
+emitLife = 1.28

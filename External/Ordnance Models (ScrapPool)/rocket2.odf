@@ -1,0 +1,142 @@
+[OrdnanceClass]
+classLabel = "rocket"
+
+shotGeometry = "grckt02.mesh" //"grckt01.mesh" //"grckt00.geo"
+shotSound = "Ordin_e.wav"
+
+xplGround = "xgasxpl"
+xplVehicle = "xgasxpl"
+xplBuilding = "xgasxpl"
+xplExpire = "xgasxpl"
+
+renderName = "rocket2.render"
+
+ammoCost = 50
+lifeSpan = 5.0
+shotSpeed = 60.0
+damageBallistic = 0
+damageConcussion = 500
+damageFlame = 0
+damageImpact = 0
+
+[RocketClass]
+flameRadius = 0.5
+flameLength = 5.0
+flameTexture = "exhaust_r.0"
+flameFrames = 4
+flareRadius = 3.0
+flareTexture = "flare.0"
+flareFrames = 4
+//smokeRadius = 1.25
+//smokeDelay = 0.08
+//smokePause = 0.04
+//smokeTexture = "rsmoke.0"
+//smokeFrames = 16
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 4
+//renderName1 = "rocket2.flare"
+renderName1 = "rocket2.smoke"
+renderName2 = "rocket2.smoke2"
+renderName3 = "rocket2.light1"
+renderName4 = "rocket2.light2"
+
+//[Light]
+//renderBase = "draw_light"
+//startColor = "255 255 255 255"
+//finishColor = "255 255 255 255"
+//startRadius = 50 //150.0
+//finishRadius = 50 //150.0
+
+//[Flare]
+//renderBase = "draw_twirl"
+//textureName = "flare_bz2.tga"
+//textureBlend = "one one modulate"
+//textureBlend = "srcalpha one modulatealpha"
+//startColor = "255 255 255 255"
+//finishColor = "255 255 255 255"
+//startRadius = 3.0
+//finishRadius = 3.0
+//rotationRate = 1.0
+
+[Smoke]
+renderBase = "draw_twirl_trail"
+textureName = "flamealpha.tga" //"smokeflame2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 131" //"153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.75
+finishRadius = 2.25
+animateTime = 1.0 //1.28
+//rotationRate = 2.0
+emitDelay = 0.02 //0.010 //0.04
+emitVelocity = "0.0 0.0 -5.0"
+emitVariance = "1.0 1.0 0.5"
+emitLife = 1.0
+
+[Smoke2]
+renderBase = "draw_twirl_trail"
+textureName = "smoke2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 91" //"153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 1.25
+finishRadius = 3.0
+animateTime = 1.28
+//rotationRate = 2.0
+emitDelay = 0.011 //0.011 //0.043
+emitVelocity = "0.0 0.0 -10.0"
+emitVariance = "3.0 3.0 1.0"
+emitLife = 1.28
+
+//----------------------lights-------------------------\\
+
+[Light1]
+simulateBase = "sim_smoke"
+lifeTime = 0.2
+renderBase = "draw_emit"
+emitName = "rocket2.lightemit1"
+emitDelay = 0.2
+emitDelayVar = 0.0
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitInherit = "1.0 1.0 1.0"
+
+[Lightemit1]
+simulateBase = "sim_smoke"
+lifeTime = 0.1
+renderBase = "draw_light"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 255"
+startRadius = 50
+finishRadius = 30
+animateTime = 0.1
+attenuateConstant = 1.0
+attenuateLinear = 0.0
+attenuateQuadratic = 0.0
+
+[Light2]
+StartDelay = 0.1
+simulateBase = "sim_smoke"
+lifeTime = 0.2
+renderBase = "draw_emit"
+emitName = "rocket2.lightemit2"
+emitDelay = 0.2
+emitDelayVar = 0.0
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitInherit = "1.0 1.0 1.0"
+
+[Lightemit2]
+simulateBase = "sim_smoke"
+lifeTime = 0.1
+renderBase = "draw_light"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 255"
+startRadius = 30
+finishRadius = 50
+animateTime = 0.1
+attenuateConstant = 1.0
+attenuateLinear = 0.0
+attenuateQuadratic = 0.0

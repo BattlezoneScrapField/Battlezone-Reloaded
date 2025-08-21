@@ -1,0 +1,121 @@
+[OrdnanceClass]
+classLabel = "imagemissile"
+
+shotGeometry = "ghorn03.mesh" //"gshad00.geo"
+xplGround = "xmslgnd"
+xplVehicle = "xmslcar"
+xplBuilding = "xmslbld"
+
+renderName = "biomsl.render"
+
+ammoCost = 12
+lifeSpan = 8.0
+shotSpeed = 60.0
+damageBallistic = 80
+damageConcussion = 200
+damageFlame = 0
+damageImpact = 40
+
+[RocketClass]
+flameRadius = 0.2
+flameLength = 1.0
+flameTexture = "exhaust_r.0"
+flameFrames = 4
+flareRadius = 0.5
+flareDelay = 0.1
+flareTexture = "flare.0"
+flareFrames = 4
+
+[MissileClass]
+omegaTurn = 2.0
+shotAccel = 170.0
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 4
+renderName1 = "biomsl.smoke"
+renderName2 = "biomsl.smoke2"
+renderName3 = "biomsl.light1"
+renderName4 = "biomsl.light2"
+
+[Smoke]
+renderBase = "draw_twirl_trail"
+textureName = "flamealpha.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.15
+finishRadius = 0.45
+animateTime = 0.8 //1.28
+emitDelay = 0.015
+emitVelocity = "0.0 0.0 -4.0"
+emitVariance = "1.0 1.0 0.5"
+emitLife = 0.4
+
+[Smoke2]
+renderBase = "draw_twirl_trail"
+textureName = "smoke2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.2
+finishRadius = 0.95
+animateTime = 1.28
+emitDelay = 0.05 //0.013
+emitVelocity = "0.0 0.0 -8.0"
+emitVariance = "2.0 2.0 0.5"
+emitLife = 0.65
+
+//----------------------lights-------------------------\\
+
+[Light1]
+simulateBase = "sim_smoke"
+lifeTime = 0.2
+renderBase = "draw_emit"
+emitName = "imagemsl.lightemit1"
+emitDelay = 0.2
+emitDelayVar = 0.0
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitInherit = "1.0 1.0 1.0"
+
+[Lightemit1]
+simulateBase = "sim_smoke"
+lifeTime = 0.1
+renderBase = "draw_light"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 255"
+startRadius = 30
+finishRadius = 20
+animateTime = 0.1
+attenuateConstant = 1.0
+attenuateLinear = 0.0
+attenuateQuadratic = 0.0
+
+
+[Light2]
+StartDelay = 0.1
+simulateBase = "sim_smoke"
+lifeTime = 0.2
+renderBase = "draw_emit"
+emitName = "imagemsl.lightemit2"
+emitDelay = 0.2
+emitDelayVar = 0.0
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitInherit = "1.0 1.0 1.0"
+
+[Lightemit2]
+simulateBase = "sim_smoke"
+lifeTime = 0.1
+renderBase = "draw_light"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 255"
+startRadius = 20
+finishRadius = 30
+animateTime = 0.1
+attenuateConstant = 1.0
+attenuateLinear = 0.0
+attenuateQuadratic = 0.0
+
+

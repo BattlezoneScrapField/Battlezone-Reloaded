@@ -1,0 +1,20 @@
+[GameObjectClass]
+baseName = "gsplin01" //"splintbm"
+classLabel = "spraybomb"
+//shotGeometry = "gsplin01.mesh" 
+scrapCost = 0
+scrapValue = 0
+maxHealth = 150
+maxHeat = 0
+maxAmmo = 400
+unitName = "Splinter"
+
+[SprayBuildingClass]
+payloadName = "splinter"
+jumpSound = "gspli01.wav"
+fireSound = "gspli04.wav"
+triggerDelay = 1.0
+shotDelay = 0.01
+setAltitude = 2.0
+omegaSpin = 10.0
+anglePitch = 0.25

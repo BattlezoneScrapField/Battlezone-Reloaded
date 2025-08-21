@@ -1,0 +1,92 @@
+[WeaponClass]
+classLabel = "targeting"
+ordName = "swarmer"
+wpnName = "TAG Cannon"
+fireSound = "gtagg00.wav"
+wpnReticle = "gtaggun.0"
+wpnPriority = 1
+wpnCategory = "ROCK"
+
+[TargetingGunClass]
+leaderSound = "gtagg03.wav"
+shotDelay = 1.0
+firstDelay = 1.0
+salvoDelay = 0.2
+salvoCount = 10
+lockingReticle = "gtaggun.1"
+lockedReticle = "gtaggun.2"
+
+[OrdnanceClass]
+classLabel = "targeting"
+shotGeometry = "gtagg03.mesh" //"gtagg00.geo"
+xplGround = "xbulgnd"
+xplVehicle = "xbulcar"
+xplBuilding = "xbulbld"
+
+renderName = "gtaggun.render"
+
+ammoCost = 0
+lifeSpan = 2.0
+shotSpeed = 100.0
+damageBallistic = 0
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 1
+
+[RocketClass]
+//flameLength = 0.3 //0.2
+//smokeRadius = 0.3
+//smokeDelay = 0.005
+//smokePause = 0.001
+//smokeTexture = "bpuff.0"
+//smokeFrames = 16
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 3
+renderName1 = "gtaggun.core"
+renderName2 = "gtaggun.flame"
+renderName3 = "gtaggun.glow"
+
+[Core]
+renderBase = "draw_twirl_trail"
+textureName = "bpuff_0.tga"
+startColor = "55 127 255 255" //"255 255 255 255"
+finishColor = "55 127 255 0" //"255 255 255 0" //"255 255 255 127"
+startRadius = 0.20 //0.25
+finishRadius = 0.05
+animateTime = 0.035 //0.075 
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.040 //0.08 
+//maxCount = 10000
+
+[Flame]
+renderBase = "draw_twirl_trail"
+textureName = "bpuff_0.tga"
+startColor = "25 87 255 127" //"55 127 255 127"
+finishColor = "25 87 255 0" //"55 255 127 0"
+startRadius = 0.30 //0.45
+finishRadius = 0.25 //0.1
+animateTime = 0.08 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.9 //0.16
+
+[Glow]
+renderBase = "draw_twirl_trail"
+textureName = "bpuff_0.tga"
+startColor = "20 95 255 0" //"20 95 255 67" //"20 255 95 67"
+finishColor = "20 95 255 0" //"20 95 255 0"
+startRadius = 0.35 //0.5
+finishRadius = 0.15 //0.25 //0.05
+animateTime = 0.15 //0.30 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.16 //0.32 //0.16
+
+[LeaderRoundClass]
+homingTime = 3.0

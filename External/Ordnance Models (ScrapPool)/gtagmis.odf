@@ -1,0 +1,44 @@
+[WeaponClass]
+baseName = "gtaggun"
+classLabel = "targeting"
+ordName = "tagmis"
+wpnName = "TAG Missile"
+fireSound = "gpopp00.wav"
+wpnReticle = "gtaggun.0"
+wpnPriority = 1
+wpnCategory = "ROCK"
+
+[TargetingGunClass]
+leaderSound = "gtagg03.wav"
+shotDelay = 1.0
+firstDelay = 0.5
+salvoDelay = 1.0
+salvoCount = 1
+lockingReticle = "gtaggun.1"
+lockedReticle = "gtaggun.2"
+
+[OrdnanceClass]
+classLabel = "targeting"
+shotGeometry = "gsand01.mesh" //"gsand00.geo"
+xplGround = "xbulxpl"
+xplVehicle = "xbulxpl"
+xplBuilding = "xbulxpl"
+
+ammoCost = 0
+lifeSpan = 2.5
+shotSpeed = 50.0
+damageBallistic = 0
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 1
+
+[RocketClass]
+flameLength = 0.1
+smokeRadius = 0.2
+smokeDelay = 0.020 //0.005
+smokePause = 0.001 //0.003
+smokeTexture = "rsmoke.0"
+smokeFrames = 16
+
+[LeaderRoundClass]
+homingTime = 2.0

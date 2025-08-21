@@ -1,0 +1,30 @@
+[OrdnanceClass]
+classLabel = "spraybomb"
+
+shotGeometry = "gsplin02.mesh" //"gsplnt00.geo"
+shotSound = "Ordin_c.wav"
+
+xplGround = "xgasxpl"
+xplVehicle = "xgasxpl"
+xplBuilding = "xgasxpl"
+
+renderName = "grenade.render"
+
+ammoCost = 100
+lifeSpan = 1e30
+shotSpeed = 45.0
+damageBallistic = 0
+damageConcussion = 500
+damageFlame = 0
+damageImpact = 0
+
+//[RocketClass]
+//smokeRadius = 0.4
+//smokeDelay = 0.05
+//smokePause = 0.01
+//smokeTexture = "lsmoke.0"
+//smokeFrames = 16
+
+[SprayBombClass]
+bounceRatio = 0.5
+deployName = "splintb2"

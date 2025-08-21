@@ -1,0 +1,81 @@
+[OrdnanceClass]
+classLabel = "anchor"
+
+shotGeometry = "gsand01.mesh" //"gsand00.geo"
+shotSound = "anchor.wav"
+
+xplGround = "xbulgnd"
+xplVehicle = "xbulcar"
+xplBuilding = "xbulbld"
+
+renderName = "anchor.render"
+
+ammoCost = 5
+lifeSpan = 2.0
+shotSpeed = 70.0
+damageBallistic = 0
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 10
+
+[RocketClass]
+flameRadius = 0.1
+flameLength = 1.0
+flameTexture = "exhaust_r.0"
+flameFrames = 4
+flareRadius = 0.5
+flareTexture = "flare.0"
+flareFrames = 4
+//smokeDevRadial = 0.0
+//smokeDevAxial = 0.0
+//smokeInherit = 0.2
+//smokeRadius = 0.3
+//smokeDelay = 0.02
+//smokePause = 0.001 //0.01
+//smokeTexture = "particle.0"
+//smokeFrames = 16
+
+[AnchorRocketClass]
+accelDrag = 8.0
+alphaDrag = 0.5
+anchorTime = 5.0
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 3
+renderName1 = "anchor.particlecore"
+renderName2 = "anchor.particleshell"
+renderName3 = "anchor.light"
+
+[ParticleCore]
+renderBase = "draw_twirl_trail"
+textureName = "particle_bz2.tga"
+startColor = "225 50 0 20" //"255 80 30 255" //"155 155 155 155" //"127 127 127 127"
+finishColor = "100 15 0 50" //"127 25 5 50"
+startRadius = 0.15 //0.25
+finishRadius = 0.08
+animateTime = 0.17 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.18 //0.16
+
+[ParticleShell]
+renderBase = "draw_twirl_trail"
+textureName = "particle_bz2.tga"
+startColor = "225 50 0 150" //"255 80 30 200" //"155 155 155 155" //"127 127 127 127"
+finishColor = "100 15 0 0" //"127 25 5 0"
+startRadius = 0.30 //0.25
+finishRadius = 0.15 // 0.25
+animateTime = 0.27 //0.15
+emitDelay = 0.001 //0.005
+emitVelocity = "0.0 0.0 0.0"
+emitVariance = "0.0 0.0 0.0"
+emitLife = 0.28 //0.16
+
+[Light]
+renderBase = "draw_light"
+startColor = "255 255 255 255"
+finishColor = "255 255 255 255"
+startRadius = 10 //150.0
+finishRadius = 10 //150.0

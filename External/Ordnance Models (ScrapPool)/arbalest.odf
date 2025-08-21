@@ -1,0 +1,65 @@
+[OrdnanceClass]
+//baseName = "grenade"
+classLabel = "grenade"
+
+shotGeometry = "gtagg04.mesh"//"gtagg01.geo"//"ghartl00.geo"
+shotSound = "Ordin_c.wav"
+
+xplGround = "xarbgnd"
+xplVehicle = "xarbxpl"
+xplBuilding = "xarbxpl"
+xplExpire = "xarbxpl"
+
+renderName = "arbalest.render"
+
+ammoCost = 10
+lifeSpan = 1e30
+shotSpeed = 40.0
+damageBallistic = 0
+damageConcussion = 200
+damageFlame = 0
+damageImpact = 0
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 3
+renderName1 = "arbalest.smoke"
+renderName2 = "arbalest.smoke2"
+renderName3 = "arbalest.trail"
+
+[Smoke]
+renderBase = "draw_twirl_trail"
+textureName = "flamealpha.tga"
+startColor = "255 191 100 63" 
+finishColor = "127 127 127 0"
+startRadius = 0.3
+finishRadius = 0.1 //0.2
+animateTime = 1.0
+emitDelay = 0.01
+emitVelocity = "0.0 0.0 -3.0"
+emitVariance = "2.0 2.0 1.0" 
+emitLife = 0.5
+
+[Smoke2]
+renderBase = "draw_twirl_trail"
+textureName = "smoke2.tga"
+startColor = "255 191 191 191"
+finishColor = "127 127 127 0"
+startRadius = 0.3
+finishRadius = 1.2
+animateTime = 1.0
+emitDelay = 0.02
+emitVelocity = "0.0 0.0 -3.0"
+emitVariance = "3.0 3.0 1.0"
+emitLife = 0.6
+
+[Trail]
+renderBase = "draw_trail"
+textureName = "trail2.tga"
+//textureBlend = "one one modulate"
+textureRate = 0.05
+startColor = "255 127 0 128"
+finishColor = "255 0 0 0"
+startRadius = 0.1 //0.1
+finishRadius = 0.0 //0.4 //0.5
+segmentTime = 0.4

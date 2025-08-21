@@ -1,0 +1,41 @@
+[OrdnanceClass]
+baseName = "swarmer"
+classLabel = "missile"
+
+shotGeometry = "grckt02.mesh" //"gtagg01.geo"
+shotSound = "Ordin_e.wav"
+
+//xplGround = "xmslgnd"
+//xplVehicle = "xmslcar"
+//xplBuilding = "xmslbld"
+xplGround = "xgasxpl"
+xplVehicle = "xgasxpl"
+xplBuilding = "xgasxpl"
+
+ammoCost = 50
+lifeSpan = 6.0
+shotSpeed = 80.0
+damageBallistic = 275
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 0
+
+[RocketClass]
+flameRadius = 0.5
+flameLength = 2.5
+flameTexture = "exhaust_r.0"
+flameFrames = 4
+flareRadius = 2.75
+flareDelay = 0.1
+flareTexture = "flare.0"
+flareFrames = 4
+smokeRadius = 1.25
+smokeDelay = 0.06
+smokePause = 0.01
+smokeTexture = "rsmoke.0"
+smokeFrames = 16
+
+[MissileClass]
+omegaTurn = 5.5
+shotAccel = 150.0
+

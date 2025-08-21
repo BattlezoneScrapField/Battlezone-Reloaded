@@ -1,0 +1,27 @@
+[OrdnanceClass] // Double ranged AT Stabber.
+classLabel = "rocket"
+
+shotGeometry = "gatst01.mesh" //"gatst00.geo"
+shotSound = "Ordin_a.wav"
+
+xplGround = "xmslgnd"
+xplVehicle = "xmslcar"
+xplBuilding = "xmslbld"
+
+renderName = "rocket.render"
+
+ammoCost = 9
+lifeSpan = 2.0
+shotSpeed = 150.0
+damageBallistic = 80
+damageConcussion = 0
+damageFlame = 0
+damageImpact = 0
+
+[RocketClass]
+flameLength = 0.3
+smokeRadius = 0.5
+smokeDelay = 0.010
+smokePause = 0.005
+smokeTexture = "rsmoke.0"
+smokeFrames = 16

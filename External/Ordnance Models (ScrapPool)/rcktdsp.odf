@@ -1,0 +1,29 @@
+[OrdnanceClass]
+baseName = "rocket"
+classLabel = "rocket"
+
+shotGeometry = "gspst04.mesh" //"gspst00.geo"
+shotSound = "Ordin_b.wav"
+
+xplGround = "xmslgnd"
+xplVehicle = "xmslcar"
+xplBuilding = "xmslbld"
+
+ammoCost = 100
+lifeSpan = 2.0
+shotSpeed = 130.0
+damageBallistic = 750
+damageConcussion = 50
+damageFlame = 0
+damageImpact = 0
+
+renderName = "rocket3a.render"
+
+[RocketClass]
+//flameLength = 0.3
+//smokeRadius = 0.5
+//smokeDelay = 0.025
+//smokePause = 0.001 //0.005
+//smokeTexture = "gpuff.0"
+//smokeFrames = 16
+

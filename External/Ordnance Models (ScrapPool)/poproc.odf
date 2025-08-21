@@ -1,0 +1,78 @@
+[OrdnanceClass]
+baseName = "rocket"
+classLabel = "rocket"
+shotGeometry = "gatst01.mesh" //"gatst00.geo"
+shotSound = "Ordin_c.wav"
+
+xplGround = "xmslgnd"
+xplVehicle = "xmslcar"
+xplBuilding = "xmslbld"
+
+renderName = "poproc.render"
+
+ammoCost = 20
+lifeSpan = 2.0
+shotSpeed = 70.0
+damageBallistic = 0
+damageConcussion = 200
+damageFlame = 0
+damageImpact = 0
+
+[RocketClass]
+flameRadius = 0.2
+flameLength = 3.0
+flameTexture = "exhaust_r.0"
+flameFrames = 4
+flareRadius = 3.0
+flareTexture = "flare.0"
+flareFrames = 4
+//smokeRadius = 0.5
+//smokeDelay = 0.02
+//smokePause = 0.008
+//smokeTexture = "rsmoke.0"
+//smokeFrames = 16
+
+[Render]
+renderBase = "draw_multi"
+renderCount = 4
+//renderName1 = "rocket2.flare"
+renderName1 = "poproc.smoke"
+renderName2 = "poproc.smoke2"
+renderName3 = "rocket2.light1"
+renderName4 = "rocket2.light2"
+
+//[Render]
+//renderBase = "draw_light"
+//startColor = "255 255 255 255"
+//finishColor = "255 255 255 255"
+//startRadius = 30 //150.0
+//finishRadius = 30 //150.0
+
+
+[Smoke]
+renderBase = "draw_twirl_trail"
+textureName = "flamealpha.tga" //"smokeflame2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.3
+finishRadius = 1.0
+animateTime = 0.4 //1.28
+emitDelay = 0.008
+emitVelocity = "0.0 0.0 -4.0"
+emitVariance = "1.0 1.0 0.5"
+emitLife = 0.4
+
+[Smoke2]
+renderBase = "draw_twirl_trail"
+textureName = "smoke2.tga"
+textureBlend = "srcalpha invsrcalpha modulatealpha"
+startColor = "153 153 153 191"
+finishColor = "153 153 153 0"
+startRadius = 0.4
+finishRadius = 1.25
+animateTime = 0.64
+emitDelay = 0.01
+emitVelocity = "0.0 0.0 -8.0"
+emitVariance = "2.0 2.0 0.5"
+emitLife = 0.64
