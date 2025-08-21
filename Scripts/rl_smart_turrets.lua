@@ -160,7 +160,7 @@ do
 
         if best_target ~= self.current_target then
             self.current_target = best_target
-            Attack(self.handle, self.current_target)
+            Attack(self.handle, self.current_target, 0)
         end
     end
 
