@@ -1,0 +1,71 @@
+[GameObjectClass]
+classLabel = "turrettank"
+scrapCost = 6
+scrapValue = 4
+buildTime = 7.0
+maxHealth = 2200
+maxAmmo = 2000
+unitName = "Turret"
+aiName = "TurretTankFriend"
+aiName2 = "TurretTankEnemy"
+heatSignature = 0.1
+imageSignature = 2.0
+radarSignature = 0.1
+
+weaponHard1 = "GC1"
+weaponName1 = "gtminis"
+weaponHard2 = "GC2"
+weaponName2 = ""
+
+[CraftClass]
+rangeScan = 200.0
+periodScan = 0.0
+velocJam = 1.0
+fPersonEjectRatio = 1.0
+
+selectGoMsg = "svturrvb.wav"
+selectAttackMsg = "svturrvc.wav"
+selectDeployMsg = "svturrv0.wav"
+selectOtherMsg = "svturrve.wav"
+
+goMsg = "svturrv1.wav"
+followMeMsg = "svturrv8.wav"
+reloadMsg = "svturrvg.wav"
+repairMsg = "svturrvh.wav"
+rescueMsg = "svturrvj.wav"
+recycleMsg = "svturrvf.wav"
+otherMsg = "svturrvd.wav"
+
+deployedMsg = "svturrv6.wav"
+killedMsg = "svturrv3.wav"
+diedMsg = "sbetty2.wav"
+
+[HoverCraftClass]
+setAltitude = 0.5
+accelDragStop = 4.0
+accelDragFull = 1.0
+alphaTrack = 10.0
+alphaDamp = 3.0
+pitchPitch = 0.5
+pitchThrust = 0.1
+rollStrafe = 0.1
+rollSteer = 0.1
+
+velocForward = 15.0
+velocReverse = 15.0
+velocStrafe = 15.0
+accelThrust = 50.0
+accelBrake = 50.0
+omegaSpin = 3.5
+omegaTurn = 1.5
+alphaSteer = 5.0
+accelJump = 0.0
+
+soundThrust = "svturre6.wav"
+soundTurbo = "svturre8.wav"
+
+[TurretTankClass]
+omegaTurret = 4.0
+alphaTurret = 10.0
+timeDeploy = 3.5
+timeUndeploy = 0.35

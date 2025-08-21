@@ -1,0 +1,70 @@
+[GameObjectClass]
+classLabel = "walker"
+scrapValue = 6
+scrapCost = 12
+buildTime = 15.0
+maxHealth = 6000
+maxAmmo = 2500
+unitName = "Walker"
+aiName = "GechFriend"
+aiName2 = "GechEnemy"
+heatSignature = 3.0
+imageSignature = 5.0
+radarSignature = 1.0
+
+weaponHard1 = "GC1"
+weaponName1 = "gblast"
+weaponHard2 = "GC2"
+weaponName2 = "gblast"
+weaponHard3 = "GM1"
+weaponName3 = "gpopgun"
+weaponMask = 00011
+
+[CraftClass]
+rangeScan = 250.0
+periodScan = 0.0
+velocJam = 0.0
+fPersonEjectRatio = 1.0
+
+selectAttackMsg = "svwalkvd.wav"
+selectWaitMsg = "svwalkvf.wav"
+selectFollowMsg = "svwalkvh.wav"
+selectGoMsg = "svwalkvk.wav"
+selectOtherMsg = "svwalkvj.wav"
+
+goMsg = "svwalkv0.wav"
+goObjectMsg = "svwalkvg.wav"
+attackMsg = "svwalkv2.wav"
+followMsg = "svwalkv7.wav"
+followMeMsg = "svwalkv3.wav"
+repairMsg = "svwalkv4.wav"
+reloadMsg = "svwalkv5.wav"
+rescueMsg = "svwalkv8.wav"
+recycleMsg = "svwalkv9.wav"
+otherMsg = "svwalkvi.wav"
+
+killedMsg = "svwalkvm.wav"
+diedMsg = "sbetty3.wav"
+
+[WalkerClass]
+alphaDamp = 5.0
+alphaTrack = 20.0
+pitchPitch = 0.3
+pitchThrust = 0.1
+rollStrafe = 0.1
+velocForward = 8.0
+velocReverse = 8.0
+velocStrafe = 8.0
+accelThrust = 50.0
+omegaSpin = 2.0
+omegaTurn = 1.0
+alphaSteer = 5.0
+velocJump = 10.0
+
+jumpSound  = "svwalke2.wav";
+landSound  = "svwalke3.wav";
+stepSound  = "svwalke0.wav"
+
+animRate = 1.0
+
+
