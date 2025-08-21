@@ -118,9 +118,9 @@ do
     --- @param func fun(...: any)
     --- @return self
     function mission:define_event_listener(state, what, func)
-        vsp.utility.required_param(state, "state", "any", "Reloaded")
-        vsp.utility.required_param(what, "what", "string", "Reloaded")
-        vsp.utility.required_param(func, "func", "function", "Reloaded")
+        vsp.functional.required_param(state, "state", "any", "Reloaded")
+        vsp.functional.required_param(what, "what", "string", "Reloaded")
+        vsp.functional.required_param(func, "func", "function", "Reloaded")
         assert(valid_events:contains(what), string.format("Reloaded: requested event %s is invalid", what))
         assert(self.states[state], string.format("Reloaded: Requested state %s does not exist", state))
         assert(what ~= "Start", "Reloaded: Start event listeners are forbidden, just use Start()")
@@ -139,8 +139,8 @@ do
     --- @param func fun(...: any)
     --- @return integer listener_handle handle you can save in case you need to undefine it later
     function mission:define_global_listener(what, func)
-        vsp.utility.required_param(what, "what", "string", "Reloaded")
-        vsp.utility.required_param(func, "func", "function", "Reloaded")
+        vsp.functional.required_param(what, "what", "string", "Reloaded")
+        vsp.functional.required_param(func, "func", "function", "Reloaded")
         assert(valid_events:contains(what), string.format("Reloaded: requested event %s is invalid", what))
         assert(what ~= "Start", "Reloaded: Start global listeners are forbidden, just use Start()")
 
@@ -154,8 +154,8 @@ do
     --- @param what string event name
     --- @param handle integer global listener handle
     function mission:undefine_global_listener(what, handle)
-        vsp.utility.required_param(what, "what", "string", "Reloaded")
-        vsp.utility.required_param(handle, "handle", "number", "Reloaded")
+        vsp.functional.required_param(what, "what", "string", "Reloaded")
+        vsp.functional.required_param(handle, "handle", "number", "Reloaded")
         assert(valid_events:contains(what), string.format("Reloaded: requested event %s is invalid", what))
         assert(self.global_listeners[what][handle], "Reloaded: Global listener handle is invalid")
 

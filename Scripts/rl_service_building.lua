@@ -65,12 +65,12 @@ do
 			"Reloaded: This building has already been registered as a service building"
 		)
 
-		self.handle = vsp.utility.required_param(building, "building", "userdata", "Reloaded")
+		self.handle = vsp.functional.required_param(building, "building", "userdata", "Reloaded")
 		self.odf = self.odf or vsp.odf.open(self.handle)
-		self.range = vsp.utility.required_param(range, "range", "number", "Reloaded")
-		self.interval = vsp.utility.required_param(interval, "interval", "number", "Reloaded")
-		self.amount = vsp.utility.required_param(amount, "amount", "number", "Reloaded")
-		vsp.utility.required_param(service_function, "service_function", "function", "Reloaded")
+		self.range = vsp.functional.required_param(range, "range", "number", "Reloaded")
+		self.interval = vsp.functional.required_param(interval, "interval", "number", "Reloaded")
+		self.amount = vsp.functional.required_param(amount, "amount", "number", "Reloaded")
+		vsp.functional.required_param(service_function, "service_function", "function", "Reloaded")
 
 		self.service_mode = service_attributes.service_team
 
@@ -209,7 +209,7 @@ do
 	--- Anything with a "supplybuilding" or "repairbuilding" class label is a valid service auto service building.
 	--- @param state boolean
 	function rl_service_building.autodetect(state)
-		auto_detect_service_buildings = vsp.utility.required_param(state, "state", "boolean", "Reloaded")
+		auto_detect_service_buildings = vsp.functional.required_param(state, "state", "boolean", "Reloaded")
 	end
 
 	function rl_service_building.enable_all()
@@ -225,7 +225,7 @@ do
 	end
 
 	function rl_service_building.get(handle)
-		vsp.utility.required_param(handle, "handle", "userdata", "Reloaded")
+		vsp.functional.required_param(handle, "handle", "userdata", "Reloaded")
 		return assert(all_service_buildings[handle], "Reloaded: this handle is not a service building")
 	end
 

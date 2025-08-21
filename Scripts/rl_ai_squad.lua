@@ -62,7 +62,7 @@ do
     --- @param ...? any
     --- @return self
     function ai_squad:for_each(func, ...)
-        vsp.utility.required_param(func, "func", "function", "Reloaded")
+        vsp.functional.required_param(func, "func", "function", "Reloaded")
         for unit in self.members:iterator() do
             func(unit, ...)
         end
